@@ -23,6 +23,7 @@ Partial Class FindReplaceDialog
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FindReplaceDialog))
         Me.Label1 = New System.Windows.Forms.Label()
         Me.TextBoxSearchText = New System.Windows.Forms.TextBox()
         Me.CheckBoxMatchCase = New System.Windows.Forms.CheckBox()
@@ -209,6 +210,7 @@ Partial Class FindReplaceDialog
         Me.Controls.Add(Me.Label1)
         Me.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.MaximizeBox = False
         Me.MinimizeBox = False

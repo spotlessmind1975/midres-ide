@@ -23,6 +23,7 @@ Partial Class ErrorOutputWindow
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ErrorOutputWindow))
         Me.ListBoxOutput = New System.Windows.Forms.ListBox()
         Me.ContextMenuStripWarnings = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.IgnoreMessagenextTimeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -83,6 +84,7 @@ Partial Class ErrorOutputWindow
         Me.ClientSize = New System.Drawing.Size(804, 571)
         Me.Controls.Add(Me.ListBoxOutput)
         Me.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.Name = "ErrorOutputWindow"
         Me.Text = "Errors"

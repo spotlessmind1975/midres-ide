@@ -22,6 +22,7 @@ Partial Class HelpWindow
     'Non modificarla mediante l'editor del codice.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(HelpWindow))
         Me.SuspendLayout()
         '
         'HelpWindow
@@ -30,7 +31,8 @@ Partial Class HelpWindow
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1070, 702)
         Me.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.Margin = New System.Windows.Forms.Padding(5)
         Me.Name = "HelpWindow"
         Me.Text = "Help on line"
         Me.ResumeLayout(False)

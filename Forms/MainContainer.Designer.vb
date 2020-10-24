@@ -57,9 +57,9 @@ Partial Class MainContainer
         Me.InformazioniSuMIDRESIDEToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.WindowsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.OutputWindowToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ProjectExplorerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MainStatusStrip = New System.Windows.Forms.StatusStrip()
         Me.MainStatusStripLabel = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.ProjectExplorerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.MainStatusStrip.SuspendLayout()
         Me.SuspendLayout()
@@ -325,8 +325,16 @@ Partial Class MainContainer
         '
         Me.OutputWindowToolStripMenuItem.Name = "OutputWindowToolStripMenuItem"
         Me.OutputWindowToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.F10), System.Windows.Forms.Keys)
-        Me.OutputWindowToolStripMenuItem.Size = New System.Drawing.Size(272, 26)
+        Me.OutputWindowToolStripMenuItem.Size = New System.Drawing.Size(336, 26)
         Me.OutputWindowToolStripMenuItem.Text = "&Output Window"
+        '
+        'ProjectExplorerToolStripMenuItem
+        '
+        Me.ProjectExplorerToolStripMenuItem.Name = "ProjectExplorerToolStripMenuItem"
+        Me.ProjectExplorerToolStripMenuItem.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Shift) _
+            Or System.Windows.Forms.Keys.F10), System.Windows.Forms.Keys)
+        Me.ProjectExplorerToolStripMenuItem.Size = New System.Drawing.Size(336, 26)
+        Me.ProjectExplorerToolStripMenuItem.Text = "Project Explorer"
         '
         'MainStatusStrip
         '
@@ -344,14 +352,6 @@ Partial Class MainContainer
         Me.MainStatusStripLabel.Size = New System.Drawing.Size(28, 20)
         Me.MainStatusStripLabel.Text = "1:1"
         '
-        'ProjectExplorerToolStripMenuItem
-        '
-        Me.ProjectExplorerToolStripMenuItem.Name = "ProjectExplorerToolStripMenuItem"
-        Me.ProjectExplorerToolStripMenuItem.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Shift) _
-            Or System.Windows.Forms.Keys.F10), System.Windows.Forms.Keys)
-        Me.ProjectExplorerToolStripMenuItem.Size = New System.Drawing.Size(336, 26)
-        Me.ProjectExplorerToolStripMenuItem.Text = "Project Explorer"
-        '
         'MainContainer
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -359,6 +359,7 @@ Partial Class MainContainer
         Me.ClientSize = New System.Drawing.Size(1067, 554)
         Me.Controls.Add(Me.MainStatusStrip)
         Me.Controls.Add(Me.MenuStrip1)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.IsMdiContainer = True
         Me.MainMenuStrip = Me.MenuStrip1
         Me.Margin = New System.Windows.Forms.Padding(4)

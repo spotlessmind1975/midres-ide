@@ -62,6 +62,7 @@ Partial Class ProjectExplorer
         Me.ConsiderAsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FolderToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExecutableToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SetAsactiveToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ContextMenuStripExecutable = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.MakeToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.C16ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
@@ -91,7 +92,6 @@ Partial Class ProjectExplorer
         Me.FolderToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
         Me.LibraryToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.SetAsactiveToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SetAsactiveToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ContextMenuStripFolder.SuspendLayout()
         Me.ContextMenuStripFile.SuspendLayout()
         Me.ContextMenuStripProject.SuspendLayout()
@@ -369,6 +369,13 @@ Partial Class ProjectExplorer
         Me.ExecutableToolStripMenuItem1.Size = New System.Drawing.Size(164, 26)
         Me.ExecutableToolStripMenuItem1.Text = "Executable"
         '
+        'SetAsactiveToolStripMenuItem1
+        '
+        Me.SetAsactiveToolStripMenuItem1.Image = CType(resources.GetObject("SetAsactiveToolStripMenuItem1.Image"), System.Drawing.Image)
+        Me.SetAsactiveToolStripMenuItem1.Name = "SetAsactiveToolStripMenuItem1"
+        Me.SetAsactiveToolStripMenuItem1.Size = New System.Drawing.Size(180, 26)
+        Me.SetAsactiveToolStripMenuItem1.Text = "Set as ""active"""
+        '
         'ContextMenuStripExecutable
         '
         Me.ContextMenuStripExecutable.ImageScalingSize = New System.Drawing.Size(20, 20)
@@ -540,14 +547,14 @@ Partial Class ProjectExplorer
         '
         Me.FolderToolStripMenuItem2.Image = CType(resources.GetObject("FolderToolStripMenuItem2.Image"), System.Drawing.Image)
         Me.FolderToolStripMenuItem2.Name = "FolderToolStripMenuItem2"
-        Me.FolderToolStripMenuItem2.Size = New System.Drawing.Size(224, 26)
+        Me.FolderToolStripMenuItem2.Size = New System.Drawing.Size(137, 26)
         Me.FolderToolStripMenuItem2.Text = "Folder"
         '
         'LibraryToolStripMenuItem1
         '
         Me.LibraryToolStripMenuItem1.Image = CType(resources.GetObject("LibraryToolStripMenuItem1.Image"), System.Drawing.Image)
         Me.LibraryToolStripMenuItem1.Name = "LibraryToolStripMenuItem1"
-        Me.LibraryToolStripMenuItem1.Size = New System.Drawing.Size(224, 26)
+        Me.LibraryToolStripMenuItem1.Size = New System.Drawing.Size(137, 26)
         Me.LibraryToolStripMenuItem1.Text = "Library"
         '
         'SetAsactiveToolStripMenuItem
@@ -557,13 +564,6 @@ Partial Class ProjectExplorer
         Me.SetAsactiveToolStripMenuItem.Size = New System.Drawing.Size(180, 26)
         Me.SetAsactiveToolStripMenuItem.Text = "Set as ""active"""
         '
-        'SetAsactiveToolStripMenuItem1
-        '
-        Me.SetAsactiveToolStripMenuItem1.Image = CType(resources.GetObject("SetAsactiveToolStripMenuItem1.Image"), System.Drawing.Image)
-        Me.SetAsactiveToolStripMenuItem1.Name = "SetAsactiveToolStripMenuItem1"
-        Me.SetAsactiveToolStripMenuItem1.Size = New System.Drawing.Size(180, 26)
-        Me.SetAsactiveToolStripMenuItem1.Text = "Set as ""active"""
-        '
         'ProjectExplorer
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 20.0!)
@@ -571,6 +571,7 @@ Partial Class ProjectExplorer
         Me.ClientSize = New System.Drawing.Size(804, 571)
         Me.Controls.Add(Me.TreeViewProject)
         Me.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.Name = "ProjectExplorer"
         Me.Text = "ProjectExplorer"

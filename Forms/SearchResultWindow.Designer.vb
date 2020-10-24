@@ -22,6 +22,7 @@ Partial Class SearchResultWindow
     'Non modificarla mediante l'editor del codice.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(SearchResultWindow))
         Me.ListBoxSearchResult = New System.Windows.Forms.ListBox()
         Me.SuspendLayout()
         '
@@ -43,6 +44,7 @@ Partial Class SearchResultWindow
         Me.ClientSize = New System.Drawing.Size(804, 571)
         Me.Controls.Add(Me.ListBoxSearchResult)
         Me.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.Name = "SearchResultWindow"
         Me.Text = "Search results (in files)"

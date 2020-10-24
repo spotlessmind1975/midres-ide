@@ -181,7 +181,7 @@ Partial Class SourceEditor
         Me.CompileForToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.C16ToolStripMenuItem, Me.VIC20ToolStripMenuItem, Me.VIC2024KBToolStripMenuItem, Me.C64ToolStripMenuItem, Me.C128ToolStripMenuItem, Me.PLUS4ToolStripMenuItem, Me.ATARI8BitToolStripMenuItem, Me.ATARI8BitlowResolutionToolStripMenuItem})
         Me.CompileForToolStripMenuItem.Image = CType(resources.GetObject("CompileForToolStripMenuItem.Image"), System.Drawing.Image)
         Me.CompileForToolStripMenuItem.Name = "CompileForToolStripMenuItem"
-        Me.CompileForToolStripMenuItem.Size = New System.Drawing.Size(224, 26)
+        Me.CompileForToolStripMenuItem.Size = New System.Drawing.Size(171, 26)
         Me.CompileForToolStripMenuItem.Text = "&Compile for"
         '
         'C16ToolStripMenuItem
@@ -253,7 +253,7 @@ Partial Class SourceEditor
         Me.RunOnToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.C16ToolStripMenuItem1, Me.VIC20ToolStripMenuItem1, Me.VIC2024KBToolStripMenuItem1, Me.C64ToolStripMenuItem1, Me.C128ToolStripMenuItem1, Me.PLUS4ToolStripMenuItem1, Me.ATARI8BitToolStripMenuItem1, Me.ATARI8BitlowResolutionToolStripMenuItem1})
         Me.RunOnToolStripMenuItem.Image = CType(resources.GetObject("RunOnToolStripMenuItem.Image"), System.Drawing.Image)
         Me.RunOnToolStripMenuItem.Name = "RunOnToolStripMenuItem"
-        Me.RunOnToolStripMenuItem.Size = New System.Drawing.Size(224, 26)
+        Me.RunOnToolStripMenuItem.Size = New System.Drawing.Size(171, 26)
         Me.RunOnToolStripMenuItem.Text = "Run on"
         '
         'C16ToolStripMenuItem1
@@ -320,6 +320,7 @@ Partial Class SourceEditor
         Me.Controls.Add(Me.ScintillaSource)
         Me.Controls.Add(Me.MenuStrip1)
         Me.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MainMenuStrip = Me.MenuStrip1
         Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Name = "SourceEditor"
