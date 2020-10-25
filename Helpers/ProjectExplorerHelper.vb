@@ -186,6 +186,7 @@ Module ProjectExplorerHelper
             If TypeOf tp.Tag Is FolderEntry Then
                 Dim filename As String = OpenSaveDialogEx()
                 If Not (filename Is Nothing) Then
+                    My.Computer.FileSystem.WriteAllText(filename, "", False, System.Text.Encoding.ASCII)
                     Dim f As FileEntry = New FileEntry(filename, Path.GetFileName(filename))
                     tp.Tag.Files.Add(f)
                     tp.Tag.NormalizePaths()
