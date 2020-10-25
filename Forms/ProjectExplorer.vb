@@ -278,4 +278,32 @@ Public Class ProjectExplorer
     Private Sub TreeViewProject_BeforeCollapse(sender As Object, e As TreeViewCancelEventArgs) Handles TreeViewProject.BeforeCollapse
         CollapseIfFolderNode(e.Node)
     End Sub
+
+    Private Sub VIC20ToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles VIC20ToolStripMenuItem2.Click
+        ExecuteEmulatorFolderNodeForTarget(Me, "vic20")
+    End Sub
+
+    Private Sub VIC2024KBToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles VIC2024KBToolStripMenuItem2.Click
+        ExecuteEmulatorFolderNodeForTarget(Me, "vic2024")
+    End Sub
+
+    Private Sub C64ToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles C64ToolStripMenuItem2.Click
+        ExecuteEmulatorFolderNodeForTarget(Me, "c64")
+    End Sub
+
+    Private Sub C128ToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles C128ToolStripMenuItem2.Click
+        ExecuteEmulatorFolderNodeForTarget(Me, "c128")
+    End Sub
+
+    Private Sub PLUS4ToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles PLUS4ToolStripMenuItem2.Click
+        ExecuteEmulatorFolderNodeForTarget(Me, "plus4")
+    End Sub
+
+    Private Sub ATARI8BitToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles ATARI8BitToolStripMenuItem2.Click
+        ExecuteEmulatorFolderNodeForTarget(Me, "atari")
+    End Sub
+
+    Private Sub ATARI8BitlowResToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles ATARI8BitlowResToolStripMenuItem2.Click
+        ExecuteEmulatorFolderNodeForTarget(Me, "atarilo")
+    End Sub
 End Class

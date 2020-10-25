@@ -68,7 +68,7 @@
 
     Public Sub ExecuteEmulatorFolderForTarget(_folder_entry As FolderEntry, _target As String)
 
-        ExecuteEmulatorForTarget(_folder_entry.CurrentOptions, _target)
+        ExecuteEmulatorForTarget(ChooseBestOptions(), _target)
 
     End Sub
 End Module

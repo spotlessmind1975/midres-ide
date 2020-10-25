@@ -366,4 +366,69 @@ Module ProjectExplorerHelper
             End If
         End If
     End Sub
+
+    Public Sub UpdateProjectExplorerMenuEntriesForSpecificOptions(_project_explorer As ProjectExplorer, _options As Options)
+
+        If Not (_options Is Nothing) Then
+            _project_explorer.MakeToolStripMenuItem1.Visible = True
+            _project_explorer.MakeToolStripMenuItem1.Enabled = True
+            _project_explorer.RunToolStripMenuItem.Visible = True
+            _project_explorer.RunToolStripMenuItem.Enabled = True
+            _project_explorer.VIC20ToolStripMenuItem.Visible = _options.CC65.Vic20
+            _project_explorer.VIC20ToolStripMenuItem.Enabled = _options.CC65.Vic20
+            _project_explorer.VIC2024KBToolStripMenuItem.Visible = _options.CC65.Vic2024
+            _project_explorer.VIC2024KBToolStripMenuItem.Enabled = _options.CC65.Vic2024
+            _project_explorer.C64ToolStripMenuItem.Visible = _options.CC65.C64
+            _project_explorer.C64ToolStripMenuItem.Enabled = _options.CC65.C64
+            _project_explorer.C128ToolStripMenuItem.Visible = _options.CC65.C128
+            _project_explorer.C128ToolStripMenuItem.Enabled = _options.CC65.C128
+            _project_explorer.C16ToolStripMenuItem.Visible = _options.CC65.C16
+            _project_explorer.C16ToolStripMenuItem.Enabled = _options.CC65.C16
+            _project_explorer.PLUS4ToolStripMenuItem.Visible = _options.CC65.Plus4
+            _project_explorer.PLUS4ToolStripMenuItem.Enabled = _options.CC65.Plus4
+            _project_explorer.ATARI8BitToolStripMenuItem.Visible = _options.CC65.Atari
+            _project_explorer.ATARI8BitToolStripMenuItem.Enabled = _options.CC65.Atari
+            _project_explorer.ATARI8BitlowResToolStripMenuItem1.Visible = _options.CC65.Atarilo
+            _project_explorer.ATARI8BitlowResToolStripMenuItem.Enabled = _options.CC65.Atarilo
+
+            _project_explorer.VIC20ToolStripMenuItem1.Visible = _options.Emulators.ViceEnabled And _options.CC65.Vic20
+            _project_explorer.VIC20ToolStripMenuItem1.Enabled = _options.Emulators.ViceEnabled And _options.CC65.Vic20
+            _project_explorer.VIC2024KBToolStripMenuItem1.Visible = _options.Emulators.ViceEnabled And _options.CC65.Vic2024
+            _project_explorer.VIC2024KBToolStripMenuItem1.Enabled = _options.Emulators.ViceEnabled And _options.CC65.Vic2024
+            _project_explorer.C64ToolStripMenuItem1.Visible = _options.Emulators.ViceEnabled And _options.CC65.C64
+            _project_explorer.C64ToolStripMenuItem1.Enabled = _options.Emulators.ViceEnabled And _options.CC65.C64
+            _project_explorer.C128ToolStripMenuItem1.Visible = _options.Emulators.ViceEnabled And _options.CC65.C128
+            _project_explorer.C128ToolStripMenuItem1.Enabled = _options.Emulators.ViceEnabled And _options.CC65.C128
+            _project_explorer.C16ToolStripMenuItem1.Visible = _options.Emulators.ViceEnabled And _options.CC65.C16
+            _project_explorer.C16ToolStripMenuItem1.Enabled = _options.Emulators.ViceEnabled And _options.CC65.C16
+            _project_explorer.PLUS4ToolStripMenuItem1.Visible = (_options.Emulators.ViceEnabled Or _options.Emulators.YapeEnabled) And _options.CC65.Plus4
+            _project_explorer.PLUS4ToolStripMenuItem1.Enabled = (_options.Emulators.ViceEnabled Or _options.Emulators.YapeEnabled) And _options.CC65.Plus4
+            _project_explorer.ATARI8BitToolStripMenuItem1.Visible = (_options.Emulators.AltirraEnabled Or _options.Emulators.Atari800Enabled) And _options.CC65.Atari
+            _project_explorer.ATARI8BitToolStripMenuItem1.Enabled = (_options.Emulators.AltirraEnabled Or _options.Emulators.Atari800Enabled) And _options.CC65.Atari
+            _project_explorer.ATARI8BitlowResToolStripMenuItem1.Visible = (_options.Emulators.AltirraEnabled Or _options.Emulators.Atari800Enabled) And _options.CC65.Atarilo
+            _project_explorer.ATARI8BitlowResToolStripMenuItem1.Enabled = (_options.Emulators.AltirraEnabled Or _options.Emulators.Atari800Enabled) And _options.CC65.Atarilo
+
+            _project_explorer.VIC20ToolStripMenuItem2.Visible = _options.Emulators.ViceEnabled And _options.CC65.Vic20
+            _project_explorer.VIC20ToolStripMenuItem2.Enabled = _options.Emulators.ViceEnabled And _options.CC65.Vic20
+            _project_explorer.VIC2024KBToolStripMenuItem2.Visible = _options.Emulators.ViceEnabled And _options.CC65.Vic2024
+            _project_explorer.VIC2024KBToolStripMenuItem2.Enabled = _options.Emulators.ViceEnabled And _options.CC65.Vic2024
+            _project_explorer.C64ToolStripMenuItem2.Visible = _options.Emulators.ViceEnabled And _options.CC65.C64
+            _project_explorer.C64ToolStripMenuItem2.Enabled = _options.Emulators.ViceEnabled And _options.CC65.C64
+            _project_explorer.C128ToolStripMenuItem2.Visible = _options.Emulators.ViceEnabled And _options.CC65.C128
+            _project_explorer.C128ToolStripMenuItem2.Enabled = _options.Emulators.ViceEnabled And _options.CC65.C128
+            _project_explorer.C16ToolStripMenuItem2.Visible = _options.Emulators.ViceEnabled And _options.CC65.C16
+            _project_explorer.C16ToolStripMenuItem2.Enabled = _options.Emulators.ViceEnabled And _options.CC65.C16
+            _project_explorer.PLUS4ToolStripMenuItem2.Visible = (_options.Emulators.ViceEnabled Or _options.Emulators.YapeEnabled) And _options.CC65.Plus4
+            _project_explorer.PLUS4ToolStripMenuItem2.Enabled = (_options.Emulators.ViceEnabled Or _options.Emulators.YapeEnabled) And _options.CC65.Plus4
+            _project_explorer.ATARI8BitToolStripMenuItem2.Visible = (_options.Emulators.AltirraEnabled Or _options.Emulators.Atari800Enabled) And _options.CC65.Atari
+            _project_explorer.ATARI8BitToolStripMenuItem2.Enabled = (_options.Emulators.AltirraEnabled Or _options.Emulators.Atari800Enabled) And _options.CC65.Atari
+            _project_explorer.ATARI8BitlowResToolStripMenuItem2.Visible = (_options.Emulators.AltirraEnabled Or _options.Emulators.Atari800Enabled) And _options.CC65.Atarilo
+            _project_explorer.ATARI8BitlowResToolStripMenuItem2.Enabled = (_options.Emulators.AltirraEnabled Or _options.Emulators.Atari800Enabled) And _options.CC65.Atarilo
+        Else
+            _project_explorer.MakeToolStripMenuItem1.Visible = False
+            _project_explorer.RunToolStripMenuItem.Enabled = False
+        End If
+
+    End Sub
+
 End Module

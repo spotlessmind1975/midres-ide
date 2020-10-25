@@ -160,6 +160,8 @@ Module OptionsHelper
         _options.Output.BinaryFilename = _options_window.TextBoxBinaryFileName.Text
         _options.Output.complete = _options_window.RadioButtonComplete.Checked
 
+        UpdateProjectExplorerMenuEntriesForSpecificOptions(ProjectExplorer, _options)
+
     End Sub
 
     Public Function showOptionsWindow(_options As Options, _title As String) As OptionsWindow
@@ -177,7 +179,9 @@ Module OptionsHelper
     End Function
 
     Public Function ChooseBestOptions() As Options
-        If Not (GlobalVars.CurrentProject Is Nothing) Then
+        If Not (GlobalVars.CurrentFolder Is Nothing) Then
+            Return GlobalVars.CurrentFolder.CurrentOptions
+        ElseIf Not (GlobalVars.CurrentProject Is Nothing) Then
             Return GlobalVars.CurrentProject.CurrentOptions
         ElseIf Not (GlobalVars.CurrentOptions Is Nothing) Then
             Return GlobalVars.CurrentOptions
