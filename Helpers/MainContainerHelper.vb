@@ -186,6 +186,7 @@ Module MainContainerHelper
             openedSourceEditor = GlobalVars.OpenedSourceEditors.Item(_filename)
 
             openedSourceEditor.Show()
+            openedSourceEditor.BringToFront()
 
         Else
 
