@@ -160,8 +160,6 @@ Module OptionsHelper
         _options.Output.BinaryFilename = _options_window.TextBoxBinaryFileName.Text
         _options.Output.complete = _options_window.RadioButtonComplete.Checked
 
-        UpdateAllMenuEntries()
-
     End Sub
 
     Public Function showOptionsWindow(_options As Options, _title As String) As OptionsWindow
