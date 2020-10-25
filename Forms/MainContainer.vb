@@ -152,6 +152,7 @@ Public Class MainContainer
 
     Private Sub ProjectExplorerToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ProjectExplorerToolStripMenuItem.Click
         ProjectExplorer.Show()
+        ProjectExplorer.BringToFront()
     End Sub
 
 End Class
