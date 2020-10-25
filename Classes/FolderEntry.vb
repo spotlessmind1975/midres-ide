@@ -20,6 +20,7 @@ Public Class FolderEntry
     Private _kind As KindEnum
     Private _folders As Collection
     Private _files As Collection
+    Private _opened As Boolean
 
     Public Sub New(path As String, Optional name As String = "", Optional description As String = "")
         _path = path
@@ -98,6 +99,15 @@ Public Class FolderEntry
         End Set
     End Property
 
+    Public Property Opened As Boolean
+        Get
+            Return _opened
+        End Get
+        Set(value As Boolean)
+            _opened = value
+        End Set
+    End Property
+
     Public Sub ReadXml(reader As XmlReader) Implements IXmlSerializable.ReadXml
 
         reader.Read()
@@ -128,6 +138,8 @@ Public Class FolderEntry
                         Dim pe As FileEntry = New FileEntry
                         pe.ReadXml(reader)
                         _files.Add(pe)
+                    Case "Opened"
+                        _opened = reader.ReadElementContentAsBoolean()
                     Case Else
                         reader.Read()
                 End Select
@@ -168,6 +180,13 @@ Public Class FolderEntry
             DirectCast(_files(i), FileEntry).WriteXml(writer)
             writer.WriteEndElement()
         Next
+        writer.WriteStartElement("Opened")
+        If (_opened) Then
+            writer.WriteString("true")
+        Else
+            writer.WriteString("false")
+        End If
+        writer.WriteEndElement()
     End Sub
 
     Public Function GetSchema() As XmlSchema Implements IXmlSerializable.GetSchema

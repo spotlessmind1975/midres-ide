@@ -64,6 +64,10 @@ Module ProjectExplorerHelper
             t.Nodes.Add(PopulateTreeViewWithFile(file))
         Next
 
+        If _folder_entry.Opened Then
+            t.Expand()
+        End If
+
         Return t
 
     End Function
@@ -342,6 +346,22 @@ Module ProjectExplorerHelper
                         tp.ImageIndex = 7
                         tp.SelectedImageIndex = 7
                 End Select
+            End If
+        End If
+    End Sub
+
+    Public Sub ExpandIfFolderNode(_tree_node As TreeNode)
+        If Not (_tree_node Is Nothing) Then
+            If TypeOf _tree_node.Tag Is FolderEntry Then
+                _tree_node.Tag.Opened = True
+            End If
+        End If
+    End Sub
+
+    Public Sub CollapseIfFolderNode(_tree_node As TreeNode)
+        If Not (_tree_node Is Nothing) Then
+            If TypeOf _tree_node.Tag Is FolderEntry Then
+                _tree_node.Tag.Opened = False
             End If
         End If
     End Sub

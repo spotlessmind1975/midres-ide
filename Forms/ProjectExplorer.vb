@@ -270,4 +270,12 @@ Public Class ProjectExplorer
     Private Sub NewFileToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles NewFileToolStripMenuItem2.Click
         AddNewFile(Me)
     End Sub
+
+    Private Sub TreeViewProject_BeforeExpand(sender As Object, e As TreeViewCancelEventArgs) Handles TreeViewProject.BeforeExpand
+        ExpandIfFolderNode(e.Node)
+    End Sub
+
+    Private Sub TreeViewProject_BeforeCollapse(sender As Object, e As TreeViewCancelEventArgs) Handles TreeViewProject.BeforeCollapse
+        CollapseIfFolderNode(e.Node)
+    End Sub
 End Class
