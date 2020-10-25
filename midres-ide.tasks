@@ -1,183 +1,114 @@
 [
   {
     "$type": "VSToDoList.Models.Task, VSToDoList",
-    "Name": "Gestire errore linker di unresolved symbol (\"Unresolved external '...' referenced in:\")",
+    "Name": "BUG FIX",
     "IsDone": false,
-    "IsExpanded": false,
-    "SubTasks": [],
+    "IsExpanded": true,
+    "SubTasks": [
+      {
+        "$type": "VSToDoList.Models.Task, VSToDoList",
+        "Name": "Non si posono aggiungere file ai folders se non esistono già.",
+        "IsDone": false,
+        "IsExpanded": false,
+        "SubTasks": [],
+        "Status": 0
+      },
+      {
+        "$type": "VSToDoList.Models.Task, VSToDoList",
+        "Name": "non funziona l'autocompletamento (non trova: mr_puttile)",
+        "IsDone": false,
+        "IsExpanded": false,
+        "SubTasks": [],
+        "Status": 0
+      },
+      {
+        "$type": "VSToDoList.Models.Task, VSToDoList",
+        "Name": "quando modifico una riga con un marker, si dovrebbe togliere (oppure: colore rosa)",
+        "IsDone": false,
+        "IsExpanded": false,
+        "SubTasks": [],
+        "Status": 0
+      },
+      {
+        "$type": "VSToDoList.Models.Task, VSToDoList",
+        "Name": "quando si fa show di una finestra assicurarsi dello zindex a top",
+        "IsDone": false,
+        "IsExpanded": false,
+        "SubTasks": [],
+        "Status": 0
+      }
+    ],
     "Status": 0
   },
   {
     "$type": "VSToDoList.Models.Task, VSToDoList",
-    "Name": "Aprire il primo livello del progetto (i folders)",
+    "Name": "COSE DA FARE",
     "IsDone": false,
-    "IsExpanded": false,
-    "SubTasks": [],
-    "Status": 2
-  },
-  {
-    "$type": "VSToDoList.Models.Task, VSToDoList",
-    "Name": "Modificare rendering voci menu elenco progetti salvati",
-    "IsDone": false,
-    "IsExpanded": false,
-    "SubTasks": [],
+    "IsExpanded": true,
+    "SubTasks": [
+      {
+        "$type": "VSToDoList.Models.Task, VSToDoList",
+        "Name": "salvare lo stato aperto / chiuso dell'albero",
+        "IsDone": false,
+        "IsExpanded": false,
+        "SubTasks": [],
+        "Status": 0
+      }
+    ],
     "Status": 0
   },
   {
     "$type": "VSToDoList.Models.Task, VSToDoList",
-    "Name": "Integrare git",
+    "Name": "MI PIACEREBBE...",
     "IsDone": false,
-    "IsExpanded": false,
-    "SubTasks": [],
+    "IsExpanded": true,
+    "SubTasks": [
+      {
+        "$type": "VSToDoList.Models.Task, VSToDoList",
+        "Name": "Integrare img2tile",
+        "IsDone": false,
+        "IsExpanded": false,
+        "SubTasks": [],
+        "Status": 0
+      },
+      {
+        "$type": "VSToDoList.Models.Task, VSToDoList",
+        "Name": "Riordinare \"Open\" prima di \"Rename\"",
+        "IsDone": false,
+        "IsExpanded": false,
+        "SubTasks": [],
+        "Status": 0
+      },
+      {
+        "$type": "VSToDoList.Models.Task, VSToDoList",
+        "Name": "aprire il file generato con una utility (es: DirMaster)",
+        "IsDone": false,
+        "IsExpanded": false,
+        "SubTasks": [],
+        "Status": 0
+      },
+      {
+        "$type": "VSToDoList.Models.Task, VSToDoList",
+        "Name": "più dettagli sulla compilazione (nel messagebox)",
+        "IsDone": false,
+        "IsExpanded": false,
+        "SubTasks": [],
+        "Status": 0
+      },
+      {
+        "$type": "VSToDoList.Models.Task, VSToDoList",
+        "Name": "come far comparire un \"check\" su messagebox per non chiedere più se farlo partire?",
+        "IsDone": false,
+        "IsExpanded": false,
+        "SubTasks": [],
+        "Status": 0
+      }
+    ],
     "Status": 0
   },
   {
     "$type": "VSToDoList.Models.Task, VSToDoList",
-    "Name": "Invia commenti e suggerimenti sotto ?",
-    "IsDone": false,
-    "IsExpanded": false,
-    "SubTasks": [],
-    "Status": 0
-  },
-  {
-    "$type": "VSToDoList.Models.Task, VSToDoList",
-    "Name": "Gestire simboli di include tramite pannello",
-    "IsDone": false,
-    "IsExpanded": false,
-    "SubTasks": [],
-    "Status": 0
-  },
-  {
-    "$type": "VSToDoList.Models.Task, VSToDoList",
-    "Name": "Omettere dall'output le linee vuote e quelle del make.exe",
-    "IsDone": false,
-    "IsExpanded": false,
-    "SubTasks": [],
-    "Status": 0
-  },
-  {
-    "$type": "VSToDoList.Models.Task, VSToDoList",
-    "Name": "Evidenza ed estrazione dei todo (formato: \"@todo: ...\")",
-    "IsDone": false,
-    "IsExpanded": false,
-    "SubTasks": [],
-    "Status": 0
-  },
-  {
-    "$type": "VSToDoList.Models.Task, VSToDoList",
-    "Name": "Gestire formato makefile",
-    "IsDone": false,
-    "IsExpanded": false,
-    "SubTasks": [],
-    "Status": 0
-  },
-  {
-    "$type": "VSToDoList.Models.Task, VSToDoList",
-    "Name": "Spostare menu Edit dopo File e prima di Make",
-    "IsDone": false,
-    "IsExpanded": false,
-    "SubTasks": [],
-    "Status": 2
-  },
-  {
-    "$type": "VSToDoList.Models.Task, VSToDoList",
-    "Name": "Adeguamento visibilità ignore su presenza esclusione su configurazione",
-    "IsDone": false,
-    "IsExpanded": false,
-    "SubTasks": [],
-    "Status": 0
-  },
-  {
-    "$type": "VSToDoList.Models.Task, VSToDoList",
-    "Name": "Gestione supporto overlay",
-    "IsDone": false,
-    "IsExpanded": false,
-    "SubTasks": [],
-    "Status": 0
-  },
-  {
-    "$type": "VSToDoList.Models.Task, VSToDoList",
-    "Name": "Aggiungere nome del progetto su elenco progetti salvati",
-    "IsDone": false,
-    "IsExpanded": false,
-    "SubTasks": [],
-    "Status": 0
-  },
-  {
-    "$type": "VSToDoList.Models.Task, VSToDoList",
-    "Name": "Aprendo Find in Files, il path deve essere compilato con il Full Path attuale",
-    "IsDone": false,
-    "IsExpanded": false,
-    "SubTasks": [],
-    "Status": 0
-  },
-  {
-    "$type": "VSToDoList.Models.Task, VSToDoList",
-    "Name": "Titolo finesta risultati della ricerca",
-    "IsDone": false,
-    "IsExpanded": false,
-    "SubTasks": [],
-    "Status": 0
-  },
-  {
-    "$type": "VSToDoList.Models.Task, VSToDoList",
-    "Name": "Struttura ad albero per risultati ricerca per files",
-    "IsDone": false,
-    "IsExpanded": false,
-    "SubTasks": [],
-    "Status": 0
-  },
-  {
-    "$type": "VSToDoList.Models.Task, VSToDoList",
-    "Name": "Se si clicca due volte su un risultato, fare anche show della finestra già aperta",
-    "IsDone": false,
-    "IsExpanded": false,
-    "SubTasks": [],
-    "Status": 0
-  },
-  {
-    "$type": "VSToDoList.Models.Task, VSToDoList",
-    "Name": "Se trova una sola sostituzione dice \"Text not found\" (ma la sost.lo stesso)",
-    "IsDone": false,
-    "IsExpanded": false,
-    "SubTasks": [],
-    "Status": 0
-  },
-  {
-    "$type": "VSToDoList.Models.Task, VSToDoList",
-    "Name": "Aggiungere Windows > Close All (per chiudere tutte le finestre)",
-    "IsDone": false,
-    "IsExpanded": false,
-    "SubTasks": [],
-    "Status": 0
-  },
-  {
-    "$type": "VSToDoList.Models.Task, VSToDoList",
-    "Name": "Aggiungere Windows > Opened editors > ... (elenco editor aperti)",
-    "IsDone": false,
-    "IsExpanded": false,
-    "SubTasks": [],
-    "Status": 0
-  },
-  {
-    "$type": "VSToDoList.Models.Task, VSToDoList",
-    "Name": "Memorizzare ultima estensione selezionata (rimuovendo ultima aperta)",
-    "IsDone": false,
-    "IsExpanded": false,
-    "SubTasks": [],
-    "Status": 0
-  },
-  {
-    "$type": "VSToDoList.Models.Task, VSToDoList",
-    "Name": "Gestire keywords di MIDRES",
-    "IsDone": false,
-    "IsExpanded": false,
-    "SubTasks": [],
-    "Status": 0
-  },
-  {
-    "$type": "VSToDoList.Models.Task, VSToDoList",
-    "Name": "Eccezione di errori su CC65 vanno sulle options contestuali",
+    "Name": null,
     "IsDone": false,
     "IsExpanded": false,
     "SubTasks": [],

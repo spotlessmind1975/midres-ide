@@ -226,30 +226,39 @@ Module MainContainerHelper
 
     End Sub
 
+    Public Function OpenSaveDialogEx() As String
+
+        Dim sfd = New SaveFileDialog()
+
+        Dim result As DialogResult = sfd.ShowDialog()
+
+        If result = DialogResult.OK Then
+
+            Return Path.GetFullPath(sfd.FileName)
+
+        Else
+
+            Return Nothing
+
+        End If
+
+    End Function
+
     Public Sub SaveFile(_source_editor As SourceEditor, Optional _filename As String = "")
 
-        Dim filename = _filename
-        Dim sfd = New SaveFileDialog()
+        Dim filename As String
 
         If (_filename = "") Then
 
-            sfd.FileName = _source_editor.Text
+            filename = OpenSaveDialogEx()
 
-            Dim result As DialogResult = sfd.ShowDialog()
-
-            If result = DialogResult.OK Then
-
-                filename = Path.GetFullPath(sfd.FileName)
-
-            Else
-
+            If filename Is Nothing Then
                 Exit Sub
-
             End If
 
         Else
 
-            filename = Path.GetFullPath(filename)
+            filename = Path.GetFullPath(_filename)
 
         End If
 

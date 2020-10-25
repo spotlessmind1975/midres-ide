@@ -156,13 +156,31 @@ Module ProjectExplorerHelper
 
     End Sub
 
-    Public Sub AddNewFile(_project_explorer As ProjectExplorer)
+    Public Sub AddExistingFile(_project_explorer As ProjectExplorer)
 
         Dim tp As TreeNode = _project_explorer.TreeViewProject.SelectedNode
 
         If Not (tp Is Nothing) Then
             If TypeOf tp.Tag Is FolderEntry Then
                 Dim filename As String = OpenDialogEx()
+                If Not (filename Is Nothing) Then
+                    Dim f As FileEntry = New FileEntry(filename, Path.GetFileName(filename))
+                    tp.Tag.Files.Add(f)
+                    tp.Tag.NormalizePaths()
+                    tp.Nodes.Add(PopulateTreeViewWithFile(f))
+                End If
+            End If
+        End If
+
+    End Sub
+
+    Public Sub AddNewFile(_project_explorer As ProjectExplorer)
+
+        Dim tp As TreeNode = _project_explorer.TreeViewProject.SelectedNode
+
+        If Not (tp Is Nothing) Then
+            If TypeOf tp.Tag Is FolderEntry Then
+                Dim filename As String = OpenSaveDialogEx()
                 If Not (filename Is Nothing) Then
                     Dim f As FileEntry = New FileEntry(filename, Path.GetFileName(filename))
                     tp.Tag.Files.Add(f)

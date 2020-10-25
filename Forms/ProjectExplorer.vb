@@ -61,7 +61,7 @@ Public Class ProjectExplorer
     End Sub
 
     Private Sub AddFileToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AddFileToolStripMenuItem.Click
-        AddNewFile(Me)
+        AddExistingFile(Me)
     End Sub
 
     Private Sub OptionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OptionsToolStripMenuItem.Click
@@ -128,7 +128,7 @@ Public Class ProjectExplorer
     End Sub
 
     Private Sub AddfileToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles AddfileToolStripMenuItem1.Click
-        AddNewFile(Me)
+        AddExistingFile(Me)
     End Sub
 
     Private Sub RemoveFolderToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles RemoveFolderToolStripMenuItem1.Click
@@ -152,7 +152,7 @@ Public Class ProjectExplorer
     End Sub
 
     Private Sub AddfileToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles AddfileToolStripMenuItem2.Click
-        AddNewFile(Me)
+        AddExistingFile(Me)
     End Sub
 
     Private Sub RemoveFolderToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles RemoveFolderToolStripMenuItem2.Click
@@ -257,5 +257,17 @@ Public Class ProjectExplorer
 
     Private Sub SetAsactiveToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SetAsactiveToolStripMenuItem.Click
         SetFolderAsActive(Me)
+    End Sub
+
+    Private Sub NewFileToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NewFileToolStripMenuItem.Click
+        AddNewFile(Me)
+    End Sub
+
+    Private Sub NewFileToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles NewFileToolStripMenuItem1.Click
+        AddNewFile(Me)
+    End Sub
+
+    Private Sub NewFileToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles NewFileToolStripMenuItem2.Click
+        AddNewFile(Me)
     End Sub
 End Class
