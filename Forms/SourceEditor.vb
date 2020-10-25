@@ -105,10 +105,10 @@ Public Class SourceEditor
             ScintillaSource.Markers(1).SetBackColor(Color.Orange)
             ScintillaSource.Margins(2).Type = MarginType.Symbol
             ScintillaSource.Markers(2).Symbol = MarkerSymbol.FullRect
-            ScintillaSource.Markers(2).SetForeColor(Color.Red)
-            ScintillaSource.Markers(2).SetBackColor(Color.Red)
+            ScintillaSource.Markers(2).SetForeColor(Color.LightSalmon)
+            ScintillaSource.Markers(2).SetBackColor(Color.LightSalmon)
             ScintillaSource.Markers(2).Symbol = MarkerSymbol.Background
-            ScintillaSource.Markers(2).SetBackColor(Color.Red)
+            ScintillaSource.Markers(2).SetBackColor(Color.LightSalmon)
 
             ScintillaSource.SetKeywords(0, GlobalVars.CKeywords)
             ScintillaSource.SetKeywords(1, GlobalVars.FunctionsAndDataTypes)
