@@ -57,6 +57,8 @@ Public Class SourceEditor
 
     Private Sub Init()
 
+        ScintillaSource.AutoCSeparator = " "
+        ScintillaSource.AutoCIgnoreCase = true
         ScintillaSource.Lexer = _formalLexer
 
         If _formalLexer = Lexer.Cpp Then
