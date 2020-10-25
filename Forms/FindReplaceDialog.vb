@@ -101,6 +101,7 @@ Public Class FindReplaceDialog
     End Property
 
     Private Sub FindDialog_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        TextBoxSearchText.SelectAll()
         TextBoxSearchText.Focus()
     End Sub
 
