@@ -75,7 +75,7 @@ Module MakeHelper
             If (File.Exists(_binary_filename)) Then
                 If _executable Then
                     If MsgBox("Program has been built for " & _target & "." & vbCrLf & "Run it?", vbYesNo, "SUCCESSFUL COMPILATION") = vbYes Then
-                        ExecuteEmulatorInternal(_binary_filename, _target)
+                        ExecuteEmulatorInternal(_options, _binary_filename, _target)
                     End If
                 Else
                     MsgBox("Library has been built for " & _target & ".", vbOKOnly, "SUCCESSFUL MAKE")

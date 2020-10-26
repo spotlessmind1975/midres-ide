@@ -1,47 +1,47 @@
 ﻿Module EmulatorHelper
 
-    Public Function ExecuteEmulatorInternal(_executable_name As String, _target As String) As String
+    Public Function ExecuteEmulatorInternal(_options As Options, _executable_name As String, _target As String) As String
 
         ExecuteEmulatorInternal = 0
 
         Select Case _target
             Case "c16"
-                If (GlobalVars.CurrentOptions.Emulators.ViceEnabled) Then
-                    ExecuteEmulatorInternal = Shell(GlobalVars.CurrentOptions.Emulators.VicePath & "xplus4.exe --model c16 " & _executable_name, AppWinStyle.NormalFocus)
+                If (_options.Emulators.ViceEnabled) Then
+                    ExecuteEmulatorInternal = Shell(_options.Emulators.VicePath & "xplus4.exe --model c16 " & _executable_name, AppWinStyle.NormalFocus)
                 End If
             Case "c64"
-                If (GlobalVars.CurrentOptions.Emulators.ViceEnabled) Then
-                    ExecuteEmulatorInternal = Shell(GlobalVars.CurrentOptions.Emulators.VicePath & "x64.exe " & _executable_name, AppWinStyle.NormalFocus)
+                If (_options.Emulators.ViceEnabled) Then
+                    ExecuteEmulatorInternal = Shell(_options.Emulators.VicePath & "x64.exe " & _executable_name, AppWinStyle.NormalFocus)
                 End If
             Case "c128"
-                If (GlobalVars.CurrentOptions.Emulators.ViceEnabled) Then
-                    ExecuteEmulatorInternal = Shell(GlobalVars.CurrentOptions.Emulators.VicePath & "x128.exe " & _executable_name, AppWinStyle.NormalFocus)
+                If (_options.Emulators.ViceEnabled) Then
+                    ExecuteEmulatorInternal = Shell(_options.Emulators.VicePath & "x128.exe " & _executable_name, AppWinStyle.NormalFocus)
                 End If
             Case "vic20"
-                If (GlobalVars.CurrentOptions.Emulators.ViceEnabled) Then
-                    ExecuteEmulatorInternal = Shell(GlobalVars.CurrentOptions.Emulators.VicePath & "xvic.exe " & _executable_name, AppWinStyle.NormalFocus)
+                If (_options.Emulators.ViceEnabled) Then
+                    ExecuteEmulatorInternal = Shell(_options.Emulators.VicePath & "xvic.exe " & _executable_name, AppWinStyle.NormalFocus)
                 End If
             Case "vic2024"
-                If (GlobalVars.CurrentOptions.Emulators.ViceEnabled) Then
-                    ExecuteEmulatorInternal = Shell(GlobalVars.CurrentOptions.Emulators.VicePath & "xvic.exe --memory 24k " & _executable_name, AppWinStyle.NormalFocus)
+                If (_options.Emulators.ViceEnabled) Then
+                    ExecuteEmulatorInternal = Shell(_options.Emulators.VicePath & "xvic.exe --memory 24k " & _executable_name, AppWinStyle.NormalFocus)
                 End If
             Case "plus4"
-                If (GlobalVars.CurrentOptions.Emulators.YapeEnabled) Then
-                    ExecuteEmulatorInternal = Shell(GlobalVars.CurrentOptions.Emulators.YapePath & "yape.exe " & _executable_name, AppWinStyle.NormalFocus)
-                ElseIf (GlobalVars.CurrentOptions.Emulators.ViceEnabled) Then
-                    ExecuteEmulatorInternal = Shell(GlobalVars.CurrentOptions.Emulators.VicePath & "xplus4.exe " & _executable_name, AppWinStyle.NormalFocus)
+                If (_options.Emulators.YapeEnabled) Then
+                    ExecuteEmulatorInternal = Shell(_options.Emulators.YapePath & "yape.exe " & _executable_name, AppWinStyle.NormalFocus)
+                ElseIf (_options.Emulators.ViceEnabled) Then
+                    ExecuteEmulatorInternal = Shell(_options.Emulators.VicePath & "xplus4.exe " & _executable_name, AppWinStyle.NormalFocus)
                 End If
             Case "atari"
-                If (GlobalVars.CurrentOptions.Emulators.AltirraEnabled) Then
-                    ExecuteEmulatorInternal = Shell(GlobalVars.CurrentOptions.Emulators.AltirraPath & "altirra.exe " & _executable_name, AppWinStyle.NormalFocus)
-                ElseIf (GlobalVars.CurrentOptions.Emulators.Atari800Enabled) Then
-                    ExecuteEmulatorInternal = Shell(GlobalVars.CurrentOptions.Emulators.VicePath & "atari800.exe " & _executable_name, AppWinStyle.NormalFocus)
+                If (_options.Emulators.AltirraEnabled) Then
+                    ExecuteEmulatorInternal = Shell(_options.Emulators.AltirraPath & "altirra.exe " & _executable_name, AppWinStyle.NormalFocus)
+                ElseIf (_options.Emulators.Atari800Enabled) Then
+                    ExecuteEmulatorInternal = Shell(_options.Emulators.Atari800Path & "atari800.exe " & _executable_name, AppWinStyle.NormalFocus)
                 End If
             Case "atarilo"
-                If (GlobalVars.CurrentOptions.Emulators.AltirraEnabled) Then
-                    ExecuteEmulatorInternal = Shell(GlobalVars.CurrentOptions.Emulators.AltirraPath & "altirra.exe " & _executable_name, AppWinStyle.NormalFocus)
-                ElseIf (GlobalVars.CurrentOptions.Emulators.Atari800Enabled) Then
-                    ExecuteEmulatorInternal = Shell(GlobalVars.CurrentOptions.Emulators.VicePath & "atari800.exe " & _executable_name, AppWinStyle.NormalFocus)
+                If (_options.Emulators.AltirraEnabled) Then
+                    ExecuteEmulatorInternal = Shell(_options.Emulators.AltirraPath & "altirra.exe " & _executable_name, AppWinStyle.NormalFocus)
+                ElseIf (_options.Emulators.Atari800Enabled) Then
+                    ExecuteEmulatorInternal = Shell(_options.Emulators.Atari800Path & "atari800.exe " & _executable_name, AppWinStyle.NormalFocus)
                 End If
         End Select
 
@@ -62,7 +62,7 @@
         binaryFileName = binaryFileName.Replace("{target}", _target)
         binaryFileName = binaryFileName.Replace("{support}", support)
 
-        ExecuteEmulatorInternal(_options.IDE.RootPath & "\" & binaryFileName, _target)
+        ExecuteEmulatorInternal(_options, _options.IDE.RootPath & "\" & binaryFileName, _target)
 
     End Sub
 
