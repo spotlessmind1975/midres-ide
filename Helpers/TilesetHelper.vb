@@ -68,7 +68,39 @@ Module TilesetHelper
         Dim parts() = _output.Split(vbCrLf)
 
         For Each part In parts
-            AddErrorOutput("", 0, part, 0, 0)
+            Dim warning As Integer = 0
+            Dim linker As Boolean = False
+            If (Trim(part) <> "") Then
+
+                If (InStr(part, "ERROR:")) Then
+                    warning = 2
+                End If
+                If (warning > 0) Then
+
+                    Dim rx As Regex
+
+                    rx = New Regex("ERROR:([^:]*): (.*)", RegexOptions.Compiled Or RegexOptions.IgnoreCase)
+
+                    Dim matches As MatchCollection = rx.Matches(part)
+
+                    For Each match As Match In matches
+
+                        Dim groups As GroupCollection = match.Groups
+
+                        Dim fileName = Path.GetFullPath((_working_directory & "\" & groups.Item(1).Value).Replace(vbCrLf, "").Replace(vbLf, ""))
+                        Dim message = groups.Item(2).Value
+
+                        partCounts += 1
+
+                        AddErrorOutput(fileName, 0, message, warning, 0)
+
+                    Next
+
+                Else
+                    AddErrorOutput("", 0, part, 0, 0)
+                End If
+
+            End If
         Next
 
         If (partCounts > 0) Then

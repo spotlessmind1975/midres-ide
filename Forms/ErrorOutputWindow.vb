@@ -30,7 +30,7 @@
         If ListBoxOutput.SelectedIndex > -1 Then
             Dim eoe As ErrorOutputEntry = GlobalVars.ErrorOutput.Items(ListBoxOutput.SelectedIndex + 1)
 
-            If (eoe.Filename <> "") Then
+            If (eoe.Filename <> "" And eoe.Line > 0) Then
 
                 If (GlobalVars.OpenedSourceEditors.Contains(eoe.Filename)) Then
                     FocusOnFilenameAndMarker(eoe.Filename, eoe.Line, Me.MdiParent, eoe.Kind)
