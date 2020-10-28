@@ -153,13 +153,11 @@ Public Class FindReplaceDialog
         End If
     End Sub
 
-    Private Sub TextBoxSearchText_TextChanged(sender As Object, e As EventArgs) Handles TextBoxSearchText.TextChanged
-
-    End Sub
-
     Private Sub TextBoxSearchText_KeyUp(sender As Object, e As KeyEventArgs) Handles TextBoxSearchText.KeyUp
         If e.KeyCode = Keys.Enter Then
             ButtonFindNext_Click(sender, e)
+        ElseIf e.KeyCode = Keys.Escape Then
+            Close()
         End If
     End Sub
 
@@ -171,5 +169,25 @@ Public Class FindReplaceDialog
         If e.KeyCode = Keys.Escape Then
             Me.Close()
         End If
+    End Sub
+
+    Private Sub TextBoxReplaceText_KeyUp(sender As Object, e As KeyEventArgs) Handles TextBoxReplaceText.KeyUp
+        If e.KeyCode = Keys.Escape Then
+            Me.Close()
+        End If
+    End Sub
+
+    Private Sub TextBoxPath_KeyUp(sender As Object, e As KeyEventArgs) Handles TextBoxPath.KeyUp
+        If e.KeyCode = Keys.Escape Then
+            Me.Close()
+        End If
+
+    End Sub
+
+    Private Sub TextBoxFileMask_KeyUp(sender As Object, e As KeyEventArgs) Handles TextBoxFileMask.KeyUp
+        If e.KeyCode = Keys.Escape Then
+            Me.Close()
+        End If
+
     End Sub
 End Class
