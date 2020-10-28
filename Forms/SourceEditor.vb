@@ -97,6 +97,9 @@ Public Class SourceEditor
             ScintillaSource.Styles(Style.Cpp.Operator + 64).ForeColor = Color.Purple
             ScintillaSource.Styles(Style.Cpp.Preprocessor + 64).ForeColor = Color.Maroon
 
+            ScintillaSource.Margins(0).Width = 32
+            ScintillaSource.Margins(0).Type = MarginType.Number
+
             ScintillaSource.Margins(1).Type = MarginType.Symbol
             ScintillaSource.Markers(0).Symbol = MarkerSymbol.Arrow
             ScintillaSource.Markers(0).SetForeColor(Color.Orange)
