@@ -3,7 +3,7 @@ Imports System.Text.RegularExpressions
 
 Module TilesetHelper
 
-    Private Function Image2Tile(_working_directory As String, _input_filenames As Collection, _output_filename As String, Optional _bank_number As Integer = 0, Optional _debug As Boolean = False, Optional _header_file As String = Nothing, Optional _threshold_luminance As Integer = 16, Optional _multicolor As Boolean = False, Optional _reverse As Boolean = False, Optional _verbose As Boolean = False) As String
+    Private Function Image2Tile(_working_directory As String, _input_filenames As Collection, _output_filename As String, Optional _bank_number As Integer = 0, Optional _header_file As String = Nothing, Optional _threshold_luminance As Integer = 16, Optional _multicolor As Boolean = False, Optional _reverse As Boolean = False) As String
 
         Dim commandLine As String = ""
 
@@ -13,9 +13,6 @@ Module TilesetHelper
         commandLine = commandLine & " -o " & _output_filename
         If _bank_number > 0 Then
             commandLine = commandLine & " -b " & _bank_number
-        End If
-        If _debug Then
-            commandLine = commandLine & " -d "
         End If
         If Not (_header_file Is Nothing) Then
             commandLine = commandLine & " -g " & _header_file
@@ -28,9 +25,6 @@ Module TilesetHelper
         End If
         If _reverse Then
             commandLine = commandLine & " -r "
-        End If
-        If _verbose Then
-            commandLine = commandLine & " -v "
         End If
 
         MsgBox("img2tile64.exe " & commandLine & " !! " & _working_directory)
@@ -135,7 +129,7 @@ Module TilesetHelper
 
         ClearErrorOutput()
 
-        Dim errorString = Image2Tile(Path.GetDirectoryName(options.IDE.RootPath & "\" & _folder_entry.Path & "\" & binaryFileName), _folder_entry.Files, binaryFileName, options.Tileset.BankNumber, options.Tileset.Debug, options.Tileset.HeaderFilename, options.Tileset.ThresholdLuminance, options.Tileset.Multicolor, options.Tileset.Reverse, options.Tileset.Verbose)
+        Dim errorString = Image2Tile(Path.GetDirectoryName(options.IDE.RootPath & "\" & _folder_entry.Path & "\" & binaryFileName), _folder_entry.Files, binaryFileName, options.Tileset.BankNumber, options.Tileset.HeaderFilename, options.Tileset.ThresholdLuminance, options.Tileset.Multicolor, options.Tileset.Reverse)
 
         If ParseImg2TileErrors(Path.GetDirectoryName(options.IDE.RootPath & "\" & _folder_entry.Path & "\" & binaryFileName), errorString, options) = 0 Then
             If (File.Exists(options.IDE.RootPath & "\" & _folder_entry.Path & "\" & binaryFileName)) Then

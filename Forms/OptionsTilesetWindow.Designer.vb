@@ -35,8 +35,6 @@ Partial Class OptionsTilesetWindow
         Me.TrackBarTilesetThresholdLuminance = New System.Windows.Forms.TrackBar()
         Me.TextBoxTilesetHeaderFileName = New System.Windows.Forms.TextBox()
         Me.Label13 = New System.Windows.Forms.Label()
-        Me.CheckBoxTilesetVerbose = New System.Windows.Forms.CheckBox()
-        Me.CheckBoxTilesetDebug = New System.Windows.Forms.CheckBox()
         Me.TextBoxBankNumber = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.TextBoxTilesetBinaryFilename = New System.Windows.Forms.TextBox()
@@ -115,8 +113,6 @@ Partial Class OptionsTilesetWindow
         Me.GroupBox8.Controls.Add(Me.TrackBarTilesetThresholdLuminance)
         Me.GroupBox8.Controls.Add(Me.TextBoxTilesetHeaderFileName)
         Me.GroupBox8.Controls.Add(Me.Label13)
-        Me.GroupBox8.Controls.Add(Me.CheckBoxTilesetVerbose)
-        Me.GroupBox8.Controls.Add(Me.CheckBoxTilesetDebug)
         Me.GroupBox8.Controls.Add(Me.TextBoxBankNumber)
         Me.GroupBox8.Controls.Add(Me.Label10)
         Me.GroupBox8.Controls.Add(Me.TextBoxTilesetBinaryFilename)
@@ -181,26 +177,6 @@ Partial Class OptionsTilesetWindow
         Me.Label13.Size = New System.Drawing.Size(119, 20)
         Me.Label13.TabIndex = 8
         Me.Label13.Text = "Include filename"
-        '
-        'CheckBoxTilesetVerbose
-        '
-        Me.CheckBoxTilesetVerbose.AutoSize = True
-        Me.CheckBoxTilesetVerbose.Location = New System.Drawing.Point(11, 152)
-        Me.CheckBoxTilesetVerbose.Name = "CheckBoxTilesetVerbose"
-        Me.CheckBoxTilesetVerbose.Size = New System.Drawing.Size(132, 24)
-        Me.CheckBoxTilesetVerbose.TabIndex = 7
-        Me.CheckBoxTilesetVerbose.Text = "Verbose output"
-        Me.CheckBoxTilesetVerbose.UseVisualStyleBackColor = True
-        '
-        'CheckBoxTilesetDebug
-        '
-        Me.CheckBoxTilesetDebug.AutoSize = True
-        Me.CheckBoxTilesetDebug.Location = New System.Drawing.Point(188, 152)
-        Me.CheckBoxTilesetDebug.Name = "CheckBoxTilesetDebug"
-        Me.CheckBoxTilesetDebug.Size = New System.Drawing.Size(153, 24)
-        Me.CheckBoxTilesetDebug.TabIndex = 6
-        Me.CheckBoxTilesetDebug.Text = "Enable debugging"
-        Me.CheckBoxTilesetDebug.UseVisualStyleBackColor = True
         '
         'TextBoxBankNumber
         '
@@ -272,8 +248,6 @@ Partial Class OptionsTilesetWindow
     Friend WithEvents TrackBarTilesetThresholdLuminance As TrackBar
     Friend WithEvents TextBoxTilesetHeaderFileName As TextBox
     Friend WithEvents Label13 As Label
-    Friend WithEvents CheckBoxTilesetVerbose As CheckBox
-    Friend WithEvents CheckBoxTilesetDebug As CheckBox
     Friend WithEvents TextBoxBankNumber As TextBox
     Friend WithEvents Label10 As Label
     Friend WithEvents TextBoxTilesetBinaryFilename As TextBox

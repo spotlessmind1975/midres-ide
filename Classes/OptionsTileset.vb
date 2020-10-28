@@ -8,12 +8,10 @@ Public Class OptionsTileset
 
     Private _binaryFileName As String
     Private _bankNumber As Integer
-    Private _debug As Boolean
     Private _headerFileName As String
     Private _thresholdLuminance As Integer
     Private _multicolor As Boolean
     Private _reverse As Boolean
-    Private _verbose As Boolean
 
 
     Public Property BinaryFilename As String
@@ -34,14 +32,6 @@ Public Class OptionsTileset
         End Set
     End Property
 
-    Public Property Debug As Boolean
-        Get
-            Return _debug
-        End Get
-        Set(value As Boolean)
-            _debug = value
-        End Set
-    End Property
 
     Public Property HeaderFilename As String
         Get
@@ -79,15 +69,6 @@ Public Class OptionsTileset
         End Set
     End Property
 
-    Public Property Verbose As Boolean
-        Get
-            Return _verbose
-        End Get
-        Set(value As Boolean)
-            _verbose = value
-        End Set
-    End Property
-
     Public Sub ReadXml(reader As XmlReader) Implements IXmlSerializable.ReadXml
 
         reader.ReadStartElement()
@@ -104,8 +85,6 @@ Public Class OptionsTileset
                         _binaryFileName = reader.ReadElementContentAsString()
                     Case "BankNumber"
                         _bankNumber = reader.ReadElementContentAsInt()
-                    Case "Debug"
-                        _debug = reader.ReadElementContentAsBoolean()
                     Case "HeaderFileName"
                         _headerFileName = reader.ReadElementContentAsString()
                     Case "ThresholdLuminance"
@@ -114,8 +93,6 @@ Public Class OptionsTileset
                         _multicolor = reader.ReadElementContentAsBoolean()
                     Case "Reverse"
                         _reverse = reader.ReadElementContentAsBoolean()
-                    Case "Verbose"
-                        _verbose = reader.ReadElementContentAsBoolean()
                     Case Else
                         reader.Read()
                 End Select
@@ -135,13 +112,6 @@ Public Class OptionsTileset
         writer.WriteStartElement("BankNumber")
         writer.WriteString(_bankNumber)
         writer.WriteEndElement()
-        writer.WriteStartElement("Debug")
-        If (_debug) Then
-            writer.WriteString("true")
-        Else
-            writer.WriteString("false")
-        End If
-        writer.WriteEndElement()
         writer.WriteStartElement("HeaderFileName")
         writer.WriteString(_headerFileName)
         writer.WriteEndElement()
@@ -157,13 +127,6 @@ Public Class OptionsTileset
         writer.WriteEndElement()
         writer.WriteStartElement("Reverse")
         If (_reverse) Then
-            writer.WriteString("true")
-        Else
-            writer.WriteString("false")
-        End If
-        writer.WriteEndElement()
-        writer.WriteStartElement("Verbose")
-        If (_verbose) Then
             writer.WriteString("true")
         Else
             writer.WriteString("false")

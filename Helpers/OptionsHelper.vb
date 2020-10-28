@@ -138,8 +138,6 @@ Module OptionsHelper
         _options_window.TrackBarTilesetThresholdLuminance.Value = _options.Tileset.ThresholdLuminance
         _options_window.CheckBoxTilesetMulticolor.Checked = _options.Tileset.Multicolor
         _options_window.CheckBoxTilesetReverse.Checked = _options.Tileset.Reverse
-        _options_window.CheckBoxTilesetDebug.Checked = _options.Tileset.Debug
-        _options_window.CheckBoxTilesetVerbose.Checked = _options.Tileset.Verbose
 
     End Sub
 
@@ -202,8 +200,6 @@ Module OptionsHelper
         _options.Tileset.ThresholdLuminance = _options_window.TrackBarTilesetThresholdLuminance.Value
         _options.Tileset.Multicolor = _options_window.CheckBoxTilesetMulticolor.Checked
         _options.Tileset.Reverse = _options_window.CheckBoxTilesetReverse.Checked
-        _options.Tileset.Debug = _options_window.CheckBoxTilesetDebug.Checked
-        _options.Tileset.Verbose = _options_window.CheckBoxTilesetVerbose.Checked
 
         UpdateProjectExplorerMenuEntriesForSpecificOptions(ProjectExplorer, _options)
 
