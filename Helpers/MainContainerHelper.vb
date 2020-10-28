@@ -7,12 +7,36 @@ Imports System.Xml.Serialization
 Imports Microsoft.VisualBasic.FileIO
 Module MainContainerHelper
 
-    Public Function OpenDialogEx() As String
+    Public Function FilterForFolderKind(_kind As FolderEntry.KindEnum) As String
+
+        Dim defaultFilter As String = "C source (*.c)|*.c|C include (*.h)|*.h|CC65/CL65 configure file (*.cfg)|*.cfg|MAKE file (makefile*.*)|makefile*.*|Any file (*.*)|*.*"
+
+        Select Case _kind
+            Case FolderEntry.KindEnum.FOLDER, FolderEntry.KindEnum.EXECUTABLE, FolderEntry.KindEnum.LIBRARY
+                Return defaultFilter
+            Case FolderEntry.KindEnum.TILESET
+                Return "PNG image (*.png)|*.png|JPEG image (*.jpg)|*.jpg|BINary file (*.bin)|*.bin|Any file (*.*)|*.*"
+        End Select
+
+        Return defaultFilter
+    End Function
+    Public Function OpenDialogEx(Optional _folder_entry As FolderEntry = Nothing) As String
+
+        Dim path As String = ""
 
         Dim ofd As OpenFileDialog = New OpenFileDialog With {
-            .Filter = "C source (*.c)|*.c|C include (*.h)|*.h|CC65/CL65 configure file (*.cfg)|*.cfg|MAKE file (makefile*.*)|makefile*.*|Any file (*.*)|*.*",
+            .Filter = FilterForFolderKind(_folder_entry.Kind),
             .FilterIndex = GlobalVars.LastExtensionUsed
         }
+
+        If Not (_folder_entry Is Nothing) Then
+            If Not (GlobalVars.CurrentProject Is Nothing) Then
+                path = GlobalVars.CurrentProject.CurrentOptions.IDE.RootPath & "\" & _folder_entry.Path
+            ElseIf Not (GlobalVars.CurrentOptions Is Nothing) Then
+                path = GlobalVars.CurrentOptions.IDE.RootPath & "\" & _folder_entry.Path
+            End If
+            ofd.InitialDirectory = path
+        End If
 
         Dim result As DialogResult = ofd.ShowDialog()
 

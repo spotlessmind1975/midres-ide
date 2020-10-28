@@ -16,6 +16,8 @@ Public Class Options
 
     Private _cc65 As OptionsCC65 = New OptionsCC65
 
+    Private _tileset As OptionsTileset = New OptionsTileset
+
     Public Property Make As OptionsMake
         Get
             Return _make
@@ -61,6 +63,16 @@ Public Class Options
         End Set
     End Property
 
+    Public Property Tileset As OptionsTileset
+        Get
+            Return _tileset
+        End Get
+        Set(value As OptionsTileset)
+            _tileset = value
+        End Set
+    End Property
+
+
     Public Sub ReadXml(reader As XmlReader) Implements IXmlSerializable.ReadXml
 
         reader.ReadStartElement()
@@ -94,6 +106,10 @@ Public Class Options
                             Dim pe As OptionsCC65 = New OptionsCC65
                             pe.ReadXml(reader)
                             _cc65 = pe
+                        Case "OptionsTileset"
+                            Dim pe As OptionsTileset = New OptionsTileset
+                            pe.ReadXml(reader)
+                            _tileset = pe
                         Case Else
                             reader.Read()
                     End Select
@@ -123,6 +139,9 @@ Public Class Options
         writer.WriteStartElement("OptionsCC65")
         DirectCast(_cc65, OptionsCC65).WriteXml(writer)
         writer.WriteEndElement()
+        writer.WriteStartElement("OptionsTileset")
+        DirectCast(_tileset, OptionsTileset).WriteXml(writer)
+        writer.WriteEndElement()
     End Sub
 
     Public Function GetSchema() As XmlSchema Implements IXmlSerializable.GetSchema
@@ -140,6 +159,7 @@ Public Class Options
         o._ide = _ide.DeepClone()
         o._emulators = _emulators.DeepClone()
         o._cc65 = _cc65.DeepClone()
+        o._tileset = _tileset.DeepClone()
         Return o
     End Function
 

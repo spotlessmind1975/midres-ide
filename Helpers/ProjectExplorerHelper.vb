@@ -21,6 +21,8 @@ Module ProjectExplorerHelper
                 Return 4
             Case FolderEntry.KindEnum.EXECUTABLE
                 Return 5
+            Case FolderEntry.KindEnum.TILESET
+                Return 6
         End Select
 
         Return 2
@@ -41,17 +43,24 @@ Module ProjectExplorerHelper
             Case FolderEntry.KindEnum.LIBRARY
                 If Not (GlobalVars.CurrentFolder Is Nothing) Then
                     If GlobalVars.CurrentFolder.Equals(_folder_entry) Then
-                        t.ImageIndex = 6
+                        t.ImageIndex = 7
                     End If
                 End If
                 t.ContextMenuStrip = ProjectExplorer.ContextMenuStripLibrary
             Case FolderEntry.KindEnum.EXECUTABLE
                 If Not (GlobalVars.CurrentFolder Is Nothing) Then
                     If GlobalVars.CurrentFolder.Equals(_folder_entry) Then
-                        t.ImageIndex = 7
+                        t.ImageIndex = 8
                     End If
                 End If
                 t.ContextMenuStrip = ProjectExplorer.ContextMenuStripExecutable
+            Case FolderEntry.KindEnum.TILESET
+                If Not (GlobalVars.CurrentFolder Is Nothing) Then
+                    If GlobalVars.CurrentFolder.Equals(_folder_entry) Then
+                        t.ImageIndex = 9
+                    End If
+                End If
+                t.ContextMenuStrip = ProjectExplorer.ContextMenuStripTileset
             Case Else
                 t.ContextMenuStrip = ProjectExplorer.ContextMenuStripFolder
         End Select
@@ -166,7 +175,7 @@ Module ProjectExplorerHelper
 
         If Not (tp Is Nothing) Then
             If TypeOf tp.Tag Is FolderEntry Then
-                Dim filename As String = OpenDialogEx()
+                Dim filename As String = OpenDialogEx(tp.Tag)
                 If Not (filename Is Nothing) Then
                     Dim f As FileEntry = New FileEntry(filename, Path.GetFileName(filename))
                     tp.Tag.Files.Add(f)
@@ -225,6 +234,8 @@ Module ProjectExplorerHelper
                     tp.ContextMenuStrip = _project_explorer.ContextMenuStripLibrary
                 Case FolderEntry.KindEnum.EXECUTABLE
                     tp.ContextMenuStrip = _project_explorer.ContextMenuStripExecutable
+                Case FolderEntry.KindEnum.TILESET
+                    tp.ContextMenuStrip = _project_explorer.ContextMenuStripTileset
                 Case Else
                     tp.ContextMenuStrip = _project_explorer.ContextMenuStripFolder
             End Select
@@ -241,7 +252,15 @@ Module ProjectExplorerHelper
             If Not (tpp Is Nothing) Then
                 If TypeOf tp.Tag Is FileEntry Then
                     Dim filename As String = GlobalVars.CurrentProject.CurrentOptions.IDE.RootPath & "\" & tpp.Tag.path & "\" & tp.Tag.filename
-                    Dim se As SourceEditor = OpenFileEx(filename, MainContainer)
+                    Dim extension As String = Path.GetExtension(filename)
+                    Select Case LCase(extension)
+                        Case ".c", ".h"
+                            Dim se As SourceEditor = OpenFileEx(filename, MainContainer)
+                        Case ".jpg", ".gif", ".png"
+                            Shell("gimp-2.10.exe " & filename)
+                        Case Else
+                            MsgBox("Unable to open file " & filename & ": format unknown!")
+                    End Select
                 End If
             End If
         End If
@@ -268,7 +287,7 @@ Module ProjectExplorerHelper
                 If tp.Tag.CurrentOptions Is Nothing Then
                     tp.Tag.CurrentOptions = ChooseBestOptions().DeepClone()
                 End If
-                showOptionsWindow(tp.Tag.CurrentOptions, "Library " & tp.Tag.name & " options")
+                ShowOptionsWindow(tp.Tag.CurrentOptions, "Library " & tp.Tag.name & " options", tp.Tag.Kind)
             End If
         End If
     End Sub
@@ -281,7 +300,20 @@ Module ProjectExplorerHelper
                 If tp.Tag.CurrentOptions Is Nothing Then
                     tp.Tag.CurrentOptions = ChooseBestOptions().DeepClone()
                 End If
-                showOptionsWindow(tp.Tag.CurrentOptions, "Executable " & tp.Tag.name & " options")
+                ShowOptionsWindow(tp.Tag.CurrentOptions, "Executable " & tp.Tag.name & " options", tp.Tag.Kind)
+            End If
+        End If
+    End Sub
+
+    Public Sub ShowOptionsWindowTileset(_project_explorer As ProjectExplorer)
+        Dim tp As TreeNode = _project_explorer.TreeViewProject.SelectedNode
+
+        If Not (tp Is Nothing) Then
+            If TypeOf tp.Tag Is FolderEntry And tp.Tag.Kind = FolderEntry.KindEnum.TILESET Then
+                If tp.Tag.CurrentOptions Is Nothing Then
+                    tp.Tag.CurrentOptions = ChooseBestOptions().DeepClone()
+                End If
+                ShowOptionsTilesetWindow(tp.Tag.CurrentOptions, "Tileset " & tp.Tag.name & " options", tp.Tag.Kind)
             End If
         End If
     End Sub
@@ -341,11 +373,11 @@ Module ProjectExplorerHelper
                 GlobalVars.CurrentFolderNode = tp
                 Select Case tp.Tag.Kind
                     Case FolderEntry.KindEnum.LIBRARY
-                        tp.ImageIndex = 6
-                        tp.SelectedImageIndex = 6
-                    Case FolderEntry.KindEnum.EXECUTABLE
                         tp.ImageIndex = 7
                         tp.SelectedImageIndex = 7
+                    Case FolderEntry.KindEnum.EXECUTABLE
+                        tp.ImageIndex = 8
+                        tp.SelectedImageIndex = 8
                 End Select
             End If
         End If
@@ -431,4 +463,13 @@ Module ProjectExplorerHelper
 
     End Sub
 
+    Public Sub PrepareTilesetNodeFolder(_project_explorer As ProjectExplorer)
+        Dim tp As TreeNode = _project_explorer.TreeViewProject.SelectedNode
+
+        If Not (tp Is Nothing) Then
+            If TypeOf tp.Tag Is FolderEntry And tp.Tag.Kind = FolderEntry.KindEnum.TILESET Then
+                PrepareTilesetFolder(tp.Tag)
+            End If
+        End If
+    End Sub
 End Module

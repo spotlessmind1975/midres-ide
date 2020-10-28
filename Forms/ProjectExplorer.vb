@@ -306,4 +306,48 @@ Public Class ProjectExplorer
     Private Sub ATARI8BitlowResToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles ATARI8BitlowResToolStripMenuItem2.Click
         ExecuteEmulatorFolderNodeForTarget(Me, "atarilo")
     End Sub
+
+    Private Sub TilesetToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TilesetToolStripMenuItem.Click
+        ConsiderFolderAs(Me, FolderEntry.KindEnum.TILESET)
+    End Sub
+
+    Private Sub TilesetToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles TilesetToolStripMenuItem1.Click
+        ConsiderFolderAs(Me, FolderEntry.KindEnum.TILESET)
+    End Sub
+
+    Private Sub OptionsToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles OptionsToolStripMenuItem2.Click
+        ShowOptionsWindowTileset(Me)
+    End Sub
+
+    Private Sub AddFileToolStripMenuItem3_Click(sender As Object, e As EventArgs) Handles AddFileToolStripMenuItem3.Click
+        AddExistingFile(Me)
+    End Sub
+
+    Private Sub RenameToolStripMenuItem5_Click(sender As Object, e As EventArgs) Handles RenameToolStripMenuItem5.Click
+        StartRenaming()
+    End Sub
+
+    Private Sub RemoveFolderToolStripMenuItem3_Click(sender As Object, e As EventArgs) Handles RemoveFolderToolStripMenuItem3.Click
+        RemoveFolder(Me)
+    End Sub
+
+    Private Sub ToolStripMenuItem11_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem11.Click
+        ConsiderFolderAs(Me, FolderEntry.KindEnum.FOLDER)
+    End Sub
+
+    Private Sub ToolStripMenuItem13_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem13.Click
+        ConsiderFolderAs(Me, FolderEntry.KindEnum.LIBRARY)
+    End Sub
+
+    Private Sub ToolStripMenuItem12_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem12.Click
+        ConsiderFolderAs(Me, FolderEntry.KindEnum.EXECUTABLE)
+    End Sub
+
+    Private Sub TilesetToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles TilesetToolStripMenuItem2.Click
+        ConsiderFolderAs(Me, FolderEntry.KindEnum.TILESET)
+    End Sub
+
+    Private Sub PrepareToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PrepareToolStripMenuItem.Click
+        PrepareTilesetNodeFolder(Me)
+    End Sub
 End Class

@@ -113,7 +113,33 @@ Module OptionsHelper
         _options_window.TextBoxActionClean.Text = _options.Make.ActionClean
 
         _options_window.TextBoxBinaryFileName.Text = _options.Output.BinaryFilename
-        _options_window.RadioButtonComplete.Checked = _options.Output.complete
+        _options_window.RadioButtonComplete.Checked = _options.Output.Complete
+
+    End Sub
+
+    Public Sub UpdateOptionsTileset(_options_window As OptionsTilesetWindow, Optional _options As Options = Nothing)
+
+        If GlobalVars.CurrentProject Is Nothing Then
+            _options_window.ButtonFromProject.Visible = False
+        Else
+            _options_window.ButtonFromProject.Visible = True
+        End If
+
+        If (_options Is Nothing) Then
+            _options = GlobalVars.CurrentOptions
+            _options_window.ButtonRestore.Visible = True
+        Else
+            _options_window.ButtonRestore.Visible = False
+        End If
+
+        _options_window.TextBoxTilesetBinaryFilename.Text = _options.Tileset.BinaryFilename
+        _options_window.TextBoxBankNumber.Text = _options.Tileset.BankNumber
+        _options_window.TextBoxTilesetHeaderFileName.Text = _options.Tileset.HeaderFilename
+        _options_window.TrackBarTilesetThresholdLuminance.Value = _options.Tileset.ThresholdLuminance
+        _options_window.CheckBoxTilesetMulticolor.Checked = _options.Tileset.Multicolor
+        _options_window.CheckBoxTilesetReverse.Checked = _options.Tileset.Reverse
+        _options_window.CheckBoxTilesetDebug.Checked = _options.Tileset.Debug
+        _options_window.CheckBoxTilesetVerbose.Checked = _options.Tileset.Verbose
 
     End Sub
 
@@ -158,16 +184,75 @@ Module OptionsHelper
         _options.Make.ActionClean = _options_window.TextBoxActionClean.Text
 
         _options.Output.BinaryFilename = _options_window.TextBoxBinaryFileName.Text
-        _options.Output.complete = _options_window.RadioButtonComplete.Checked
+        _options.Output.Complete = _options_window.RadioButtonComplete.Checked
 
         UpdateProjectExplorerMenuEntriesForSpecificOptions(ProjectExplorer, _options)
 
     End Sub
 
-    Public Function showOptionsWindow(_options As Options, _title As String) As OptionsWindow
+    Public Sub ApplyOptionsTileset(_options_window As OptionsTilesetWindow, Optional _options As Options = Nothing)
+
+        If (_options Is Nothing) Then
+            _options = GlobalVars.CurrentOptions
+        End If
+
+        _options.Tileset.BinaryFilename = _options_window.TextBoxTilesetBinaryFilename.Text
+        _options.Tileset.BankNumber = _options_window.TextBoxBankNumber.Text
+        _options.Tileset.HeaderFilename = _options_window.TextBoxTilesetHeaderFileName.Text
+        _options.Tileset.ThresholdLuminance = _options_window.TrackBarTilesetThresholdLuminance.Value
+        _options.Tileset.Multicolor = _options_window.CheckBoxTilesetMulticolor.Checked
+        _options.Tileset.Reverse = _options_window.CheckBoxTilesetReverse.Checked
+        _options.Tileset.Debug = _options_window.CheckBoxTilesetDebug.Checked
+        _options.Tileset.Verbose = _options_window.CheckBoxTilesetVerbose.Checked
+
+        UpdateProjectExplorerMenuEntriesForSpecificOptions(ProjectExplorer, _options)
+
+    End Sub
+
+    Public Function ShowOptionsWindow(_options As Options, _title As String, Optional _kind As FolderEntry.KindEnum = Nothing) As OptionsWindow
         Dim ow As OptionsWindow
 
         ow = New OptionsWindow With {
+            .MdiParent = MainContainer,
+            .CurrentOptions = _options
+        }
+        ow.Text = _title
+        Select Case _kind
+            Case FolderEntry.KindEnum.FOLDER
+                ow.TabControlOptions.TabPages(0).Visible = True
+                ow.TabControlOptions.TabPages(1).Visible = True
+                ow.TabControlOptions.TabPages(2).Visible = True
+                ow.TabControlOptions.TabPages(3).Visible = True
+                ow.TabControlOptions.TabPages(4).Visible = True
+            Case FolderEntry.KindEnum.LIBRARY, FolderEntry.KindEnum.EXECUTABLE
+                ow.TabControlOptions.TabPages(0).Visible = True
+                ow.TabControlOptions.TabPages(1).Visible = True
+                ow.TabControlOptions.TabPages(2).Visible = True
+                ow.TabControlOptions.TabPages(3).Visible = True
+                ow.TabControlOptions.TabPages(4).Visible = False
+            Case FolderEntry.KindEnum.TILESET
+                ow.TabControlOptions.TabPages(0).Visible = False
+                ow.TabControlOptions.TabPages(1).Visible = False
+                ow.TabControlOptions.TabPages(2).Visible = False
+                ow.TabControlOptions.TabPages(3).Visible = False
+                ow.TabControlOptions.TabPages(4).Visible = True
+            Case Else
+                ow.TabControlOptions.TabPages(0).Visible = True
+                ow.TabControlOptions.TabPages(1).Visible = True
+                ow.TabControlOptions.TabPages(2).Visible = True
+                ow.TabControlOptions.TabPages(3).Visible = True
+                ow.TabControlOptions.TabPages(4).Visible = True
+        End Select
+        ow.Show()
+
+        Return ow
+
+    End Function
+
+    Public Function ShowOptionsTilesetWindow(_options As Options, _title As String, Optional _kind As FolderEntry.KindEnum = Nothing) As OptionsTilesetWindow
+        Dim ow As OptionsTilesetWindow
+
+        ow = New OptionsTilesetWindow With {
             .MdiParent = MainContainer,
             .CurrentOptions = _options
         }

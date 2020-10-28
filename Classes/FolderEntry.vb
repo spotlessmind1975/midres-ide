@@ -12,6 +12,7 @@ Public Class FolderEntry
         FOLDER = 1
         LIBRARY = 2
         EXECUTABLE = 3
+        TILESET = 4
     End Enum
 
     Private _name As String

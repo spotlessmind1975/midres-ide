@@ -35,6 +35,7 @@ Partial Class ProjectExplorer
         Me.PromoteAsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LibraryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExecutableToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TilesetToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ContextMenuStripFile = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.RenameToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
         Me.OpenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -66,6 +67,7 @@ Partial Class ProjectExplorer
         Me.ConsiderAsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FolderToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExecutableToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TilesetToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ContextMenuStripExecutable = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.MakeToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.C16ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
@@ -97,11 +99,25 @@ Partial Class ProjectExplorer
         Me.ConsiderAsToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.FolderToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
         Me.LibraryToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TilesetToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ContextMenuStripTileset = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.OptionsToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem15 = New System.Windows.Forms.ToolStripSeparator()
+        Me.AddFileToolStripMenuItem3 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.RenameToolStripMenuItem5 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.RemoveFolderToolStripMenuItem3 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem16 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripMenuItem10 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem11 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem13 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem12 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PrepareToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ContextMenuStripFolder.SuspendLayout()
         Me.ContextMenuStripFile.SuspendLayout()
         Me.ContextMenuStripProject.SuspendLayout()
         Me.ContextMenuStripLibrary.SuspendLayout()
         Me.ContextMenuStripExecutable.SuspendLayout()
+        Me.ContextMenuStripTileset.SuspendLayout()
         Me.SuspendLayout()
         '
         'TreeViewProject
@@ -126,8 +142,10 @@ Partial Class ProjectExplorer
         Me.ImageListIcons.Images.SetKeyName(3, "File")
         Me.ImageListIcons.Images.SetKeyName(4, "Library")
         Me.ImageListIcons.Images.SetKeyName(5, "Executable")
-        Me.ImageListIcons.Images.SetKeyName(6, "ActiveLibrary")
-        Me.ImageListIcons.Images.SetKeyName(7, "ActiveExecutable")
+        Me.ImageListIcons.Images.SetKeyName(6, "Tileset")
+        Me.ImageListIcons.Images.SetKeyName(7, "ActiveLibrary")
+        Me.ImageListIcons.Images.SetKeyName(8, "ActiveExecutable")
+        Me.ImageListIcons.Images.SetKeyName(9, "ActiveTileset")
         '
         'ContextMenuStripFolder
         '
@@ -173,7 +191,7 @@ Partial Class ProjectExplorer
         '
         'PromoteAsToolStripMenuItem
         '
-        Me.PromoteAsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LibraryToolStripMenuItem, Me.ExecutableToolStripMenuItem})
+        Me.PromoteAsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LibraryToolStripMenuItem, Me.ExecutableToolStripMenuItem, Me.TilesetToolStripMenuItem2})
         Me.PromoteAsToolStripMenuItem.Image = CType(resources.GetObject("PromoteAsToolStripMenuItem.Image"), System.Drawing.Image)
         Me.PromoteAsToolStripMenuItem.Name = "PromoteAsToolStripMenuItem"
         Me.PromoteAsToolStripMenuItem.Size = New System.Drawing.Size(180, 26)
@@ -192,6 +210,13 @@ Partial Class ProjectExplorer
         Me.ExecutableToolStripMenuItem.Name = "ExecutableToolStripMenuItem"
         Me.ExecutableToolStripMenuItem.Size = New System.Drawing.Size(164, 26)
         Me.ExecutableToolStripMenuItem.Text = "&Executable"
+        '
+        'TilesetToolStripMenuItem2
+        '
+        Me.TilesetToolStripMenuItem2.Image = CType(resources.GetObject("TilesetToolStripMenuItem2.Image"), System.Drawing.Image)
+        Me.TilesetToolStripMenuItem2.Name = "TilesetToolStripMenuItem2"
+        Me.TilesetToolStripMenuItem2.Size = New System.Drawing.Size(164, 26)
+        Me.TilesetToolStripMenuItem2.Text = "Tileset"
         '
         'ContextMenuStripFile
         '
@@ -380,7 +405,7 @@ Partial Class ProjectExplorer
         '
         'ConsiderAsToolStripMenuItem
         '
-        Me.ConsiderAsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FolderToolStripMenuItem1, Me.ExecutableToolStripMenuItem1})
+        Me.ConsiderAsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FolderToolStripMenuItem1, Me.ExecutableToolStripMenuItem1, Me.TilesetToolStripMenuItem1})
         Me.ConsiderAsToolStripMenuItem.Image = CType(resources.GetObject("ConsiderAsToolStripMenuItem.Image"), System.Drawing.Image)
         Me.ConsiderAsToolStripMenuItem.Name = "ConsiderAsToolStripMenuItem"
         Me.ConsiderAsToolStripMenuItem.Size = New System.Drawing.Size(180, 26)
@@ -400,19 +425,26 @@ Partial Class ProjectExplorer
         Me.ExecutableToolStripMenuItem1.Size = New System.Drawing.Size(164, 26)
         Me.ExecutableToolStripMenuItem1.Text = "Executable"
         '
+        'TilesetToolStripMenuItem1
+        '
+        Me.TilesetToolStripMenuItem1.Image = CType(resources.GetObject("TilesetToolStripMenuItem1.Image"), System.Drawing.Image)
+        Me.TilesetToolStripMenuItem1.Name = "TilesetToolStripMenuItem1"
+        Me.TilesetToolStripMenuItem1.Size = New System.Drawing.Size(164, 26)
+        Me.TilesetToolStripMenuItem1.Text = "Tileset"
+        '
         'ContextMenuStripExecutable
         '
         Me.ContextMenuStripExecutable.ImageScalingSize = New System.Drawing.Size(20, 20)
         Me.ContextMenuStripExecutable.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MakeToolStripMenuItem1, Me.RunToolStripMenuItem, Me.ExeToolStripMenuItem, Me.SetAsactiveToolStripMenuItem, Me.ToolStripMenuItem3, Me.NewFileToolStripMenuItem2, Me.AddfileToolStripMenuItem2, Me.AddFolderToolStripMenuItem3, Me.RenameToolStripMenuItem4, Me.RemoveFolderToolStripMenuItem2, Me.ToolStripMenuItem4, Me.ConsiderAsToolStripMenuItem1})
         Me.ContextMenuStripExecutable.Name = "ContextMenuStripExecutable"
-        Me.ContextMenuStripExecutable.Size = New System.Drawing.Size(215, 304)
+        Me.ContextMenuStripExecutable.Size = New System.Drawing.Size(181, 276)
         '
         'MakeToolStripMenuItem1
         '
         Me.MakeToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.C16ToolStripMenuItem1, Me.VIC20ToolStripMenuItem1, Me.VIC2024KBToolStripMenuItem1, Me.C64ToolStripMenuItem1, Me.C128ToolStripMenuItem1, Me.PLUS4ToolStripMenuItem1, Me.ATARI8BitToolStripMenuItem1, Me.ATARI8BitlowResToolStripMenuItem1})
         Me.MakeToolStripMenuItem1.Image = CType(resources.GetObject("MakeToolStripMenuItem1.Image"), System.Drawing.Image)
         Me.MakeToolStripMenuItem1.Name = "MakeToolStripMenuItem1"
-        Me.MakeToolStripMenuItem1.Size = New System.Drawing.Size(214, 26)
+        Me.MakeToolStripMenuItem1.Size = New System.Drawing.Size(180, 26)
         Me.MakeToolStripMenuItem1.Text = "&Make"
         '
         'C16ToolStripMenuItem1
@@ -468,7 +500,7 @@ Partial Class ProjectExplorer
         Me.RunToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.C16ToolStripMenuItem2, Me.VIC20ToolStripMenuItem2, Me.VIC2024KBToolStripMenuItem2, Me.C64ToolStripMenuItem2, Me.C128ToolStripMenuItem2, Me.PLUS4ToolStripMenuItem2, Me.ATARI8BitToolStripMenuItem2, Me.ATARI8BitlowResToolStripMenuItem2})
         Me.RunToolStripMenuItem.Image = CType(resources.GetObject("RunToolStripMenuItem.Image"), System.Drawing.Image)
         Me.RunToolStripMenuItem.Name = "RunToolStripMenuItem"
-        Me.RunToolStripMenuItem.Size = New System.Drawing.Size(214, 26)
+        Me.RunToolStripMenuItem.Size = New System.Drawing.Size(180, 26)
         Me.RunToolStripMenuItem.Text = "R&un"
         '
         'C16ToolStripMenuItem2
@@ -523,67 +555,67 @@ Partial Class ProjectExplorer
         '
         Me.ExeToolStripMenuItem.Image = CType(resources.GetObject("ExeToolStripMenuItem.Image"), System.Drawing.Image)
         Me.ExeToolStripMenuItem.Name = "ExeToolStripMenuItem"
-        Me.ExeToolStripMenuItem.Size = New System.Drawing.Size(214, 26)
+        Me.ExeToolStripMenuItem.Size = New System.Drawing.Size(180, 26)
         Me.ExeToolStripMenuItem.Text = "&Options..."
         '
         'SetAsactiveToolStripMenuItem
         '
         Me.SetAsactiveToolStripMenuItem.Image = CType(resources.GetObject("SetAsactiveToolStripMenuItem.Image"), System.Drawing.Image)
         Me.SetAsactiveToolStripMenuItem.Name = "SetAsactiveToolStripMenuItem"
-        Me.SetAsactiveToolStripMenuItem.Size = New System.Drawing.Size(214, 26)
+        Me.SetAsactiveToolStripMenuItem.Size = New System.Drawing.Size(180, 26)
         Me.SetAsactiveToolStripMenuItem.Text = "Set as ""active"""
         '
         'ToolStripMenuItem3
         '
         Me.ToolStripMenuItem3.Name = "ToolStripMenuItem3"
-        Me.ToolStripMenuItem3.Size = New System.Drawing.Size(211, 6)
+        Me.ToolStripMenuItem3.Size = New System.Drawing.Size(177, 6)
         '
         'NewFileToolStripMenuItem2
         '
         Me.NewFileToolStripMenuItem2.Image = CType(resources.GetObject("NewFileToolStripMenuItem2.Image"), System.Drawing.Image)
         Me.NewFileToolStripMenuItem2.Name = "NewFileToolStripMenuItem2"
-        Me.NewFileToolStripMenuItem2.Size = New System.Drawing.Size(214, 26)
+        Me.NewFileToolStripMenuItem2.Size = New System.Drawing.Size(180, 26)
         Me.NewFileToolStripMenuItem2.Text = "New file..."
         '
         'AddfileToolStripMenuItem2
         '
         Me.AddfileToolStripMenuItem2.Image = CType(resources.GetObject("AddfileToolStripMenuItem2.Image"), System.Drawing.Image)
         Me.AddfileToolStripMenuItem2.Name = "AddfileToolStripMenuItem2"
-        Me.AddfileToolStripMenuItem2.Size = New System.Drawing.Size(214, 26)
+        Me.AddfileToolStripMenuItem2.Size = New System.Drawing.Size(180, 26)
         Me.AddfileToolStripMenuItem2.Text = "Add &file..."
         '
         'AddFolderToolStripMenuItem3
         '
         Me.AddFolderToolStripMenuItem3.Image = CType(resources.GetObject("AddFolderToolStripMenuItem3.Image"), System.Drawing.Image)
         Me.AddFolderToolStripMenuItem3.Name = "AddFolderToolStripMenuItem3"
-        Me.AddFolderToolStripMenuItem3.Size = New System.Drawing.Size(214, 26)
+        Me.AddFolderToolStripMenuItem3.Size = New System.Drawing.Size(180, 26)
         Me.AddFolderToolStripMenuItem3.Text = "&Add folder..."
         '
         'RenameToolStripMenuItem4
         '
         Me.RenameToolStripMenuItem4.Image = CType(resources.GetObject("RenameToolStripMenuItem4.Image"), System.Drawing.Image)
         Me.RenameToolStripMenuItem4.Name = "RenameToolStripMenuItem4"
-        Me.RenameToolStripMenuItem4.Size = New System.Drawing.Size(214, 26)
+        Me.RenameToolStripMenuItem4.Size = New System.Drawing.Size(180, 26)
         Me.RenameToolStripMenuItem4.Text = "&Rename"
         '
         'RemoveFolderToolStripMenuItem2
         '
         Me.RemoveFolderToolStripMenuItem2.Image = CType(resources.GetObject("RemoveFolderToolStripMenuItem2.Image"), System.Drawing.Image)
         Me.RemoveFolderToolStripMenuItem2.Name = "RemoveFolderToolStripMenuItem2"
-        Me.RemoveFolderToolStripMenuItem2.Size = New System.Drawing.Size(214, 26)
+        Me.RemoveFolderToolStripMenuItem2.Size = New System.Drawing.Size(180, 26)
         Me.RemoveFolderToolStripMenuItem2.Text = "R&emove folder"
         '
         'ToolStripMenuItem4
         '
         Me.ToolStripMenuItem4.Name = "ToolStripMenuItem4"
-        Me.ToolStripMenuItem4.Size = New System.Drawing.Size(211, 6)
+        Me.ToolStripMenuItem4.Size = New System.Drawing.Size(177, 6)
         '
         'ConsiderAsToolStripMenuItem1
         '
-        Me.ConsiderAsToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FolderToolStripMenuItem2, Me.LibraryToolStripMenuItem1})
+        Me.ConsiderAsToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FolderToolStripMenuItem2, Me.LibraryToolStripMenuItem1, Me.TilesetToolStripMenuItem})
         Me.ConsiderAsToolStripMenuItem1.Image = CType(resources.GetObject("ConsiderAsToolStripMenuItem1.Image"), System.Drawing.Image)
         Me.ConsiderAsToolStripMenuItem1.Name = "ConsiderAsToolStripMenuItem1"
-        Me.ConsiderAsToolStripMenuItem1.Size = New System.Drawing.Size(214, 26)
+        Me.ConsiderAsToolStripMenuItem1.Size = New System.Drawing.Size(180, 26)
         Me.ConsiderAsToolStripMenuItem1.Text = "Consider as..."
         '
         'FolderToolStripMenuItem2
@@ -599,6 +631,94 @@ Partial Class ProjectExplorer
         Me.LibraryToolStripMenuItem1.Name = "LibraryToolStripMenuItem1"
         Me.LibraryToolStripMenuItem1.Size = New System.Drawing.Size(137, 26)
         Me.LibraryToolStripMenuItem1.Text = "Library"
+        '
+        'TilesetToolStripMenuItem
+        '
+        Me.TilesetToolStripMenuItem.Image = CType(resources.GetObject("TilesetToolStripMenuItem.Image"), System.Drawing.Image)
+        Me.TilesetToolStripMenuItem.Name = "TilesetToolStripMenuItem"
+        Me.TilesetToolStripMenuItem.Size = New System.Drawing.Size(137, 26)
+        Me.TilesetToolStripMenuItem.Text = "Tileset"
+        '
+        'ContextMenuStripTileset
+        '
+        Me.ContextMenuStripTileset.ImageScalingSize = New System.Drawing.Size(20, 20)
+        Me.ContextMenuStripTileset.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PrepareToolStripMenuItem, Me.OptionsToolStripMenuItem2, Me.ToolStripMenuItem15, Me.AddFileToolStripMenuItem3, Me.RenameToolStripMenuItem5, Me.RemoveFolderToolStripMenuItem3, Me.ToolStripMenuItem16, Me.ToolStripMenuItem10})
+        Me.ContextMenuStripTileset.Name = "ContextMenuStripTileset"
+        Me.ContextMenuStripTileset.Size = New System.Drawing.Size(215, 200)
+        '
+        'OptionsToolStripMenuItem2
+        '
+        Me.OptionsToolStripMenuItem2.Image = CType(resources.GetObject("OptionsToolStripMenuItem2.Image"), System.Drawing.Image)
+        Me.OptionsToolStripMenuItem2.Name = "OptionsToolStripMenuItem2"
+        Me.OptionsToolStripMenuItem2.Size = New System.Drawing.Size(214, 26)
+        Me.OptionsToolStripMenuItem2.Text = "&Options..."
+        '
+        'ToolStripMenuItem15
+        '
+        Me.ToolStripMenuItem15.Name = "ToolStripMenuItem15"
+        Me.ToolStripMenuItem15.Size = New System.Drawing.Size(211, 6)
+        '
+        'AddFileToolStripMenuItem3
+        '
+        Me.AddFileToolStripMenuItem3.Image = CType(resources.GetObject("AddFileToolStripMenuItem3.Image"), System.Drawing.Image)
+        Me.AddFileToolStripMenuItem3.Name = "AddFileToolStripMenuItem3"
+        Me.AddFileToolStripMenuItem3.Size = New System.Drawing.Size(214, 26)
+        Me.AddFileToolStripMenuItem3.Text = "Add &file..."
+        '
+        'RenameToolStripMenuItem5
+        '
+        Me.RenameToolStripMenuItem5.Image = CType(resources.GetObject("RenameToolStripMenuItem5.Image"), System.Drawing.Image)
+        Me.RenameToolStripMenuItem5.Name = "RenameToolStripMenuItem5"
+        Me.RenameToolStripMenuItem5.Size = New System.Drawing.Size(214, 26)
+        Me.RenameToolStripMenuItem5.Text = "&Rename"
+        '
+        'RemoveFolderToolStripMenuItem3
+        '
+        Me.RemoveFolderToolStripMenuItem3.Image = CType(resources.GetObject("RemoveFolderToolStripMenuItem3.Image"), System.Drawing.Image)
+        Me.RemoveFolderToolStripMenuItem3.Name = "RemoveFolderToolStripMenuItem3"
+        Me.RemoveFolderToolStripMenuItem3.Size = New System.Drawing.Size(214, 26)
+        Me.RemoveFolderToolStripMenuItem3.Text = "R&emove folder"
+        '
+        'ToolStripMenuItem16
+        '
+        Me.ToolStripMenuItem16.Name = "ToolStripMenuItem16"
+        Me.ToolStripMenuItem16.Size = New System.Drawing.Size(211, 6)
+        '
+        'ToolStripMenuItem10
+        '
+        Me.ToolStripMenuItem10.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem11, Me.ToolStripMenuItem13, Me.ToolStripMenuItem12})
+        Me.ToolStripMenuItem10.Image = CType(resources.GetObject("ToolStripMenuItem10.Image"), System.Drawing.Image)
+        Me.ToolStripMenuItem10.Name = "ToolStripMenuItem10"
+        Me.ToolStripMenuItem10.Size = New System.Drawing.Size(214, 26)
+        Me.ToolStripMenuItem10.Text = "Consider as..."
+        '
+        'ToolStripMenuItem11
+        '
+        Me.ToolStripMenuItem11.Image = CType(resources.GetObject("ToolStripMenuItem11.Image"), System.Drawing.Image)
+        Me.ToolStripMenuItem11.Name = "ToolStripMenuItem11"
+        Me.ToolStripMenuItem11.Size = New System.Drawing.Size(164, 26)
+        Me.ToolStripMenuItem11.Text = "Folder"
+        '
+        'ToolStripMenuItem13
+        '
+        Me.ToolStripMenuItem13.Image = CType(resources.GetObject("ToolStripMenuItem13.Image"), System.Drawing.Image)
+        Me.ToolStripMenuItem13.Name = "ToolStripMenuItem13"
+        Me.ToolStripMenuItem13.Size = New System.Drawing.Size(164, 26)
+        Me.ToolStripMenuItem13.Text = "Library"
+        '
+        'ToolStripMenuItem12
+        '
+        Me.ToolStripMenuItem12.Image = CType(resources.GetObject("ToolStripMenuItem12.Image"), System.Drawing.Image)
+        Me.ToolStripMenuItem12.Name = "ToolStripMenuItem12"
+        Me.ToolStripMenuItem12.Size = New System.Drawing.Size(164, 26)
+        Me.ToolStripMenuItem12.Text = "Executable"
+        '
+        'PrepareToolStripMenuItem
+        '
+        Me.PrepareToolStripMenuItem.Image = CType(resources.GetObject("PrepareToolStripMenuItem.Image"), System.Drawing.Image)
+        Me.PrepareToolStripMenuItem.Name = "PrepareToolStripMenuItem"
+        Me.PrepareToolStripMenuItem.Size = New System.Drawing.Size(214, 26)
+        Me.PrepareToolStripMenuItem.Text = "Prepare"
         '
         'ProjectExplorer
         '
@@ -616,6 +736,7 @@ Partial Class ProjectExplorer
         Me.ContextMenuStripProject.ResumeLayout(False)
         Me.ContextMenuStripLibrary.ResumeLayout(False)
         Me.ContextMenuStripExecutable.ResumeLayout(False)
+        Me.ContextMenuStripTileset.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -693,4 +814,19 @@ Partial Class ProjectExplorer
     Friend WithEvents NewFileToolStripMenuItem2 As ToolStripMenuItem
     Friend WithEvents ToolStripMenuItem4 As ToolStripSeparator
     Friend WithEvents ToolStripMenuItem5 As ToolStripSeparator
+    Friend WithEvents TilesetToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents TilesetToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ContextMenuStripTileset As ContextMenuStrip
+    Friend WithEvents OptionsToolStripMenuItem2 As ToolStripMenuItem
+    Friend WithEvents AddFileToolStripMenuItem3 As ToolStripMenuItem
+    Friend WithEvents RenameToolStripMenuItem5 As ToolStripMenuItem
+    Friend WithEvents RemoveFolderToolStripMenuItem3 As ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem15 As ToolStripSeparator
+    Friend WithEvents ToolStripMenuItem16 As ToolStripSeparator
+    Friend WithEvents ToolStripMenuItem10 As ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem11 As ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem13 As ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem12 As ToolStripMenuItem
+    Friend WithEvents TilesetToolStripMenuItem2 As ToolStripMenuItem
+    Friend WithEvents PrepareToolStripMenuItem As ToolStripMenuItem
 End Class

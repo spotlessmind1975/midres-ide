@@ -143,7 +143,7 @@ Public Class MainContainer
     End Sub
 
     Private Sub OptionsToolStripMenuItem_Click_1(sender As Object, e As EventArgs) Handles OptionsToolStripMenuItem.Click
-        showOptionsWindow(GlobalVars.CurrentOptions, "Global options")
+        ShowOptionsWindow(GlobalVars.CurrentOptions, "Global options")
     End Sub
 
     Private Sub ExitToolStripMenuItem_Click_1(sender As Object, e As EventArgs) Handles ExitToolStripMenuItem.Click
