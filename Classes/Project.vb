@@ -79,9 +79,17 @@ Public Class Project
                             pe.ReadXml(reader)
                             _folders.Add(pe)
                         Case "Options"
-                            _currentOptions.ReadXml(reader)
+                            Dim pe As Options = New Options
+                            pe.ReadXml(reader)
+                            _currentOptions = pe
+                        Case "Path"
+                            reader.ReadElementContentAsString()
                         Case Else
-                            reader.Read()
+                            If reader.NodeType = XmlNodeType.Text Then
+                                reader.ReadContentAsString()
+                            Else
+                                reader.ReadElementContentAsString()
+                            End If
                     End Select
                 End If
             End While

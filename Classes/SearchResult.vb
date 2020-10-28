@@ -64,6 +64,9 @@ Public Class SearchResult
 
     Public Sub ReadXml(reader As XmlReader) Implements IXmlSerializable.ReadXml
 
+        reader.ReadStartElement()
+        reader.MoveToContent()
+
         While reader.NodeType <> System.Xml.XmlNodeType.EndElement And reader.NodeType <> System.Xml.XmlNodeType.None
             While reader.NodeType = System.Xml.XmlNodeType.Whitespace
                 reader.Read()
@@ -82,7 +85,7 @@ Public Class SearchResult
                     Case "Size"
                         _size = reader.ReadElementContentAsInt()
                     Case Else
-                        reader.Read()
+                        reader.ReadContentAsString()
                 End Select
             End If
         End While

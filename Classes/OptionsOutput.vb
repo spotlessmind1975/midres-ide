@@ -44,7 +44,7 @@ Public Class OptionsOutput
                     Case "Complete"
                         _complete = reader.ReadElementContentAsBoolean()
                     Case Else
-                        reader.Read()
+                        reader.ReadContentAsString()
                 End Select
             End If
         End While

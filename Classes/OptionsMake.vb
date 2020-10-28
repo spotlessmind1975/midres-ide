@@ -81,7 +81,7 @@ Public Class OptionsMake
                     Case "ActionClean"
                         _actionClean = reader.ReadElementContentAsString()
                     Case Else
-                        reader.Read()
+                        reader.ReadContentAsString()
                 End Select
             End If
         End While

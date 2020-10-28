@@ -111,7 +111,9 @@ Public Class FolderEntry
 
     Public Sub ReadXml(reader As XmlReader) Implements IXmlSerializable.ReadXml
 
-        reader.Read()
+        reader.ReadStartElement()
+        reader.MoveToContent()
+
         While reader.NodeType <> System.Xml.XmlNodeType.EndElement And reader.NodeType <> System.Xml.XmlNodeType.None
             While reader.NodeType = System.Xml.XmlNodeType.Whitespace
                 reader.Read()
@@ -142,7 +144,7 @@ Public Class FolderEntry
                     Case "Opened"
                         _opened = reader.ReadElementContentAsBoolean()
                     Case Else
-                        reader.Read()
+                        reader.ReadContentAsString()
                 End Select
             End If
         End While

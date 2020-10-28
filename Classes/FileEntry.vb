@@ -50,6 +50,9 @@ Public Class FileEntry
 
     Public Sub ReadXml(reader As XmlReader) Implements IXmlSerializable.ReadXml
 
+        reader.ReadStartElement()
+        reader.MoveToContent()
+
         While reader.NodeType <> System.Xml.XmlNodeType.EndElement
             While reader.NodeType = System.Xml.XmlNodeType.Whitespace
                 reader.Read()
@@ -64,7 +67,7 @@ Public Class FileEntry
                     Case "Description"
                         _description = reader.ReadElementContentAsString()
                     Case Else
-                        reader.Read()
+                        reader.ReadContentAsString()
                 End Select
             End If
         End While

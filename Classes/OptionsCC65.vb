@@ -131,7 +131,7 @@ Public Class OptionsCC65
                         Case "AtariLo"
                             _atarilo = reader.ReadElementContentAsBoolean()
                         Case Else
-                            reader.Read()
+                            reader.ReadContentAsString()
                     End Select
                 End If
             End While

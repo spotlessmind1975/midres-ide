@@ -94,7 +94,7 @@ Public Class OptionsTileset
                     Case "Reverse"
                         _reverse = reader.ReadElementContentAsBoolean()
                     Case Else
-                        reader.Read()
+                        reader.ReadElementContentAsString()
                 End Select
             End If
         End While

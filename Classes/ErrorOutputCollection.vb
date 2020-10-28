@@ -35,7 +35,7 @@ Public Class ErrorOutputCollection
                             pe.ReadXml(reader)
                             _items.Add(pe)
                         Case Else
-                            reader.Read()
+                            reader.ReadContentAsString()
                     End Select
                 End If
             End While

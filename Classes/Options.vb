@@ -111,7 +111,7 @@ Public Class Options
                             pe.ReadXml(reader)
                             _tileset = pe
                         Case Else
-                            reader.Read()
+                            reader.ReadContentAsString()
                     End Select
                 End If
             End While
