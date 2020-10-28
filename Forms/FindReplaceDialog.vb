@@ -64,22 +64,7 @@ Public Class FindReplaceDialog
                 TextBoxReplaceText.Visible = False
                 ButtonReplace.Visible = False
                 ButtonReplaceAll.Visible = False
-                TextBoxPath.Text = ""
-                If Not (GlobalVars.CurrentFolder Is Nothing) Then
-                    If Not (GlobalVars.CurrentFolder.CurrentOptions Is Nothing) Then
-                        TextBoxPath.Text = Path.GetFullPath(GlobalVars.CurrentFolder.CurrentOptions.IDE.RootPath)
-                    End If
-                End If
-                If TextBoxPath.Text = "" Then
-                    If Not (GlobalVars.CurrentProject Is Nothing) Then
-                        If Not (GlobalVars.CurrentProject.CurrentOptions Is Nothing) Then
-                            TextBoxPath.Text = Path.GetFullPath(GlobalVars.CurrentProject.CurrentOptions.IDE.RootPath)
-                        End If
-                    End If
-                End If
-                If TextBoxPath.Text = "" Then
-                    TextBoxPath.Text = Path.GetFullPath(GlobalVars.CurrentOptions.IDE.RootPath)
-                End If
+                TextBoxPath.Text = GetFullPathForElement("", GlobalVars.CurrentFolder)
             Else
                 LabelPath.Visible = False
                 TextBoxPath.Visible = False

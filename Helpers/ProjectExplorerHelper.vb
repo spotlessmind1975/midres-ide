@@ -96,7 +96,7 @@ Module ProjectExplorerHelper
             Dim t As TreeNode = New TreeNode(p.Name, 0, 0) With {
                 .Tag = p,
                 .ContextMenuStrip = ProjectExplorer.ContextMenuStripProject,
-                .ToolTipText = GlobalVars.CurrentProject.CurrentOptions.IDE.RootPath
+                .ToolTipText = GlobalVars.CurrentProject.RootPath
             }
 
             '' t.ContextMenu = ContextMenuStripProjectExplorer.ContextMenu
@@ -133,7 +133,7 @@ Module ProjectExplorerHelper
                 Dim startingPath As String = ""
 
                 If TypeOf tp.Tag Is FolderEntry Then
-                    startingPath = GlobalVars.CurrentProject.CurrentOptions.IDE.RootPath & "\" & tp.Tag.Path
+                    startingPath = GetFullPathForElement("", tp.Tag)
                 End If
 
                 Dim folderPath = OpenFolderDialogEx(startingPath)
@@ -141,7 +141,7 @@ Module ProjectExplorerHelper
                 If Not (folderPath Is Nothing) Then
                     Dim rootFolder = tp.Tag
 
-                    Dim f As FolderEntry = New FolderEntry(folderPath, folderPath.Replace(GlobalVars.CurrentProject.CurrentOptions.IDE.RootPath & "\", ""))
+                    Dim f As FolderEntry = New FolderEntry(folderPath, folderPath.Replace(GetRootPath() & "\", ""))
 
                     rootFolder.Folders.Add(f)
 
@@ -162,7 +162,7 @@ Module ProjectExplorerHelper
         Dim path As String = OpenFolderDialogEx()
 
         If Not (path Is Nothing) Then
-            GlobalVars.CurrentProject.CurrentOptions.IDE.RootPath = path
+            GlobalVars.CurrentProject.RootPath = path
             projectNode.ToolTipText = path
             GlobalVars.CurrentProject.NormalizePaths()
         End If
@@ -251,7 +251,7 @@ Module ProjectExplorerHelper
             Dim tpp As TreeNode = tp.Parent
             If Not (tpp Is Nothing) Then
                 If TypeOf tp.Tag Is FileEntry Then
-                    Dim filename As String = GlobalVars.CurrentProject.CurrentOptions.IDE.RootPath & "\" & tpp.Tag.path & "\" & tp.Tag.filename
+                    Dim filename As String = GetFullPathForElement(tp.Tag.filename, tpp.Tag.path)
                     Dim extension As String = Path.GetExtension(filename)
                     Select Case LCase(extension)
                         Case ".c", ".h"

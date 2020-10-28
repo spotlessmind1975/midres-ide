@@ -210,6 +210,7 @@
     <Compile Include="Helpers\EmulatorHelper.vb" />
     <Compile Include="Helpers\ErrorOutputWindowHelper.vb" />
     <Compile Include="Helpers\HelpWindowHelper.vb" />
+    <Compile Include="Helpers\Library.vb" />
     <Compile Include="Helpers\MainContainerHelper.vb" />
     <Compile Include="Helpers\GlobalVars.vb" />
     <Compile Include="Helpers\MakeHelper.vb" />

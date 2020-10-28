@@ -30,11 +30,7 @@ Module MainContainerHelper
         }
 
         If Not (_folder_entry Is Nothing) Then
-            If Not (GlobalVars.CurrentProject Is Nothing) Then
-                path = GlobalVars.CurrentProject.CurrentOptions.IDE.RootPath & "\" & _folder_entry.Path
-            ElseIf Not (GlobalVars.CurrentOptions Is Nothing) Then
-                path = GlobalVars.CurrentOptions.IDE.RootPath & "\" & _folder_entry.Path
-            End If
+            path = GetRootPath() & "\" & _folder_entry.Path
             ofd.InitialDirectory = path
         End If
 
@@ -51,11 +47,7 @@ Module MainContainerHelper
     Public Function OpenFolderDialogEx(Optional _starting_path As String = "") As String
 
         If (_starting_path = "") Then
-            If GlobalVars.CurrentProject Is Nothing Then
-                _starting_path = GlobalVars.CurrentOptions.IDE.RootPath
-            Else
-                _starting_path = GlobalVars.CurrentProject.CurrentOptions.IDE.RootPath
-            End If
+            _starting_path = GetRootPath()
         End If
 
         Dim fbd As FolderBrowserDialog = New FolderBrowserDialog
@@ -454,6 +446,7 @@ Module MainContainerHelper
                 Dim xmlSerializer As XmlSerializer = New XmlSerializer(GetType(Project))
 
                 GlobalVars.CurrentProject = xmlSerializer.Deserialize(New StringReader(fc))
+                GlobalVars.CurrentProject.RootPath = Path.GetDirectoryName(_filename)
 
             End If
         Catch e As FileNotFoundException
@@ -504,12 +497,6 @@ Module MainContainerHelper
         Dim sfd = New SaveFileDialog()
 
         If (_filename = "(no name)" Or filename = "") Then
-
-            'If ProjectExplorer.Text = "(no name)" Then
-            '    sfd.FileName = GlobalVars.CurrentOptions.IDE.RootPath  '' & "\" & GlobalVars.CurrentProject.Name & ".midresproj"
-            'Else
-            '    sfd.FileName = ProjectExplorer.Text
-            'End If
 
             sfd.ShowHelp = True
 

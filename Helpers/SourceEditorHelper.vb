@@ -191,9 +191,7 @@ Module SourceEditorHelper
 
         Dim path = System.IO.Path.GetDirectoryName(_source_editor.Text)
 
-        If (GlobalVars.CurrentOptions.IDE.RootPath <> "") Then
-            path = GlobalVars.CurrentOptions.IDE.RootPath
-        End If
+        path = GetRootPath()
 
         If _source_editor.ExecutableName = "" Then
             MsgBox("Cannot make executable file, since ExecutableName parameter is missing.", vbOKOnly, "CANNOT RUN MAKEFILE")

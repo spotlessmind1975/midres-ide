@@ -49,10 +49,10 @@
 
     End Function
 
-    Public Sub ExecuteEmulatorForTarget(_options As Options, _target As String)
+    Public Sub ExecuteEmulatorForTarget(_folder_entry As FolderEntry, _target As String)
 
-        Dim binaryFileName As String = _options.Output.BinaryFilename
-        Dim support As String = SupportForTarget(_target, _options.Output)
+        Dim binaryFileName As String = _folder_entry.CurrentOptions.Output.BinaryFilename
+        Dim support As String = SupportForTarget(_target, _folder_entry.CurrentOptions.Output)
 
         If binaryFileName = "" Then
             MsgBox("Cannot execute program since the output file name is undefined.", vbOKOnly, "CANNOT RUN EXECUTABLE")
@@ -62,13 +62,13 @@
         binaryFileName = binaryFileName.Replace("{target}", _target)
         binaryFileName = binaryFileName.Replace("{support}", support)
 
-        ExecuteEmulatorInternal(_options, _options.IDE.RootPath & "\" & binaryFileName, _target)
+        ExecuteEmulatorInternal(_folder_entry.CurrentOptions, GetFullPathForElement(binaryFileName, _folder_entry), _target)
 
     End Sub
 
     Public Sub ExecuteEmulatorFolderForTarget(_folder_entry As FolderEntry, _target As String)
 
-        ExecuteEmulatorForTarget(ChooseBestOptions(), _target)
+        ExecuteEmulatorForTarget(_folder_entry, _target)
 
     End Sub
 End Module

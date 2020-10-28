@@ -180,7 +180,7 @@ Module MakeHelper
 
         binaryFileName = binaryFileName.Replace("{target}", _target)
 
-        MakeFileForTargetInternal(Path.GetDirectoryName(options.IDE.RootPath & "\" & makeFileName), options.IDE.RootPath & "\" & binaryFileName, additionalParams, _target, options, False)
+        MakeFileForTargetInternal(Path.GetDirectoryName(GetFullPathForElement(makeFileName)), GetFullPathForElement(binaryFileName), additionalParams, _target, options, False)
 
     End Sub
 
@@ -209,7 +209,7 @@ Module MakeHelper
         binaryFileName = binaryFileName.Replace("{target}", _target)
         binaryFileName = binaryFileName.Replace("{support}", support)
 
-        MakeFileForTargetInternal(Path.GetDirectoryName(options.IDE.RootPath & "\" & makeFileName), options.IDE.RootPath & "\" & binaryFileName, additionalParams, _target, options, True)
+        MakeFileForTargetInternal(Path.GetDirectoryName(GetFullPathForElement(makeFileName)), GetFullPathForElement(binaryFileName), additionalParams, _target, options, True)
 
     End Sub
 

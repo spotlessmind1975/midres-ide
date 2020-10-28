@@ -88,14 +88,13 @@ Public Class MainContainer
 
         If Not (GlobalVars.CurrentFolder Is Nothing) Then
             fn = GlobalVars.CurrentFolder.CurrentOptions.Make.MakeFilename
-            fn = GlobalVars.CurrentFolder.CurrentOptions.IDE.RootPath & "\" & fn
         ElseIf Not (GlobalVars.CurrentProject Is Nothing) Then
             fn = GlobalVars.CurrentProject.CurrentOptions.Make.MakeFilename
-            fn = GlobalVars.CurrentProject.CurrentOptions.IDE.RootPath & "\" & fn
         Else
             fn = GlobalVars.CurrentOptions.Make.MakeFilename
-            fn = GlobalVars.CurrentOptions.IDE.RootPath & "\" & fn
         End If
+
+        fn = GetFullPathForElement(fn, GlobalVars.CurrentFolder)
 
         If Not File.Exists(fn) Then
             MsgBox("The file " & fn & " is missing.", vbOKOnly, "CANNOT OPEN MAKEFILE")

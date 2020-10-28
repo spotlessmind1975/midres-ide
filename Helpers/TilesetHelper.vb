@@ -3,19 +3,19 @@ Imports System.Text.RegularExpressions
 
 Module TilesetHelper
 
-    Private Function Image2Tile(_working_directory As String, _input_filenames As Collection, _output_filename As String, Optional _bank_number As Integer = 0, Optional _header_file As String = Nothing, Optional _threshold_luminance As Integer = 16, Optional _multicolor As Boolean = False, Optional _reverse As Boolean = False) As String
+    Private Function Image2Tile(_working_directory As String, _folder_entry As FolderEntry, _output_filename As String, Optional _bank_number As Integer = 0, Optional _header_file As String = Nothing, Optional _threshold_luminance As Integer = 16, Optional _multicolor As Boolean = False, Optional _reverse As Boolean = False) As String
 
         Dim commandLine As String = ""
 
-        For Each file In _input_filenames
-            commandLine = commandLine & " -i " & file.filename
+        For Each file In _folder_entry.Files
+            commandLine = commandLine & " -i " & GetFullPathForElement(file.filename, _folder_entry)
         Next
-        commandLine = commandLine & " -o " & _output_filename
+        commandLine = commandLine & " -o " & GetFullPathForElement(_output_filename)
         If _bank_number > 0 Then
             commandLine = commandLine & " -b " & _bank_number
         End If
         If Not (_header_file Is Nothing) Then
-            commandLine = commandLine & " -g " & _header_file
+            commandLine = commandLine & " -g " & GetFullPathForElement(_header_file)
         End If
         If _threshold_luminance > 0 Then
             commandLine = commandLine & " -l " & _threshold_luminance
@@ -26,8 +26,6 @@ Module TilesetHelper
         If _reverse Then
             commandLine = commandLine & " -r "
         End If
-
-        MsgBox("img2tile64.exe " & commandLine & " !! " & _working_directory)
 
         Dim oProcess As New Process()
         Dim oStartInfo As New ProcessStartInfo("img2tile64.exe", commandLine) With {
@@ -117,22 +115,23 @@ Module TilesetHelper
         End If
 
         Dim binaryFileName As String = options.Tileset.BinaryFilename
+        Dim headerFileName As String = options.Tileset.HeaderFilename
 
         If binaryFileName = "" Then
             MsgBox("Cannot prepare tileset since the output file name is undefined.", vbOKOnly, "CANNOT PREPARE TILESET")
             Exit Sub
         End If
 
-        File.Delete(binaryFileName)
+        File.Delete(GetFullPathForElement(binaryFileName))
 
         ClearAllMarkers()
 
         ClearErrorOutput()
 
-        Dim errorString = Image2Tile(Path.GetDirectoryName(options.IDE.RootPath & "\" & _folder_entry.Path & "\" & binaryFileName), _folder_entry.Files, binaryFileName, options.Tileset.BankNumber, options.Tileset.HeaderFilename, options.Tileset.ThresholdLuminance, options.Tileset.Multicolor, options.Tileset.Reverse)
+        Dim errorString = Image2Tile(Path.GetDirectoryName(GetFullPathForElement(binaryFileName)), _folder_entry, binaryFileName, options.Tileset.BankNumber, headerFileName, options.Tileset.ThresholdLuminance, options.Tileset.Multicolor, options.Tileset.Reverse)
 
-        If ParseImg2TileErrors(Path.GetDirectoryName(options.IDE.RootPath & "\" & _folder_entry.Path & "\" & binaryFileName), errorString, options) = 0 Then
-            If (File.Exists(options.IDE.RootPath & "\" & _folder_entry.Path & "\" & binaryFileName)) Then
+        If ParseImg2TileErrors(Path.GetDirectoryName(GetFullPathForElement(binaryFileName)), errorString, options) = 0 Then
+            If (File.Exists(GetFullPathForElement(binaryFileName))) Then
                 MsgBox("Tiles has been built.", vbOKOnly, "SUCCESSFUL PREPARE")
             Else
                 MsgBox("Tiles has NOT been built.", vbOKOnly, "FAILED PREPARE")

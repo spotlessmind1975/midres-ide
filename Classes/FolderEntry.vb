@@ -210,7 +210,7 @@ Public Class FolderEntry
     Public Sub NormalizePaths()
 
         Dim parts
-        parts = GlobalVars.CurrentProject.CurrentOptions.IDE.RootPath.Split("\")
+        parts = GetRootPath().Split("\")
 
         Dim partialPath As String = ""
         Dim replacePath As String = ""
@@ -230,7 +230,7 @@ Public Class FolderEntry
                 End If
             Next
         Else
-            partialPath = GlobalVars.CurrentProject.CurrentOptions.IDE.RootPath
+            partialPath = GetRootPath()
         End If
 
         parts = (partialPath & "\" & _path).Split("\")

@@ -9,6 +9,7 @@ Public Class Project
     Private _name As String
     Private _description As String
     Private _folders As Collection = New Collection
+    Private _rootPath As String
 
     Private _currentOptions As Options
     Public Property CurrentOptions As Options
@@ -44,6 +45,15 @@ Public Class Project
         End Get
         Set(value As Collection)
             _folders = value
+        End Set
+    End Property
+
+    Public Property RootPath As String
+        Get
+            Return _rootPath
+        End Get
+        Set(value As String)
+            _rootPath = value
         End Set
     End Property
 
