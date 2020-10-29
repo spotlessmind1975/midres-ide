@@ -8,9 +8,20 @@ Module ProjectExplorerHelper
         Dim s As TreeNode = New TreeNode(_file_entry.Name, 3, 3) With {
             .Tag = _file_entry,
             .ContextMenuStrip = ProjectExplorer.ContextMenuStripFile,
-            .ToolTipText = _file_entry.Filename
+            .ToolTipText = _file_entry.Filename,
+            .ImageIndex = FileKindToImageIndex(_file_entry.Kind),
+            .SelectedImageIndex = FileKindToImageIndex(_file_entry.Kind)
         }
+
+        Select Case _file_entry.Kind
+            Case FileEntry.KindEnum.NORMAL
+                s.ContextMenuStrip = ProjectExplorer.ContextMenuStripFile
+            Case FileEntry.KindEnum.GENERATED
+                s.ContextMenuStrip = ProjectExplorer.ContextMenuStripGenerated
+        End Select
+
         Return s
+
     End Function
 
     Public Function FolderKindToImageIndex(_kind As FolderEntry.KindEnum)
@@ -26,6 +37,17 @@ Module ProjectExplorerHelper
         End Select
 
         Return 2
+    End Function
+
+    Public Function FileKindToImageIndex(_kind As FileEntry.KindEnum)
+        Select Case _kind
+            Case FileEntry.KindEnum.NORMAL
+                Return 3
+            Case FileEntry.KindEnum.GENERATED
+                Return 10
+        End Select
+
+        Return 3
     End Function
 
     Public Function PopulateTreeViewRicorsive(_folder_entry As FolderEntry) As TreeNode
@@ -245,17 +267,36 @@ Module ProjectExplorerHelper
 
     End Sub
 
+    Public Sub ConsiderFileAs(_project_explorer As ProjectExplorer, _kind As FileEntry.KindEnum)
+        Dim tp As TreeNode = _project_explorer.TreeViewProject.SelectedNode
+
+        If Not (tp Is Nothing) Then
+            tp.Tag.Kind = _kind
+            Select Case _kind
+                Case FileEntry.KindEnum.NORMAL
+                    tp.ContextMenuStrip = _project_explorer.ContextMenuStripFile
+                Case FileEntry.KindEnum.GENERATED
+                    tp.ContextMenuStrip = _project_explorer.ContextMenuStripGenerated
+                Case Else
+                    tp.ContextMenuStrip = _project_explorer.ContextMenuStripFile
+            End Select
+            tp.ImageIndex = FileKindToImageIndex(_kind)
+            tp.SelectedImageIndex = FileKindToImageIndex(_kind)
+        End If
+
+    End Sub
+
     Public Sub OpenNodeFile(_project_explorer As ProjectExplorer)
         Dim tp As TreeNode = _project_explorer.TreeViewProject.SelectedNode
         If Not (tp Is Nothing) Then
             Dim tpp As TreeNode = tp.Parent
             If Not (tpp Is Nothing) Then
                 If TypeOf tp.Tag Is FileEntry Then
-                    Dim filename As String = GetFullPathForElement(tp.Tag.filename, tpp.Tag.path)
+                    Dim filename As String = GetFullPathForElement(tp.Tag.filename, tpp.Tag)
                     Dim extension As String = Path.GetExtension(filename)
                     Select Case LCase(extension)
                         Case ".c", ".h"
-                            Dim se As SourceEditor = OpenFileEx(filename, MainContainer)
+                            Dim se As SourceEditor = OpenFileEx(filename, MainContainer, tp.Tag.Kind = FileEntry.KindEnum.GENERATED)
                         Case ".jpg", ".gif", ".png"
                             Shell("gimp-2.10.exe " & filename)
                         Case Else
@@ -314,6 +355,19 @@ Module ProjectExplorerHelper
                     tp.Tag.CurrentOptions = ChooseBestOptions().DeepClone()
                 End If
                 ShowOptionsTilesetWindow(tp.Tag.CurrentOptions, "Tileset " & tp.Tag.name & " options", tp.Tag.Kind)
+            End If
+        End If
+    End Sub
+
+    Public Sub ShowOptionsWindowGenerated(_project_explorer As ProjectExplorer)
+        Dim tp As TreeNode = _project_explorer.TreeViewProject.SelectedNode
+
+        If Not (tp Is Nothing) Then
+            If TypeOf tp.Tag Is FileEntry And tp.Tag.Kind = FileEntry.KindEnum.GENERATED Then
+                If tp.Tag.CurrentOptions Is Nothing Then
+                    tp.Tag.CurrentOptions = New OptionsGenerated
+                End If
+                ShowOptionsGeneratedWindow(tp.Tag.CurrentOptions, "Generated file " & tp.Tag.name & " options")
             End If
         End If
     End Sub

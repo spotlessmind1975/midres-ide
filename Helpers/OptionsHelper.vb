@@ -141,6 +141,23 @@ Module OptionsHelper
 
     End Sub
 
+    Public Sub UpdateOptionsGenerated(_options_window As OptionsGeneratedWindow, Optional _options As OptionsGenerated = Nothing)
+
+        Dim kinds As Collection = New Collection
+        kinds.Add(FolderEntry.KindEnum.EXECUTABLE)
+        kinds.Add(FolderEntry.KindEnum.LIBRARY)
+        kinds.Add(FolderEntry.KindEnum.TILESET)
+        Dim folders As Collection = GlobalVars.CurrentProject.GetFoldersByKind(kinds)
+
+        _options_window.CheckedListBoxDependency.Items.Clear()
+
+        For Each folder In folders
+            _options_window.CheckedListBoxDependency.Items.Add(folder.Name, _options.Dependencies.Contains(folder.GetHashCode()))
+        Next
+        _options_window.folders = folders
+
+    End Sub
+
     Public Sub ApplyOptions(_options_window As OptionsWindow, Optional _options As Options = Nothing)
 
         If (_options Is Nothing) Then
@@ -205,6 +222,27 @@ Module OptionsHelper
 
     End Sub
 
+    Public Sub ApplyOptionsGenerated(_options_window As OptionsGeneratedWindow, Optional _options As OptionsGenerated = Nothing)
+
+        If (_options Is Nothing) Then
+            Exit Sub
+        End If
+
+        Dim kinds As Collection = New Collection
+        kinds.Add(FolderEntry.KindEnum.EXECUTABLE)
+        kinds.Add(FolderEntry.KindEnum.LIBRARY)
+        kinds.Add(FolderEntry.KindEnum.TILESET)
+        Dim folders As Collection = _options_window.Folders
+
+        _options.Dependencies.Clear()
+
+        For i = 0 To folders.Count - 1
+            If _options_window.CheckedListBoxDependency.GetItemChecked(i) Then
+                _options.Dependencies.Add(folders.Item(i), folders.Item(i).GetHashCode())
+            End If
+        Next
+
+    End Sub
     Public Function ShowOptionsWindow(_options As Options, _title As String, Optional _kind As FolderEntry.KindEnum = Nothing) As OptionsWindow
         Dim ow As OptionsWindow
 
@@ -213,32 +251,6 @@ Module OptionsHelper
             .CurrentOptions = _options
         }
         ow.Text = _title
-        Select Case _kind
-            Case FolderEntry.KindEnum.FOLDER
-                ow.TabControlOptions.TabPages(0).Visible = True
-                ow.TabControlOptions.TabPages(1).Visible = True
-                ow.TabControlOptions.TabPages(2).Visible = True
-                ow.TabControlOptions.TabPages(3).Visible = True
-                ow.TabControlOptions.TabPages(4).Visible = True
-            Case FolderEntry.KindEnum.LIBRARY, FolderEntry.KindEnum.EXECUTABLE
-                ow.TabControlOptions.TabPages(0).Visible = True
-                ow.TabControlOptions.TabPages(1).Visible = True
-                ow.TabControlOptions.TabPages(2).Visible = True
-                ow.TabControlOptions.TabPages(3).Visible = True
-                ow.TabControlOptions.TabPages(4).Visible = False
-            Case FolderEntry.KindEnum.TILESET
-                ow.TabControlOptions.TabPages(0).Visible = False
-                ow.TabControlOptions.TabPages(1).Visible = False
-                ow.TabControlOptions.TabPages(2).Visible = False
-                ow.TabControlOptions.TabPages(3).Visible = False
-                ow.TabControlOptions.TabPages(4).Visible = True
-            Case Else
-                ow.TabControlOptions.TabPages(0).Visible = True
-                ow.TabControlOptions.TabPages(1).Visible = True
-                ow.TabControlOptions.TabPages(2).Visible = True
-                ow.TabControlOptions.TabPages(3).Visible = True
-                ow.TabControlOptions.TabPages(4).Visible = True
-        End Select
         ow.Show()
 
         Return ow
@@ -249,6 +261,20 @@ Module OptionsHelper
         Dim ow As OptionsTilesetWindow
 
         ow = New OptionsTilesetWindow With {
+            .MdiParent = MainContainer,
+            .CurrentOptions = _options
+        }
+        ow.Text = _title
+        ow.Show()
+
+        Return ow
+
+    End Function
+
+    Public Function ShowOptionsGeneratedWindow(_options As OptionsGenerated, _title As String) As OptionsGeneratedWindow
+        Dim ow As OptionsGeneratedWindow
+
+        ow = New OptionsGeneratedWindow With {
             .MdiParent = MainContainer,
             .CurrentOptions = _options
         }

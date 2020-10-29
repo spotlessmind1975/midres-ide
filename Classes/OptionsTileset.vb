@@ -13,7 +13,6 @@ Public Class OptionsTileset
     Private _multicolor As Boolean
     Private _reverse As Boolean
 
-
     Public Property BinaryFilename As String
         Get
             Return _binaryFileName

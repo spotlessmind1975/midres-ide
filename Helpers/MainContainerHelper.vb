@@ -193,14 +193,14 @@ Module MainContainerHelper
         OpenSourceWindow = sourceEditor
 
     End Function
-    Public Function OpenFileEx(_filename As String, _main_container As MainContainer) As SourceEditor
+    Public Function OpenFileEx(_filename As String, _main_container As MainContainer, Optional _read_only As Boolean = False) As SourceEditor
 
         Dim openedSourceEditor As SourceEditor = Nothing
 
         If (GlobalVars.OpenedSourceEditors.Contains(_filename)) Then
 
             openedSourceEditor = GlobalVars.OpenedSourceEditors.Item(_filename)
-
+            openedSourceEditor.OnlyRead = _read_only
             openedSourceEditor.Show()
             openedSourceEditor.BringToFront()
 
@@ -210,6 +210,8 @@ Module MainContainerHelper
                 Dim content As String = My.Computer.FileSystem.ReadAllText(_filename)
 
                 openedSourceEditor = OpenSourceWindow(_main_container, content, _filename)
+                openedSourceEditor.FileName = _filename
+                openedSourceEditor.OnlyRead = _read_only
 
                 GlobalVars.OpenedSourceEditors.Add(openedSourceEditor, _filename)
 
@@ -293,11 +295,11 @@ Module MainContainerHelper
 
     End Sub
 
-    Public Sub CloseFileEx(_filename As String)
+    Public Sub CloseFileEx(_source_editor As SourceEditor)
 
-        If (GlobalVars.OpenedSourceEditors.Contains(_filename)) Then
+        If (GlobalVars.OpenedSourceEditors.Contains(_source_editor.FileName)) Then
 
-            GlobalVars.OpenedSourceEditors.Remove(_filename)
+            GlobalVars.OpenedSourceEditors.Remove(_source_editor.FileName)
 
         End If
 
@@ -447,6 +449,7 @@ Module MainContainerHelper
 
                 GlobalVars.CurrentProject = xmlSerializer.Deserialize(New StringReader(fc))
                 GlobalVars.CurrentProject.RootPath = Path.GetDirectoryName(_filename)
+                GlobalVars.CurrentProject.Resolve()
 
             End If
         Catch e As FileNotFoundException

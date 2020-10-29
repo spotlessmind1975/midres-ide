@@ -151,6 +151,7 @@
     <Compile Include="Classes\OptionsEmulators.vb" />
     <Compile Include="Classes\ErrorOutputCollection.vb" />
     <Compile Include="Classes\ErrorOutputEntry.vb" />
+    <Compile Include="Classes\OptionsGenerated.vb" />
     <Compile Include="Classes\OptionsIDE.vb" />
     <Compile Include="Classes\OptionsMake.vb" />
     <Compile Include="Classes\OptionsOutput.vb" />
@@ -175,6 +176,12 @@
       <DependentUpon>HelpWindow.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\HelpWindow.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\OptionsGeneratedWindow.Designer.vb">
+      <DependentUpon>OptionsGeneratedWindow.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\OptionsGeneratedWindow.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\OptionsTilesetWindow.Designer.vb">
@@ -260,6 +267,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainContainer.resx">
       <DependentUpon>MainContainer.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\OptionsGeneratedWindow.resx">
+      <DependentUpon>OptionsGeneratedWindow.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\OptionsTilesetWindow.resx">
       <DependentUpon>OptionsTilesetWindow.vb</DependentUpon>

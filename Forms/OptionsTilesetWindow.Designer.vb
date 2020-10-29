@@ -102,7 +102,7 @@ Partial Class OptionsTilesetWindow
         Me.TabPageTileset.Name = "TabPageTileset"
         Me.TabPageTileset.Size = New System.Drawing.Size(699, 188)
         Me.TabPageTileset.TabIndex = 5
-        Me.TabPageTileset.Text = "Tileset"
+        Me.TabPageTileset.Text = "Generate"
         Me.TabPageTileset.UseVisualStyleBackColor = True
         '
         'GroupBox8

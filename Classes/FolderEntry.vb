@@ -267,4 +267,52 @@ Public Class FolderEntry
         Return fe
     End Function
 
+    Public Function FindFolderByHash(_hashcode As String) As FolderEntry
+
+        If Me.GetHashCode() = _hashcode Then
+            Return Me
+        End If
+
+        For Each folder In _folders
+            Dim found As FolderEntry = folder.FindFolderByHash(_hashcode)
+            If Not (found Is Nothing) Then
+                Return found
+            End If
+        Next
+
+        Return Nothing
+
+    End Function
+
+    Public Sub Resolve(_project As Project)
+
+        For Each folder In _folders
+            folder.Resolve(_project)
+        Next
+
+        For Each file In _files
+            file.Resolve(_project)
+        Next
+
+    End Sub
+
+    Public Function GetFoldersByKind(_kind As FolderEntry.KindEnum) As Collection
+
+        Dim result As Collection = New Collection
+
+        If Me.Kind = _kind Then
+            result.Add(Me)
+        End If
+
+        For Each folder In _folders
+            Dim tmp As Collection = folder.GetFoldersByKind(_kind)
+            For Each f In tmp
+                result.Add(f)
+            Next
+        Next
+
+        Return result
+
+    End Function
+
 End Class

@@ -156,4 +156,42 @@ Public Class Project
         Return p
     End Function
 
+    Public Function FindFolderByHash(_hashcode As String) As FolderEntry
+
+        For Each folder In _folders
+            Dim found As FolderEntry = folder.FindFolderByHash(_hashcode)
+            If Not (found Is Nothing) Then
+                Return found
+            End If
+        Next
+
+        Return Nothing
+
+    End Function
+
+    Public Sub Resolve()
+
+        For Each folder In _folders
+            folder.Resolve(Me)
+        Next
+
+    End Sub
+
+    Public Function GetFoldersByKind(_kinds As Collection) As Collection
+
+        Dim result As Collection = New Collection
+
+        For Each k In _kinds
+            For Each folder In _folders
+                Dim tmp As Collection = folder.GetFoldersByKind(k)
+                For Each f In tmp
+                    result.Add(f)
+                Next
+            Next
+        Next
+
+        Return result
+
+    End Function
+
 End Class

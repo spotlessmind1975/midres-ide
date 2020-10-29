@@ -350,4 +350,32 @@ Public Class ProjectExplorer
     Private Sub PrepareToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PrepareToolStripMenuItem.Click
         PrepareTilesetNodeFolder(Me)
     End Sub
+
+    Private Sub NormalToolStripMenuItem_Click(sender As Object, e As EventArgs)
+        ConsiderFileAs(Me, FileEntry.KindEnum.NORMAL)
+    End Sub
+
+    Private Sub GeneratedToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GeneratedToolStripMenuItem.Click
+        ConsiderFileAs(Me, FileEntry.KindEnum.GENERATED)
+    End Sub
+
+    Private Sub NormalToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles NormalToolStripMenuItem1.Click
+        ConsiderFileAs(Me, FileEntry.KindEnum.NORMAL)
+    End Sub
+
+    Private Sub OptionsToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles OptionsToolStripMenuItem1.Click
+        ShowOptionsWindowGenerated(Me)
+    End Sub
+
+    Private Sub RenameToolStripMenuItem6_Click(sender As Object, e As EventArgs) Handles RenameToolStripMenuItem6.Click
+        StartRenaming()
+    End Sub
+
+    Private Sub RemoveToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles RemoveToolStripMenuItem1.Click
+        RemoveFile(Me)
+    End Sub
+
+    Private Sub OpenToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles OpenToolStripMenuItem1.Click
+        OpenNodeFile(Me)
+    End Sub
 End Class

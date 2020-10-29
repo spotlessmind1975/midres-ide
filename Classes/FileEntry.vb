@@ -6,9 +6,17 @@ Public Class FileEntry
 
     Implements IXmlSerializable
 
+    Public Enum KindEnum
+        NORMAL = 1
+        GENERATED = 2
+    End Enum
+
     Private _name As String
     Private _filename As String
     Private _description As String
+    Private _kind As KindEnum
+
+    Private _currentOptions As OptionsGenerated
 
     Public Sub New(Optional filename As String = "", Optional name As String = "", Optional description As String = "")
         If filename = "" Then
@@ -39,12 +47,32 @@ Public Class FileEntry
             _filename = value
         End Set
     End Property
+
     Public Property Description As String
         Get
             Return _description
         End Get
         Set(value As String)
             _description = value
+        End Set
+    End Property
+
+    Public Property CurrentOptions As OptionsGenerated
+        Get
+            Return _currentOptions
+        End Get
+        Set(value As OptionsGenerated)
+            _currentOptions = value
+        End Set
+    End Property
+
+
+    Public Property Kind As KindEnum
+        Get
+            Return _kind
+        End Get
+        Set(value As KindEnum)
+            _kind = value
         End Set
     End Property
 
@@ -66,6 +94,12 @@ Public Class FileEntry
                         _filename = reader.ReadElementContentAsString()
                     Case "Description"
                         _description = reader.ReadElementContentAsString()
+                    Case "Kind"
+                        _kind = reader.ReadElementContentAsInt()
+                    Case "CurrentOptions"
+                        Dim pe As OptionsGenerated = New OptionsGenerated
+                        pe.ReadXml(reader)
+                        _currentOptions = pe
                     Case Else
                         reader.ReadContentAsString()
                 End Select
@@ -88,6 +122,14 @@ Public Class FileEntry
         writer.WriteStartElement("Description")
         writer.WriteString(_description)
         writer.WriteEndElement()
+        writer.WriteStartElement("Kind")
+        writer.WriteString(_kind)
+        writer.WriteEndElement()
+        If Not (_currentOptions Is Nothing) Then
+            writer.WriteStartElement("CurrentOptions")
+            DirectCast(_currentOptions, OptionsGenerated).WriteXml(writer)
+            writer.WriteEndElement()
+        End If
     End Sub
 
     Public Function GetSchema() As XmlSchema Implements IXmlSerializable.GetSchema
@@ -110,4 +152,11 @@ Public Class FileEntry
         Return DirectCast(Me.MemberwiseClone(), FileEntry)
     End Function
 
+    Public Sub Resolve(_project As Project)
+
+        If Not (_currentOptions Is Nothing) Then
+            _currentOptions.Resolve(_project)
+        End If
+
+    End Sub
 End Class

@@ -216,6 +216,17 @@ Module SourceEditorHelper
 
     Public Sub UpdateMenuEntriesForSpecificOptions(_source_editor As SourceEditor, _options As Options)
 
+        If _source_editor.OnlyRead Then
+            _source_editor.SaveToolStripMenuItem.Visible = False
+            _source_editor.SaveToolStripMenuItem.Enabled = False
+            _source_editor.SaveasToolStripMenuItem.Visible = False
+            _source_editor.SaveasToolStripMenuItem.Enabled = False
+        Else
+            _source_editor.SaveToolStripMenuItem.Visible = True
+            _source_editor.SaveToolStripMenuItem.Enabled = True
+            _source_editor.SaveasToolStripMenuItem.Visible = True
+            _source_editor.SaveasToolStripMenuItem.Enabled = True
+        End If
         If Not (_options Is Nothing) Then
             _source_editor.CompileForToolStripMenuItem.Visible = True
             _source_editor.CompileForToolStripMenuItem.Enabled = True

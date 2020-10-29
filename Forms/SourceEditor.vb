@@ -11,6 +11,8 @@ Public Class SourceEditor
     Private _formalLexer As Lexer = Lexer.Cpp
 
     Private _changed As Boolean
+    Private _readOnly As Boolean
+    Private _fileName As String
 
     Public Property Changed As String
         Get
@@ -18,6 +20,23 @@ Public Class SourceEditor
         End Get
         Set(value As String)
             _changed = value
+        End Set
+    End Property
+
+    Public Property FileName As String
+        Get
+            Return _fileName
+        End Get
+        Set(value As String)
+            _fileName = value
+        End Set
+    End Property
+    Public Property OnlyRead As Boolean
+        Get
+            Return _readOnly
+        End Get
+        Set(value As Boolean)
+            _readOnly = value
         End Set
     End Property
 
@@ -221,7 +240,7 @@ Public Class SourceEditor
     End Sub
     Private Sub SourceEditor_Closed(sender As Object, e As EventArgs) Handles Me.Closed
 
-        CloseFileEx(Me.Text)
+        CloseFileEx(Me)
 
     End Sub
 
@@ -388,5 +407,12 @@ Public Class SourceEditor
             ExecuteEmulatorFolderForTarget(GlobalVars.CurrentFolder, "atarilo")
         End If
 
+    End Sub
+
+    Private Sub SourceEditor_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+        ScintillaSource.ReadOnly = _readOnly
+        If _readOnly And InStr(Me.Text, "(read only)") = 0 Then
+            Me.Text &= " (read only)"
+        End If
     End Sub
 End Class

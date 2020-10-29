@@ -107,11 +107,16 @@ Public Class MainContainer
     End Sub
 
     Private Sub NewToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles NewToolStripMenuItem1.Click
-        GlobalVars.CurrentProject = New Project("(no name)") With {
-            .CurrentOptions = GlobalVars.CurrentOptions
-        }
-        UpdateProjectExplorer()
-        ProjectExplorer.Text = "(no name)"
+        Dim filename As String = OpenSaveDialogEx()
+        If Not (filename Is Nothing) Then
+            My.Computer.FileSystem.WriteAllText(filename, "<Project></Project>", False, System.Text.Encoding.ASCII)
+            GlobalVars.CurrentProject = New Project(Path.GetFileNameWithoutExtension(filename)) With {
+                .CurrentOptions = GlobalVars.CurrentOptions,
+                .RootPath = Path.GetDirectoryName(filename)
+            }
+            UpdateProjectExplorer()
+            ProjectExplorer.Text = Path.GetFileNameWithoutExtension(filename)
+        End If
     End Sub
 
     Private Sub OpenToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles OpenToolStripMenuItem1.Click
