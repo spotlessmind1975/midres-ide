@@ -20,13 +20,14 @@ Module MainContainerHelper
 
         Return defaultFilter
     End Function
-    Public Function OpenDialogEx(Optional _folder_entry As FolderEntry = Nothing) As String
+    Public Function OpenDialogEx(Optional _folder_entry As FolderEntry = Nothing, Optional _multiple As Boolean = False)
 
         Dim path As String = ""
 
         Dim ofd As OpenFileDialog = New OpenFileDialog With {
             .Filter = FilterForFolderKind(_folder_entry.Kind),
-            .FilterIndex = GlobalVars.LastExtensionUsed
+            .FilterIndex = GlobalVars.LastExtensionUsed,
+            .Multiselect = _multiple
         }
 
         If Not (_folder_entry Is Nothing) Then
@@ -38,7 +39,11 @@ Module MainContainerHelper
 
         If (result = DialogResult.OK) Then
             GlobalVars.LastExtensionUsed = ofd.FilterIndex
-            Return ofd.FileName
+            If _multiple Then
+                Return ofd.FileNames
+            Else
+                Return ofd.FileName
+            End If
         Else
             Return Nothing
         End If

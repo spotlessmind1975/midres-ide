@@ -164,7 +164,7 @@ Partial Class ProjectExplorer
         'ContextMenuStripFolder
         '
         Me.ContextMenuStripFolder.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.ContextMenuStripFolder.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewFileToolStripMenuItem, Me.AddFileToolStripMenuItem, Me.AddFolderToolStripMenuItem, Me.RenameToolStripMenuItem, Me.RemoveFolderToolStripMenuItem, Me.PromoteAsToolStripMenuItem})
+        Me.ContextMenuStripFolder.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewFileToolStripMenuItem, Me.AddFolderToolStripMenuItem, Me.AddFileToolStripMenuItem, Me.RenameToolStripMenuItem, Me.RemoveFolderToolStripMenuItem, Me.PromoteAsToolStripMenuItem})
         Me.ContextMenuStripFolder.Name = "ContextMenuStripFolder"
         Me.ContextMenuStripFolder.Size = New System.Drawing.Size(181, 160)
         '
@@ -180,7 +180,7 @@ Partial Class ProjectExplorer
         Me.AddFileToolStripMenuItem.Image = CType(resources.GetObject("AddFileToolStripMenuItem.Image"), System.Drawing.Image)
         Me.AddFileToolStripMenuItem.Name = "AddFileToolStripMenuItem"
         Me.AddFileToolStripMenuItem.Size = New System.Drawing.Size(180, 26)
-        Me.AddFileToolStripMenuItem.Text = "Add file..."
+        Me.AddFileToolStripMenuItem.Text = "Add file(s)..."
         '
         'AddFolderToolStripMenuItem
         '
@@ -408,7 +408,7 @@ Partial Class ProjectExplorer
         Me.AddfileToolStripMenuItem1.Image = CType(resources.GetObject("AddfileToolStripMenuItem1.Image"), System.Drawing.Image)
         Me.AddfileToolStripMenuItem1.Name = "AddfileToolStripMenuItem1"
         Me.AddfileToolStripMenuItem1.Size = New System.Drawing.Size(180, 26)
-        Me.AddfileToolStripMenuItem1.Text = "Add &file..."
+        Me.AddfileToolStripMenuItem1.Text = "Add &file(s)..."
         '
         'AddFolderToolStripMenuItem2
         '
@@ -615,7 +615,7 @@ Partial Class ProjectExplorer
         Me.AddfileToolStripMenuItem2.Image = CType(resources.GetObject("AddfileToolStripMenuItem2.Image"), System.Drawing.Image)
         Me.AddfileToolStripMenuItem2.Name = "AddfileToolStripMenuItem2"
         Me.AddfileToolStripMenuItem2.Size = New System.Drawing.Size(180, 26)
-        Me.AddfileToolStripMenuItem2.Text = "Add &file..."
+        Me.AddfileToolStripMenuItem2.Text = "Add &file(s)..."
         '
         'AddFolderToolStripMenuItem3
         '
@@ -703,7 +703,7 @@ Partial Class ProjectExplorer
         Me.AddFileToolStripMenuItem3.Image = CType(resources.GetObject("AddFileToolStripMenuItem3.Image"), System.Drawing.Image)
         Me.AddFileToolStripMenuItem3.Name = "AddFileToolStripMenuItem3"
         Me.AddFileToolStripMenuItem3.Size = New System.Drawing.Size(180, 26)
-        Me.AddFileToolStripMenuItem3.Text = "Add &file..."
+        Me.AddFileToolStripMenuItem3.Text = "Add &file(s)..."
         '
         'RenameToolStripMenuItem5
         '
