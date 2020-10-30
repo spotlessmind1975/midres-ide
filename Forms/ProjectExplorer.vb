@@ -44,12 +44,17 @@ Public Class ProjectExplorer
 
         e.Node.EndEdit(False)
 
-        e.Node.Tag.Name = e.Label
         If TypeOf e.Node.Tag Is FolderEntry Then
-            e.Node.Parent.Tag.Folders.Remove(e.Node.Tag.GetHashCode())
+            e.Node.Parent.Tag.Folders.Remove(e.Node.Tag.GetHashCode().ToString())
+        Else
+            e.Node.Parent.Tag.Files.Remove(e.Node.Tag.GetHashCode().ToString())
+        End If
+
+        e.Node.Tag.Name = e.Label
+
+        If TypeOf e.Node.Tag Is FolderEntry Then
             e.Node.Parent.Tag.Folders.add(e.Node.Tag, e.Node.Tag.GetHashCode())
         Else
-            e.Node.Parent.Tag.Files.Remove(e.Node.Tag.GetHashCode())
             e.Node.Parent.Tag.Files.add(e.Node.Tag, e.Node.Tag.GetHashCode())
         End If
 
