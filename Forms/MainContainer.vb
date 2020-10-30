@@ -41,10 +41,6 @@ Public Class MainContainer
 
     End Sub
 
-    Private Sub ToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem2.Click
-
-    End Sub
-
     Public Sub RecentyOpenedFilesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RecentyOpenedFilesToolStripMenuItem.Click
 
         OpenFileEx(GlobalVars.RecentOpenedFiles.Items(DirectCast(sender, ToolStripMenuItem).Tag).FileName, Me)
@@ -71,7 +67,7 @@ Public Class MainContainer
         SplashScreen.MdiParent = Me
         SplashScreen.Show()
         SplashScreen.BringToFront()
-
+        UpdateMenuEntries(Me)
     End Sub
 
     Private Sub FindInFilesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FindInFilesToolStripMenuItem.Click
@@ -121,14 +117,17 @@ Public Class MainContainer
 
     Private Sub OpenToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles OpenToolStripMenuItem1.Click
         OpenProject()
+        UpdateMenuEntries(Me)
     End Sub
 
     Private Sub SaveToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles SaveToolStripMenuItem1.Click
         SaveProject(ProjectExplorer.Text)
+        UpdateMenuEntries(Me)
     End Sub
 
     Private Sub SaveAsToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles SaveAsToolStripMenuItem1.Click
         SaveProject()
+        UpdateMenuEntries(Me)
     End Sub
 
     Public Sub RecentOpenedProjectsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RecentOpenedProjectsToolStripMenuItem.Click
@@ -142,6 +141,7 @@ Public Class MainContainer
 
             UpdateProjectExplorer()
             ProjectExplorer.Text = filename
+            UpdateMenuEntries(Me)
         End If
 
     End Sub

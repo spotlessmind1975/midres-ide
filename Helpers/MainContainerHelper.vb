@@ -344,6 +344,18 @@ Module MainContainerHelper
         Next
     End Sub
 
+    Public Sub UpdateMenuEntries(_main_container As MainContainer)
+
+        If GlobalVars.CurrentProject Is Nothing Then
+            _main_container.SaveToolStripMenuItem1.Enabled = False
+            _main_container.SaveAsToolStripMenuItem1.Enabled = False
+        Else
+            _main_container.SaveToolStripMenuItem1.Enabled = True
+            _main_container.SaveAsToolStripMenuItem1.Enabled = True
+        End If
+
+    End Sub
+
     Private Function ExtractLine(_content As String, _start As Integer)
 
         Dim startLine As Integer = InStrRev(_content, vbCrLf, _start)
