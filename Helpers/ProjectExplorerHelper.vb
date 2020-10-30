@@ -535,7 +535,7 @@ Module ProjectExplorerHelper
             Dim sourceFileName = GetFullPathForElement(_file_or_folder.FileName, _source_folder)
             Dim targetFileName = GetFullPathForElement(_file_or_folder.FileName, _target_folder)
             If File.Exists(sourceFileName) And Not File.Exists(targetFileName) Then
-                Rename(sourceFileName, targetFileName)
+                FileCopy(sourceFileName, targetFileName)
             End If
         Else
             _source_folder.Folders.Remove(_file_or_folder.GetHashCode().ToString())
