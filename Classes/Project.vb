@@ -87,7 +87,7 @@ Public Class Project
                         Case "Folder"
                             Dim pe As FolderEntry = New FolderEntry
                             pe.ReadXml(reader)
-                            _folders.Add(pe)
+                            _folders.Add(pe, pe.GetHashCode())
                         Case "Options"
                             Dim pe As Options = New Options
                             pe.ReadXml(reader)
@@ -148,7 +148,8 @@ Public Class Project
         p._folders.Clear()
 
         For Each f In p._folders
-            p._folders.Add(f.DeepClone())
+            Dim folderCloned As FolderEntry = f.DeepClone()
+            p._folders.Add(folderCloned, folderCloned.GetHashCode())
         Next
 
         p._currentOptions = _currentOptions.DeepClone()

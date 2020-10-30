@@ -445,7 +445,7 @@ Public Class ProjectExplorer
 
         If targetNode Is Nothing Then Exit Sub
 
-        If (TypeOf targetNode.Tag Is FileEntry) Then
+        If (TypeOf targetNode.Tag Is FileEntry) And (TypeOf dropNode.Tag Is FileEntry) Then
 
             If (targetNode.Parent.Tag.Equals(dropNode.Parent.Tag)) Then
 

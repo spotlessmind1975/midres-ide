@@ -165,7 +165,7 @@ Module ProjectExplorerHelper
 
                     Dim f As FolderEntry = New FolderEntry(folderPath, folderPath.Replace(GetRootPath() & "\", ""))
 
-                    rootFolder.Folders.Add(f)
+                    rootFolder.Folders.Add(f, f.GetHashCode())
 
                     rootFolder.NormalizePaths()
 
@@ -198,12 +198,14 @@ Module ProjectExplorerHelper
         If Not (tp Is Nothing) Then
             If TypeOf tp.Tag Is FolderEntry Then
                 Dim filenames As String() = OpenDialogEx(tp.Tag, True)
-                For Each filename In filenames
-                    Dim f As FileEntry = New FileEntry(filename, Path.GetFileName(filename))
-                    tp.Tag.Files.Add(f, f.GetHashCode())
-                    tp.Tag.NormalizePaths()
-                    tp.Nodes.Add(PopulateTreeViewWithFile(f))
-                Next
+                If Not (filenames Is Nothing) Then
+                    For Each filename In filenames
+                        Dim f As FileEntry = New FileEntry(filename, Path.GetFileName(filename))
+                        tp.Tag.Files.Add(f, f.GetHashCode())
+                        tp.Tag.NormalizePaths()
+                        tp.Nodes.Add(PopulateTreeViewWithFile(f))
+                    Next
+                End If
             End If
         End If
 
