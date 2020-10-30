@@ -440,18 +440,45 @@ Public Class ProjectExplorer
 
         If targetNode Is Nothing Then Exit Sub
 
-        If Not (TypeOf targetNode.Tag Is FolderEntry) Then
+        If (TypeOf targetNode.Tag Is FileEntry) Then
+
+            If (targetNode.Parent.Tag.Equals(dropNode.Parent.Tag)) Then
+
+                targetNode.Parent.Tag.Files.Remove(dropNode.Tag.GetHashCode().ToString())
+                targetNode.Parent.Tag.InsertFileBefore(targetNode.Tag, dropNode.Tag)
+
+                dropNode.Remove()
+
+                Dim i As Integer
+
+                For i = 0 To targetNode.Parent.Nodes.Count
+                    If targetNode.Parent.Nodes(i).Tag.Equals(targetNode.Tag) Then
+                        targetNode.Parent.Nodes.Insert(i, dropNode)
+                        Exit For
+                    End If
+                Next
+
+                dropNode.EnsureVisible()
+
+                selectedTreeview.SelectedNode = dropNode
+
+            End If
+
+        ElseIf (TypeOf targetNode.Tag Is FolderEntry) Then
+
+            MoveFileOrFolderUnderFolder(dropNode.Parent.Tag, dropNode.Tag, targetNode.Tag)
+
+            dropNode.Remove()
+
+            targetNode.Nodes.Add(dropNode)
+
+            dropNode.EnsureVisible()
+            selectedTreeview.SelectedNode = dropNode
+
+        Else
             Exit Sub
         End If
 
-        MoveFileOrFolderUnderFolder(dropNode.Parent.Tag, dropNode.Tag, targetNode.Tag)
-
-        dropNode.Remove()
-
-        targetNode.Nodes.Add(dropNode)
-
-        dropNode.EnsureVisible()
-        selectedTreeview.SelectedNode = dropNode
 
     End Sub
 End Class

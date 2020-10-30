@@ -159,4 +159,5 @@ Public Class FileEntry
         End If
 
     End Sub
+
 End Class

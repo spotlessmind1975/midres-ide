@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class OptionsTilesetWindow
     Inherits System.Windows.Forms.Form
 
     'Form esegue l'override del metodo Dispose per pulire l'elenco dei componenti.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class OptionsTilesetWindow
     'NOTA: la procedura che segue è richiesta da Progettazione Windows Form
     'Può essere modificata in Progettazione Windows Form.  
     'Non modificarla mediante l'editor del codice.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.ButtonFromGlobal = New System.Windows.Forms.Button()
         Me.ButtonFromProject = New System.Windows.Forms.Button()
@@ -126,7 +126,7 @@ Partial Class OptionsTilesetWindow
         'CheckBoxTilesetReverse
         '
         Me.CheckBoxTilesetReverse.AutoSize = True
-        Me.CheckBoxTilesetReverse.Location = New System.Drawing.Point(531, 92)
+        Me.CheckBoxTilesetReverse.Location = New System.Drawing.Point(531, 125)
         Me.CheckBoxTilesetReverse.Name = "CheckBoxTilesetReverse"
         Me.CheckBoxTilesetReverse.Size = New System.Drawing.Size(127, 24)
         Me.CheckBoxTilesetReverse.TabIndex = 13
@@ -136,7 +136,7 @@ Partial Class OptionsTilesetWindow
         'CheckBoxTilesetMulticolor
         '
         Me.CheckBoxTilesetMulticolor.AutoSize = True
-        Me.CheckBoxTilesetMulticolor.Location = New System.Drawing.Point(365, 92)
+        Me.CheckBoxTilesetMulticolor.Location = New System.Drawing.Point(365, 125)
         Me.CheckBoxTilesetMulticolor.Name = "CheckBoxTilesetMulticolor"
         Me.CheckBoxTilesetMulticolor.Size = New System.Drawing.Size(148, 24)
         Me.CheckBoxTilesetMulticolor.TabIndex = 12
@@ -146,7 +146,7 @@ Partial Class OptionsTilesetWindow
         'Label14
         '
         Me.Label14.AutoSize = True
-        Me.Label14.Location = New System.Drawing.Point(361, 20)
+        Me.Label14.Location = New System.Drawing.Point(361, 34)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(146, 20)
         Me.Label14.TabIndex = 11
@@ -155,7 +155,7 @@ Partial Class OptionsTilesetWindow
         'TrackBarTilesetThresholdLuminance
         '
         Me.TrackBarTilesetThresholdLuminance.BackColor = System.Drawing.SystemColors.Window
-        Me.TrackBarTilesetThresholdLuminance.Location = New System.Drawing.Point(365, 48)
+        Me.TrackBarTilesetThresholdLuminance.Location = New System.Drawing.Point(365, 69)
         Me.TrackBarTilesetThresholdLuminance.Maximum = 255
         Me.TrackBarTilesetThresholdLuminance.Name = "TrackBarTilesetThresholdLuminance"
         Me.TrackBarTilesetThresholdLuminance.Size = New System.Drawing.Size(316, 56)
@@ -163,7 +163,7 @@ Partial Class OptionsTilesetWindow
         '
         'TextBoxTilesetHeaderFileName
         '
-        Me.TextBoxTilesetHeaderFileName.Location = New System.Drawing.Point(132, 89)
+        Me.TextBoxTilesetHeaderFileName.Location = New System.Drawing.Point(132, 122)
         Me.TextBoxTilesetHeaderFileName.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.TextBoxTilesetHeaderFileName.Name = "TextBoxTilesetHeaderFileName"
         Me.TextBoxTilesetHeaderFileName.Size = New System.Drawing.Size(209, 27)
@@ -172,7 +172,7 @@ Partial Class OptionsTilesetWindow
         'Label13
         '
         Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(7, 92)
+        Me.Label13.Location = New System.Drawing.Point(7, 125)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(119, 20)
         Me.Label13.TabIndex = 8
@@ -180,7 +180,7 @@ Partial Class OptionsTilesetWindow
         '
         'TextBoxBankNumber
         '
-        Me.TextBoxBankNumber.Location = New System.Drawing.Point(132, 55)
+        Me.TextBoxBankNumber.Location = New System.Drawing.Point(132, 76)
         Me.TextBoxBankNumber.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.TextBoxBankNumber.Name = "TextBoxBankNumber"
         Me.TextBoxBankNumber.Size = New System.Drawing.Size(209, 27)
@@ -189,7 +189,7 @@ Partial Class OptionsTilesetWindow
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(25, 57)
+        Me.Label10.Location = New System.Drawing.Point(25, 78)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(96, 20)
         Me.Label10.TabIndex = 4
@@ -197,7 +197,7 @@ Partial Class OptionsTilesetWindow
         '
         'TextBoxTilesetBinaryFilename
         '
-        Me.TextBoxTilesetBinaryFilename.Location = New System.Drawing.Point(132, 20)
+        Me.TextBoxTilesetBinaryFilename.Location = New System.Drawing.Point(132, 27)
         Me.TextBoxTilesetBinaryFilename.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.TextBoxTilesetBinaryFilename.Name = "TextBoxTilesetBinaryFilename"
         Me.TextBoxTilesetBinaryFilename.Size = New System.Drawing.Size(209, 27)
@@ -206,7 +206,7 @@ Partial Class OptionsTilesetWindow
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(14, 23)
+        Me.Label5.Location = New System.Drawing.Point(14, 30)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(112, 20)
         Me.Label5.TabIndex = 2

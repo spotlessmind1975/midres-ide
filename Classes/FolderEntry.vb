@@ -315,4 +315,21 @@ Public Class FolderEntry
 
     End Function
 
+    Public Sub InsertFileBefore(_target As FileEntry, _file As FileEntry)
+
+        Dim c As Collection = New Collection
+
+        For Each file In _files
+
+            If file.Equals(_target) Then
+                c.Add(_file, _file.GetHashCode())
+            End If
+
+            c.Add(file, file.GetHashCode())
+        Next
+
+        _files = c
+
+    End Sub
+
 End Class
