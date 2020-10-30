@@ -45,6 +45,13 @@ Public Class ProjectExplorer
         e.Node.EndEdit(False)
 
         e.Node.Tag.Name = e.Label
+        If TypeOf e.Node.Tag Is FolderEntry Then
+            e.Node.Parent.Tag.Folders.Remove(e.Node.Tag.GetHashCode())
+            e.Node.Parent.Tag.Folders.add(e.Node.Tag, e.Node.Tag.GetHashCode())
+        Else
+            e.Node.Parent.Tag.Files.Remove(e.Node.Tag.GetHashCode())
+            e.Node.Parent.Tag.Files.add(e.Node.Tag, e.Node.Tag.GetHashCode())
+        End If
 
     End Sub
 
@@ -377,5 +384,98 @@ Public Class ProjectExplorer
 
     Private Sub OpenToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles OpenToolStripMenuItem1.Click
         OpenNodeFile(Me)
+    End Sub
+
+    Private Sub TreeViewProject_ItemDrag(sender As Object, e As ItemDragEventArgs) Handles TreeViewProject.ItemDrag
+        DoDragDrop(e.Item, DragDropEffects.Move)
+    End Sub
+
+    Private Sub TreeViewProject_DragEnter(sender As Object, e As DragEventArgs) Handles TreeViewProject.DragEnter
+        If e.Data.GetDataPresent("System.Windows.Forms.TreeNode", True) Then
+            'TreeNode found allow move effect
+            e.Effect = DragDropEffects.Move
+        Else
+            'No TreeNode found, prevent move
+            e.Effect = DragDropEffects.None
+        End If
+    End Sub
+
+    Private Sub TreeViewProject_DragOver(sender As Object, e As DragEventArgs) Handles TreeViewProject.DragOver
+
+        'Check that there is a TreeNode being dragged
+        If e.Data.GetDataPresent("System.Windows.Forms.TreeNode", True) = False Then Exit Sub
+
+        'Get the TreeView raising the event (incase multiple on form)
+        Dim selectedTreeview As TreeView = CType(sender, TreeView)
+
+        'As the mouse moves over nodes, provide feedback to
+        'the user by highlighting the node that is the
+        'current drop target
+        Dim pt As Point =
+            CType(sender, TreeView).PointToClient(New Point(e.X, e.Y))
+        Dim targetNode As TreeNode = selectedTreeview.GetNodeAt(pt)
+
+        'See if the targetNode is currently selected,
+        'if so no need to validate again
+        If Not (selectedTreeview.SelectedNode Is targetNode) Then
+            'Select the    node currently under the cursor
+            selectedTreeview.SelectedNode = targetNode
+
+            'Check that the selected node is not the dropNode and
+            'also that it is not a child of the dropNode and
+            'therefore an invalid target
+            Dim dropNode As TreeNode =
+                CType(e.Data.GetData("System.Windows.Forms.TreeNode"),
+                TreeNode)
+
+            Do Until targetNode Is Nothing
+                If targetNode Is dropNode Then
+                    e.Effect = DragDropEffects.None
+                    Exit Sub
+                End If
+                targetNode = targetNode.Parent
+            Loop
+        End If
+
+        'Currently selected node is a suitable target
+        e.Effect = DragDropEffects.Move
+
+    End Sub
+
+    Private Sub TreeViewProject_DragDrop(sender As Object, e As DragEventArgs) Handles TreeViewProject.DragDrop
+
+        'Check that there is a TreeNode being dragged
+        If e.Data.GetDataPresent("System.Windows.Forms.TreeNode", True) = False Then Exit Sub
+
+        'Get the TreeView raising the event (incase multiple on form)
+        Dim selectedTreeview As TreeView = CType(sender, TreeView)
+
+        'Get the TreeNode being dragged
+        Dim dropNode As TreeNode = CType(e.Data.GetData("System.Windows.Forms.TreeNode"), TreeNode)
+
+        'The target node should be selected from the DragOver event
+        Dim targetNode As TreeNode = selectedTreeview.SelectedNode
+
+        If targetNode Is Nothing Then Exit Sub
+
+        If Not (TypeOf targetNode.Tag Is FolderEntry) Then
+            Exit Sub
+        End If
+
+        'If there is no targetNode add dropNode to the bottom of
+        'the TreeView root nodes, otherwise add it to the end of
+        'the dropNode child nodes
+        MoveFileOrFolderUnderFolder(dropNode.Parent.Tag, dropNode.Tag, targetNode.Tag)
+
+        'Remove the drop node from its current location
+        dropNode.Remove()
+
+        targetNode.Nodes.Add(dropNode)
+
+        'Ensure the newley created node is visible to
+        'the user and select it
+        dropNode.EnsureVisible()
+        selectedTreeview.SelectedNode = dropNode
+
     End Sub
 End Class

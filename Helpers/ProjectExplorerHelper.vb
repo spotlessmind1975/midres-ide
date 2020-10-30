@@ -200,7 +200,7 @@ Module ProjectExplorerHelper
                 Dim filenames As String() = OpenDialogEx(tp.Tag, True)
                 For Each filename In filenames
                     Dim f As FileEntry = New FileEntry(filename, Path.GetFileName(filename))
-                    tp.Tag.Files.Add(f)
+                    tp.Tag.Files.Add(f, f.GetHashCode())
                     tp.Tag.NormalizePaths()
                     tp.Nodes.Add(PopulateTreeViewWithFile(f))
                 Next
@@ -219,7 +219,7 @@ Module ProjectExplorerHelper
                 If Not (filename Is Nothing) Then
                     My.Computer.FileSystem.WriteAllText(filename, "", False, System.Text.Encoding.ASCII)
                     Dim f As FileEntry = New FileEntry(filename, Path.GetFileName(filename))
-                    tp.Tag.Files.Add(f)
+                    tp.Tag.Files.Add(f, f.GetHashCode())
                     tp.Tag.NormalizePaths()
                     tp.Nodes.Add(PopulateTreeViewWithFile(f))
                 End If
@@ -525,5 +525,22 @@ Module ProjectExplorerHelper
                 PrepareTilesetFolder(tp.Tag)
             End If
         End If
+    End Sub
+
+    Public Sub MoveFileOrFolderUnderFolder(_source_folder As FolderEntry, _file_or_folder As Object, _target_folder As FolderEntry)
+
+        If TypeOf _file_or_folder Is FileEntry Then
+            _source_folder.Files.Remove(_file_or_folder.GetHashCode().ToString())
+            _target_folder.Files.Add(_file_or_folder, _file_or_folder.GetHashCode().ToString())
+            Dim sourceFileName = GetFullPathForElement(_file_or_folder.FileName, _source_folder)
+            Dim targetFileName = GetFullPathForElement(_file_or_folder.FileName, _target_folder)
+            If File.Exists(sourceFileName) And Not File.Exists(targetFileName) Then
+                Rename(sourceFileName, targetFileName)
+            End If
+        Else
+            _source_folder.Folders.Remove(_file_or_folder.GetHashCode().ToString())
+            _target_folder.Folders.Add(_file_or_folder, _file_or_folder.GetHashCode().ToString())
+        End If
+
     End Sub
 End Module

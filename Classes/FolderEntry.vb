@@ -136,11 +136,11 @@ Public Class FolderEntry
                     Case "Folder"
                         Dim pe As FolderEntry = New FolderEntry
                         pe.ReadXml(reader)
-                        _folders.Add(pe, pe.Name)
+                        _folders.Add(pe, pe.GetHashCode())
                     Case "File"
                         Dim pe As FileEntry = New FileEntry
                         pe.ReadXml(reader)
-                        _files.Add(pe)
+                        _files.Add(pe, pe.GetHashCode())
                     Case "Opened"
                         _opened = reader.ReadElementContentAsBoolean()
                     Case Else
