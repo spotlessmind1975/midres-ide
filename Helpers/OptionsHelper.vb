@@ -238,7 +238,7 @@ Module OptionsHelper
 
         For i = 0 To folders.Count - 1
             If _options_window.CheckedListBoxDependency.GetItemChecked(i) Then
-                _options.Dependencies.Add(folders.Item(i), folders.Item(i).GetHashCode())
+                _options.Dependencies.Add(folders.Item(i + 1), folders.Item(i + 1).GetHashCode())
             End If
         Next
 
