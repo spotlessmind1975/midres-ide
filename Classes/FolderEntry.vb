@@ -1,6 +1,7 @@
 ﻿Imports System.Xml
 Imports System.Xml.Schema
 Imports System.Xml.Serialization
+Imports System.IO
 
 Public Class FolderEntry
 
@@ -207,7 +208,7 @@ Public Class FolderEntry
 
     Public Overrides Function GetHashCode() As Integer
         If _persistentHashCode Is Nothing Then
-            _persistentHashCode = (_name, _description).GetHashCode()
+            _persistentHashCode = (_name, _description, DateTime.Now().ToLongTimeString()).GetHashCode()
         End If
         Return _persistentHashCode
     End Function
@@ -337,4 +338,23 @@ Public Class FolderEntry
 
     End Sub
 
+    Public Function ToXML() As String
+        Dim xmlSerializer As XmlSerializer = New XmlSerializer(GetType(FolderEntry))
+
+        Dim ms As MemoryStream = New MemoryStream()
+        Dim sw As StreamWriter = New StreamWriter(ms, System.Text.Encoding.UTF8)
+
+        xmlSerializer.Serialize(sw, Me)
+
+        Return Mid(System.Text.Encoding.UTF8.GetString(ms.ToArray()), 2)
+
+    End Function
+
+    Public Shared Function FromXML(_xml As String) As FolderEntry
+
+        Dim xmlSerializer As XmlSerializer = New XmlSerializer(GetType(FolderEntry))
+
+        Return DirectCast(xmlSerializer.Deserialize(New StringReader(_xml)), FolderEntry)
+
+    End Function
 End Class

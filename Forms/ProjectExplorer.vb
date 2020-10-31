@@ -474,4 +474,64 @@ Public Class ProjectExplorer
 
 
     End Sub
+
+    Private Sub CopyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CopyToolStripMenuItem.Click
+        CopyElementInClipboard(Me)
+    End Sub
+
+    Private Sub ToolStripMenuItem9_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem9.Click
+        CopyElementInClipboard(Me)
+    End Sub
+
+    Private Sub ToolStripMenuItem14_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem14.Click
+        CopyElementInClipboard(Me)
+    End Sub
+
+    Private Sub ToolStripMenuItem17_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem17.Click
+        CopyElementInClipboard(Me)
+    End Sub
+
+    Private Sub CutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CutToolStripMenuItem.Click
+        CutElementInClipboard(Me)
+    End Sub
+
+    Private Sub ToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem1.Click
+        CutElementInClipboard(Me)
+    End Sub
+
+    Private Sub ToolStripMenuItem18_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem18.Click
+        CutElementInClipboard(Me)
+    End Sub
+
+    Private Sub ToolStripMenuItem19_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem19.Click
+        CutElementInClipboard(Me)
+    End Sub
+
+    Private Sub PasteasChildToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PasteasChildToolStripMenuItem.Click
+        PasteClipboardAsChildElement(Me)
+    End Sub
+
+    Private Sub ToolStripMenuItem20_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem20.Click
+        PasteClipboardAsChildElement(Me)
+    End Sub
+
+    Private Sub ToolStripMenuItem21_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem21.Click
+        PasteClipboardAsChildElement(Me)
+    End Sub
+
+    Private Sub PastesameLevelToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PastesameLevelToolStripMenuItem.Click
+        PasteClipboardAsSameLevelElement(Me)
+    End Sub
+
+    Private Sub ToolStripMenuItem22_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem22.Click
+        PasteClipboardAsSameLevelElement(Me)
+    End Sub
+
+    Private Sub ToolStripMenuItem23_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem23.Click
+        PasteClipboardAsSameLevelElement(Me)
+    End Sub
+
+    Private Sub ToolStripMenuItem24_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem24.Click
+        PasteClipboardAsSameLevelElement(Me)
+    End Sub
 End Class

@@ -1,4 +1,5 @@
 ﻿Imports System.IO
+Imports System.Xml.Serialization
 
 Module Library
 
@@ -29,4 +30,5 @@ Module Library
         Return Path.GetFullPath(GetRootPath() & "\" & elementPath & _filename)
 
     End Function
+
 End Module

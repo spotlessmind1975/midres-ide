@@ -147,7 +147,7 @@ Public Class FileEntry
 
     Public Overrides Function GetHashCode() As Integer
         If _persistentHashCode Is Nothing Then
-            _persistentHashCode = (_name, _description, _filename).GetHashCode()
+            _persistentHashCode = (_name, _description, _filename, DateTime.Now().ToLongTimeString()).GetHashCode()
         End If
         Return _persistentHashCode
     End Function

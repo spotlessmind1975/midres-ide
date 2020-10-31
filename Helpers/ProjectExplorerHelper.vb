@@ -545,4 +545,63 @@ Module ProjectExplorerHelper
         End If
 
     End Sub
+    Public Sub CopyElementInClipboard(_project_explorer As ProjectExplorer)
+        Dim tp As TreeNode = _project_explorer.TreeViewProject.SelectedNode
+
+        If Not (tp Is Nothing) Then
+            If TypeOf tp.Tag Is FolderEntry Then
+                Clipboard.SetText(tp.Tag.ToXML())
+            End If
+        End If
+    End Sub
+
+    Public Sub CutElementInClipboard(_project_explorer As ProjectExplorer)
+        Dim tp As TreeNode = _project_explorer.TreeViewProject.SelectedNode
+
+        If Not (tp Is Nothing) Then
+            If TypeOf tp.Tag Is FolderEntry Then
+                Clipboard.SetText(tp.Tag.ToXML())
+                tp.Remove()
+            End If
+        End If
+    End Sub
+
+    Public Sub PasteClipboardAsChildElement(_project_explorer As ProjectExplorer)
+        Dim tp As TreeNode = _project_explorer.TreeViewProject.SelectedNode
+
+        If Not (tp Is Nothing) Then
+            If TypeOf tp.Tag Is FolderEntry Then
+                Dim sourceObject = Clipboard.GetText()
+                If Not (sourceObject Is Nothing) Then
+                    Try
+                        Dim folderCloned As FolderEntry = FolderEntry.FromXML(sourceObject)
+                        tp.Tag.folders.add(folderCloned, folderCloned.GetHashCode())
+                        tp.Nodes.Add(PopulateTreeViewRicorsive(folderCloned))
+                    Catch ex As Exception
+                        MsgBox(ex.Message)
+                    End Try
+                End If
+            End If
+        End If
+    End Sub
+
+    Public Sub PasteClipboardAsSameLevelElement(_project_explorer As ProjectExplorer)
+        Dim tp As TreeNode = _project_explorer.TreeViewProject.SelectedNode
+        Dim tpp As TreeNode = tp.Parent
+
+        If Not (tp Is Nothing) And Not (tpp Is Nothing) Then
+            If TypeOf tp.Tag Is FolderEntry And TypeOf tpp.Tag Is FolderEntry Then
+                Dim sourceObject = Clipboard.GetText()
+                If Not (sourceObject Is Nothing) Then
+                    Try
+                        Dim folderCloned As FolderEntry = DirectCast(sourceObject, FolderEntry).DeepClone()
+                        tpp.Tag.folders.add(folderCloned, folderCloned.GetHashCode())
+                        tpp.Nodes.Add(PopulateTreeViewRicorsive(folderCloned))
+                    Catch ex As Exception
+                        MsgBox(ex.Message)
+                    End Try
+                End If
+            End If
+        End If
+    End Sub
 End Module
