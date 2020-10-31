@@ -75,51 +75,57 @@ Public Class Options
 
     Public Sub ReadXml(reader As XmlReader) Implements IXmlSerializable.ReadXml
 
-        reader.ReadStartElement()
-        reader.MoveToContent()
-
         If Not reader.IsEmptyElement Then
-            While reader.NodeType <> System.Xml.XmlNodeType.EndElement And reader.NodeType <> System.Xml.XmlNodeType.None
-                While reader.NodeType = System.Xml.XmlNodeType.Whitespace
-                    reader.Read()
+
+            reader.ReadStartElement()
+            reader.MoveToContent()
+
+            If Not reader.IsEmptyElement Then
+                While reader.NodeType <> System.Xml.XmlNodeType.EndElement And reader.NodeType <> System.Xml.XmlNodeType.None
+                    While reader.NodeType = System.Xml.XmlNodeType.Whitespace
+                        reader.Read()
+                    End While
+
+                    If reader.NodeType <> System.Xml.XmlNodeType.EndElement And reader.NodeType <> System.Xml.XmlNodeType.None Then
+                        Select Case reader.Name
+                            Case "OptionsMake"
+                                Dim pe As OptionsMake = New OptionsMake
+                                pe.ReadXml(reader)
+                                _make = pe
+                            Case "OptionsOutput"
+                                Dim pe As OptionsOutput = New OptionsOutput
+                                pe.ReadXml(reader)
+                                _output = pe
+                            Case "OptionsIDE"
+                                Dim pe As OptionsIDE = New OptionsIDE
+                                pe.ReadXml(reader)
+                                _ide = pe
+                            Case "OptionsEmulators"
+                                Dim pe As OptionsEmulators = New OptionsEmulators
+                                pe.ReadXml(reader)
+                                _emulators = pe
+                            Case "OptionsCC65"
+                                Dim pe As OptionsCC65 = New OptionsCC65
+                                pe.ReadXml(reader)
+                                _cc65 = pe
+                            Case "OptionsTileset"
+                                Dim pe As OptionsTileset = New OptionsTileset
+                                pe.ReadXml(reader)
+                                _tileset = pe
+                            Case Else
+                                reader.ReadContentAsString()
+                        End Select
+                    End If
                 End While
+            End If
 
-                If reader.NodeType <> System.Xml.XmlNodeType.EndElement And reader.NodeType <> System.Xml.XmlNodeType.None Then
-                    Select Case reader.Name
-                        Case "OptionsMake"
-                            Dim pe As OptionsMake = New OptionsMake
-                            pe.ReadXml(reader)
-                            _make = pe
-                        Case "OptionsOutput"
-                            Dim pe As OptionsOutput = New OptionsOutput
-                            pe.ReadXml(reader)
-                            _output = pe
-                        Case "OptionsIDE"
-                            Dim pe As OptionsIDE = New OptionsIDE
-                            pe.ReadXml(reader)
-                            _ide = pe
-                        Case "OptionsEmulators"
-                            Dim pe As OptionsEmulators = New OptionsEmulators
-                            pe.ReadXml(reader)
-                            _emulators = pe
-                        Case "OptionsCC65"
-                            Dim pe As OptionsCC65 = New OptionsCC65
-                            pe.ReadXml(reader)
-                            _cc65 = pe
-                        Case "OptionsTileset"
-                            Dim pe As OptionsTileset = New OptionsTileset
-                            pe.ReadXml(reader)
-                            _tileset = pe
-                        Case Else
-                            reader.ReadContentAsString()
-                    End Select
-                End If
-            End While
+            If reader.NodeType <> System.Xml.XmlNodeType.None Then
+                reader.ReadEndElement()
+            End If
+        Else
+            reader.Read()
         End If
 
-        If reader.NodeType <> System.Xml.XmlNodeType.None Then
-            reader.ReadEndElement()
-        End If
 
     End Sub
 

@@ -102,7 +102,7 @@ Public Class FileEntry
                         pe.ReadXml(reader)
                         _currentOptions = pe
                     Case Else
-                        reader.ReadContentAsString()
+                        reader.ReadElementContentAsString()
                 End Select
             End If
         End While

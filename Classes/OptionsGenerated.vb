@@ -20,26 +20,29 @@ Public Class OptionsGenerated
 
     Public Sub ReadXml(reader As XmlReader) Implements IXmlSerializable.ReadXml
 
-        reader.ReadStartElement()
-        reader.MoveToContent()
+        If Not reader.IsEmptyElement Then
+            reader.ReadStartElement()
+            reader.MoveToContent()
+            While reader.NodeType <> System.Xml.XmlNodeType.EndElement And reader.NodeType <> System.Xml.XmlNodeType.None
+                While reader.NodeType = System.Xml.XmlNodeType.Whitespace
+                    reader.Read()
+                End While
 
-        While reader.NodeType <> System.Xml.XmlNodeType.EndElement And reader.NodeType <> System.Xml.XmlNodeType.None
-            While reader.NodeType = System.Xml.XmlNodeType.Whitespace
-                reader.Read()
+                If reader.NodeType <> System.Xml.XmlNodeType.EndElement And reader.NodeType <> System.Xml.XmlNodeType.None Then
+                    Select Case reader.Name
+                        Case "FolderEntryHashCode"
+                            _dependenciesHashes.Add(reader.ReadElementContentAsString())
+                        Case Else
+                            reader.ReadContentAsString()
+                    End Select
+                End If
             End While
 
-            If reader.NodeType <> System.Xml.XmlNodeType.EndElement And reader.NodeType <> System.Xml.XmlNodeType.None Then
-                Select Case reader.Name
-                    Case "FolderEntryHashCode"
-                        _dependenciesHashes.Add(reader.ReadElementContentAsString())
-                    Case Else
-                        reader.ReadContentAsString()
-                End Select
+            If reader.NodeType <> System.Xml.XmlNodeType.None Then
+                reader.ReadEndElement()
             End If
-        End While
-
-        If reader.NodeType <> System.Xml.XmlNodeType.None Then
-            reader.ReadEndElement()
+        Else
+            reader.Read()
         End If
 
     End Sub

@@ -69,44 +69,50 @@ Public Class Project
     End Sub
     Public Sub ReadXml(reader As XmlReader) Implements IXmlSerializable.ReadXml
 
-        reader.ReadStartElement()
-        reader.MoveToContent()
-
         If Not reader.IsEmptyElement Then
-            While reader.NodeType <> System.Xml.XmlNodeType.EndElement And reader.NodeType <> System.Xml.XmlNodeType.None
-                While reader.NodeType = System.Xml.XmlNodeType.Whitespace
-                    reader.Read()
-                End While
 
-                If reader.NodeType <> System.Xml.XmlNodeType.EndElement And reader.NodeType <> System.Xml.XmlNodeType.None Then
-                    Select Case reader.Name
-                        Case "Name"
-                            _name = reader.ReadElementContentAsString()
-                        Case "Description"
-                            _description = reader.ReadElementContentAsString()
-                        Case "Folder"
-                            Dim pe As FolderEntry = New FolderEntry
-                            pe.ReadXml(reader)
-                            _folders.Add(pe, pe.GetHashCode())
-                        Case "Options"
-                            Dim pe As Options = New Options
-                            pe.ReadXml(reader)
-                            _currentOptions = pe
-                        Case "Path"
-                            reader.ReadElementContentAsString()
-                        Case Else
-                            If reader.NodeType = XmlNodeType.Text Then
-                                reader.ReadContentAsString()
-                            Else
+            reader.ReadStartElement()
+            reader.MoveToContent()
+
+            If Not reader.IsEmptyElement Then
+                While reader.NodeType <> System.Xml.XmlNodeType.EndElement And reader.NodeType <> System.Xml.XmlNodeType.None
+                    While reader.NodeType = System.Xml.XmlNodeType.Whitespace
+                        reader.Read()
+                    End While
+
+                    If reader.NodeType <> System.Xml.XmlNodeType.EndElement And reader.NodeType <> System.Xml.XmlNodeType.None Then
+                        Select Case reader.Name
+                            Case "Name"
+                                _name = reader.ReadElementContentAsString()
+                            Case "Description"
+                                _description = reader.ReadElementContentAsString()
+                            Case "Folder"
+                                Dim pe As FolderEntry = New FolderEntry
+                                pe.ReadXml(reader)
+                                _folders.Add(pe, pe.GetHashCode())
+                            Case "Options"
+                                Dim pe As Options = New Options
+                                pe.ReadXml(reader)
+                                _currentOptions = pe
+                            Case "Path"
                                 reader.ReadElementContentAsString()
-                            End If
-                    End Select
-                End If
-            End While
-        End If
+                            Case Else
+                                If reader.NodeType = XmlNodeType.Text Then
+                                    reader.ReadContentAsString()
+                                Else
+                                    reader.ReadElementContentAsString()
+                                End If
+                        End Select
+                    End If
+                End While
+            End If
 
-        If reader.NodeType <> System.Xml.XmlNodeType.None Then
-            reader.ReadEndElement()
+            If reader.NodeType <> System.Xml.XmlNodeType.None Then
+                reader.ReadEndElement()
+            End If
+
+        Else
+            reader.Read()
         End If
 
     End Sub

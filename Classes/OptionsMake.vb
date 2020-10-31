@@ -60,35 +60,41 @@ Public Class OptionsMake
 
     Public Sub ReadXml(reader As XmlReader) Implements IXmlSerializable.ReadXml
 
-        reader.ReadStartElement()
-        reader.MoveToContent()
+        If Not reader.IsEmptyElement Then
 
-        While reader.NodeType <> System.Xml.XmlNodeType.EndElement And reader.NodeType <> System.Xml.XmlNodeType.None
-            While reader.NodeType = System.Xml.XmlNodeType.Whitespace
-                reader.Read()
+            reader.ReadStartElement()
+            reader.MoveToContent()
+
+            While reader.NodeType <> System.Xml.XmlNodeType.EndElement And reader.NodeType <> System.Xml.XmlNodeType.None
+                While reader.NodeType = System.Xml.XmlNodeType.Whitespace
+                    reader.Read()
+                End While
+
+                If reader.NodeType <> System.Xml.XmlNodeType.EndElement And reader.NodeType <> System.Xml.XmlNodeType.None Then
+                    Select Case reader.Name
+                        Case "MakeFileName"
+                            _makeFilename = reader.ReadElementContentAsString()
+                        Case "DynamicMakefile"
+                            _dynamicMakefile = reader.ReadElementContentAsBoolean()
+                        Case "AdditionalParams"
+                            _additionalParams = reader.ReadElementContentAsString()
+                        Case "ActionBuild"
+                            _actionBuild = reader.ReadElementContentAsString()
+                        Case "ActionClean"
+                            _actionClean = reader.ReadElementContentAsString()
+                        Case Else
+                            reader.ReadContentAsString()
+                    End Select
+                End If
             End While
 
-            If reader.NodeType <> System.Xml.XmlNodeType.EndElement And reader.NodeType <> System.Xml.XmlNodeType.None Then
-                Select Case reader.Name
-                    Case "MakeFileName"
-                        _makeFilename = reader.ReadElementContentAsString()
-                    Case "DynamicMakefile"
-                        _dynamicMakefile = reader.ReadElementContentAsBoolean()
-                    Case "AdditionalParams"
-                        _additionalParams = reader.ReadElementContentAsString()
-                    Case "ActionBuild"
-                        _actionBuild = reader.ReadElementContentAsString()
-                    Case "ActionClean"
-                        _actionClean = reader.ReadElementContentAsString()
-                    Case Else
-                        reader.ReadContentAsString()
-                End Select
+            If reader.NodeType <> System.Xml.XmlNodeType.None Then
+                reader.ReadEndElement()
             End If
-        End While
-
-        If reader.NodeType <> System.Xml.XmlNodeType.None Then
-            reader.ReadEndElement()
+        Else
+            reader.Read()
         End If
+
 
     End Sub
 

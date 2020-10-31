@@ -19,32 +19,36 @@ Public Class RecentFileCollection
 
     Public Sub ReadXml(reader As XmlReader) Implements IXmlSerializable.ReadXml
 
-        reader.ReadStartElement()
-        reader.MoveToContent()
-
         If Not reader.IsEmptyElement Then
-            While reader.NodeType <> System.Xml.XmlNodeType.EndElement And reader.NodeType <> System.Xml.XmlNodeType.None
-                While reader.NodeType = System.Xml.XmlNodeType.Whitespace
-                    reader.Read()
+
+            reader.ReadStartElement()
+            reader.MoveToContent()
+
+            If Not reader.IsEmptyElement Then
+                While reader.NodeType <> System.Xml.XmlNodeType.EndElement And reader.NodeType <> System.Xml.XmlNodeType.None
+                    While reader.NodeType = System.Xml.XmlNodeType.Whitespace
+                        reader.Read()
+                    End While
+
+                    If reader.NodeType <> System.Xml.XmlNodeType.EndElement Then
+                        Select Case reader.Name
+                            Case "RecentFileEntry"
+                                Dim pe As RecentFileEntry = New RecentFileEntry
+                                pe.ReadXml(reader)
+                                _items.Add(pe)
+                            Case Else
+                                reader.ReadContentAsString()
+                        End Select
+                    End If
                 End While
+            End If
 
-                If reader.NodeType <> System.Xml.XmlNodeType.EndElement Then
-                    Select Case reader.Name
-                        Case "RecentFileEntry"
-                            Dim pe As RecentFileEntry = New RecentFileEntry
-                            pe.ReadXml(reader)
-                            _items.Add(pe)
-                        Case Else
-                            reader.ReadContentAsString()
-                    End Select
-                End If
-            End While
+            If reader.NodeType <> System.Xml.XmlNodeType.None Then
+                reader.ReadEndElement()
+            End If
+        Else
+            reader.Read()
         End If
-
-        If reader.NodeType <> System.Xml.XmlNodeType.None Then
-            reader.ReadEndElement()
-        End If
-
 
     End Sub
 

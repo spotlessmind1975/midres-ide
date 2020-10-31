@@ -56,34 +56,40 @@ Public Class ErrorOutputEntry
 
     Public Sub ReadXml(reader As XmlReader) Implements IXmlSerializable.ReadXml
 
-        reader.ReadStartElement()
-        reader.MoveToContent()
+        If Not reader.IsEmptyElement Then
 
-        While reader.NodeType <> System.Xml.XmlNodeType.EndElement And reader.NodeType <> System.Xml.XmlNodeType.None
-            While reader.NodeType = System.Xml.XmlNodeType.Whitespace
-                reader.Read()
+            reader.ReadStartElement()
+            reader.MoveToContent()
+
+            While reader.NodeType <> System.Xml.XmlNodeType.EndElement And reader.NodeType <> System.Xml.XmlNodeType.None
+                While reader.NodeType = System.Xml.XmlNodeType.Whitespace
+                    reader.Read()
+                End While
+
+                If reader.NodeType <> System.Xml.XmlNodeType.EndElement And reader.NodeType <> System.Xml.XmlNodeType.None Then
+                    Select Case reader.Name
+                        Case "FileName"
+                            _filename = reader.ReadElementContentAsString()
+                        Case "Line"
+                            _line = reader.ReadElementContentAsInt()
+                        Case "Message"
+                            _message = reader.ReadElementContentAsString()
+                        Case "Kind"
+                            _kind = reader.ReadElementContentAsInt()
+                        Case "Marker"
+                            _marker = reader.ReadElementContentAsInt()
+                        Case Else
+                            reader.ReadContentAsString()
+                    End Select
+                End If
             End While
 
-            If reader.NodeType <> System.Xml.XmlNodeType.EndElement And reader.NodeType <> System.Xml.XmlNodeType.None Then
-                Select Case reader.Name
-                    Case "FileName"
-                        _filename = reader.ReadElementContentAsString()
-                    Case "Line"
-                        _line = reader.ReadElementContentAsInt()
-                    Case "Message"
-                        _message = reader.ReadElementContentAsString()
-                    Case "Kind"
-                        _kind = reader.ReadElementContentAsInt()
-                    Case "Marker"
-                        _marker = reader.ReadElementContentAsInt()
-                    Case Else
-                        reader.ReadContentAsString()
-                End Select
+            If reader.NodeType <> System.Xml.XmlNodeType.None Then
+                reader.ReadEndElement()
             End If
-        End While
 
-        If reader.NodeType <> System.Xml.XmlNodeType.None Then
-            reader.ReadEndElement()
+        Else
+            reader.Read()
         End If
 
     End Sub

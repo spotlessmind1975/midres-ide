@@ -99,47 +99,53 @@ Public Class OptionsCC65
 
     Public Sub ReadXml(reader As XmlReader) Implements IXmlSerializable.ReadXml
 
-        reader.ReadStartElement()
-        reader.MoveToContent()
-
         If Not reader.IsEmptyElement Then
-            While reader.NodeType <> System.Xml.XmlNodeType.EndElement And reader.NodeType <> System.Xml.XmlNodeType.None
-                While reader.NodeType = System.Xml.XmlNodeType.Whitespace
-                    reader.Read()
+
+            reader.ReadStartElement()
+            reader.MoveToContent()
+
+            If Not reader.IsEmptyElement Then
+                While reader.NodeType <> System.Xml.XmlNodeType.EndElement And reader.NodeType <> System.Xml.XmlNodeType.None
+                    While reader.NodeType = System.Xml.XmlNodeType.Whitespace
+                        reader.Read()
+                    End While
+
+                    If reader.NodeType <> System.Xml.XmlNodeType.EndElement And reader.NodeType <> System.Xml.XmlNodeType.None Then
+                        Select Case reader.Name
+                            Case "CC65WarningEntry"
+                                Dim pe As CC65WarningEntry = New CC65WarningEntry
+                                pe.ReadXml(reader)
+                                _warnings.Add(pe, pe.Pattern)
+                            Case "Plus4"
+                                _plus4 = reader.ReadElementContentAsBoolean()
+                            Case "C16"
+                                _c16 = reader.ReadElementContentAsBoolean()
+                            Case "Vic20"
+                                _vic20 = reader.ReadElementContentAsBoolean()
+                            Case "Vic2024"
+                                _vic2024 = reader.ReadElementContentAsBoolean()
+                            Case "C64"
+                                _c64 = reader.ReadElementContentAsBoolean()
+                            Case "C128"
+                                _c128 = reader.ReadElementContentAsBoolean()
+                            Case "Atari"
+                                _atari = reader.ReadElementContentAsBoolean()
+                            Case "AtariLo"
+                                _atarilo = reader.ReadElementContentAsBoolean()
+                            Case Else
+                                reader.ReadContentAsString()
+                        End Select
+                    End If
                 End While
+            End If
 
-                If reader.NodeType <> System.Xml.XmlNodeType.EndElement And reader.NodeType <> System.Xml.XmlNodeType.None Then
-                    Select Case reader.Name
-                        Case "CC65WarningEntry"
-                            Dim pe As CC65WarningEntry = New CC65WarningEntry
-                            pe.ReadXml(reader)
-                            _warnings.Add(pe, pe.Pattern)
-                        Case "Plus4"
-                            _plus4 = reader.ReadElementContentAsBoolean()
-                        Case "C16"
-                            _c16 = reader.ReadElementContentAsBoolean()
-                        Case "Vic20"
-                            _vic20 = reader.ReadElementContentAsBoolean()
-                        Case "Vic2024"
-                            _vic2024 = reader.ReadElementContentAsBoolean()
-                        Case "C64"
-                            _c64 = reader.ReadElementContentAsBoolean()
-                        Case "C128"
-                            _c128 = reader.ReadElementContentAsBoolean()
-                        Case "Atari"
-                            _atari = reader.ReadElementContentAsBoolean()
-                        Case "AtariLo"
-                            _atarilo = reader.ReadElementContentAsBoolean()
-                        Case Else
-                            reader.ReadContentAsString()
-                    End Select
-                End If
-            End While
+            If reader.NodeType <> System.Xml.XmlNodeType.None Then
+                reader.ReadEndElement()
+            End If
+        Else
+            reader.Read()
         End If
 
-        If reader.NodeType <> System.Xml.XmlNodeType.None Then
-            reader.ReadEndElement()
-        End If
 
     End Sub
 

@@ -70,36 +70,42 @@ Public Class OptionsTileset
 
     Public Sub ReadXml(reader As XmlReader) Implements IXmlSerializable.ReadXml
 
-        reader.ReadStartElement()
-        reader.MoveToContent()
+        If Not reader.IsEmptyElement Then
 
-        While reader.NodeType <> System.Xml.XmlNodeType.EndElement And reader.NodeType <> System.Xml.XmlNodeType.None
-            While reader.NodeType = System.Xml.XmlNodeType.Whitespace
-                reader.Read()
+            reader.ReadStartElement()
+            reader.MoveToContent()
+
+            While reader.NodeType <> System.Xml.XmlNodeType.EndElement And reader.NodeType <> System.Xml.XmlNodeType.None
+                While reader.NodeType = System.Xml.XmlNodeType.Whitespace
+                    reader.Read()
+                End While
+
+                If reader.NodeType <> System.Xml.XmlNodeType.EndElement And reader.NodeType <> System.Xml.XmlNodeType.None Then
+                    Select Case reader.Name
+                        Case "BinaryFileName"
+                            _binaryFileName = reader.ReadElementContentAsString()
+                        Case "BankNumber"
+                            _bankNumber = reader.ReadElementContentAsInt()
+                        Case "HeaderFileName"
+                            _headerFileName = reader.ReadElementContentAsString()
+                        Case "ThresholdLuminance"
+                            _thresholdLuminance = reader.ReadElementContentAsInt()
+                        Case "Multicolor"
+                            _multicolor = reader.ReadElementContentAsBoolean()
+                        Case "Reverse"
+                            _reverse = reader.ReadElementContentAsBoolean()
+                        Case Else
+                            reader.ReadElementContentAsString()
+                    End Select
+                End If
             End While
 
-            If reader.NodeType <> System.Xml.XmlNodeType.EndElement And reader.NodeType <> System.Xml.XmlNodeType.None Then
-                Select Case reader.Name
-                    Case "BinaryFileName"
-                        _binaryFileName = reader.ReadElementContentAsString()
-                    Case "BankNumber"
-                        _bankNumber = reader.ReadElementContentAsInt()
-                    Case "HeaderFileName"
-                        _headerFileName = reader.ReadElementContentAsString()
-                    Case "ThresholdLuminance"
-                        _thresholdLuminance = reader.ReadElementContentAsInt()
-                    Case "Multicolor"
-                        _multicolor = reader.ReadElementContentAsBoolean()
-                    Case "Reverse"
-                        _reverse = reader.ReadElementContentAsBoolean()
-                    Case Else
-                        reader.ReadElementContentAsString()
-                End Select
+            If reader.NodeType <> System.Xml.XmlNodeType.None Then
+                reader.ReadEndElement()
             End If
-        End While
 
-        If reader.NodeType <> System.Xml.XmlNodeType.None Then
-            reader.ReadEndElement()
+        Else
+            reader.Read()
         End If
 
     End Sub

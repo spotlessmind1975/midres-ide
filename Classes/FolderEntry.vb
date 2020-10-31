@@ -114,47 +114,52 @@ Public Class FolderEntry
 
     Public Sub ReadXml(reader As XmlReader) Implements IXmlSerializable.ReadXml
 
-        reader.ReadStartElement()
-        reader.MoveToContent()
+        If Not reader.IsEmptyElement Then
 
-        While reader.NodeType <> System.Xml.XmlNodeType.EndElement And reader.NodeType <> System.Xml.XmlNodeType.None
-            While reader.NodeType = System.Xml.XmlNodeType.Whitespace
-                reader.Read()
+            reader.ReadStartElement()
+            reader.MoveToContent()
+
+            While reader.NodeType <> System.Xml.XmlNodeType.EndElement And reader.NodeType <> System.Xml.XmlNodeType.None
+                While reader.NodeType = System.Xml.XmlNodeType.Whitespace
+                    reader.Read()
+                End While
+
+                If reader.NodeType <> System.Xml.XmlNodeType.EndElement And reader.NodeType <> System.Xml.XmlNodeType.None Then
+                    Select Case reader.Name
+                        Case "Name"
+                            _name = reader.ReadElementContentAsString()
+                        Case "Path"
+                            _path = reader.ReadElementContentAsString()
+                        Case "Description"
+                            _description = reader.ReadElementContentAsString()
+                        Case "Kind"
+                            _kind = reader.ReadElementContentAsInt()
+                        Case "CurrentOptions"
+                            Dim pe As Options = New Options
+                            pe.ReadXml(reader)
+                            _currentOptions = pe
+                        Case "Folder"
+                            Dim pe As FolderEntry = New FolderEntry
+                            pe.ReadXml(reader)
+                            _folders.Add(pe, pe.GetHashCode())
+                        Case "File"
+                            Dim pe As FileEntry = New FileEntry
+                            pe.ReadXml(reader)
+                            _files.Add(pe, pe.GetHashCode())
+                        Case "Opened"
+                            _opened = reader.ReadElementContentAsBoolean()
+                        Case Else
+                            reader.ReadContentAsString()
+                    End Select
+                End If
             End While
 
-            If reader.NodeType <> System.Xml.XmlNodeType.EndElement And reader.NodeType <> System.Xml.XmlNodeType.None Then
-                Select Case reader.Name
-                    Case "Name"
-                        _name = reader.ReadElementContentAsString()
-                    Case "Path"
-                        _path = reader.ReadElementContentAsString()
-                    Case "Description"
-                        _description = reader.ReadElementContentAsString()
-                    Case "Kind"
-                        _kind = reader.ReadElementContentAsInt()
-                    Case "CurrentOptions"
-                        Dim pe As Options = New Options
-                        pe.ReadXml(reader)
-                        _currentOptions = pe
-                    Case "Folder"
-                        Dim pe As FolderEntry = New FolderEntry
-                        pe.ReadXml(reader)
-                        _folders.Add(pe, pe.GetHashCode())
-                    Case "File"
-                        Dim pe As FileEntry = New FileEntry
-                        pe.ReadXml(reader)
-                        _files.Add(pe, pe.GetHashCode())
-                    Case "Opened"
-                        _opened = reader.ReadElementContentAsBoolean()
-                    Case Else
-                        reader.ReadContentAsString()
-                End Select
+            If reader.NodeType <> System.Xml.XmlNodeType.None Then
+                reader.ReadEndElement()
             End If
-        End While
-
-        If reader.NodeType <> System.Xml.XmlNodeType.None Then
-            reader.ReadEndElement()
+        Else
         End If
+
 
     End Sub
 

@@ -93,40 +93,44 @@ Public Class OptionsEmulators
 
     Public Sub ReadXml(reader As XmlReader) Implements IXmlSerializable.ReadXml
 
-        reader.ReadStartElement()
-        reader.MoveToContent()
+        If Not reader.IsEmptyElement Then
+            reader.ReadStartElement()
+            reader.MoveToContent()
 
-        While reader.NodeType <> System.Xml.XmlNodeType.EndElement And reader.NodeType <> System.Xml.XmlNodeType.None
-            While reader.NodeType = System.Xml.XmlNodeType.Whitespace
-                reader.Read()
+            While reader.NodeType <> System.Xml.XmlNodeType.EndElement And reader.NodeType <> System.Xml.XmlNodeType.None
+                While reader.NodeType = System.Xml.XmlNodeType.Whitespace
+                    reader.Read()
+                End While
+
+                If reader.NodeType <> System.Xml.XmlNodeType.EndElement And reader.NodeType <> System.Xml.XmlNodeType.None Then
+                    Select Case reader.Name
+                        Case "ViceEnabled"
+                            _viceEnabled = reader.ReadElementContentAsBoolean()
+                        Case "VicePath"
+                            _vicePath = reader.ReadElementContentAsString()
+                        Case "AltirraEnabled"
+                            _altirraEnabled = reader.ReadElementContentAsBoolean()
+                        Case "AltirraPath"
+                            _altirraPath = reader.ReadElementContentAsString()
+                        Case "Atari800Enabled"
+                            _atari800Enabled = reader.ReadElementContentAsBoolean()
+                        Case "Atari800Path"
+                            _atari800Path = reader.ReadElementContentAsString()
+                        Case "YapeEnabled"
+                            _yapeEnabled = reader.ReadElementContentAsBoolean()
+                        Case "YapePath"
+                            _yapePath = reader.ReadElementContentAsString()
+                        Case Else
+                            reader.ReadContentAsString()
+                    End Select
+                End If
             End While
 
-            If reader.NodeType <> System.Xml.XmlNodeType.EndElement And reader.NodeType <> System.Xml.XmlNodeType.None Then
-                Select Case reader.Name
-                    Case "ViceEnabled"
-                        _viceEnabled = reader.ReadElementContentAsBoolean()
-                    Case "VicePath"
-                        _vicePath = reader.ReadElementContentAsString()
-                    Case "AltirraEnabled"
-                        _altirraEnabled = reader.ReadElementContentAsBoolean()
-                    Case "AltirraPath"
-                        _altirraPath = reader.ReadElementContentAsString()
-                    Case "Atari800Enabled"
-                        _atari800Enabled = reader.ReadElementContentAsBoolean()
-                    Case "Atari800Path"
-                        _atari800Path = reader.ReadElementContentAsString()
-                    Case "YapeEnabled"
-                        _yapeEnabled = reader.ReadElementContentAsBoolean()
-                    Case "YapePath"
-                        _yapePath = reader.ReadElementContentAsString()
-                    Case Else
-                        reader.ReadContentAsString()
-                End Select
+            If reader.NodeType <> System.Xml.XmlNodeType.None Then
+                reader.ReadEndElement()
             End If
-        End While
-
-        If reader.NodeType <> System.Xml.XmlNodeType.None Then
-            reader.ReadEndElement()
+        Else
+            reader.Read()
         End If
 
     End Sub
