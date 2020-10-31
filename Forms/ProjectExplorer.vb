@@ -547,4 +547,20 @@ Public Class ProjectExplorer
     Private Sub TilesetToolStripMenuItem3_Click(sender As Object, e As EventArgs) Handles TilesetToolStripMenuItem3.Click
         ShowOptionsWindowTileset(Me)
     End Sub
+
+    Private Sub ToolStripMenuItem25_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem25.Click
+        StartRenaming()
+    End Sub
+
+    Private Sub ToolStripMenuItem31_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem31.Click
+        OpenNodeFile(Me)
+    End Sub
+
+    Private Sub ToolStripMenuItem32_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem32.Click
+        RemoveFile(Me)
+    End Sub
+
+    Private Sub OptionsToolStripMenuItem3_Click(sender As Object, e As EventArgs) Handles OptionsToolStripMenuItem3.Click
+        ShowOptionsWindowCC65(Me)
+    End Sub
 End Class

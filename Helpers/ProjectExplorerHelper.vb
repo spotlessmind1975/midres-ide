@@ -378,11 +378,12 @@ Module ProjectExplorerHelper
         Dim tp As TreeNode = _project_explorer.TreeViewProject.SelectedNode
 
         If Not (tp Is Nothing) Then
-            If TypeOf tp.Tag Is FolderEntry And (tp.Tag.Kind = FolderEntry.KindEnum.EXECUTABLE Or tp.Tag.Kind = FolderEntry.KindEnum.LIBRARY) Then
-                If tp.Tag.CurrentOptions Is Nothing Then
-                    tp.Tag.CurrentOptions = ChooseBestOptions().DeepClone()
+            If TypeOf tp.Tag Is FolderEntry Then
+                If (tp.Tag.Kind = FolderEntry.KindEnum.EXECUTABLE Or tp.Tag.Kind = FolderEntry.KindEnum.LIBRARY) Then
+                    ShowOptionsCC65Window(tp.Tag.CurrentOptions.CC65, "Compile " & tp.Tag.name & " options")
+                Else
+                    ShowOptionsCC65Window(tp.Tag.cc65, "Compile " & tp.Tag.name & " options")
                 End If
-                ShowOptionsCC65Window(tp.Tag.CurrentOptions.CC65, "Compile " & tp.Tag.name & " options")
             End If
         End If
     End Sub

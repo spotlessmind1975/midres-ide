@@ -17,7 +17,9 @@ Public Class FileEntry
     Private _description As String
     Private _kind As KindEnum
 
-    Private _currentOptions As OptionsGenerated
+    Private _generated As OptionsGenerated
+    Private _cc65 As OptionsCC65
+
 
     Public Sub New(Optional filename As String = "", Optional name As String = "", Optional description As String = "")
         If filename = "" Then
@@ -58,15 +60,23 @@ Public Class FileEntry
         End Set
     End Property
 
-    Public Property CurrentOptions As OptionsGenerated
+    Public Property Generated As OptionsGenerated
         Get
-            Return _currentOptions
+            Return _generated
         End Get
         Set(value As OptionsGenerated)
-            _currentOptions = value
+            _generated = value
         End Set
     End Property
 
+    Public Property CC65 As OptionsCC65
+        Get
+            Return _cc65
+        End Get
+        Set(value As OptionsCC65)
+            _cc65 = value
+        End Set
+    End Property
 
     Public Property Kind As KindEnum
         Get
@@ -97,10 +107,10 @@ Public Class FileEntry
                         _description = reader.ReadElementContentAsString()
                     Case "Kind"
                         _kind = reader.ReadElementContentAsInt()
-                    Case "CurrentOptions"
+                    Case "CurrentOptions", "Generated"
                         Dim pe As OptionsGenerated = New OptionsGenerated
                         pe.ReadXml(reader)
-                        _currentOptions = pe
+                        _generated = pe
                     Case Else
                         reader.ReadElementContentAsString()
                 End Select
@@ -126,9 +136,9 @@ Public Class FileEntry
         writer.WriteStartElement("Kind")
         writer.WriteString(_kind)
         writer.WriteEndElement()
-        If Not (_currentOptions Is Nothing) Then
-            writer.WriteStartElement("CurrentOptions")
-            DirectCast(_currentOptions, OptionsGenerated).WriteXml(writer)
+        If Not (_generated Is Nothing) Then
+            writer.WriteStartElement("Generated")
+            DirectCast(_generated, OptionsGenerated).WriteXml(writer)
             writer.WriteEndElement()
         End If
     End Sub
@@ -158,8 +168,8 @@ Public Class FileEntry
 
     Public Sub Resolve(_project As Project)
 
-        If Not (_currentOptions Is Nothing) Then
-            _currentOptions.Resolve(_project)
+        If Not (_generated Is Nothing) Then
+            _generated.Resolve(_project)
         End If
 
     End Sub

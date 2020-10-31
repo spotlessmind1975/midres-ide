@@ -51,6 +51,10 @@ Partial Class ProjectExplorer
         Me.GeneratedToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ContextMenuStripProject = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.OptionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MakeToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CompileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.EmulatorToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TilesetToolStripMenuItem3 = New System.Windows.Forms.ToolStripMenuItem()
         Me.RenameToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.AddFolderToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.SetRootpathToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -144,10 +148,11 @@ Partial Class ProjectExplorer
         Me.ToolStripMenuItem7 = New System.Windows.Forms.ToolStripSeparator()
         Me.ConsiderAsToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
         Me.NormalToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MakeToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CompileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.EmulatorToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TilesetToolStripMenuItem3 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ContextMenuStripSource = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ToolStripMenuItem25 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem31 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem32 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.OptionsToolStripMenuItem3 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ContextMenuStripFolder.SuspendLayout()
         Me.ContextMenuStripFile.SuspendLayout()
         Me.ContextMenuStripProject.SuspendLayout()
@@ -155,6 +160,7 @@ Partial Class ProjectExplorer
         Me.ContextMenuStripExecutable.SuspendLayout()
         Me.ContextMenuStripTileset.SuspendLayout()
         Me.ContextMenuStripGenerated.SuspendLayout()
+        Me.ContextMenuStripSource.SuspendLayout()
         Me.SuspendLayout()
         '
         'TreeViewProject
@@ -356,25 +362,53 @@ Partial Class ProjectExplorer
         Me.OptionsToolStripMenuItem.Size = New System.Drawing.Size(178, 26)
         Me.OptionsToolStripMenuItem.Text = "&Options..."
         '
+        'MakeToolStripMenuItem2
+        '
+        Me.MakeToolStripMenuItem2.Image = CType(resources.GetObject("MakeToolStripMenuItem2.Image"), System.Drawing.Image)
+        Me.MakeToolStripMenuItem2.Name = "MakeToolStripMenuItem2"
+        Me.MakeToolStripMenuItem2.Size = New System.Drawing.Size(161, 26)
+        Me.MakeToolStripMenuItem2.Text = "&Make..."
+        '
+        'CompileToolStripMenuItem
+        '
+        Me.CompileToolStripMenuItem.Image = CType(resources.GetObject("CompileToolStripMenuItem.Image"), System.Drawing.Image)
+        Me.CompileToolStripMenuItem.Name = "CompileToolStripMenuItem"
+        Me.CompileToolStripMenuItem.Size = New System.Drawing.Size(161, 26)
+        Me.CompileToolStripMenuItem.Text = "&Compile..."
+        '
+        'EmulatorToolStripMenuItem
+        '
+        Me.EmulatorToolStripMenuItem.Image = CType(resources.GetObject("EmulatorToolStripMenuItem.Image"), System.Drawing.Image)
+        Me.EmulatorToolStripMenuItem.Name = "EmulatorToolStripMenuItem"
+        Me.EmulatorToolStripMenuItem.Size = New System.Drawing.Size(161, 26)
+        Me.EmulatorToolStripMenuItem.Text = "&Emulator..."
+        '
+        'TilesetToolStripMenuItem3
+        '
+        Me.TilesetToolStripMenuItem3.Image = CType(resources.GetObject("TilesetToolStripMenuItem3.Image"), System.Drawing.Image)
+        Me.TilesetToolStripMenuItem3.Name = "TilesetToolStripMenuItem3"
+        Me.TilesetToolStripMenuItem3.Size = New System.Drawing.Size(161, 26)
+        Me.TilesetToolStripMenuItem3.Text = "&Tileset..."
+        '
         'RenameToolStripMenuItem1
         '
         Me.RenameToolStripMenuItem1.Image = CType(resources.GetObject("RenameToolStripMenuItem1.Image"), System.Drawing.Image)
         Me.RenameToolStripMenuItem1.Name = "RenameToolStripMenuItem1"
-        Me.RenameToolStripMenuItem1.Size = New System.Drawing.Size(214, 26)
+        Me.RenameToolStripMenuItem1.Size = New System.Drawing.Size(178, 26)
         Me.RenameToolStripMenuItem1.Text = "&Rename"
         '
         'AddFolderToolStripMenuItem1
         '
         Me.AddFolderToolStripMenuItem1.Image = CType(resources.GetObject("AddFolderToolStripMenuItem1.Image"), System.Drawing.Image)
         Me.AddFolderToolStripMenuItem1.Name = "AddFolderToolStripMenuItem1"
-        Me.AddFolderToolStripMenuItem1.Size = New System.Drawing.Size(214, 26)
+        Me.AddFolderToolStripMenuItem1.Size = New System.Drawing.Size(178, 26)
         Me.AddFolderToolStripMenuItem1.Text = "&Add folder"
         '
         'SetRootpathToolStripMenuItem
         '
         Me.SetRootpathToolStripMenuItem.Image = CType(resources.GetObject("SetRootpathToolStripMenuItem.Image"), System.Drawing.Image)
         Me.SetRootpathToolStripMenuItem.Name = "SetRootpathToolStripMenuItem"
-        Me.SetRootpathToolStripMenuItem.Size = New System.Drawing.Size(214, 26)
+        Me.SetRootpathToolStripMenuItem.Size = New System.Drawing.Size(178, 26)
         Me.SetRootpathToolStripMenuItem.Text = "Set root &path..."
         '
         'ContextMenuStripLibrary
@@ -967,33 +1001,40 @@ Partial Class ProjectExplorer
         Me.NormalToolStripMenuItem1.Size = New System.Drawing.Size(142, 26)
         Me.NormalToolStripMenuItem1.Text = "Normal"
         '
-        'MakeToolStripMenuItem2
+        'ContextMenuStripSource
         '
-        Me.MakeToolStripMenuItem2.Image = CType(resources.GetObject("MakeToolStripMenuItem2.Image"), System.Drawing.Image)
-        Me.MakeToolStripMenuItem2.Name = "MakeToolStripMenuItem2"
-        Me.MakeToolStripMenuItem2.Size = New System.Drawing.Size(224, 26)
-        Me.MakeToolStripMenuItem2.Text = "&Make..."
+        Me.ContextMenuStripSource.ImageScalingSize = New System.Drawing.Size(20, 20)
+        Me.ContextMenuStripSource.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem25, Me.ToolStripMenuItem31, Me.ToolStripMenuItem32, Me.OptionsToolStripMenuItem3})
+        Me.ContextMenuStripSource.Name = "ContextMenuStripSource"
+        Me.ContextMenuStripSource.Size = New System.Drawing.Size(215, 136)
         '
-        'CompileToolStripMenuItem
+        'ToolStripMenuItem25
         '
-        Me.CompileToolStripMenuItem.Image = CType(resources.GetObject("CompileToolStripMenuItem.Image"), System.Drawing.Image)
-        Me.CompileToolStripMenuItem.Name = "CompileToolStripMenuItem"
-        Me.CompileToolStripMenuItem.Size = New System.Drawing.Size(224, 26)
-        Me.CompileToolStripMenuItem.Text = "&Compile..."
+        Me.ToolStripMenuItem25.Image = CType(resources.GetObject("ToolStripMenuItem25.Image"), System.Drawing.Image)
+        Me.ToolStripMenuItem25.Name = "ToolStripMenuItem25"
+        Me.ToolStripMenuItem25.Size = New System.Drawing.Size(214, 26)
+        Me.ToolStripMenuItem25.Text = "&Rename"
         '
-        'EmulatorToolStripMenuItem
+        'ToolStripMenuItem31
         '
-        Me.EmulatorToolStripMenuItem.Image = CType(resources.GetObject("EmulatorToolStripMenuItem.Image"), System.Drawing.Image)
-        Me.EmulatorToolStripMenuItem.Name = "EmulatorToolStripMenuItem"
-        Me.EmulatorToolStripMenuItem.Size = New System.Drawing.Size(224, 26)
-        Me.EmulatorToolStripMenuItem.Text = "&Emulator..."
+        Me.ToolStripMenuItem31.Image = CType(resources.GetObject("ToolStripMenuItem31.Image"), System.Drawing.Image)
+        Me.ToolStripMenuItem31.Name = "ToolStripMenuItem31"
+        Me.ToolStripMenuItem31.Size = New System.Drawing.Size(214, 26)
+        Me.ToolStripMenuItem31.Text = "&Open"
         '
-        'TilesetToolStripMenuItem3
+        'ToolStripMenuItem32
         '
-        Me.TilesetToolStripMenuItem3.Image = CType(resources.GetObject("TilesetToolStripMenuItem3.Image"), System.Drawing.Image)
-        Me.TilesetToolStripMenuItem3.Name = "TilesetToolStripMenuItem3"
-        Me.TilesetToolStripMenuItem3.Size = New System.Drawing.Size(224, 26)
-        Me.TilesetToolStripMenuItem3.Text = "&Tileset..."
+        Me.ToolStripMenuItem32.Image = CType(resources.GetObject("ToolStripMenuItem32.Image"), System.Drawing.Image)
+        Me.ToolStripMenuItem32.Name = "ToolStripMenuItem32"
+        Me.ToolStripMenuItem32.Size = New System.Drawing.Size(214, 26)
+        Me.ToolStripMenuItem32.Text = "Remove"
+        '
+        'OptionsToolStripMenuItem3
+        '
+        Me.OptionsToolStripMenuItem3.Image = CType(resources.GetObject("OptionsToolStripMenuItem3.Image"), System.Drawing.Image)
+        Me.OptionsToolStripMenuItem3.Name = "OptionsToolStripMenuItem3"
+        Me.OptionsToolStripMenuItem3.Size = New System.Drawing.Size(214, 26)
+        Me.OptionsToolStripMenuItem3.Text = "Options..."
         '
         'ProjectExplorer
         '
@@ -1013,6 +1054,7 @@ Partial Class ProjectExplorer
         Me.ContextMenuStripExecutable.ResumeLayout(False)
         Me.ContextMenuStripTileset.ResumeLayout(False)
         Me.ContextMenuStripGenerated.ResumeLayout(False)
+        Me.ContextMenuStripSource.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -1141,4 +1183,9 @@ Partial Class ProjectExplorer
     Friend WithEvents CompileToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents EmulatorToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents TilesetToolStripMenuItem3 As ToolStripMenuItem
+    Friend WithEvents ContextMenuStripSource As ContextMenuStrip
+    Friend WithEvents ToolStripMenuItem25 As ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem31 As ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem32 As ToolStripMenuItem
+    Friend WithEvents OptionsToolStripMenuItem3 As ToolStripMenuItem
 End Class
