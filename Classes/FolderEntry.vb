@@ -6,6 +6,8 @@ Public Class FolderEntry
 
     Implements IXmlSerializable
 
+    Private _persistentHashCode As Object
+
     Private _currentOptions As Options
 
     Public Enum KindEnum
@@ -204,7 +206,10 @@ Public Class FolderEntry
     End Function
 
     Public Overrides Function GetHashCode() As Integer
-        Return (_name, _description).GetHashCode()
+        If _persistentHashCode Is Nothing Then
+            _persistentHashCode = (_name, _description).GetHashCode()
+        End If
+        Return _persistentHashCode
     End Function
 
     Public Sub NormalizePaths()

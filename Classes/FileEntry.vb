@@ -6,6 +6,7 @@ Public Class FileEntry
 
     Implements IXmlSerializable
 
+    Private _persistentHashCode As Object
     Public Enum KindEnum
         NORMAL = 1
         GENERATED = 2
@@ -145,7 +146,10 @@ Public Class FileEntry
     End Function
 
     Public Overrides Function GetHashCode() As Integer
-        Return (_name, _description, _filename).GetHashCode()
+        If _persistentHashCode Is Nothing Then
+            _persistentHashCode = (_name, _description, _filename).GetHashCode()
+        End If
+        Return _persistentHashCode
     End Function
 
     Public Function ShallowClone() As FileEntry
