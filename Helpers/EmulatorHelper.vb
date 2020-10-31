@@ -51,8 +51,8 @@
 
     Public Sub ExecuteEmulatorForTarget(_folder_entry As FolderEntry, _target As String)
 
-        Dim binaryFileName As String = _folder_entry.CurrentOptions.Output.BinaryFilename
-        Dim support As String = SupportForTarget(_target, _folder_entry.CurrentOptions.Output)
+        Dim binaryFileName As String = _folder_entry.CurrentOptions.Make.BinaryFilename
+        Dim support As String = SupportForTarget(_target, _folder_entry.CurrentOptions.Make)
 
         If binaryFileName = "" Then
             MsgBox("Cannot execute program since the output file name is undefined.", vbOKOnly, "CANNOT RUN EXECUTABLE")

@@ -1,12 +1,13 @@
-﻿Public Class OptionsWindow
+﻿Public Class OptionsMakeWindow
 
-    Private _currentOptions As Options
-    Public Property CurrentOptions As Options
+    Private _currentOptions As OptionsMake
+    Public Property CurrentOptions As OptionsMake
         Get
             Return _currentOptions
         End Get
-        Set(value As Options)
+        Set(value As OptionsMake)
             _currentOptions = value
+            UpdateOptionsMake(Me, _currentOptions)
         End Set
     End Property
 
@@ -19,6 +20,7 @@
 
     Private Sub OptionsWindow_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ResizeMe()
+        UpdateOptionsMake(Me, CurrentOptions)
     End Sub
 
     Private Sub OptionsWindow_Resize(sender As Object, e As EventArgs) Handles Me.Resize
@@ -27,14 +29,13 @@
 
     Private Sub ButtonRestore_Click(sender As Object, e As EventArgs) Handles ButtonRestore.Click
 
-        If (CurrentOptions Is Nothing) Then
-            LoadOptions()
-        End If
-
+        UpdateOptionsMake(Me, CurrentOptions)
 
     End Sub
 
     Private Sub ButtonApply_Click(sender As Object, e As EventArgs) Handles ButtonApply.Click
+
+        ApplyOptionsMake(Me, CurrentOptions)
 
         If (CurrentOptions Is Nothing) Then
             SaveOptions()
@@ -43,9 +44,11 @@
     End Sub
 
     Private Sub ButtonFromGlobal_Click(sender As Object, e As EventArgs) Handles ButtonFromGlobal.Click
+        UpdateOptionsMake(Me, GlobalVars.CurrentOptions.Make)
     End Sub
 
     Private Sub ButtonFromProject_Click(sender As Object, e As EventArgs) Handles ButtonFromProject.Click
+        UpdateOptionsMake(Me, GlobalVars.CurrentProject.CurrentOptions.Make)
     End Sub
 
 End Class

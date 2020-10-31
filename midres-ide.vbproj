@@ -154,7 +154,6 @@
     <Compile Include="Classes\OptionsGenerated.vb" />
     <Compile Include="Classes\OptionsIDE.vb" />
     <Compile Include="Classes\OptionsMake.vb" />
-    <Compile Include="Classes\OptionsOutput.vb" />
     <Compile Include="Classes\OptionsTileset.vb" />
     <Compile Include="Classes\Project.vb" />
     <Compile Include="Classes\RecentFileEntry.vb" />
@@ -178,10 +177,28 @@
     <Compile Include="Forms\HelpWindow.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\OptionsCC65Window.Designer.vb">
+      <DependentUpon>OptionsCC65Window.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\OptionsCC65Window.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\OptionsEmulatorsWindow.Designer.vb">
+      <DependentUpon>OptionsEmulatorsWindow.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\OptionsEmulatorsWindow.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\OptionsGeneratedWindow.Designer.vb">
       <DependentUpon>OptionsGeneratedWindow.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\OptionsGeneratedWindow.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\OptionsMakeWindow.Designer.vb">
+      <DependentUpon>OptionsMakeWindow.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\OptionsMakeWindow.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\OptionsTilesetWindow.Designer.vb">
@@ -268,8 +285,17 @@
     <EmbeddedResource Include="Forms\MainContainer.resx">
       <DependentUpon>MainContainer.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\OptionsCC65Window.resx">
+      <DependentUpon>OptionsCC65Window.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\OptionsEmulatorsWindow.resx">
+      <DependentUpon>OptionsEmulatorsWindow.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\OptionsGeneratedWindow.resx">
       <DependentUpon>OptionsGeneratedWindow.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\OptionsMakeWindow.resx">
+      <DependentUpon>OptionsMakeWindow.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\OptionsTilesetWindow.resx">
       <DependentUpon>OptionsTilesetWindow.vb</DependentUpon>

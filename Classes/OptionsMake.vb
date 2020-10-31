@@ -11,6 +11,8 @@ Public Class OptionsMake
     Private _additionalParams As String
     Private _actionBuild As String
     Private _actionClean As String
+    Private _binaryFileName As String
+    Private _complete As Boolean
 
     Public Property MakeFilename As String
         Get
@@ -58,6 +60,25 @@ Public Class OptionsMake
         End Set
     End Property
 
+    Public Property BinaryFilename As String
+        Get
+            Return _binaryFileName
+        End Get
+        Set(value As String)
+            _binaryFileName = value
+        End Set
+    End Property
+
+    Public Property Complete As Boolean
+        Get
+            Return _complete
+        End Get
+        Set(value As Boolean)
+            _complete = value
+        End Set
+    End Property
+
+
     Public Sub ReadXml(reader As XmlReader) Implements IXmlSerializable.ReadXml
 
         If Not reader.IsEmptyElement Then
@@ -82,6 +103,10 @@ Public Class OptionsMake
                             _actionBuild = reader.ReadElementContentAsString()
                         Case "ActionClean"
                             _actionClean = reader.ReadElementContentAsString()
+                        Case "BinaryFileName"
+                            _binaryFileName = reader.ReadElementContentAsString()
+                        Case "Complete"
+                            _complete = reader.ReadElementContentAsBoolean()
                         Case Else
                             reader.ReadContentAsString()
                     End Select
@@ -117,6 +142,16 @@ Public Class OptionsMake
         writer.WriteEndElement()
         writer.WriteStartElement("ActionClean")
         writer.WriteString(_actionClean)
+        writer.WriteEndElement()
+        writer.WriteStartElement("BinaryFileName")
+        writer.WriteString(_binaryFileName)
+        writer.WriteEndElement()
+        writer.WriteStartElement("Complete")
+        If (_complete) Then
+            writer.WriteString("true")
+        Else
+            writer.WriteString("false")
+        End If
         writer.WriteEndElement()
     End Sub
 

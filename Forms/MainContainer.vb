@@ -146,10 +146,6 @@ Public Class MainContainer
 
     End Sub
 
-    Private Sub OptionsToolStripMenuItem_Click_1(sender As Object, e As EventArgs) Handles OptionsToolStripMenuItem.Click
-        ShowOptionsWindow(GlobalVars.CurrentOptions, "Global options")
-    End Sub
-
     Private Sub ExitToolStripMenuItem_Click_1(sender As Object, e As EventArgs) Handles ExitToolStripMenuItem.Click
         ExitProgram()
     End Sub
@@ -159,4 +155,36 @@ Public Class MainContainer
         ProjectExplorer.BringToFront()
     End Sub
 
+    Private Sub MakeOptionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MakeOptionsToolStripMenuItem.Click
+        ShowOptionsMakeWindow(GlobalVars.CurrentOptions.Make, "Global make options")
+    End Sub
+
+    Private Sub CompileOptionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CompileOptionsToolStripMenuItem.Click
+        ShowOptionsCC65Window(GlobalVars.CurrentOptions.CC65, "Global compile options")
+    End Sub
+
+    Private Sub EmulatorOptionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EmulatorOptionsToolStripMenuItem.Click
+        ShowOptionsEmulatorsWindow(GlobalVars.CurrentOptions.Emulators, "Global emulators options")
+    End Sub
+
+    Private Sub TilesetOptionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TilesetOptionsToolStripMenuItem.Click
+        ShowOptionsTilesetWindow(GlobalVars.CurrentOptions.Tileset, "Global tileset options")
+    End Sub
+
+    Private Sub MakeToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles MakeToolStripMenuItem1.Click
+        ShowOptionsMakeWindow(GlobalVars.CurrentProject.CurrentOptions.Make, "Project's make options")
+    End Sub
+
+    Private Sub CompileToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CompileToolStripMenuItem.Click
+        ShowOptionsCC65Window(GlobalVars.CurrentProject.CurrentOptions.CC65, "Project's compile options")
+
+    End Sub
+
+    Private Sub EmulatorToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EmulatorToolStripMenuItem.Click
+        ShowOptionsEmulatorsWindow(GlobalVars.CurrentProject.CurrentOptions.Emulators, "Project's emulators options")
+    End Sub
+
+    Private Sub TilesetToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TilesetToolStripMenuItem.Click
+        ShowOptionsTilesetWindow(GlobalVars.CurrentProject.CurrentOptions.Tileset, "Project's tileset options")
+    End Sub
 End Class

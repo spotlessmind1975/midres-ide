@@ -330,7 +330,7 @@ Module ProjectExplorerHelper
                 If tp.Tag.CurrentOptions Is Nothing Then
                     tp.Tag.CurrentOptions = ChooseBestOptions().DeepClone()
                 End If
-                ShowOptionsWindow(tp.Tag.CurrentOptions, "Library " & tp.Tag.name & " options", tp.Tag.Kind)
+                '' ShowOptionsWindow(tp.Tag.CurrentOptions, "Library " & tp.Tag.name & " options", tp.Tag.Kind)
             End If
         End If
     End Sub
@@ -343,7 +343,7 @@ Module ProjectExplorerHelper
                 If tp.Tag.CurrentOptions Is Nothing Then
                     tp.Tag.CurrentOptions = ChooseBestOptions().DeepClone()
                 End If
-                ShowOptionsWindow(tp.Tag.CurrentOptions, "Executable " & tp.Tag.name & " options", tp.Tag.Kind)
+                '' ShowOptionsWindow(tp.Tag.CurrentOptions, "Executable " & tp.Tag.name & " options", tp.Tag.Kind)
             End If
         End If
     End Sub
@@ -356,7 +356,46 @@ Module ProjectExplorerHelper
                 If tp.Tag.CurrentOptions Is Nothing Then
                     tp.Tag.CurrentOptions = ChooseBestOptions().DeepClone()
                 End If
-                ShowOptionsTilesetWindow(tp.Tag.CurrentOptions, "Tileset " & tp.Tag.name & " options", tp.Tag.Kind)
+                ShowOptionsTilesetWindow(tp.Tag.CurrentOptions.Tileset, "Tileset " & tp.Tag.name & " options", tp.Tag.Kind)
+            End If
+        End If
+    End Sub
+
+    Public Sub ShowOptionsWindowEmulators(_project_explorer As ProjectExplorer)
+        Dim tp As TreeNode = _project_explorer.TreeViewProject.SelectedNode
+
+        If Not (tp Is Nothing) Then
+            If TypeOf tp.Tag Is FolderEntry And tp.Tag.Kind = FolderEntry.KindEnum.EXECUTABLE Then
+                If tp.Tag.CurrentOptions Is Nothing Then
+                    tp.Tag.CurrentOptions = ChooseBestOptions().DeepClone()
+                End If
+                ShowOptionsEmulatorsWindow(tp.Tag.CurrentOptions.Emulators, "Emulators " & tp.Tag.name & " options")
+            End If
+        End If
+    End Sub
+
+    Public Sub ShowOptionsWindowCC65(_project_explorer As ProjectExplorer)
+        Dim tp As TreeNode = _project_explorer.TreeViewProject.SelectedNode
+
+        If Not (tp Is Nothing) Then
+            If TypeOf tp.Tag Is FolderEntry And (tp.Tag.Kind = FolderEntry.KindEnum.EXECUTABLE Or tp.Tag.Kind = FolderEntry.KindEnum.LIBRARY) Then
+                If tp.Tag.CurrentOptions Is Nothing Then
+                    tp.Tag.CurrentOptions = ChooseBestOptions().DeepClone()
+                End If
+                ShowOptionsCC65Window(tp.Tag.CurrentOptions.CC65, "Compile " & tp.Tag.name & " options")
+            End If
+        End If
+    End Sub
+
+    Public Sub ShowOptionsWindowMake(_project_explorer As ProjectExplorer)
+        Dim tp As TreeNode = _project_explorer.TreeViewProject.SelectedNode
+
+        If Not (tp Is Nothing) Then
+            If TypeOf tp.Tag Is Project Or (TypeOf tp.Tag Is FolderEntry And (tp.Tag.Kind = FolderEntry.KindEnum.EXECUTABLE Or tp.Tag.Kind = FolderEntry.KindEnum.LIBRARY)) Then
+                If tp.Tag.CurrentOptions Is Nothing Then
+                    tp.Tag.CurrentOptions = ChooseBestOptions().DeepClone()
+                End If
+                ShowOptionsCC65Window(tp.Tag.CurrentOptions.Make, "Make project options")
             End If
         End If
     End Sub

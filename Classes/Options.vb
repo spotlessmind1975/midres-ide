@@ -8,8 +8,6 @@ Public Class Options
 
     Private _make As OptionsMake = New OptionsMake
 
-    Private _output As OptionsOutput = New OptionsOutput
-
     Private _ide As OptionsIDE = New OptionsIDE
 
     Private _emulators As OptionsEmulators = New OptionsEmulators
@@ -24,15 +22,6 @@ Public Class Options
         End Get
         Set(value As OptionsMake)
             _make = value
-        End Set
-    End Property
-
-    Public Property Output As OptionsOutput
-        Get
-            Return _output
-        End Get
-        Set(value As OptionsOutput)
-            _output = value
         End Set
     End Property
 
@@ -93,9 +82,17 @@ Public Class Options
                                 pe.ReadXml(reader)
                                 _make = pe
                             Case "OptionsOutput"
-                                Dim pe As OptionsOutput = New OptionsOutput
-                                pe.ReadXml(reader)
-                                _output = pe
+                                '' ignore
+                                If Not (reader.IsEmptyElement) Then
+                                    reader.ReadStartElement()
+                                    reader.MoveToContent()
+                                    Do
+                                        reader.Skip()
+                                    Loop While reader.NodeType <> System.Xml.XmlNodeType.EndElement
+                                    reader.ReadEndElement()
+                                Else
+                                    reader.Read()
+                                End If
                             Case "OptionsIDE"
                                 Dim pe As OptionsIDE = New OptionsIDE
                                 pe.ReadXml(reader)
@@ -133,9 +130,6 @@ Public Class Options
         writer.WriteStartElement("OptionsMake")
         DirectCast(_make, OptionsMake).WriteXml(writer)
         writer.WriteEndElement()
-        writer.WriteStartElement("OptionsOutput")
-        DirectCast(_output, OptionsOutput).WriteXml(writer)
-        writer.WriteEndElement()
         writer.WriteStartElement("OptionsIDE")
         DirectCast(_ide, OptionsIDE).WriteXml(writer)
         writer.WriteEndElement()
@@ -161,7 +155,6 @@ Public Class Options
     Public Function DeepClone() As Options
         Dim o As Options = DirectCast(Me.MemberwiseClone(), Options)
         o._make = _make.DeepClone()
-        o._output = _output.DeepClone()
         o._ide = _ide.DeepClone()
         o._emulators = _emulators.DeepClone()
         o._cc65 = _cc65.DeepClone()

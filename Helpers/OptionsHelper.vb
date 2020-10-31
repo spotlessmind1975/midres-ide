@@ -66,7 +66,7 @@ Module OptionsHelper
         My.Computer.FileSystem.WriteAllBytes(path & "\options", ms.ToArray(), False)
     End Sub
 
-    Public Sub UpdateOptions(_options_window As OptionsWindow, Optional _options As Options = Nothing)
+    Public Sub UpdateOptionsEmulators(_options_window As OptionsEmulatorsWindow, Optional _options As OptionsEmulators = Nothing)
 
         If GlobalVars.CurrentProject Is Nothing Then
             _options_window.ButtonFromProject.Visible = False
@@ -75,39 +75,82 @@ Module OptionsHelper
         End If
 
         If (_options Is Nothing) Then
-            _options = GlobalVars.CurrentOptions
+            _options = GlobalVars.CurrentOptions.Emulators
             _options_window.ButtonRestore.Visible = True
         Else
             _options_window.ButtonRestore.Visible = False
         End If
 
-        _options_window.CheckBoxALTIRRA.Checked = _options.Emulators.AltirraEnabled
-        _options_window.TextBoxALTIRRAPath.Text = _options.Emulators.AltirraPath
-        _options_window.CheckBoxATARI800.Checked = _options.Emulators.Atari800Enabled
-        _options_window.TextBoxATARI800Path.Text = _options.Emulators.Atari800Path
-        _options_window.CheckBoxYAPE.Checked = _options.Emulators.YapeEnabled
-        _options_window.TextBoxYAPEPath.Text = _options.Emulators.YapePath
-        _options_window.CheckBoxVICE.Checked = _options.Emulators.ViceEnabled
-        _options_window.TextBoxVICEPath.Text = _options.Emulators.VicePath
+        _options_window.CheckBoxALTIRRA.Checked = _options.AltirraEnabled
+        _options_window.TextBoxALTIRRAPath.Text = _options.AltirraPath
+        _options_window.CheckBoxATARI800.Checked = _options.Atari800Enabled
+        _options_window.TextBoxATARI800Path.Text = _options.Atari800Path
+        _options_window.CheckBoxYAPE.Checked = _options.YapeEnabled
+        _options_window.TextBoxYAPEPath.Text = _options.YapePath
+        _options_window.CheckBoxVICE.Checked = _options.ViceEnabled
+        _options_window.TextBoxVICEPath.Text = _options.VicePath
 
-        Dim c As Collection = _options.CC65.Warnings
+    End Sub
+
+    Public Sub UpdateOptionsMake(_options_window As OptionsMakeWindow, Optional _options As OptionsMake = Nothing)
+
+        If GlobalVars.CurrentProject Is Nothing Then
+            _options_window.ButtonFromProject.Visible = False
+        Else
+            _options_window.ButtonFromProject.Visible = True
+        End If
+
+        If (_options Is Nothing) Then
+            _options = GlobalVars.CurrentOptions.Make
+            _options_window.ButtonRestore.Visible = True
+        Else
+            _options_window.ButtonRestore.Visible = False
+        End If
+
+        _options_window.TextBoxMakeFileName.Text = _options.MakeFilename
+        _options_window.RadioButtonStaticMakefile.Checked = _options.DynamicMakefile
+        _options_window.TextBoxAdditionalParams.Text = _options.AdditionalParams
+        _options_window.TextBoxActionBuild.Text = _options.ActionBuild
+        _options_window.TextBoxActionClean.Text = _options.ActionClean
+
+        _options_window.TextBoxBinaryFileName.Text = _options.BinaryFilename
+        _options_window.RadioButtonComplete.Checked = _options.Complete
+
+    End Sub
+
+    Public Sub UpdateOptionsCC65(_options_window As OptionsCC65Window, Optional _options As OptionsCC65 = Nothing)
+
+        If GlobalVars.CurrentProject Is Nothing Then
+            _options_window.ButtonFromProject.Visible = False
+        Else
+            _options_window.ButtonFromProject.Visible = True
+        End If
+
+        If (_options Is Nothing) Then
+            _options = GlobalVars.CurrentOptions.CC65
+            _options_window.ButtonRestore.Visible = True
+        Else
+            _options_window.ButtonRestore.Visible = False
+        End If
+
+        Dim c As Collection = _options.Warnings
 
         _options_window.CheckedListBoxCC65Warnings.Items.Clear()
         For i = 1 To c.Count
             _options_window.CheckedListBoxCC65Warnings.Items.Add(c(i).Pattern, c(i).Ignored)
         Next
 
-        _options_window.CheckBoxPlus4.Checked = _options.CC65.Plus4
-        _options_window.CheckBoxC16.Checked = _options.CC65.C16
-        _options_window.CheckBoxVic20.Checked = _options.CC65.Vic20
-        _options_window.CheckBoxVic2024.Checked = _options.CC65.Vic2024
-        _options_window.CheckBoxC64.Checked = _options.CC65.C64
-        _options_window.CheckBoxC128.Checked = _options.CC65.C128
-        _options_window.CheckBoxAtari.Checked = _options.CC65.Atari
-        _options_window.CheckBoxAtariLo.Checked = _options.CC65.Atarilo
+        _options_window.CheckBoxPlus4.Checked = _options.Plus4
+        _options_window.CheckBoxC16.Checked = _options.C16
+        _options_window.CheckBoxVic20.Checked = _options.Vic20
+        _options_window.CheckBoxVic2024.Checked = _options.Vic2024
+        _options_window.CheckBoxC64.Checked = _options.C64
+        _options_window.CheckBoxC128.Checked = _options.C128
+        _options_window.CheckBoxAtari.Checked = _options.Atari
+        _options_window.CheckBoxAtariLo.Checked = _options.Atarilo
 
-        _options_window.CheckBoxStaticLocals.Checked = _options.CC65.StaticLocals
-        For Each symbol In _options.CC65.Symbols
+        _options_window.CheckBoxStaticLocals.Checked = _options.StaticLocals
+        For Each symbol In _options.Symbols
             Dim parts() As String = symbol.split("=")
             If UBound(parts) = 0 Then
                 _options_window.DataGridViewSymbols.Rows.Add(parts(0), Nothing)
@@ -115,29 +158,29 @@ Module OptionsHelper
                 _options_window.DataGridViewSymbols.Rows.Add(parts(0), parts(1))
             End If
         Next
-        For Each includeDir In _options.CC65.IncludeDirs
+        For Each includeDir In _options.IncludeDirs
             _options_window.ListBoxIncludeDirs.Items.Add(includeDir)
         Next
-        _options_window.CheckBoxOptimizeCode.Checked = _options.CC65.OptimizeCode
-        _options_window.CheckBoxOptimizeCodeInline.Checked = _options.CC65.OptimizeCodeInline
-        _options_window.CheckBoxRegisterVars.Checked = _options.CC65.RegisterVars
-        _options_window.CheckBoxInlineFunctions.Checked = _options.CC65.InlineFunctions
-        _options_window.CheckBoxAddSource.Checked = _options.CC65.AddSource
-        _options_window.CheckBoxSuppressWarnings.Checked = _options.CC65.SuppressWarnings
-        _options_window.CheckBoxDebugInfo.Checked = _options.CC65.DebugInfo
-        _options_window.CheckBoxSignedChars.Checked = _options.CC65.SignedChars
-        '' _options_window.TextBoxOutputFile.Text = _options.CC65.OutputFile
-        _options_window.TextBoxBssName.Text = _options.CC65.BssName
-        _options_window.CheckBoxCheckStack.Checked = _options.CC65.CheckStack
-        _options_window.TextBoxCodeName.Text = _options.CC65.CodeName
-        _options_window.TrackBarCodeSize.Value = _options.CC65.CodeSize
-        _options_window.CheckBoxCpu65C02.Checked = _options.CC65.Cpu65C02
-        _options_window.CheckBoxCreateDep.Checked = _options.CC65.CreateDep
-        _options_window.TextBoxDataName.Text = _options.CC65.DataName
-        _options_window.CheckBoxForgetIncPath.Checked = _options.CC65.ForgetIncPath
-        _options_window.TrackBarRegisterSpace.Value = _options.CC65.RegisterSpace
-        _options_window.TextBoxRoDataName.Text = _options.CC65.RodataName
-        Select Case _options.CC65.StandardLanguage
+        _options_window.CheckBoxOptimizeCode.Checked = _options.OptimizeCode
+        _options_window.CheckBoxOptimizeCodeInline.Checked = _options.OptimizeCodeInline
+        _options_window.CheckBoxRegisterVars.Checked = _options.RegisterVars
+        _options_window.CheckBoxInlineFunctions.Checked = _options.InlineFunctions
+        _options_window.CheckBoxAddSource.Checked = _options.AddSource
+        _options_window.CheckBoxSuppressWarnings.Checked = _options.SuppressWarnings
+        _options_window.CheckBoxDebugInfo.Checked = _options.DebugInfo
+        _options_window.CheckBoxSignedChars.Checked = _options.SignedChars
+        _options_window.TextBoxBinaryFileName.Text = _options.OutputFile
+        _options_window.TextBoxBssName.Text = _options.BssName
+        _options_window.CheckBoxCheckStack.Checked = _options.CheckStack
+        _options_window.TextBoxCodeName.Text = _options.CodeName
+        _options_window.TrackBarCodeSize.Value = _options.CodeSize
+        _options_window.CheckBoxCpu65C02.Checked = _options.Cpu65C02
+        _options_window.CheckBoxCreateDep.Checked = _options.CreateDep
+        _options_window.TextBoxDataName.Text = _options.DataName
+        _options_window.CheckBoxForgetIncPath.Checked = _options.ForgetIncPath
+        _options_window.TrackBarRegisterSpace.Value = _options.RegisterSpace
+        _options_window.TextBoxRoDataName.Text = _options.RodataName
+        Select Case _options.StandardLanguage
             Case OptionsCC65.LanguageEnum.CC65
                 _options_window.RadioButtonCC65.Checked = True
             Case OptionsCC65.LanguageEnum.C89
@@ -145,21 +188,11 @@ Module OptionsHelper
             Case OptionsCC65.LanguageEnum.C99
                 _options_window.RadioButtonC99.Checked = True
         End Select
-        _options_window.CheckBoxWritableStrings.Checked = _options.CC65.WritableStrings
-
-
-        _options_window.TextBoxMakeFileName.Text = _options.Make.MakeFilename
-        _options_window.RadioButtonStaticMakefile.Checked = _options.Make.DynamicMakefile
-        _options_window.TextBoxAdditionalParams.Text = _options.Make.AdditionalParams
-        _options_window.TextBoxActionBuild.Text = _options.Make.ActionBuild
-        _options_window.TextBoxActionClean.Text = _options.Make.ActionClean
-
-        _options_window.TextBoxBinaryFileName.Text = _options.Output.BinaryFilename
-        _options_window.RadioButtonComplete.Checked = _options.Output.Complete
+        _options_window.CheckBoxWritableStrings.Checked = _options.WritableStrings
 
     End Sub
 
-    Public Sub UpdateOptionsTileset(_options_window As OptionsTilesetWindow, Optional _options As Options = Nothing)
+    Public Sub UpdateOptionsTileset(_options_window As OptionsTilesetWindow, Optional _options As OptionsTileset = Nothing)
 
         If GlobalVars.CurrentProject Is Nothing Then
             _options_window.ButtonFromProject.Visible = False
@@ -168,18 +201,18 @@ Module OptionsHelper
         End If
 
         If (_options Is Nothing) Then
-            _options = GlobalVars.CurrentOptions
+            _options = GlobalVars.CurrentOptions.Tileset
             _options_window.ButtonRestore.Visible = True
         Else
             _options_window.ButtonRestore.Visible = False
         End If
 
-        _options_window.TextBoxTilesetBinaryFilename.Text = _options.Tileset.BinaryFilename
-        _options_window.TextBoxBankNumber.Text = _options.Tileset.BankNumber
-        _options_window.TextBoxTilesetHeaderFileName.Text = _options.Tileset.HeaderFilename
-        _options_window.TrackBarTilesetThresholdLuminance.Value = _options.Tileset.ThresholdLuminance
-        _options_window.CheckBoxTilesetMulticolor.Checked = _options.Tileset.Multicolor
-        _options_window.CheckBoxTilesetReverse.Checked = _options.Tileset.Reverse
+        _options_window.TextBoxTilesetBinaryFilename.Text = _options.BinaryFilename
+        _options_window.TextBoxBankNumber.Text = _options.BankNumber
+        _options_window.TextBoxTilesetHeaderFileName.Text = _options.HeaderFilename
+        _options_window.TrackBarTilesetThresholdLuminance.Value = _options.ThresholdLuminance
+        _options_window.CheckBoxTilesetMulticolor.Checked = _options.Multicolor
+        _options_window.CheckBoxTilesetReverse.Checked = _options.Reverse
 
     End Sub
 
@@ -200,22 +233,43 @@ Module OptionsHelper
 
     End Sub
 
-    Public Sub ApplyOptions(_options_window As OptionsWindow, Optional _options As Options = Nothing)
+    Public Sub ApplyOptionsEmulators(_options_window As OptionsEmulatorsWindow, Optional _options As OptionsEmulators = Nothing)
 
         If (_options Is Nothing) Then
-            _options = GlobalVars.CurrentOptions
+            _options = GlobalVars.CurrentOptions.Emulators
         End If
 
-        _options.Emulators.AltirraEnabled = _options_window.CheckBoxALTIRRA.Checked
-        _options.Emulators.AltirraPath = _options_window.TextBoxALTIRRAPath.Text
-        _options.Emulators.Atari800Enabled = _options_window.CheckBoxATARI800.Checked
-        _options.Emulators.Atari800Path = _options_window.TextBoxATARI800Path.Text
-        _options.Emulators.YapeEnabled = _options_window.CheckBoxYAPE.Checked
-        _options.Emulators.YapePath = _options_window.TextBoxYAPEPath.Text
-        _options.Emulators.ViceEnabled = _options_window.CheckBoxVICE.Checked
-        _options.Emulators.VicePath = _options_window.TextBoxVICEPath.Text
+        _options.AltirraEnabled = _options_window.CheckBoxALTIRRA.Checked
+        _options.AltirraPath = _options_window.TextBoxALTIRRAPath.Text
+        _options.Atari800Enabled = _options_window.CheckBoxATARI800.Checked
+        _options.Atari800Path = _options_window.TextBoxATARI800Path.Text
+        _options.YapeEnabled = _options_window.CheckBoxYAPE.Checked
+        _options.YapePath = _options_window.TextBoxYAPEPath.Text
+        _options.ViceEnabled = _options_window.CheckBoxVICE.Checked
+        _options.VicePath = _options_window.TextBoxVICEPath.Text
 
-        Dim c As Collection = _options.CC65.Warnings
+    End Sub
+
+    Public Sub ApplyOptionsMake(_options_window As OptionsMakeWindow, Optional _options As OptionsMake = Nothing)
+
+        If (_options Is Nothing) Then
+            _options = GlobalVars.CurrentOptions.Make
+        End If
+
+        _options.MakeFilename = _options_window.TextBoxMakeFileName.Text
+        _options.DynamicMakefile = _options_window.RadioButtonStaticMakefile.Checked
+        _options.AdditionalParams = _options_window.TextBoxAdditionalParams.Text
+        _options.ActionBuild = _options_window.TextBoxActionBuild.Text
+        _options.ActionClean = _options_window.TextBoxActionClean.Text
+
+    End Sub
+    Public Sub ApplyOptionsCC65(_options_window As OptionsCC65Window, Optional _options As OptionsCC65 = Nothing)
+
+        If (_options Is Nothing) Then
+            _options = GlobalVars.CurrentOptions.CC65
+        End If
+
+        Dim c As Collection = _options.Warnings
 
         For i = 1 To _options_window.CheckedListBoxCC65Warnings.Items.Count
             If (_options_window.CheckedListBoxCC65Warnings.GetItemCheckState(i - 1) = CheckState.Checked) Then
@@ -225,83 +279,66 @@ Module OptionsHelper
             End If
         Next
 
-        _options.CC65.Plus4 = _options_window.CheckBoxPlus4.Checked
-        _options.CC65.C16 = _options_window.CheckBoxC16.Checked
-        _options.CC65.Vic20 = _options_window.CheckBoxVic20.Checked
-        _options.CC65.Vic2024 = _options_window.CheckBoxVic2024.Checked
-        _options.CC65.C64 = _options_window.CheckBoxC64.Checked
-        _options.CC65.C128 = _options_window.CheckBoxC128.Checked
-        _options.CC65.Atari = _options_window.CheckBoxAtari.Checked
-        _options.CC65.Atarilo = _options_window.CheckBoxAtariLo.Checked
+        _options.Plus4 = _options_window.CheckBoxPlus4.Checked
+        _options.C16 = _options_window.CheckBoxC16.Checked
+        _options.Vic20 = _options_window.CheckBoxVic20.Checked
+        _options.Vic2024 = _options_window.CheckBoxVic2024.Checked
+        _options.C64 = _options_window.CheckBoxC64.Checked
+        _options.C128 = _options_window.CheckBoxC128.Checked
+        _options.Atari = _options_window.CheckBoxAtari.Checked
+        _options.Atarilo = _options_window.CheckBoxAtariLo.Checked
 
-        _options.CC65.StaticLocals = _options_window.CheckBoxStaticLocals.Checked
-        _options.CC65.Symbols.Clear()
+        _options.StaticLocals = _options_window.CheckBoxStaticLocals.Checked
+        _options.Symbols.Clear()
         For Each row In _options_window.DataGridViewSymbols.Rows
             If Not (row.cells(0).Value Is Nothing) Then
-                _options.CC65.Symbols.Add(row.cells(0).Value & "=" & row.cells(1).Value)
+                _options.Symbols.Add(row.cells(0).Value & "=" & row.cells(1).Value)
             Else
-                _options.CC65.Symbols.Add(row.cells(0).Value)
+                _options.Symbols.Add(row.cells(0).Value)
             End If
         Next
-        _options.CC65.IncludeDirs.Clear()
+        _options.IncludeDirs.Clear()
         For Each includeDir In _options_window.ListBoxIncludeDirs.Items
-            _options.CC65.IncludeDirs.Add(includeDir)
+            _options.IncludeDirs.Add(includeDir)
         Next
-        _options.CC65.OptimizeCode = _options_window.CheckBoxOptimizeCode.Checked
-        _options.CC65.OptimizeCodeInline = _options_window.CheckBoxOptimizeCodeInline.Checked
-        _options.CC65.RegisterVars = _options_window.CheckBoxRegisterVars.Checked
-        _options.CC65.InlineFunctions = _options_window.CheckBoxInlineFunctions.Checked
-        _options.CC65.AddSource = _options_window.CheckBoxAddSource.Checked
-        _options.CC65.SuppressWarnings = _options_window.CheckBoxSuppressWarnings.Checked
-        _options.CC65.DebugInfo = _options_window.CheckBoxDebugInfo.Checked
-        _options.CC65.SignedChars = _options_window.CheckBoxSignedChars.Checked
-        '' _options_window.TextBoxOutputFile.Text = _options.CC65.OutputFile
-        _options.CC65.BssName = _options_window.TextBoxBssName.Text
-        _options.CC65.CheckStack = _options_window.CheckBoxCheckStack.Checked
-        _options.CC65.CodeName = _options_window.TextBoxCodeName.Text
-        _options.CC65.CodeSize = _options_window.TrackBarCodeSize.Value
-        _options.CC65.Cpu65C02 = _options_window.CheckBoxCpu65C02.Checked
-        _options.CC65.CreateDep = _options_window.CheckBoxCreateDep.Checked
-        _options.CC65.DataName = _options_window.TextBoxDataName.Text
-        _options.CC65.ForgetIncPath = _options_window.CheckBoxForgetIncPath.Checked
-        _options.CC65.RegisterSpace = _options_window.TrackBarRegisterSpace.Value
-        _options.CC65.RodataName = _options_window.TextBoxRoDataName.Text
+        _options.OptimizeCode = _options_window.CheckBoxOptimizeCode.Checked
+        _options.OptimizeCodeInline = _options_window.CheckBoxOptimizeCodeInline.Checked
+        _options.RegisterVars = _options_window.CheckBoxRegisterVars.Checked
+        _options.InlineFunctions = _options_window.CheckBoxInlineFunctions.Checked
+        _options.AddSource = _options_window.CheckBoxAddSource.Checked
+        _options.SuppressWarnings = _options_window.CheckBoxSuppressWarnings.Checked
+        _options.DebugInfo = _options_window.CheckBoxDebugInfo.Checked
+        _options.SignedChars = _options_window.CheckBoxSignedChars.Checked
+        _options.OutputFile = _options_window.TextBoxBinaryFileName.Text
+        _options.BssName = _options_window.TextBoxBssName.Text
+        _options.CheckStack = _options_window.CheckBoxCheckStack.Checked
+        _options.CodeName = _options_window.TextBoxCodeName.Text
+        _options.CodeSize = _options_window.TrackBarCodeSize.Value
+        _options.Cpu65C02 = _options_window.CheckBoxCpu65C02.Checked
+        _options.CreateDep = _options_window.CheckBoxCreateDep.Checked
+        _options.DataName = _options_window.TextBoxDataName.Text
+        _options.ForgetIncPath = _options_window.CheckBoxForgetIncPath.Checked
+        _options.RegisterSpace = _options_window.TrackBarRegisterSpace.Value
+        _options.RodataName = _options_window.TextBoxRoDataName.Text
         If _options_window.RadioButtonCC65.Checked Then
-            _options.CC65.StandardLanguage = OptionsCC65.LanguageEnum.CC65
+            _options.StandardLanguage = OptionsCC65.LanguageEnum.CC65
         ElseIf _options_window.RadioButtonC89.Checked Then
-            _options.CC65.StandardLanguage = OptionsCC65.LanguageEnum.C89
+            _options.StandardLanguage = OptionsCC65.LanguageEnum.C89
         ElseIf _options_window.RadioButtonC99.Checked Then
-            _options.CC65.StandardLanguage = OptionsCC65.LanguageEnum.C99
+            _options.StandardLanguage = OptionsCC65.LanguageEnum.C99
         End If
-        _options.CC65.WritableStrings = _options_window.CheckBoxWritableStrings.Checked
-
-        _options.Make.MakeFilename = _options_window.TextBoxMakeFileName.Text
-        _options.Make.DynamicMakefile = _options_window.RadioButtonStaticMakefile.Checked
-        _options.Make.AdditionalParams = _options_window.TextBoxAdditionalParams.Text
-        _options.Make.ActionBuild = _options_window.TextBoxActionBuild.Text
-        _options.Make.ActionClean = _options_window.TextBoxActionClean.Text
-
-        _options.Output.BinaryFilename = _options_window.TextBoxBinaryFileName.Text
-        _options.Output.Complete = _options_window.RadioButtonComplete.Checked
-
-        UpdateProjectExplorerMenuEntriesForSpecificOptions(ProjectExplorer, _options)
+        _options.WritableStrings = _options_window.CheckBoxWritableStrings.Checked
 
     End Sub
 
-    Public Sub ApplyOptionsTileset(_options_window As OptionsTilesetWindow, Optional _options As Options = Nothing)
+    Public Sub ApplyOptionsTileset(_options_window As OptionsTilesetWindow, Optional _options As OptionsTileset = Nothing)
 
-        If (_options Is Nothing) Then
-            _options = GlobalVars.CurrentOptions
-        End If
-
-        _options.Tileset.BinaryFilename = _options_window.TextBoxTilesetBinaryFilename.Text
-        _options.Tileset.BankNumber = _options_window.TextBoxBankNumber.Text
-        _options.Tileset.HeaderFilename = _options_window.TextBoxTilesetHeaderFileName.Text
-        _options.Tileset.ThresholdLuminance = _options_window.TrackBarTilesetThresholdLuminance.Value
-        _options.Tileset.Multicolor = _options_window.CheckBoxTilesetMulticolor.Checked
-        _options.Tileset.Reverse = _options_window.CheckBoxTilesetReverse.Checked
-
-        UpdateProjectExplorerMenuEntriesForSpecificOptions(ProjectExplorer, _options)
+        _options.BinaryFilename = _options_window.TextBoxTilesetBinaryFilename.Text
+        _options.BankNumber = _options_window.TextBoxBankNumber.Text
+        _options.HeaderFilename = _options_window.TextBoxTilesetHeaderFileName.Text
+        _options.ThresholdLuminance = _options_window.TrackBarTilesetThresholdLuminance.Value
+        _options.Multicolor = _options_window.CheckBoxTilesetMulticolor.Checked
+        _options.Reverse = _options_window.CheckBoxTilesetReverse.Checked
 
     End Sub
 
@@ -326,10 +363,10 @@ Module OptionsHelper
         Next
 
     End Sub
-    Public Function ShowOptionsWindow(_options As Options, _title As String, Optional _kind As FolderEntry.KindEnum = Nothing) As OptionsWindow
-        Dim ow As OptionsWindow
+    Public Function ShowOptionsMakeWindow(_options As OptionsMake, _title As String, Optional _kind As FolderEntry.KindEnum = Nothing) As OptionsMakeWindow
+        Dim ow As OptionsMakeWindow
 
-        ow = New OptionsWindow With {
+        ow = New OptionsMakeWindow With {
             .MdiParent = MainContainer,
             .CurrentOptions = _options
         }
@@ -340,7 +377,7 @@ Module OptionsHelper
 
     End Function
 
-    Public Function ShowOptionsTilesetWindow(_options As Options, _title As String, Optional _kind As FolderEntry.KindEnum = Nothing) As OptionsTilesetWindow
+    Public Function ShowOptionsTilesetWindow(_options As OptionsTileset, _title As String, Optional _kind As FolderEntry.KindEnum = Nothing) As OptionsTilesetWindow
         Dim ow As OptionsTilesetWindow
 
         ow = New OptionsTilesetWindow With {
@@ -354,6 +391,33 @@ Module OptionsHelper
 
     End Function
 
+    Public Function ShowOptionsCC65Window(_options As OptionsCC65, _title As String, Optional _kind As FolderEntry.KindEnum = Nothing) As OptionsCC65Window
+        Dim ow As OptionsCC65Window
+
+        ow = New OptionsCC65Window With {
+            .MdiParent = MainContainer,
+            .CurrentOptions = _options
+        }
+        ow.Text = _title
+        ow.Show()
+
+        Return ow
+
+    End Function
+
+    Public Function ShowOptionsEmulatorsWindow(_options As OptionsEmulators, _title As String) As OptionsEmulatorsWindow
+        Dim ow As OptionsEmulatorsWindow
+
+        ow = New OptionsEmulatorsWindow With {
+            .MdiParent = MainContainer,
+            .CurrentOptions = _options
+        }
+        ow.Text = _title
+        ow.Show()
+
+        Return ow
+
+    End Function
     Public Function ShowOptionsGeneratedWindow(_options As OptionsGenerated, _title As String) As OptionsGeneratedWindow
         Dim ow As OptionsGeneratedWindow
 

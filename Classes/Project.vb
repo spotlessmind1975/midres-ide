@@ -144,8 +144,8 @@ Public Class Project
         Next
     End Sub
 
-    Public Function ShallowClone() As OptionsOutput
-        Return DirectCast(Me.MemberwiseClone(), OptionsOutput)
+    Public Function ShallowClone() As Project
+        Return DirectCast(Me.MemberwiseClone(), Project)
     End Function
 
     Public Function DeepClone() As Project

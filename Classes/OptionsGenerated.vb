@@ -59,11 +59,11 @@ Public Class OptionsGenerated
         Throw New NotImplementedException()
     End Function
 
-    Public Function ShallowClone() As OptionsOutput
-        Return DirectCast(Me.MemberwiseClone(), OptionsOutput)
+    Public Function ShallowClone() As OptionsGenerated
+        Return DirectCast(Me.MemberwiseClone(), OptionsGenerated)
     End Function
 
-    Public Function DeepClone() As OptionsOutput
+    Public Function DeepClone() As OptionsGenerated
         Return ShallowClone()
     End Function
 

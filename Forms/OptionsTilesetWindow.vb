@@ -1,11 +1,11 @@
 ﻿Public Class OptionsTilesetWindow
 
-    Private _currentOptions As Options
-    Public Property CurrentOptions As Options
+    Private _currentOptions As OptionsTileset
+    Public Property CurrentOptions As OptionsTileset
         Get
             Return _currentOptions
         End Get
-        Set(value As Options)
+        Set(value As OptionsTileset)
             _currentOptions = value
             UpdateOptionsTileset(Me, _currentOptions)
         End Set
@@ -48,11 +48,11 @@
     End Sub
 
     Private Sub ButtonFromGlobal_Click(sender As Object, e As EventArgs) Handles ButtonFromGlobal.Click
-        UpdateOptionsTileset(Me, GlobalVars.CurrentOptions)
+        UpdateOptionsTileset(Me, GlobalVars.CurrentOptions.Tileset)
     End Sub
 
     Private Sub ButtonFromProject_Click(sender As Object, e As EventArgs) Handles ButtonFromProject.Click
-        UpdateOptionsTileset(Me, GlobalVars.CurrentProject.CurrentOptions)
+        UpdateOptionsTileset(Me, GlobalVars.CurrentProject.CurrentOptions.Tileset)
     End Sub
 
 End Class

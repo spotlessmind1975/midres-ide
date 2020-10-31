@@ -3,7 +3,7 @@ Imports System.Text.RegularExpressions
 
 Module MakeHelper
 
-    Public Function SupportForTarget(_target As String, _output As OptionsOutput) As String
+    Public Function SupportForTarget(_target As String, _output As OptionsMake) As String
 
         Dim support As String = "prg"
 
@@ -170,7 +170,7 @@ Module MakeHelper
         End If
 
         Dim makeFileName As String = options.Make.MakeFilename
-        Dim binaryFileName As String = options.Output.BinaryFilename
+        Dim binaryFileName As String = options.Make.BinaryFilename
         Dim additionalParams As String = options.Make.AdditionalParams
 
         If binaryFileName = "" Then
@@ -196,10 +196,10 @@ Module MakeHelper
         End If
 
         Dim makeFileName As String = options.Make.MakeFilename
-        Dim binaryFileName As String = options.Output.BinaryFilename
+        Dim binaryFileName As String = options.Make.BinaryFilename
         Dim additionalParams As String = options.Make.AdditionalParams
 
-        Dim support As String = SupportForTarget(_target, options.Output)
+        Dim support As String = SupportForTarget(_target, options.Make)
 
         If binaryFileName = "" Then
             MsgBox("Cannot make executable since the output file name is undefined.", vbOKOnly, "CANNOT MAKE EXECUTABLE")

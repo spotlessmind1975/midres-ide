@@ -64,10 +64,6 @@ Public Class ProjectExplorer
         AddExistingFile(Me)
     End Sub
 
-    Private Sub OptionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OptionsToolStripMenuItem.Click
-        _optionsWindow = showOptionsWindow(GlobalVars.CurrentProject.CurrentOptions, "Project options")
-    End Sub
-
     Private Sub RenameToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles RenameToolStripMenuItem2.Click
         StartRenaming()
     End Sub
@@ -533,5 +529,22 @@ Public Class ProjectExplorer
 
     Private Sub ToolStripMenuItem24_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem24.Click
         PasteClipboardAsSameLevelElement(Me)
+    End Sub
+
+    Private Sub MakeToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles MakeToolStripMenuItem2.Click
+        ShowOptionsWindowMake(Me)
+    End Sub
+
+    Private Sub CompileToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CompileToolStripMenuItem.Click
+        ShowOptionsWindowCC65(Me)
+    End Sub
+
+    Private Sub EmulatorToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EmulatorToolStripMenuItem.Click
+        ShowOptionsWindowEmulators(Me)
+
+    End Sub
+
+    Private Sub TilesetToolStripMenuItem3_Click(sender As Object, e As EventArgs) Handles TilesetToolStripMenuItem3.Click
+        ShowOptionsWindowTileset(Me)
     End Sub
 End Class
