@@ -594,7 +594,7 @@ Module ProjectExplorerHelper
                 Dim sourceObject = Clipboard.GetText()
                 If Not (sourceObject Is Nothing) Then
                     Try
-                        Dim folderCloned As FolderEntry = DirectCast(sourceObject, FolderEntry).DeepClone()
+                        Dim folderCloned As FolderEntry = FolderEntry.FromXML(sourceObject)
                         tpp.Tag.folders.add(folderCloned, folderCloned.GetHashCode())
                         tpp.Nodes.Add(PopulateTreeViewRicorsive(folderCloned))
                     Catch ex As Exception
