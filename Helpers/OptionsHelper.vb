@@ -106,6 +106,48 @@ Module OptionsHelper
         _options_window.CheckBoxAtari.Checked = _options.CC65.Atari
         _options_window.CheckBoxAtariLo.Checked = _options.CC65.Atarilo
 
+        _options_window.CheckBoxStaticLocals.Checked = _options.CC65.StaticLocals
+        For Each symbol In _options.CC65.Symbols
+            Dim parts() As String = symbol.split("=")
+            If UBound(parts) = 0 Then
+                _options_window.DataGridViewSymbols.Rows.Add(parts(0), Nothing)
+            Else
+                _options_window.DataGridViewSymbols.Rows.Add(parts(0), parts(1))
+            End If
+        Next
+        For Each includeDir In _options.CC65.IncludeDirs
+            _options_window.ListBoxIncludeDirs.Items.Add(includeDir)
+        Next
+        _options_window.CheckBoxOptimizeCode.Checked = _options.CC65.OptimizeCode
+        _options_window.CheckBoxOptimizeCodeInline.Checked = _options.CC65.OptimizeCodeInline
+        _options_window.CheckBoxRegisterVars.Checked = _options.CC65.RegisterVars
+        _options_window.CheckBoxInlineFunctions.Checked = _options.CC65.InlineFunctions
+        _options_window.CheckBoxAddSource.Checked = _options.CC65.AddSource
+        _options_window.CheckBoxSuppressWarnings.Checked = _options.CC65.SuppressWarnings
+        _options_window.CheckBoxDebugInfo.Checked = _options.CC65.DebugInfo
+        _options_window.CheckBoxSignedChars.Checked = _options.CC65.SignedChars
+        '' _options_window.TextBoxOutputFile.Text = _options.CC65.OutputFile
+        _options_window.TextBoxBssName.Text = _options.CC65.BssName
+        _options_window.CheckBoxCheckStack.Checked = _options.CC65.CheckStack
+        _options_window.TextBoxCodeName.Text = _options.CC65.CodeName
+        _options_window.TrackBarCodeSize.Value = _options.CC65.CodeSize
+        _options_window.CheckBoxCpu65C02.Checked = _options.CC65.Cpu65C02
+        _options_window.CheckBoxCreateDep.Checked = _options.CC65.CreateDep
+        _options_window.TextBoxDataName.Text = _options.CC65.DataName
+        _options_window.CheckBoxForgetIncPath.Checked = _options.CC65.ForgetIncPath
+        _options_window.TrackBarRegisterSpace.Value = _options.CC65.RegisterSpace
+        _options_window.TextBoxRoDataName.Text = _options.CC65.RodataName
+        Select Case _options.CC65.StandardLanguage
+            Case OptionsCC65.LanguageEnum.CC65
+                _options_window.RadioButtonCC65.Checked = True
+            Case OptionsCC65.LanguageEnum.C89
+                _options_window.RadioButtonC89.Checked = True
+            Case OptionsCC65.LanguageEnum.C99
+                _options_window.RadioButtonC99.Checked = True
+        End Select
+        _options_window.CheckBoxWritableStrings.Checked = _options.CC65.WritableStrings
+
+
         _options_window.TextBoxMakeFileName.Text = _options.Make.MakeFilename
         _options_window.RadioButtonStaticMakefile.Checked = _options.Make.DynamicMakefile
         _options_window.TextBoxAdditionalParams.Text = _options.Make.AdditionalParams
@@ -191,6 +233,47 @@ Module OptionsHelper
         _options.CC65.C128 = _options_window.CheckBoxC128.Checked
         _options.CC65.Atari = _options_window.CheckBoxAtari.Checked
         _options.CC65.Atarilo = _options_window.CheckBoxAtariLo.Checked
+
+        _options.CC65.StaticLocals = _options_window.CheckBoxStaticLocals.Checked
+        _options.CC65.Symbols.Clear()
+        For Each row In _options_window.DataGridViewSymbols.Rows
+            If Not (row.cells(0).Value Is Nothing) Then
+                _options.CC65.Symbols.Add(row.cells(0).Value & "=" & row.cells(1).Value)
+            Else
+                _options.CC65.Symbols.Add(row.cells(0).Value)
+            End If
+        Next
+        _options.CC65.IncludeDirs.Clear()
+        For Each includeDir In _options_window.ListBoxIncludeDirs.Items
+            _options.CC65.IncludeDirs.Add(includeDir)
+        Next
+        _options.CC65.OptimizeCode = _options_window.CheckBoxOptimizeCode.Checked
+        _options.CC65.OptimizeCodeInline = _options_window.CheckBoxOptimizeCodeInline.Checked
+        _options.CC65.RegisterVars = _options_window.CheckBoxRegisterVars.Checked
+        _options.CC65.InlineFunctions = _options_window.CheckBoxInlineFunctions.Checked
+        _options.CC65.AddSource = _options_window.CheckBoxAddSource.Checked
+        _options.CC65.SuppressWarnings = _options_window.CheckBoxSuppressWarnings.Checked
+        _options.CC65.DebugInfo = _options_window.CheckBoxDebugInfo.Checked
+        _options.CC65.SignedChars = _options_window.CheckBoxSignedChars.Checked
+        '' _options_window.TextBoxOutputFile.Text = _options.CC65.OutputFile
+        _options.CC65.BssName = _options_window.TextBoxBssName.Text
+        _options.CC65.CheckStack = _options_window.CheckBoxCheckStack.Checked
+        _options.CC65.CodeName = _options_window.TextBoxCodeName.Text
+        _options.CC65.CodeSize = _options_window.TrackBarCodeSize.Value
+        _options.CC65.Cpu65C02 = _options_window.CheckBoxCpu65C02.Checked
+        _options.CC65.CreateDep = _options_window.CheckBoxCreateDep.Checked
+        _options.CC65.DataName = _options_window.TextBoxDataName.Text
+        _options.CC65.ForgetIncPath = _options_window.CheckBoxForgetIncPath.Checked
+        _options.CC65.RegisterSpace = _options_window.TrackBarRegisterSpace.Value
+        _options.CC65.RodataName = _options_window.TextBoxRoDataName.Text
+        If _options_window.RadioButtonCC65.Checked Then
+            _options.CC65.StandardLanguage = OptionsCC65.LanguageEnum.CC65
+        ElseIf _options_window.RadioButtonC89.Checked Then
+            _options.CC65.StandardLanguage = OptionsCC65.LanguageEnum.C89
+        ElseIf _options_window.RadioButtonC99.Checked Then
+            _options.CC65.StandardLanguage = OptionsCC65.LanguageEnum.C99
+        End If
+        _options.CC65.WritableStrings = _options_window.CheckBoxWritableStrings.Checked
 
         _options.Make.MakeFilename = _options_window.TextBoxMakeFileName.Text
         _options.Make.DynamicMakefile = _options_window.RadioButtonStaticMakefile.Checked
