@@ -99,6 +99,8 @@ Public Class FileEntry
 
             If reader.NodeType <> System.Xml.XmlNodeType.EndElement Then
                 Select Case reader.Name
+                    Case "PHC"
+                        _persistentHashCode = reader.ReadElementContentAsString()
                     Case "Name"
                         _name = reader.ReadElementContentAsString()
                     Case "Filename"
@@ -124,6 +126,9 @@ Public Class FileEntry
     End Sub
 
     Public Sub WriteXml(writer As XmlWriter) Implements IXmlSerializable.WriteXml
+        writer.WriteStartElement("PHC")
+        writer.WriteString(_persistentHashCode)
+        writer.WriteEndElement()
         writer.WriteStartElement("Name")
         writer.WriteString(_name)
         writer.WriteEndElement()

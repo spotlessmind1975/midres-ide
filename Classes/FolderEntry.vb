@@ -126,6 +126,8 @@ Public Class FolderEntry
 
                 If reader.NodeType <> System.Xml.XmlNodeType.EndElement And reader.NodeType <> System.Xml.XmlNodeType.None Then
                     Select Case reader.Name
+                        Case "PHC"
+                            _persistentHashCode = reader.ReadElementContentAsString()
                         Case "Name"
                             _name = reader.ReadElementContentAsString()
                         Case "Path"
@@ -164,6 +166,9 @@ Public Class FolderEntry
     End Sub
 
     Public Sub WriteXml(writer As XmlWriter) Implements IXmlSerializable.WriteXml
+        writer.WriteStartElement("PHC")
+        writer.WriteString(_persistentHashCode)
+        writer.WriteEndElement()
         writer.WriteStartElement("Name")
         writer.WriteString(_name)
         writer.WriteEndElement()
