@@ -55,4 +55,7 @@
         UpdateOptionsTileset(Me, GlobalVars.CurrentProject.CurrentOptions.Tileset)
     End Sub
 
+    Private Sub TrackBarTilesetThresholdLuminance_Scroll(sender As Object, e As EventArgs) Handles TrackBarTilesetThresholdLuminance.Scroll
+        LabelThresholdLuminance.Text = TrackBarTilesetThresholdLuminance.Value
+    End Sub
 End Class

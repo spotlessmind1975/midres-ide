@@ -496,12 +496,14 @@ Partial Class ProjectExplorer
         '
         'MakeToolStripMenuItem3
         '
+        Me.MakeToolStripMenuItem3.Image = CType(resources.GetObject("MakeToolStripMenuItem3.Image"), System.Drawing.Image)
         Me.MakeToolStripMenuItem3.Name = "MakeToolStripMenuItem3"
         Me.MakeToolStripMenuItem3.Size = New System.Drawing.Size(224, 26)
         Me.MakeToolStripMenuItem3.Text = "&Make..."
         '
         'CompilerToolStripMenuItem
         '
+        Me.CompilerToolStripMenuItem.Image = CType(resources.GetObject("CompilerToolStripMenuItem.Image"), System.Drawing.Image)
         Me.CompilerToolStripMenuItem.Name = "CompilerToolStripMenuItem"
         Me.CompilerToolStripMenuItem.Size = New System.Drawing.Size(224, 26)
         Me.CompilerToolStripMenuItem.Text = "&Compiler..."

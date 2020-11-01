@@ -4,8 +4,10 @@ Imports ScintillaNET
 Public Class MainContainer
 
     Private _optionsWindow As OptionsWindow
+    Private _optionsMakeWindow As OptionsMakeWindow
     Private _optionsCC64Window As OptionsCC65Window
     Private _optionsEmulatorsWindow As OptionsEmulatorsWindow
+    Private _optionsTilesetWindow As OptionsTilesetWindow
 
     Private Sub NewToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NewToolStripMenuItem.Click
 
@@ -158,7 +160,18 @@ Public Class MainContainer
     End Sub
 
     Private Sub MakeOptionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MakeOptionsToolStripMenuItem.Click
-        ShowOptionsMakeWindow(GlobalVars.CurrentOptions.Make, "Global make options")
+        If Not (_optionsMakeWindow Is Nothing) Then
+            If _optionsMakeWindow.IsDisposed Then
+                _optionsMakeWindow = Nothing
+            End If
+        End If
+        If _optionsMakeWindow Is Nothing Then
+            _optionsMakeWindow = ShowOptionsMakeWindow(Nothing, "Global make options")
+        Else
+            _optionsMakeWindow.Show()
+        End If
+
+
     End Sub
 
     Private Sub CompileOptionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CompileOptionsToolStripMenuItem.Click
@@ -191,7 +204,17 @@ Public Class MainContainer
     End Sub
 
     Private Sub TilesetOptionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TilesetOptionsToolStripMenuItem.Click
-        ShowOptionsTilesetWindow(GlobalVars.CurrentOptions.Tileset, "Global tileset options")
+        If Not (_optionsTilesetWindow Is Nothing) Then
+            If _optionsTilesetWindow.IsDisposed Then
+                _optionsTilesetWindow = Nothing
+            End If
+        End If
+
+        If _optionsTilesetWindow Is Nothing Then
+            _optionsTilesetWindow = ShowOptionsTilesetWindow(Nothing, "Global emulators options")
+        Else
+            _optionsTilesetWindow.Show()
+        End If
     End Sub
 
     Private Sub MakeToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles MakeToolStripMenuItem1.Click

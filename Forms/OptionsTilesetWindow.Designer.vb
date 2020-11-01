@@ -28,7 +28,7 @@ Partial Class OptionsTilesetWindow
         Me.ButtonApply = New System.Windows.Forms.Button()
         Me.TabControlOptions = New System.Windows.Forms.TabControl()
         Me.TabPageTileset = New System.Windows.Forms.TabPage()
-        Me.GroupBox8 = New System.Windows.Forms.GroupBox()
+        Me.Panel1 = New System.Windows.Forms.Panel()
         Me.CheckBoxTilesetReverse = New System.Windows.Forms.CheckBox()
         Me.CheckBoxTilesetMulticolor = New System.Windows.Forms.CheckBox()
         Me.Label14 = New System.Windows.Forms.Label()
@@ -39,9 +39,10 @@ Partial Class OptionsTilesetWindow
         Me.Label10 = New System.Windows.Forms.Label()
         Me.TextBoxTilesetBinaryFilename = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
+        Me.LabelThresholdLuminance = New System.Windows.Forms.Label()
         Me.TabControlOptions.SuspendLayout()
         Me.TabPageTileset.SuspendLayout()
-        Me.GroupBox8.SuspendLayout()
+        Me.Panel1.SuspendLayout()
         CType(Me.TrackBarTilesetThresholdLuminance, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -97,7 +98,7 @@ Partial Class OptionsTilesetWindow
         '
         'TabPageTileset
         '
-        Me.TabPageTileset.Controls.Add(Me.GroupBox8)
+        Me.TabPageTileset.Controls.Add(Me.Panel1)
         Me.TabPageTileset.Location = New System.Drawing.Point(4, 29)
         Me.TabPageTileset.Name = "TabPageTileset"
         Me.TabPageTileset.Size = New System.Drawing.Size(699, 188)
@@ -105,112 +106,123 @@ Partial Class OptionsTilesetWindow
         Me.TabPageTileset.Text = "Generate"
         Me.TabPageTileset.UseVisualStyleBackColor = True
         '
-        'GroupBox8
+        'Panel1
         '
-        Me.GroupBox8.Controls.Add(Me.CheckBoxTilesetReverse)
-        Me.GroupBox8.Controls.Add(Me.CheckBoxTilesetMulticolor)
-        Me.GroupBox8.Controls.Add(Me.Label14)
-        Me.GroupBox8.Controls.Add(Me.TrackBarTilesetThresholdLuminance)
-        Me.GroupBox8.Controls.Add(Me.TextBoxTilesetHeaderFileName)
-        Me.GroupBox8.Controls.Add(Me.Label13)
-        Me.GroupBox8.Controls.Add(Me.TextBoxBankNumber)
-        Me.GroupBox8.Controls.Add(Me.Label10)
-        Me.GroupBox8.Controls.Add(Me.TextBoxTilesetBinaryFilename)
-        Me.GroupBox8.Controls.Add(Me.Label5)
-        Me.GroupBox8.Location = New System.Drawing.Point(6, 3)
-        Me.GroupBox8.Name = "GroupBox8"
-        Me.GroupBox8.Size = New System.Drawing.Size(690, 182)
-        Me.GroupBox8.TabIndex = 0
-        Me.GroupBox8.TabStop = False
+        Me.Panel1.Controls.Add(Me.LabelThresholdLuminance)
+        Me.Panel1.Controls.Add(Me.CheckBoxTilesetReverse)
+        Me.Panel1.Controls.Add(Me.CheckBoxTilesetMulticolor)
+        Me.Panel1.Controls.Add(Me.Label14)
+        Me.Panel1.Controls.Add(Me.TrackBarTilesetThresholdLuminance)
+        Me.Panel1.Controls.Add(Me.TextBoxTilesetHeaderFileName)
+        Me.Panel1.Controls.Add(Me.Label13)
+        Me.Panel1.Controls.Add(Me.TextBoxBankNumber)
+        Me.Panel1.Controls.Add(Me.Label10)
+        Me.Panel1.Controls.Add(Me.TextBoxTilesetBinaryFilename)
+        Me.Panel1.Controls.Add(Me.Label5)
+        Me.Panel1.Location = New System.Drawing.Point(3, 3)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(693, 182)
+        Me.Panel1.TabIndex = 0
         '
         'CheckBoxTilesetReverse
         '
         Me.CheckBoxTilesetReverse.AutoSize = True
-        Me.CheckBoxTilesetReverse.Location = New System.Drawing.Point(531, 125)
+        Me.CheckBoxTilesetReverse.Location = New System.Drawing.Point(556, 128)
         Me.CheckBoxTilesetReverse.Name = "CheckBoxTilesetReverse"
         Me.CheckBoxTilesetReverse.Size = New System.Drawing.Size(127, 24)
-        Me.CheckBoxTilesetReverse.TabIndex = 13
+        Me.CheckBoxTilesetReverse.TabIndex = 23
         Me.CheckBoxTilesetReverse.Text = "Enable reverse"
         Me.CheckBoxTilesetReverse.UseVisualStyleBackColor = True
         '
         'CheckBoxTilesetMulticolor
         '
         Me.CheckBoxTilesetMulticolor.AutoSize = True
-        Me.CheckBoxTilesetMulticolor.Location = New System.Drawing.Point(365, 125)
+        Me.CheckBoxTilesetMulticolor.Location = New System.Drawing.Point(300, 128)
         Me.CheckBoxTilesetMulticolor.Name = "CheckBoxTilesetMulticolor"
         Me.CheckBoxTilesetMulticolor.Size = New System.Drawing.Size(148, 24)
-        Me.CheckBoxTilesetMulticolor.TabIndex = 12
+        Me.CheckBoxTilesetMulticolor.TabIndex = 22
         Me.CheckBoxTilesetMulticolor.Text = "Enable multicolor"
         Me.CheckBoxTilesetMulticolor.UseVisualStyleBackColor = True
         '
         'Label14
         '
         Me.Label14.AutoSize = True
-        Me.Label14.Location = New System.Drawing.Point(361, 34)
+        Me.Label14.Location = New System.Drawing.Point(296, 49)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(146, 20)
-        Me.Label14.TabIndex = 11
+        Me.Label14.TabIndex = 21
         Me.Label14.Text = "Threshold luminance"
         '
         'TrackBarTilesetThresholdLuminance
         '
         Me.TrackBarTilesetThresholdLuminance.BackColor = System.Drawing.SystemColors.Window
-        Me.TrackBarTilesetThresholdLuminance.Location = New System.Drawing.Point(365, 69)
+        Me.TrackBarTilesetThresholdLuminance.Location = New System.Drawing.Point(287, 72)
         Me.TrackBarTilesetThresholdLuminance.Maximum = 255
         Me.TrackBarTilesetThresholdLuminance.Name = "TrackBarTilesetThresholdLuminance"
-        Me.TrackBarTilesetThresholdLuminance.Size = New System.Drawing.Size(316, 56)
-        Me.TrackBarTilesetThresholdLuminance.TabIndex = 10
+        Me.TrackBarTilesetThresholdLuminance.Size = New System.Drawing.Size(343, 56)
+        Me.TrackBarTilesetThresholdLuminance.TabIndex = 20
         '
         'TextBoxTilesetHeaderFileName
         '
-        Me.TextBoxTilesetHeaderFileName.Location = New System.Drawing.Point(132, 122)
+        Me.TextBoxTilesetHeaderFileName.Location = New System.Drawing.Point(7, 140)
         Me.TextBoxTilesetHeaderFileName.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.TextBoxTilesetHeaderFileName.Name = "TextBoxTilesetHeaderFileName"
         Me.TextBoxTilesetHeaderFileName.Size = New System.Drawing.Size(209, 27)
-        Me.TextBoxTilesetHeaderFileName.TabIndex = 9
+        Me.TextBoxTilesetHeaderFileName.TabIndex = 19
         '
         'Label13
         '
         Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(7, 125)
+        Me.Label13.Location = New System.Drawing.Point(3, 116)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(119, 20)
-        Me.Label13.TabIndex = 8
+        Me.Label13.TabIndex = 18
         Me.Label13.Text = "Include filename"
         '
         'TextBoxBankNumber
         '
-        Me.TextBoxBankNumber.Location = New System.Drawing.Point(132, 76)
+        Me.TextBoxBankNumber.Location = New System.Drawing.Point(7, 85)
         Me.TextBoxBankNumber.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.TextBoxBankNumber.Name = "TextBoxBankNumber"
         Me.TextBoxBankNumber.Size = New System.Drawing.Size(209, 27)
-        Me.TextBoxBankNumber.TabIndex = 5
+        Me.TextBoxBankNumber.TabIndex = 17
         '
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(25, 78)
+        Me.Label10.Location = New System.Drawing.Point(3, 61)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(96, 20)
-        Me.Label10.TabIndex = 4
+        Me.Label10.TabIndex = 16
         Me.Label10.Text = "Bank number"
         '
         'TextBoxTilesetBinaryFilename
         '
-        Me.TextBoxTilesetBinaryFilename.Location = New System.Drawing.Point(132, 27)
+        Me.TextBoxTilesetBinaryFilename.Location = New System.Drawing.Point(7, 30)
         Me.TextBoxTilesetBinaryFilename.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.TextBoxTilesetBinaryFilename.Name = "TextBoxTilesetBinaryFilename"
         Me.TextBoxTilesetBinaryFilename.Size = New System.Drawing.Size(209, 27)
-        Me.TextBoxTilesetBinaryFilename.TabIndex = 3
+        Me.TextBoxTilesetBinaryFilename.TabIndex = 15
         '
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(14, 30)
+        Me.Label5.Location = New System.Drawing.Point(3, 6)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(112, 20)
-        Me.Label5.TabIndex = 2
+        Me.Label5.TabIndex = 14
         Me.Label5.Text = "Binary filename"
+        '
+        'LabelThresholdLuminance
+        '
+        Me.LabelThresholdLuminance.BackColor = System.Drawing.SystemColors.Control
+        Me.LabelThresholdLuminance.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelThresholdLuminance.Location = New System.Drawing.Point(636, 72)
+        Me.LabelThresholdLuminance.Name = "LabelThresholdLuminance"
+        Me.LabelThresholdLuminance.Size = New System.Drawing.Size(36, 29)
+        Me.LabelThresholdLuminance.TabIndex = 25
+        Me.LabelThresholdLuminance.Text = "6"
+        Me.LabelThresholdLuminance.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'OptionsTilesetWindow
         '
@@ -228,8 +240,8 @@ Partial Class OptionsTilesetWindow
         Me.Text = "OptionsTilesetWindow"
         Me.TabControlOptions.ResumeLayout(False)
         Me.TabPageTileset.ResumeLayout(False)
-        Me.GroupBox8.ResumeLayout(False)
-        Me.GroupBox8.PerformLayout()
+        Me.Panel1.ResumeLayout(False)
+        Me.Panel1.PerformLayout()
         CType(Me.TrackBarTilesetThresholdLuminance, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
@@ -241,7 +253,7 @@ Partial Class OptionsTilesetWindow
     Friend WithEvents ButtonApply As Button
     Friend WithEvents TabControlOptions As TabControl
     Friend WithEvents TabPageTileset As TabPage
-    Friend WithEvents GroupBox8 As GroupBox
+    Friend WithEvents Panel1 As Panel
     Friend WithEvents CheckBoxTilesetReverse As CheckBox
     Friend WithEvents CheckBoxTilesetMulticolor As CheckBox
     Friend WithEvents Label14 As Label
@@ -252,4 +264,5 @@ Partial Class OptionsTilesetWindow
     Friend WithEvents Label10 As Label
     Friend WithEvents TextBoxTilesetBinaryFilename As TextBox
     Friend WithEvents Label5 As Label
+    Friend WithEvents LabelThresholdLuminance As Label
 End Class
