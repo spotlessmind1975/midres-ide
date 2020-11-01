@@ -360,7 +360,7 @@ Module MakeHelper
         Dim binaryFileName As String = options.OutputFile
 
         If binaryFileName = "" Then
-            binaryFileName = sourceFileName.Replace(".c", ".o")
+            binaryFileName = _file_entry.Filename.Replace(".c", ".o")
         Else
             binaryFileName = binaryFileName.Replace("{target}", _target)
             binaryFileName = binaryFileName.Replace("{source}", _file_entry.Filename)
