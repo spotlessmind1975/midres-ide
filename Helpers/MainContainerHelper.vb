@@ -12,7 +12,9 @@ Module MainContainerHelper
         Dim defaultFilter As String = "C source (*.c)|*.c|C include (*.h)|*.h|CC65/CL65 configure file (*.cfg)|*.cfg|MAKE file (makefile*.*)|makefile*.*|Any file (*.*)|*.*"
 
         Select Case _kind
-            Case FolderEntry.KindEnum.FOLDER, FolderEntry.KindEnum.EXECUTABLE, FolderEntry.KindEnum.LIBRARY
+            Case FolderEntry.KindEnum.FOLDER
+                Return "CC65/CL65 configure file (*.cfg)|*.cfg|MAKE file (makefile*.*)|makefile*.*|Library file (*.lib)|*.lib|Any file (*.*)|*.*"
+            Case FolderEntry.KindEnum.EXECUTABLE, FolderEntry.KindEnum.LIBRARY
                 Return defaultFilter
             Case FolderEntry.KindEnum.TILESET
                 Return "PNG image (*.png)|*.png|JPEG image (*.jpg)|*.jpg|BINary file (*.bin)|*.bin|Any file (*.*)|*.*"
