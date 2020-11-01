@@ -628,6 +628,8 @@ Public Class OptionsCC65
                                 _codeSizeEnabled = reader.ReadElementContentAsBoolean()
                             Case "CodeSize"
                                 _codeSize = reader.ReadElementContentAsInt()
+                                If _codeSize < 100 Then _codeSize = 100
+                                If _codeSize > 200 Then _codeSize = 200
                             Case "Cpu65C02"
                                 _cpu65C02 = reader.ReadElementContentAsBoolean()
                             Case "CreateDep"
@@ -650,6 +652,8 @@ Public Class OptionsCC65
                                 _registerSpaceEnabled = reader.ReadElementContentAsBoolean()
                             Case "RegisterSpace"
                                 _registerSpace = reader.ReadElementContentAsInt()
+                                If _registerSpace < 1 Then _registerSpace = 1
+                                If _registerSpace > 255 Then _registerSpace = 255
                             Case "RodataName"
                                 _rodataName = reader.ReadElementContentAsString()
                             Case "StandardLanguage"

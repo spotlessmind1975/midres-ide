@@ -302,6 +302,8 @@ Module MakeHelper
             commandLine &= " --writable-strings"
         End If
 
+        MsgBox(commandLine)
+
         Dim oProcess As New Process()
         Dim oStartInfo As New ProcessStartInfo("cc65.exe", commandLine) With {
             .UseShellExecute = False,
