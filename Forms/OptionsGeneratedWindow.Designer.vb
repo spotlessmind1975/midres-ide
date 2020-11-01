@@ -77,7 +77,7 @@ Partial Class OptionsGeneratedWindow
         Me.ButtonApply.Name = "ButtonApply"
         Me.ButtonApply.Size = New System.Drawing.Size(125, 44)
         Me.ButtonApply.TabIndex = 11
-        Me.ButtonApply.Text = "Apply"
+        Me.ButtonApply.Text = "Apply && Close"
         Me.ButtonApply.UseVisualStyleBackColor = True
         '
         'TabControlOptions

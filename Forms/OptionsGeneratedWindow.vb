@@ -42,6 +42,8 @@
 
         ApplyOptionsGenerated(Me, CurrentOptions)
 
+        Me.Close()
+
     End Sub
 
     Private Sub CheckedListBoxDependency_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CheckedListBoxDependency.SelectedIndexChanged

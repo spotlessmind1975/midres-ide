@@ -41,6 +41,8 @@
             SaveOptions()
         End If
 
+        Me.Close()
+
     End Sub
 
     Private Sub ButtonFromGlobal_Click(sender As Object, e As EventArgs) Handles ButtonFromGlobal.Click
