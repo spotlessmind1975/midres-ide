@@ -343,18 +343,6 @@ Module ProjectExplorerHelper
         End If
     End Sub
 
-    Public Sub ShowOptionsWindowExecutable(_project_explorer As ProjectExplorer)
-        Dim tp As TreeNode = _project_explorer.TreeViewProject.SelectedNode
-
-        If Not (tp Is Nothing) Then
-            If TypeOf tp.Tag Is FolderEntry And tp.Tag.Kind = FolderEntry.KindEnum.EXECUTABLE Then
-                If tp.Tag.CurrentOptions Is Nothing Then
-                    tp.Tag.CurrentOptions = ChooseBestOptions().DeepClone()
-                End If
-                '' ShowOptionsWindow(tp.Tag.CurrentOptions, "Executable " & tp.Tag.name & " options", tp.Tag.Kind)
-            End If
-        End If
-    End Sub
 
     Public Sub ShowOptionsWindowTileset(_project_explorer As ProjectExplorer)
         Dim tp As TreeNode = _project_explorer.TreeViewProject.SelectedNode

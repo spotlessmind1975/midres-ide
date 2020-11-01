@@ -164,10 +164,6 @@ Public Class ProjectExplorer
     End Sub
 
 
-    Private Sub ExeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExeToolStripMenuItem.Click
-        ShowOptionsWindowExecutable(Me)
-    End Sub
-
     Private Sub ContextMenuStripLibrary_Opening(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles ContextMenuStripLibrary.Opening
 
     End Sub
@@ -604,5 +600,14 @@ Public Class ProjectExplorer
     Private Sub ProjectExplorer_Closed(sender As Object, e As EventArgs) Handles Me.Closed
         GlobalVars.CurrentProject = Nothing
         UpdateMenuEntries(MainContainer)
+    End Sub
+
+    Private Sub MakeToolStripMenuItem4_Click(sender As Object, e As EventArgs) Handles MakeToolStripMenuItem4.Click
+        ShowOptionsWindowMake(Me)
+    End Sub
+
+    Private Sub CompileToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles CompileToolStripMenuItem1.Click
+        ShowOptionsWindowCC65(Me)
+
     End Sub
 End Class

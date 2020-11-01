@@ -306,6 +306,7 @@ Module OptionsHelper
         _options.ActionBuild = _options_window.TextBoxActionBuild.Text
         _options.ActionClean = _options_window.TextBoxActionClean.Text
         _options.BinaryFilename = _options_window.TextBoxBinaryFileName.Text
+        _options.Complete = _options_window.RadioButtonComplete.Checked
 
         _options.Plus4 = _options_window.CheckBoxPlus4.Checked
         _options.C16 = _options_window.CheckBoxC16.Checked
