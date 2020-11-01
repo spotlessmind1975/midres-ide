@@ -110,7 +110,7 @@ Public Class OptionsCC65
     Private _memoryModel As String
 
     '' -o name               Name the output file
-    Private _outputFile As String
+    Private _outputFile As String = "obj\{target}\{source}.o"
 
     '' -v                    Increase verbosity
 

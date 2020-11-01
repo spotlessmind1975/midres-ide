@@ -41,6 +41,8 @@
             SaveOptions()
         End If
 
+        Me.Close()
+
     End Sub
 
     Private Sub ButtonFromGlobal_Click(sender As Object, e As EventArgs) Handles ButtonFromGlobal.Click
@@ -51,17 +53,10 @@
         UpdateOptionsCC65(Me, GlobalVars.CurrentProject.CurrentOptions.CC65)
     End Sub
 
-    Private Sub CheckBoxRegisterVars_CheckedChanged(sender As Object, e As EventArgs)
-        TrackBarRegisterSpace.Enabled = CheckBoxRegisterVars.Checked
-    End Sub
-
     Private Sub CheckBoxForgetIncPath_CheckedChanged(sender As Object, e As EventArgs)
         DataGridViewIncludeDirs.Enabled = Not CheckBoxForgetIncPath.Checked
     End Sub
 
-    Private Sub CheckBoxSuppressWarnings_CheckedChanged(sender As Object, e As EventArgs)
-        CheckedListBoxCC65Warnings.Enabled = Not CheckBoxSuppressWarnings.Checked
-    End Sub
 
     Private Sub CheckBoxCodeSizeEnabled_CheckedChanged(sender As Object, e As EventArgs)
         TrackBarCodeSize.Enabled = CheckBoxCodeSizeEnabled.Checked
@@ -86,15 +81,6 @@
 
     Private Sub CheckBoxDepTarget_CheckedChanged(sender As Object, e As EventArgs)
         TextBoxDepTargetFileName.Enabled = CheckBoxDepTarget.Enabled And CheckBoxDepTarget.Checked
-    End Sub
-
-    Private Sub CheckBoxInlineFunctions_CheckedChanged(sender As Object, e As EventArgs)
-        If CheckBoxInlineFunctions.Checked Then
-            CheckBoxInlineStdFunctions.Checked = True
-            CheckBoxInlineStdFunctions.Enabled = False
-        Else
-            CheckBoxInlineStdFunctions.Enabled = True
-        End If
     End Sub
 
     Private Sub TrackBarRegisterSpace_Scroll(sender As Object, e As EventArgs)
@@ -131,5 +117,27 @@
 
     Private Sub CheckBoxDepTarget_CheckedChanged_1(sender As Object, e As EventArgs) Handles CheckBoxDepTarget.CheckedChanged
         TextBoxDepTargetFileName.Enabled = CheckBoxDepTarget.Checked
+    End Sub
+
+    Private Sub CheckBoxInlineFunctions_CheckedChanged_1(sender As Object, e As EventArgs) Handles CheckBoxInlineFunctions.CheckedChanged
+        If CheckBoxInlineFunctions.Checked Then
+            CheckBoxInlineStdFunctions.Checked = True
+            CheckBoxInlineStdFunctions.Enabled = False
+        Else
+            CheckBoxInlineStdFunctions.Enabled = True
+        End If
+
+    End Sub
+
+    Private Sub CheckBoxRegisterSpaceEnabled_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBoxRegisterSpaceEnabled.CheckedChanged
+        TrackBarRegisterSpace.Enabled = CheckBoxRegisterSpaceEnabled.Checked
+    End Sub
+
+    Private Sub CheckBoxForgetIncPath_CheckedChanged_1(sender As Object, e As EventArgs) Handles CheckBoxForgetIncPath.CheckedChanged
+        DataGridViewIncludeDirs.Enabled = CheckBoxForgetIncPath.Checked
+    End Sub
+
+    Private Sub CheckBoxSuppressWarnings_CheckedChanged_1(sender As Object, e As EventArgs) Handles CheckBoxSuppressWarnings.CheckedChanged
+        CheckedListBoxCC65Warnings.Enabled = Not CheckBoxSuppressWarnings.Checked
     End Sub
 End Class

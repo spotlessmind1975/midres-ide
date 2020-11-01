@@ -154,7 +154,10 @@ Module OptionsHelper
         _options_window.CheckBoxAllCDecl.Checked = _options.AllCDecl
         _options_window.CheckBoxLocalStrings.Checked = _options.LocalStrings
         _options_window.CheckBoxStaticLocals.Checked = _options.StaticLocals
+        _options_window.DataGridViewSymbols.Columns.Clear()
         _options_window.DataGridViewSymbols.Rows.Clear()
+        _options_window.DataGridViewSymbols.Columns.Add(New DataGridViewTextBoxColumn() With {.HeaderText = "Name", .Width = 250})
+        _options_window.DataGridViewSymbols.Columns.Add(New DataGridViewTextBoxColumn() With {.HeaderText = "Value", .Width = 370})
         For Each symbol In _options.Symbols
             If Trim(symbol) <> "" Then
                 Dim parts() As String = symbol.split("=")
@@ -165,9 +168,12 @@ Module OptionsHelper
                 End If
             End If
         Next
+        _options_window.DataGridViewIncludeDirs.Columns.Clear()
+        _options_window.DataGridViewIncludeDirs.Rows.Clear()
+        _options_window.DataGridViewIncludeDirs.Columns.Add(New DataGridViewTextBoxColumn() With {.HeaderText = "Path", .Width = 620})
         For Each includeDir In _options.IncludeDirs
             If Trim(includeDir) <> "" Then
-                _options_window.DataGridViewSymbols.Rows.Add(includeDir)
+                _options_window.DataGridViewIncludeDirs.Rows.Add(includeDir)
             End If
         Next
         _options_window.CheckBoxOptimizeCode.Checked = _options.OptimizeCode

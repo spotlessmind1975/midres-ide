@@ -4,6 +4,7 @@ Imports ScintillaNET
 Public Class MainContainer
 
     Private _optionsWindow As OptionsWindow
+    Private _optionsCC64Window As OptionsCC65Window
 
     Private Sub NewToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NewToolStripMenuItem.Click
 
@@ -160,7 +161,14 @@ Public Class MainContainer
     End Sub
 
     Private Sub CompileOptionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CompileOptionsToolStripMenuItem.Click
-        ShowOptionsCC65Window(Nothing, "Global compile options")
+        If _optionsCC64Window Is Nothing Then
+            _optionsCC64Window = ShowOptionsCC65Window(Nothing, "Global compile options")
+        ElseIf _optionsCC64Window.IsDisposed Then
+            _optionsCC64Window = ShowOptionsCC65Window(Nothing, "Global compile options")
+        Else
+            _optionsCC64Window.Show()
+        End If
+
     End Sub
 
     Private Sub EmulatorOptionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EmulatorOptionsToolStripMenuItem.Click
