@@ -6,13 +6,13 @@ Public Class OptionsMake
 
     Implements IXmlSerializable
 
-    Private _makeFilename As String
-    Private _dynamicMakefile As Boolean
-    Private _additionalParams As String
-    Private _actionBuild As String
-    Private _actionClean As String
-    Private _binaryFileName As String
-    Private _complete As Boolean
+    Private _makeFilename As String = "makefile"
+    Private _dynamicMakefile As Boolean = False
+    Private _additionalParams As String = ""
+    Private _actionBuild As String = "all"
+    Private _actionClean As String = "clean"
+    Private _binaryFileName As String = "exe/midres.{target}.{support}"
+    Private _complete As Boolean = True
 
     Public Property MakeFilename As String
         Get
