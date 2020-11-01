@@ -128,4 +128,8 @@
     Private Sub CheckBoxCreateFullDep_CheckedChanged_1(sender As Object, e As EventArgs) Handles CheckBoxCreateFullDep.CheckedChanged
         TextBoxCreateFullDepFileName.Enabled = CheckBoxCreateFullDep.Checked
     End Sub
+
+    Private Sub CheckBoxDepTarget_CheckedChanged_1(sender As Object, e As EventArgs) Handles CheckBoxDepTarget.CheckedChanged
+        TextBoxDepTargetFileName.Enabled = CheckBoxDepTarget.Checked
+    End Sub
 End Class
