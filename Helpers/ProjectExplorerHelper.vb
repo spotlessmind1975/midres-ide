@@ -410,7 +410,7 @@ Module ProjectExplorerHelper
                 If tp.Tag.CurrentOptions Is Nothing Then
                     tp.Tag.CurrentOptions = ChooseBestOptions().DeepClone()
                 End If
-                ShowOptionsCC65Window(tp.Tag.CurrentOptions.Make, "Make project options")
+                ShowOptionsMakeWindow(tp.Tag.CurrentOptions.Make, "Make project options")
             End If
         End If
     End Sub
@@ -420,10 +420,10 @@ Module ProjectExplorerHelper
 
         If Not (tp Is Nothing) Then
             If TypeOf tp.Tag Is FileEntry And tp.Tag.Kind = FileEntry.KindEnum.GENERATED Then
-                If tp.Tag.CurrentOptions Is Nothing Then
-                    tp.Tag.CurrentOptions = New OptionsGenerated
+                If tp.Tag.Generated Is Nothing Then
+                    tp.Tag.Generated = New OptionsGenerated
                 End If
-                ShowOptionsGeneratedWindow(tp.Tag.CurrentOptions, "Generated file " & tp.Tag.name & " options")
+                ShowOptionsGeneratedWindow(tp.Tag.Generated, "Generated file " & tp.Tag.name & " options")
             End If
         End If
     End Sub

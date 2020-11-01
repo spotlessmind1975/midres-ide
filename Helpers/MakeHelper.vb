@@ -95,6 +95,7 @@ Module MakeHelper
         Dim parts() = _output.Split(vbCrLf)
 
         For Each part In parts
+            Dim compiler As Boolean = False
             Dim warning As Integer = 0
             Dim linker As Boolean = False
             If (Trim(part) <> "") Then
@@ -107,6 +108,10 @@ Module MakeHelper
                 End If
                 If (InStr(part, "ld65: ")) Then
                     linker = True
+                End If
+                If (InStr(part, "cc65.exe ")) Then
+                    warning = 2
+                    compiler = True
                 End If
                 If (warning > 0) Then
 
@@ -215,7 +220,7 @@ Module MakeHelper
 
     Private Function CompileInternal(_working_directory As String, _source_filename As String, _target_filename As String, _target As String, _options As OptionsCC65) As String
 
-        Dim commandLine As String = ""
+        Dim commandLine As String = _source_filename
 
         commandLine &= " --target " & _target
         If _options.AllCDecl Then
@@ -332,6 +337,12 @@ Module MakeHelper
         ClearAllMarkers()
 
         ClearErrorOutput()
+
+        Try
+            MkDir(_working_directory)
+        Catch ex As Exception
+
+        End Try
 
         Dim errorString = CompileInternal(_working_directory, _source_file, _target_file, _target, _options)
 

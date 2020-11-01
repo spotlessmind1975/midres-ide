@@ -163,9 +163,6 @@ Public Class ProjectExplorer
         ConsiderFolderAs(Me, FolderEntry.KindEnum.LIBRARY)
     End Sub
 
-    Private Sub LibToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LibToolStripMenuItem.Click
-        ShowOptionsWindowLibrary(Me)
-    End Sub
 
     Private Sub ExeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExeToolStripMenuItem.Click
         ShowOptionsWindowExecutable(Me)
@@ -594,5 +591,13 @@ Public Class ProjectExplorer
 
     Private Sub ToolStripMenuItem42_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem42.Click
         CompileObjectNodeForTarget(Me, "atarilo")
+    End Sub
+
+    Private Sub MakeToolStripMenuItem3_Click(sender As Object, e As EventArgs) Handles MakeToolStripMenuItem3.Click
+        ShowOptionsWindowMake(Me)
+    End Sub
+
+    Private Sub CompilerToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CompilerToolStripMenuItem.Click
+        ShowOptionsWindowCC65(Me)
     End Sub
 End Class

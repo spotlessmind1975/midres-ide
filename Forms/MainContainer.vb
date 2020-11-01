@@ -5,6 +5,7 @@ Public Class MainContainer
 
     Private _optionsWindow As OptionsWindow
     Private _optionsCC64Window As OptionsCC65Window
+    Private _optionsEmulatorsWindow As OptionsEmulatorsWindow
 
     Private Sub NewToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NewToolStripMenuItem.Click
 
@@ -161,9 +162,12 @@ Public Class MainContainer
     End Sub
 
     Private Sub CompileOptionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CompileOptionsToolStripMenuItem.Click
+        If Not (_optionsCC64Window Is Nothing) Then
+            If _optionsCC64Window.IsDisposed Then
+                _optionsCC64Window = Nothing
+            End If
+        End If
         If _optionsCC64Window Is Nothing Then
-            _optionsCC64Window = ShowOptionsCC65Window(Nothing, "Global compile options")
-        ElseIf _optionsCC64Window.IsDisposed Then
             _optionsCC64Window = ShowOptionsCC65Window(Nothing, "Global compile options")
         Else
             _optionsCC64Window.Show()
@@ -172,7 +176,18 @@ Public Class MainContainer
     End Sub
 
     Private Sub EmulatorOptionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EmulatorOptionsToolStripMenuItem.Click
-        ShowOptionsEmulatorsWindow(GlobalVars.CurrentOptions.Emulators, "Global emulators options")
+        If Not (_optionsEmulatorsWindow Is Nothing) Then
+            If _optionsEmulatorsWindow.IsDisposed Then
+                _optionsEmulatorsWindow = Nothing
+            End If
+        End If
+
+        If _optionsEmulatorsWindow Is Nothing Then
+            _optionsEmulatorsWindow = ShowOptionsEmulatorsWindow(Nothing, "Global emulators options")
+        Else
+            _optionsEmulatorsWindow.Show()
+        End If
+
     End Sub
 
     Private Sub TilesetOptionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TilesetOptionsToolStripMenuItem.Click
