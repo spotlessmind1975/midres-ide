@@ -29,6 +29,11 @@ Partial Class MainContainer
         Me.OpenToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.SaveToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.SaveAsToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.OptionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MakeToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CompileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.EmulatorToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TilesetToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem4 = New System.Windows.Forms.ToolStripSeparator()
         Me.RecentOpenedProjectsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -57,18 +62,13 @@ Partial Class MainContainer
         Me.WindowsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.OutputWindowToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ProjectExplorerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MainStatusStrip = New System.Windows.Forms.StatusStrip()
-        Me.MainStatusStripLabel = New System.Windows.Forms.ToolStripStatusLabel()
         Me.GlobalsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MakeOptionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CompileOptionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TilesetOptionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EmulatorOptionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.OptionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MakeToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CompileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.EmulatorToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TilesetToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TilesetOptionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MainStatusStrip = New System.Windows.Forms.StatusStrip()
+        Me.MainStatusStripLabel = New System.Windows.Forms.ToolStripStatusLabel()
         Me.MenuStrip1.SuspendLayout()
         Me.MainStatusStrip.SuspendLayout()
         Me.SuspendLayout()
@@ -123,6 +123,41 @@ Partial Class MainContainer
         Me.SaveAsToolStripMenuItem1.Name = "SaveAsToolStripMenuItem1"
         Me.SaveAsToolStripMenuItem1.Size = New System.Drawing.Size(255, 26)
         Me.SaveAsToolStripMenuItem1.Text = "&Save as..."
+        '
+        'OptionsToolStripMenuItem
+        '
+        Me.OptionsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MakeToolStripMenuItem1, Me.CompileToolStripMenuItem, Me.EmulatorToolStripMenuItem, Me.TilesetToolStripMenuItem})
+        Me.OptionsToolStripMenuItem.Name = "OptionsToolStripMenuItem"
+        Me.OptionsToolStripMenuItem.Size = New System.Drawing.Size(255, 26)
+        Me.OptionsToolStripMenuItem.Text = "Options..."
+        '
+        'MakeToolStripMenuItem1
+        '
+        Me.MakeToolStripMenuItem1.Image = CType(resources.GetObject("MakeToolStripMenuItem1.Image"), System.Drawing.Image)
+        Me.MakeToolStripMenuItem1.Name = "MakeToolStripMenuItem1"
+        Me.MakeToolStripMenuItem1.Size = New System.Drawing.Size(224, 26)
+        Me.MakeToolStripMenuItem1.Text = "&Make.."
+        '
+        'CompileToolStripMenuItem
+        '
+        Me.CompileToolStripMenuItem.Image = CType(resources.GetObject("CompileToolStripMenuItem.Image"), System.Drawing.Image)
+        Me.CompileToolStripMenuItem.Name = "CompileToolStripMenuItem"
+        Me.CompileToolStripMenuItem.Size = New System.Drawing.Size(224, 26)
+        Me.CompileToolStripMenuItem.Text = "&Compile..."
+        '
+        'EmulatorToolStripMenuItem
+        '
+        Me.EmulatorToolStripMenuItem.Image = CType(resources.GetObject("EmulatorToolStripMenuItem.Image"), System.Drawing.Image)
+        Me.EmulatorToolStripMenuItem.Name = "EmulatorToolStripMenuItem"
+        Me.EmulatorToolStripMenuItem.Size = New System.Drawing.Size(224, 26)
+        Me.EmulatorToolStripMenuItem.Text = "&Emulator..."
+        '
+        'TilesetToolStripMenuItem
+        '
+        Me.TilesetToolStripMenuItem.Image = CType(resources.GetObject("TilesetToolStripMenuItem.Image"), System.Drawing.Image)
+        Me.TilesetToolStripMenuItem.Name = "TilesetToolStripMenuItem"
+        Me.TilesetToolStripMenuItem.Size = New System.Drawing.Size(224, 26)
+        Me.TilesetToolStripMenuItem.Text = "&Tileset..."
         '
         'ExitToolStripMenuItem
         '
@@ -337,22 +372,6 @@ Partial Class MainContainer
         Me.ProjectExplorerToolStripMenuItem.Size = New System.Drawing.Size(336, 26)
         Me.ProjectExplorerToolStripMenuItem.Text = "Project Explorer"
         '
-        'MainStatusStrip
-        '
-        Me.MainStatusStrip.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.MainStatusStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MainStatusStripLabel})
-        Me.MainStatusStrip.Location = New System.Drawing.Point(0, 528)
-        Me.MainStatusStrip.Name = "MainStatusStrip"
-        Me.MainStatusStrip.Padding = New System.Windows.Forms.Padding(1, 0, 19, 0)
-        Me.MainStatusStrip.Size = New System.Drawing.Size(1067, 26)
-        Me.MainStatusStrip.TabIndex = 2
-        '
-        'MainStatusStripLabel
-        '
-        Me.MainStatusStripLabel.Name = "MainStatusStripLabel"
-        Me.MainStatusStripLabel.Size = New System.Drawing.Size(28, 20)
-        Me.MainStatusStripLabel.Text = "1:1"
-        '
         'GlobalsToolStripMenuItem
         '
         Me.GlobalsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MakeOptionsToolStripMenuItem, Me.CompileOptionsToolStripMenuItem, Me.EmulatorOptionsToolStripMenuItem, Me.TilesetOptionsToolStripMenuItem})
@@ -374,13 +393,6 @@ Partial Class MainContainer
         Me.CompileOptionsToolStripMenuItem.Size = New System.Drawing.Size(224, 26)
         Me.CompileOptionsToolStripMenuItem.Text = "&Compile options..."
         '
-        'TilesetOptionsToolStripMenuItem
-        '
-        Me.TilesetOptionsToolStripMenuItem.Image = CType(resources.GetObject("TilesetOptionsToolStripMenuItem.Image"), System.Drawing.Image)
-        Me.TilesetOptionsToolStripMenuItem.Name = "TilesetOptionsToolStripMenuItem"
-        Me.TilesetOptionsToolStripMenuItem.Size = New System.Drawing.Size(224, 26)
-        Me.TilesetOptionsToolStripMenuItem.Text = "&Tileset options..."
-        '
         'EmulatorOptionsToolStripMenuItem
         '
         Me.EmulatorOptionsToolStripMenuItem.Image = CType(resources.GetObject("EmulatorOptionsToolStripMenuItem.Image"), System.Drawing.Image)
@@ -388,40 +400,28 @@ Partial Class MainContainer
         Me.EmulatorOptionsToolStripMenuItem.Size = New System.Drawing.Size(224, 26)
         Me.EmulatorOptionsToolStripMenuItem.Text = "&Emulator options..."
         '
-        'OptionsToolStripMenuItem
+        'TilesetOptionsToolStripMenuItem
         '
-        Me.OptionsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MakeToolStripMenuItem1, Me.CompileToolStripMenuItem, Me.EmulatorToolStripMenuItem, Me.TilesetToolStripMenuItem})
-        Me.OptionsToolStripMenuItem.Name = "OptionsToolStripMenuItem"
-        Me.OptionsToolStripMenuItem.Size = New System.Drawing.Size(255, 26)
-        Me.OptionsToolStripMenuItem.Text = "Options..."
+        Me.TilesetOptionsToolStripMenuItem.Image = CType(resources.GetObject("TilesetOptionsToolStripMenuItem.Image"), System.Drawing.Image)
+        Me.TilesetOptionsToolStripMenuItem.Name = "TilesetOptionsToolStripMenuItem"
+        Me.TilesetOptionsToolStripMenuItem.Size = New System.Drawing.Size(224, 26)
+        Me.TilesetOptionsToolStripMenuItem.Text = "&Tileset options..."
         '
-        'MakeToolStripMenuItem1
+        'MainStatusStrip
         '
-        Me.MakeToolStripMenuItem1.Image = CType(resources.GetObject("MakeToolStripMenuItem1.Image"), System.Drawing.Image)
-        Me.MakeToolStripMenuItem1.Name = "MakeToolStripMenuItem1"
-        Me.MakeToolStripMenuItem1.Size = New System.Drawing.Size(224, 26)
-        Me.MakeToolStripMenuItem1.Text = "&Make.."
+        Me.MainStatusStrip.ImageScalingSize = New System.Drawing.Size(20, 20)
+        Me.MainStatusStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MainStatusStripLabel})
+        Me.MainStatusStrip.Location = New System.Drawing.Point(0, 528)
+        Me.MainStatusStrip.Name = "MainStatusStrip"
+        Me.MainStatusStrip.Padding = New System.Windows.Forms.Padding(1, 0, 19, 0)
+        Me.MainStatusStrip.Size = New System.Drawing.Size(1067, 26)
+        Me.MainStatusStrip.TabIndex = 2
         '
-        'CompileToolStripMenuItem
+        'MainStatusStripLabel
         '
-        Me.CompileToolStripMenuItem.Image = CType(resources.GetObject("CompileToolStripMenuItem.Image"), System.Drawing.Image)
-        Me.CompileToolStripMenuItem.Name = "CompileToolStripMenuItem"
-        Me.CompileToolStripMenuItem.Size = New System.Drawing.Size(224, 26)
-        Me.CompileToolStripMenuItem.Text = "&Compile..."
-        '
-        'EmulatorToolStripMenuItem
-        '
-        Me.EmulatorToolStripMenuItem.Image = CType(resources.GetObject("EmulatorToolStripMenuItem.Image"), System.Drawing.Image)
-        Me.EmulatorToolStripMenuItem.Name = "EmulatorToolStripMenuItem"
-        Me.EmulatorToolStripMenuItem.Size = New System.Drawing.Size(224, 26)
-        Me.EmulatorToolStripMenuItem.Text = "&Emulator..."
-        '
-        'TilesetToolStripMenuItem
-        '
-        Me.TilesetToolStripMenuItem.Image = CType(resources.GetObject("TilesetToolStripMenuItem.Image"), System.Drawing.Image)
-        Me.TilesetToolStripMenuItem.Name = "TilesetToolStripMenuItem"
-        Me.TilesetToolStripMenuItem.Size = New System.Drawing.Size(224, 26)
-        Me.TilesetToolStripMenuItem.Text = "&Tileset..."
+        Me.MainStatusStripLabel.Name = "MainStatusStripLabel"
+        Me.MainStatusStripLabel.Size = New System.Drawing.Size(28, 20)
+        Me.MainStatusStripLabel.Text = "1:1"
         '
         'MainContainer
         '

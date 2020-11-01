@@ -352,9 +352,11 @@ Module MainContainerHelper
         If GlobalVars.CurrentProject Is Nothing Then
             _main_container.SaveToolStripMenuItem1.Enabled = False
             _main_container.SaveAsToolStripMenuItem1.Enabled = False
+            _main_container.OptionsToolStripMenuItem.Enabled = False
         Else
             _main_container.SaveToolStripMenuItem1.Enabled = True
             _main_container.SaveAsToolStripMenuItem1.Enabled = True
+            _main_container.OptionsToolStripMenuItem.Enabled = True
         End If
 
     End Sub
