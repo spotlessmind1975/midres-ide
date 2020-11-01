@@ -11,6 +11,7 @@ Public Class RecentFileEntry
 
     Public Sub New(fileName As String, name As String)
         _filename = fileName
+        _name = name
     End Sub
 
     Public Sub New()

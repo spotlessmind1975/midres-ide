@@ -600,4 +600,9 @@ Public Class ProjectExplorer
     Private Sub CompilerToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CompilerToolStripMenuItem.Click
         ShowOptionsWindowCC65(Me)
     End Sub
+
+    Private Sub ProjectExplorer_Closed(sender As Object, e As EventArgs) Handles Me.Closed
+        GlobalVars.CurrentProject = Nothing
+        UpdateMenuEntries(MainContainer)
+    End Sub
 End Class
