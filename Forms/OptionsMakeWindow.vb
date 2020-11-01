@@ -52,5 +52,4 @@
     Private Sub ButtonFromProject_Click(sender As Object, e As EventArgs) Handles ButtonFromProject.Click
         UpdateOptionsMake(Me, GlobalVars.CurrentProject.CurrentOptions.Make)
     End Sub
-
 End Class

@@ -21,7 +21,7 @@ Public Class FolderEntry
     Private _name As String
     Private _description As String
     Private _path As String
-    Private _kind As KindEnum
+    Private _kind As KindEnum = KindEnum.FOLDER
     Private _folders As Collection
     Private _files As Collection
     Private _opened As Boolean

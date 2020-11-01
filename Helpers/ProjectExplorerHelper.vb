@@ -419,7 +419,7 @@ Module ProjectExplorerHelper
 
     Public Sub ShowOptionsWindowMake(_project_explorer As ProjectExplorer)
         Dim tp As TreeNode = _project_explorer.TreeViewProject.SelectedNode
-        Dim windowtitle As String
+        Dim windowtitle As String = ""
 
         If Not (tp Is Nothing) Then
             Dim tag As Object = Nothing

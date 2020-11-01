@@ -103,8 +103,10 @@ Module OptionsHelper
         If (_options Is Nothing) Then
             _options = GlobalVars.CurrentOptions.Make
             _options_window.ButtonRestore.Visible = True
+            _options_window.ButtonFromGlobal.Visible = False
         Else
             _options_window.ButtonRestore.Visible = False
+            _options_window.ButtonFromGlobal.Visible = True
         End If
 
         _options_window.TextBoxMakeFileName.Text = _options.MakeFilename
@@ -264,6 +266,15 @@ Module OptionsHelper
         Next
         _options_window.folders = folders
 
+        _options_window.CheckBoxPlus4.Checked = _options.Plus4
+        _options_window.CheckBoxC16.Checked = _options.C16
+        _options_window.CheckBoxVic20.Checked = _options.Vic20
+        _options_window.CheckBoxVic2024.Checked = _options.Vic2024
+        _options_window.CheckBoxC64.Checked = _options.C64
+        _options_window.CheckBoxC128.Checked = _options.C128
+        _options_window.CheckBoxAtari.Checked = _options.Atari
+        _options_window.CheckBoxAtariLo.Checked = _options.Atarilo
+
     End Sub
 
     Public Sub ApplyOptionsEmulators(_options_window As OptionsEmulatorsWindow, Optional _options As OptionsEmulators = Nothing)
@@ -290,10 +301,11 @@ Module OptionsHelper
         End If
 
         _options.MakeFilename = _options_window.TextBoxMakeFileName.Text
-        _options.DynamicMakefile = _options_window.RadioButtonStaticMakefile.Checked
+        _options.DynamicMakefile = _options_window.RadioButtonDynamicMakefile.Checked
         _options.AdditionalParams = _options_window.TextBoxAdditionalParams.Text
         _options.ActionBuild = _options_window.TextBoxActionBuild.Text
         _options.ActionClean = _options_window.TextBoxActionClean.Text
+        _options.BinaryFilename = _options_window.TextBoxBinaryFileName.Text
 
         _options.Plus4 = _options_window.CheckBoxPlus4.Checked
         _options.C16 = _options_window.CheckBoxC16.Checked
@@ -415,6 +427,15 @@ Module OptionsHelper
                 _options.Dependencies.Add(folders.Item(i + 1), folders.Item(i + 1).GetHashCode())
             End If
         Next
+
+        _options.Plus4 = _options_window.CheckBoxPlus4.Checked
+        _options.C16 = _options_window.CheckBoxC16.Checked
+        _options.Vic20 = _options_window.CheckBoxVic20.Checked
+        _options.Vic2024 = _options_window.CheckBoxVic2024.Checked
+        _options.C64 = _options_window.CheckBoxC64.Checked
+        _options.C128 = _options_window.CheckBoxC128.Checked
+        _options.Atari = _options_window.CheckBoxAtari.Checked
+        _options.Atarilo = _options_window.CheckBoxAtariLo.Checked
 
     End Sub
     Public Function ShowOptionsMakeWindow(_options As OptionsMake, _title As String, Optional _kind As FolderEntry.KindEnum = Nothing) As OptionsMakeWindow

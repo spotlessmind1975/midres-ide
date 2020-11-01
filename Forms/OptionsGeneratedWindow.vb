@@ -46,7 +46,7 @@
 
     End Sub
 
-    Private Sub CheckedListBoxDependency_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CheckedListBoxDependency.SelectedIndexChanged
+    Private Sub CheckedListBoxDependency_SelectedIndexChanged(sender As Object, e As EventArgs)
 
     End Sub
 End Class
