@@ -129,8 +129,10 @@ Module OptionsHelper
         If (_options Is Nothing) Then
             _options = GlobalVars.CurrentOptions.CC65
             _options_window.ButtonRestore.Visible = True
+            _options_window.ButtonFromGlobal.Visible = False
         Else
             _options_window.ButtonRestore.Visible = False
+            _options_window.ButtonFromGlobal.Visible = True
         End If
 
         Dim c As Collection = _options.Warnings
@@ -149,22 +151,30 @@ Module OptionsHelper
         _options_window.CheckBoxAtari.Checked = _options.Atari
         _options_window.CheckBoxAtariLo.Checked = _options.Atarilo
 
+        _options_window.CheckBoxAllCDecl.Checked = _options.AllCDecl
+        _options_window.CheckBoxLocalStrings.Checked = _options.LocalStrings
         _options_window.CheckBoxStaticLocals.Checked = _options.StaticLocals
+        _options_window.DataGridViewSymbols.Rows.Clear()
         For Each symbol In _options.Symbols
-            Dim parts() As String = symbol.split("=")
-            If UBound(parts) = 0 Then
-                _options_window.DataGridViewSymbols.Rows.Add(parts(0), Nothing)
-            Else
-                _options_window.DataGridViewSymbols.Rows.Add(parts(0), parts(1))
+            If Trim(symbol) <> "" Then
+                Dim parts() As String = symbol.split("=")
+                If UBound(parts) = 0 Then
+                    _options_window.DataGridViewSymbols.Rows.Add(parts(0), Nothing)
+                Else
+                    _options_window.DataGridViewSymbols.Rows.Add(parts(0), parts(1))
+                End If
             End If
         Next
         For Each includeDir In _options.IncludeDirs
-            _options_window.ListBoxIncludeDirs.Items.Add(includeDir)
+            If Trim(includeDir) <> "" Then
+                _options_window.DataGridViewSymbols.Rows.Add(includeDir)
+            End If
         Next
         _options_window.CheckBoxOptimizeCode.Checked = _options.OptimizeCode
         _options_window.CheckBoxOptimizeCodeInline.Checked = _options.OptimizeCodeInline
         _options_window.CheckBoxRegisterVars.Checked = _options.RegisterVars
         _options_window.CheckBoxInlineFunctions.Checked = _options.InlineFunctions
+        _options_window.CheckBoxInlineStdFunctions.Checked = _options.InlineStdFunctions
         _options_window.CheckBoxAddSource.Checked = _options.AddSource
         _options_window.CheckBoxSuppressWarnings.Checked = _options.SuppressWarnings
         _options_window.CheckBoxDebugInfo.Checked = _options.DebugInfo
@@ -173,11 +183,18 @@ Module OptionsHelper
         _options_window.TextBoxBssName.Text = _options.BssName
         _options_window.CheckBoxCheckStack.Checked = _options.CheckStack
         _options_window.TextBoxCodeName.Text = _options.CodeName
+        _options_window.CheckBoxCodeSizeEnabled.Checked = _options.CodeSizeEnabled
         _options_window.TrackBarCodeSize.Value = _options.CodeSize
         _options_window.CheckBoxCpu65C02.Checked = _options.Cpu65C02
         _options_window.CheckBoxCreateDep.Checked = _options.CreateDep
+        _options_window.TextBoxDependencyFileName.Text = _options.CreateDepFilename
+        _options_window.CheckBoxCreateFullDep.Checked = _options.CreateFullDep
+        _options_window.TextBoxCreateFullDepFileName.Text = _options.CreateFullDepFilename
+        _options_window.CheckBoxDepTarget.Checked = _options.DepTarget
+        _options_window.TextBoxDepTargetFileName.Text = _options.DepTargetFilename
         _options_window.TextBoxDataName.Text = _options.DataName
         _options_window.CheckBoxForgetIncPath.Checked = _options.ForgetIncPath
+        _options_window.CheckBoxRegisterSpaceEnabled.Checked = _options.RegisterSpaceEnabled
         _options_window.TrackBarRegisterSpace.Value = _options.RegisterSpace
         _options_window.TextBoxRoDataName.Text = _options.RodataName
         Select Case _options.StandardLanguage
@@ -288,23 +305,28 @@ Module OptionsHelper
         _options.Atari = _options_window.CheckBoxAtari.Checked
         _options.Atarilo = _options_window.CheckBoxAtariLo.Checked
 
+        _options.AllCDecl = _options_window.CheckBoxAllCDecl.Checked
+        _options.LocalStrings = _options_window.CheckBoxLocalStrings.Checked
         _options.StaticLocals = _options_window.CheckBoxStaticLocals.Checked
         _options.Symbols.Clear()
         For Each row In _options_window.DataGridViewSymbols.Rows
-            If Not (row.cells(0).Value Is Nothing) Then
+            If Not (row.cells(1).Value Is Nothing) Then
                 _options.Symbols.Add(row.cells(0).Value & "=" & row.cells(1).Value)
-            Else
+            ElseIf Not (row.cells(0).Value Is Nothing) Then
                 _options.Symbols.Add(row.cells(0).Value)
             End If
         Next
         _options.IncludeDirs.Clear()
-        For Each includeDir In _options_window.ListBoxIncludeDirs.Items
-            _options.IncludeDirs.Add(includeDir)
+        For Each row In _options_window.DataGridViewIncludeDirs.Rows
+            If Not (row.cells(0).Value Is Nothing) Then
+                _options.IncludeDirs.Add(row.cells(0).Value)
+            End If
         Next
         _options.OptimizeCode = _options_window.CheckBoxOptimizeCode.Checked
         _options.OptimizeCodeInline = _options_window.CheckBoxOptimizeCodeInline.Checked
         _options.RegisterVars = _options_window.CheckBoxRegisterVars.Checked
         _options.InlineFunctions = _options_window.CheckBoxInlineFunctions.Checked
+        _options.InlineStdFunctions = _options_window.CheckBoxInlineStdFunctions.Checked
         _options.AddSource = _options_window.CheckBoxAddSource.Checked
         _options.SuppressWarnings = _options_window.CheckBoxSuppressWarnings.Checked
         _options.DebugInfo = _options_window.CheckBoxDebugInfo.Checked
@@ -313,11 +335,18 @@ Module OptionsHelper
         _options.BssName = _options_window.TextBoxBssName.Text
         _options.CheckStack = _options_window.CheckBoxCheckStack.Checked
         _options.CodeName = _options_window.TextBoxCodeName.Text
+        _options.CodeSizeEnabled = _options_window.CheckBoxCodeSizeEnabled.Checked
         _options.CodeSize = _options_window.TrackBarCodeSize.Value
         _options.Cpu65C02 = _options_window.CheckBoxCpu65C02.Checked
         _options.CreateDep = _options_window.CheckBoxCreateDep.Checked
+        _options.CreateDepFilename = _options_window.TextBoxDependencyFileName.Text
+        _options.CreateFullDep = _options_window.CheckBoxCreateFullDep.Checked
+        _options.CreateFullDepFilename = _options_window.TextBoxCreateFullDepFileName.Text
+        _options.DepTarget = _options_window.CheckBoxDepTarget.Checked
+        _options.DepTargetFilename = _options_window.TextBoxDepTargetFileName.Text
         _options.DataName = _options_window.TextBoxDataName.Text
         _options.ForgetIncPath = _options_window.CheckBoxForgetIncPath.Checked
+        _options.RegisterSpaceEnabled = _options_window.CheckBoxRegisterSpaceEnabled.Checked
         _options.RegisterSpace = _options_window.TrackBarRegisterSpace.Value
         _options.RodataName = _options_window.TextBoxRoDataName.Text
         If _options_window.RadioButtonCC65.Checked Then

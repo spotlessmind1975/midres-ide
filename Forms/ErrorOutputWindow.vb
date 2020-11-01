@@ -1,6 +1,7 @@
 ﻿Public Class ErrorOutputWindow
 
     Private _currentFolder As FolderEntry
+    Private _currentFile As FileEntry
 
     Public Property CurrentFolder As FolderEntry
         Get
@@ -10,6 +11,16 @@
             _currentFolder = value
         End Set
     End Property
+
+    Public Property CurrentFile As FileEntry
+        Get
+            Return _currentFile
+        End Get
+        Set(value As FileEntry)
+            _currentFile = value
+        End Set
+    End Property
+
 
     Private Sub ResizeMe()
         ListBoxOutput.Left = 0
@@ -57,6 +68,11 @@
 
             If eoe.Kind = 1 Then
                 IgnoreMessagenextTimeToolStripMenuItem.Enabled = True
+                If CurrentFile Is Nothing Then
+                    OnThisFileToolStripMenuItem.Enabled = False
+                Else
+                    OnThisFileToolStripMenuItem.Enabled = True
+                End If
                 If CurrentFolder Is Nothing Then
                     OnThisfolderToolStripMenuItem.Enabled = False
                 Else
@@ -109,6 +125,15 @@
     End Sub
 
     Private Sub ContextMenuStripWarnings_Opening(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles ContextMenuStripWarnings.Opening
+
+    End Sub
+
+    Private Sub OnThisFileToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OnThisFileToolStripMenuItem.Click
+        If Not (CurrentFile Is Nothing) Then
+            IgnoreMessageNextTime(Me, CurrentFile.CC65)
+        End If
+
+        UpdateMenu()
 
     End Sub
 End Class

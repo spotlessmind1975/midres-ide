@@ -160,7 +160,7 @@ Public Class MainContainer
     End Sub
 
     Private Sub CompileOptionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CompileOptionsToolStripMenuItem.Click
-        ShowOptionsCC65Window(GlobalVars.CurrentOptions.CC65, "Global compile options")
+        ShowOptionsCC65Window(Nothing, "Global compile options")
     End Sub
 
     Private Sub EmulatorOptionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EmulatorOptionsToolStripMenuItem.Click

@@ -15,7 +15,11 @@ Module ProjectExplorerHelper
 
         Select Case _file_entry.Kind
             Case FileEntry.KindEnum.NORMAL
-                s.ContextMenuStrip = ProjectExplorer.ContextMenuStripFile
+                If LCase(Path.GetExtension(_file_entry.Filename)) = ".c" Then
+                    s.ContextMenuStrip = ProjectExplorer.ContextMenuStripSource
+                Else
+                    s.ContextMenuStrip = ProjectExplorer.ContextMenuStripFile
+                End If
             Case FileEntry.KindEnum.GENERATED
                 s.ContextMenuStrip = ProjectExplorer.ContextMenuStripGenerated
         End Select
@@ -276,7 +280,11 @@ Module ProjectExplorerHelper
             tp.Tag.Kind = _kind
             Select Case _kind
                 Case FileEntry.KindEnum.NORMAL
-                    tp.ContextMenuStrip = _project_explorer.ContextMenuStripFile
+                    If LCase(Path.GetExtension(tp.Tag.filename)) = ".c" Then
+                        tp.ContextMenuStrip = _project_explorer.ContextMenuStripSource
+                    Else
+                        tp.ContextMenuStrip = _project_explorer.ContextMenuStripFile
+                    End If
                 Case FileEntry.KindEnum.GENERATED
                     tp.ContextMenuStrip = _project_explorer.ContextMenuStripGenerated
                 Case Else
@@ -380,10 +388,16 @@ Module ProjectExplorerHelper
         If Not (tp Is Nothing) Then
             If TypeOf tp.Tag Is FolderEntry Then
                 If (tp.Tag.Kind = FolderEntry.KindEnum.EXECUTABLE Or tp.Tag.Kind = FolderEntry.KindEnum.LIBRARY) Then
+                    If tp.Tag.CurrentOptions Is Nothing Then
+                        tp.Tag.CurrentOptions = ChooseBestOptions().DeepClone()
+                    End If
                     ShowOptionsCC65Window(tp.Tag.CurrentOptions.CC65, "Compile " & tp.Tag.name & " options")
-                Else
-                    ShowOptionsCC65Window(tp.Tag.cc65, "Compile " & tp.Tag.name & " options")
                 End If
+            ElseIf TypeOf tp.Tag Is FileEntry Then
+                If tp.Tag.cc65 Is Nothing Then
+                    tp.Tag.cc65 = ChooseBestOptions().CC65.DeepClone()
+                End If
+                ShowOptionsCC65Window(tp.Tag.cc65, "Compile " & tp.Tag.name & " options")
             End If
         End If
     End Sub
@@ -433,6 +447,19 @@ Module ProjectExplorerHelper
             If TypeOf tp.Tag Is FolderEntry And tp.Tag.Kind = FolderEntry.KindEnum.EXECUTABLE Then
                 ErrorOutputWindow.CurrentFolder = tp.Tag
                 MakeExecutableFolderForTarget(tp.Tag, _target)
+            End If
+        End If
+
+    End Sub
+
+    Public Sub CompileObjectNodeForTarget(_project_explorer As ProjectExplorer, _target As String)
+        Dim tp As TreeNode = _project_explorer.TreeViewProject.SelectedNode
+        Dim tpp As TreeNode = tp.Parent
+
+        If Not (tp Is Nothing) And Not (tpp Is Nothing) Then
+            If TypeOf tp.Tag Is FileEntry And LCase(Path.GetExtension(tp.Tag.filename)) = ".c" Then
+                ErrorOutputWindow.CurrentFile = tp.Tag
+                CompileObjectForTarget(tp.Tag, tpp.Tag, _target)
             End If
         End If
 

@@ -8,8 +8,8 @@ Public Class FileEntry
 
     Private _persistentHashCode As Object
     Public Enum KindEnum
-        NORMAL = 1
-        GENERATED = 2
+        NORMAL = 0
+        GENERATED = 1
     End Enum
 
     Private _name As String

@@ -44,12 +44,17 @@ Public Class OptionsCC65
     Private _atari As Boolean
     Private _atarilo As Boolean
 
+    '' --all-cdecl          Make functions default to __cdecl__
+    Public _allCDecl As Boolean
+
     '' -Cl                   Make local variables static
     '' --static-locals       Make local variables static
     Private _staticLocals As Boolean
 
     '' -Dsym[=defn]          Define a symbol
     Private _symbols As Collection = New Collection
+
+    '' -E                     Stop after the preprocessing stage
 
     ''  -I dir                Set an include directory search path
     ''  --include-dir dir     Set an include directory search path
@@ -66,8 +71,12 @@ Public Class OptionsCC65
     '' --register-vars        Enable register variables
     Private _registerVars As Boolean
 
-    ''  -Os                   Inline some known functions
+    ''  -Os                     Inline some known functions
+    ''  --eagerly-inline-funcs  Eagerly inline some known functions
     Private _inlineFunctions As Boolean
+
+    '' --inline-stdfuncs        Inline some standard functions
+    Private _inlineStdFunctions As Boolean
 
     ''  -T                    Include source as comment
     ''  --add-source          Include source as comment
@@ -86,12 +95,19 @@ Public Class OptionsCC65
     '' --debug-info          Add debug info to object file
     Private _debugInfo As Boolean
 
+    '' --debug-opt name
+    '' --list-opt-steps
+    '' --debug-opt-output
+
     '' -h                    Help (this text)
     '' --help                Help (this text)
 
     '' -j                    Default characters are signed
     '' --signed-chars        Default characters are signed
     Private _signedChars As Boolean
+
+    '' -mm model             Set the memory model
+    Private _memoryModel As String
 
     '' -o name               Name the output file
     Private _outputFile As String
@@ -107,14 +123,25 @@ Public Class OptionsCC65
     '' --code-name seg       Set the name of the CODE segment
     Private _codeName As String
 
+    Private _codeSizeEnabled As Boolean
+
     '' --codesize x          Accept larger code by factor x
-    Private _codeSize As Integer
+    Private _codeSize As Integer = 100
 
     '' --cpu type            Set cpu type
     Private _cpu65C02 As Boolean
 
-    '' --create-dep          Create a make dependency file
+    '' --create-dep name         Create a make dependency file
     Private _createDep As Boolean
+    Private _createDepFilename As String
+
+    '' create-full-dep name         Create a full make dependency file
+    Private _createFullDep As Boolean
+    Private _createFullDepFilename As String
+
+    '' --dep-target target           Use this dependency target
+    Private _depTarget As Boolean
+    Private _depTargetFilename As String
 
     '' --data-name seg       Set the name of the DATA segment
     Private _dataName As String
@@ -122,8 +149,13 @@ Public Class OptionsCC65
     '' --forget-inc-paths    Forget include search paths
     Private _forgetIncPath As Boolean
 
+    '' --local-strings               Emit string literals immediately
+    Private _localStrings As Boolean
+
     '' --register-space b    Set space available for register variables
-    Private _registerSpace As Integer
+    ''                          The default value for this option is 6 (bytes).
+    Private _registerSpaceEnabled As Boolean
+    Private _registerSpace As Integer = 6
 
     '' --rodata-name seg     Set the name of the RODATA segment
     Private _rodataName As String
@@ -215,12 +247,30 @@ Public Class OptionsCC65
         End Set
     End Property
 
-    Public Property StaticLocals As Boolean
+    Public Property AllCDecl As Boolean
         Get
-            Return _staticlocals
+            Return _allCDecl
         End Get
         Set(value As Boolean)
-            _staticlocals = value
+            _allCDecl = value
+        End Set
+    End Property
+
+    Public Property StaticLocals As Boolean
+        Get
+            Return _staticLocals
+        End Get
+        Set(value As Boolean)
+            _staticLocals = value
+        End Set
+    End Property
+
+    Public Property LocalStrings As Boolean
+        Get
+            Return _localStrings
+        End Get
+        Set(value As Boolean)
+            _localStrings = value
         End Set
     End Property
 
@@ -275,6 +325,15 @@ Public Class OptionsCC65
         End Get
         Set(value As Boolean)
             _inlineFunctions = value
+        End Set
+    End Property
+
+    Public Property InlineStdFunctions As Boolean
+        Get
+            Return _inlineStdFunctions
+        End Get
+        Set(value As Boolean)
+            _inlineStdFunctions = value
         End Set
     End Property
 
@@ -350,6 +409,15 @@ Public Class OptionsCC65
         End Set
     End Property
 
+    Public Property CodeSizeEnabled As Boolean
+        Get
+            Return _codeSizeEnabled
+        End Get
+        Set(value As Boolean)
+            _codeSizeEnabled = value
+        End Set
+    End Property
+
     Public Property CodeSize As Integer
         Get
             Return _codeSize
@@ -377,6 +445,51 @@ Public Class OptionsCC65
         End Set
     End Property
 
+    Public Property CreateDepFilename As String
+        Get
+            Return _createDepFilename
+        End Get
+        Set(value As String)
+            _createDepFilename = value
+        End Set
+    End Property
+
+    Public Property CreateFullDep As Boolean
+        Get
+            Return _createFullDep
+        End Get
+        Set(value As Boolean)
+            _createFullDep = value
+        End Set
+    End Property
+
+    Public Property CreateFullDepFilename As String
+        Get
+            Return _createFullDepFilename
+        End Get
+        Set(value As String)
+            _createFullDepFilename = value
+        End Set
+    End Property
+
+    Public Property DepTarget As Boolean
+        Get
+            Return _depTarget
+        End Get
+        Set(value As Boolean)
+            _depTarget = value
+        End Set
+    End Property
+
+    Public Property DepTargetFilename As String
+        Get
+            Return _depTargetFilename
+        End Get
+        Set(value As String)
+            _depTargetFilename = value
+        End Set
+    End Property
+
     Public Property DataName As String
         Get
             Return _dataName
@@ -392,6 +505,15 @@ Public Class OptionsCC65
         End Get
         Set(value As Boolean)
             _forgetIncPath = value
+        End Set
+    End Property
+
+    Public Property RegisterSpaceEnabled As Boolean
+        Get
+            Return _registerSpaceEnabled
+        End Get
+        Set(value As Boolean)
+            _registerSpaceEnabled = value
         End Set
     End Property
 
@@ -466,6 +588,10 @@ Public Class OptionsCC65
                                 _atari = reader.ReadElementContentAsBoolean()
                             Case "AtariLo"
                                 _atarilo = reader.ReadElementContentAsBoolean()
+                            Case "AllCDecl"
+                                _allCDecl = reader.ReadElementContentAsBoolean()
+                            Case "LocalStrings"
+                                _localStrings = reader.ReadElementContentAsBoolean()
                             Case "StaticLocals"
                                 _staticLocals = reader.ReadElementContentAsBoolean()
                             Case "Symbol"
@@ -480,6 +606,8 @@ Public Class OptionsCC65
                                 _registerVars = reader.ReadElementContentAsBoolean()
                             Case "InlineFunctions"
                                 _inlineFunctions = reader.ReadElementContentAsBoolean()
+                            Case "InlineStdFunctions"
+                                _inlineStdFunctions = reader.ReadElementContentAsBoolean()
                             Case "AddSource"
                                 _addSource = reader.ReadElementContentAsBoolean()
                             Case "SuppressWarnings"
@@ -496,16 +624,30 @@ Public Class OptionsCC65
                                 _checkStack = reader.ReadElementContentAsBoolean()
                             Case "CodeName"
                                 _codeName = reader.ReadElementContentAsString()
+                            Case "CodeSizeEnabled"
+                                _codeSizeEnabled = reader.ReadElementContentAsBoolean()
                             Case "CodeSize"
                                 _codeSize = reader.ReadElementContentAsInt()
                             Case "Cpu65C02"
                                 _cpu65C02 = reader.ReadElementContentAsBoolean()
                             Case "CreateDep"
                                 _createDep = reader.ReadElementContentAsBoolean()
+                            Case "CreateDepFileName"
+                                _createDepFilename = reader.ReadElementContentAsString()
+                            Case "CreateFullDep"
+                                _createFullDep = reader.ReadElementContentAsBoolean()
+                            Case "CreateFullDepFileName"
+                                _createFullDepFilename = reader.ReadElementContentAsString()
+                            Case "DepTarget"
+                                _depTarget = reader.ReadElementContentAsBoolean()
+                            Case "DepTargetFileName"
+                                _depTargetFilename = reader.ReadElementContentAsString()
                             Case "DataName"
                                 _dataName = reader.ReadElementContentAsString()
                             Case "ForgetIncPath"
                                 _forgetIncPath = reader.ReadElementContentAsBoolean()
+                            Case "RegisterSpaceEnabled"
+                                _registerSpaceEnabled = reader.ReadElementContentAsBoolean()
                             Case "RegisterSpace"
                                 _registerSpace = reader.ReadElementContentAsInt()
                             Case "RodataName"
@@ -594,8 +736,24 @@ Public Class OptionsCC65
         End If
         writer.WriteEndElement()
 
+        writer.WriteStartElement("AllCDecl")
+        If (_allCDecl) Then
+            writer.WriteString("true")
+        Else
+            writer.WriteString("false")
+        End If
+        writer.WriteEndElement()
+
         writer.WriteStartElement("StaticLocals")
         If (_staticLocals) Then
+            writer.WriteString("true")
+        Else
+            writer.WriteString("false")
+        End If
+        writer.WriteEndElement()
+
+        writer.WriteStartElement("LocalStrings")
+        If (_localStrings) Then
             writer.WriteString("true")
         Else
             writer.WriteString("false")
@@ -640,6 +798,14 @@ Public Class OptionsCC65
 
         writer.WriteStartElement("InlineFunctions")
         If (_inlineFunctions) Then
+            writer.WriteString("true")
+        Else
+            writer.WriteString("false")
+        End If
+        writer.WriteEndElement()
+
+        writer.WriteStartElement("InlineStdFunctions")
+        If (_inlineStdFunctions) Then
             writer.WriteString("true")
         Else
             writer.WriteString("false")
@@ -718,12 +884,49 @@ Public Class OptionsCC65
         End If
         writer.WriteEndElement()
 
+        writer.WriteStartElement("CreateDepFileName")
+        writer.WriteString(_createDepFilename)
+        writer.WriteEndElement()
+
+        writer.WriteStartElement("CreateFullDep")
+        If (_createFullDep) Then
+            writer.WriteString("true")
+        Else
+            writer.WriteString("false")
+        End If
+        writer.WriteEndElement()
+
+        writer.WriteStartElement("CreateFullDepFileName")
+        writer.WriteString(_createDepFilename)
+        writer.WriteEndElement()
+
+        writer.WriteStartElement("DepTarget")
+        If (_depTarget) Then
+            writer.WriteString("true")
+        Else
+            writer.WriteString("false")
+        End If
+        writer.WriteEndElement()
+
+        writer.WriteStartElement("DepTargetFileName")
+        writer.WriteString(_depTargetFilename)
+        writer.WriteEndElement()
+
         writer.WriteStartElement("DataName")
         writer.WriteString(_dataName)
         writer.WriteEndElement()
 
         writer.WriteStartElement("ForgetIncPath")
         If (_forgetIncPath) Then
+            writer.WriteString("true")
+        Else
+            writer.WriteString("false")
+        End If
+        writer.WriteEndElement()
+
+
+        writer.WriteStartElement("RegisterSpaceEnabled")
+        If (_registerSpaceEnabled) Then
             writer.WriteString("true")
         Else
             writer.WriteString("false")

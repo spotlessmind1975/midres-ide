@@ -30,6 +30,7 @@ Partial Class ErrorOutputWindow
         Me.OnThisfolderToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.OnThisProjectToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GloballyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.OnThisFileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ContextMenuStripWarnings.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -54,7 +55,7 @@ Partial Class ErrorOutputWindow
         '
         'IgnoreMessagenextTimeToolStripMenuItem
         '
-        Me.IgnoreMessagenextTimeToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OnThisfolderToolStripMenuItem, Me.OnThisProjectToolStripMenuItem, Me.GloballyToolStripMenuItem})
+        Me.IgnoreMessagenextTimeToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OnThisFileToolStripMenuItem, Me.OnThisfolderToolStripMenuItem, Me.OnThisProjectToolStripMenuItem, Me.GloballyToolStripMenuItem})
         Me.IgnoreMessagenextTimeToolStripMenuItem.Name = "IgnoreMessagenextTimeToolStripMenuItem"
         Me.IgnoreMessagenextTimeToolStripMenuItem.Size = New System.Drawing.Size(259, 24)
         Me.IgnoreMessagenextTimeToolStripMenuItem.Text = "Ignore message (next time)"
@@ -62,20 +63,26 @@ Partial Class ErrorOutputWindow
         'OnThisfolderToolStripMenuItem
         '
         Me.OnThisfolderToolStripMenuItem.Name = "OnThisfolderToolStripMenuItem"
-        Me.OnThisfolderToolStripMenuItem.Size = New System.Drawing.Size(189, 26)
+        Me.OnThisfolderToolStripMenuItem.Size = New System.Drawing.Size(224, 26)
         Me.OnThisfolderToolStripMenuItem.Text = "On this &folder"
         '
         'OnThisProjectToolStripMenuItem
         '
         Me.OnThisProjectToolStripMenuItem.Name = "OnThisProjectToolStripMenuItem"
-        Me.OnThisProjectToolStripMenuItem.Size = New System.Drawing.Size(189, 26)
+        Me.OnThisProjectToolStripMenuItem.Size = New System.Drawing.Size(224, 26)
         Me.OnThisProjectToolStripMenuItem.Text = "On this project"
         '
         'GloballyToolStripMenuItem
         '
         Me.GloballyToolStripMenuItem.Name = "GloballyToolStripMenuItem"
-        Me.GloballyToolStripMenuItem.Size = New System.Drawing.Size(189, 26)
+        Me.GloballyToolStripMenuItem.Size = New System.Drawing.Size(224, 26)
         Me.GloballyToolStripMenuItem.Text = "Globally"
+        '
+        'OnThisFileToolStripMenuItem
+        '
+        Me.OnThisFileToolStripMenuItem.Name = "OnThisFileToolStripMenuItem"
+        Me.OnThisFileToolStripMenuItem.Size = New System.Drawing.Size(224, 26)
+        Me.OnThisFileToolStripMenuItem.Text = "On this file"
         '
         'ErrorOutputWindow
         '
@@ -99,4 +106,5 @@ Partial Class ErrorOutputWindow
     Friend WithEvents OnThisfolderToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents OnThisProjectToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents GloballyToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents OnThisFileToolStripMenuItem As ToolStripMenuItem
 End Class

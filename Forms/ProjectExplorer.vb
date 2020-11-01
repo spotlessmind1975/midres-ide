@@ -563,4 +563,36 @@ Public Class ProjectExplorer
     Private Sub OptionsToolStripMenuItem3_Click(sender As Object, e As EventArgs) Handles OptionsToolStripMenuItem3.Click
         ShowOptionsWindowCC65(Me)
     End Sub
+
+    Private Sub ToolStripMenuItem35_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem35.Click
+        CompileObjectNodeForTarget(Me, "c16")
+    End Sub
+
+    Private Sub ToolStripMenuItem36_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem36.Click
+        CompileObjectNodeForTarget(Me, "vic20")
+    End Sub
+
+    Private Sub ToolStripMenuItem37_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem37.Click
+        CompileObjectNodeForTarget(Me, "vic2024")
+    End Sub
+
+    Private Sub ToolStripMenuItem38_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem38.Click
+        CompileObjectNodeForTarget(Me, "c64")
+    End Sub
+
+    Private Sub ToolStripMenuItem39_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem39.Click
+        CompileObjectNodeForTarget(Me, "c128")
+    End Sub
+
+    Private Sub ToolStripMenuItem40_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem40.Click
+        CompileObjectNodeForTarget(Me, "plus4")
+    End Sub
+
+    Private Sub ToolStripMenuItem41_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem41.Click
+        CompileObjectNodeForTarget(Me, "atari")
+    End Sub
+
+    Private Sub ToolStripMenuItem42_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem42.Click
+        CompileObjectNodeForTarget(Me, "atarilo")
+    End Sub
 End Class

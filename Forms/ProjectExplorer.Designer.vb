@@ -149,10 +149,20 @@ Partial Class ProjectExplorer
         Me.ConsiderAsToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
         Me.NormalToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ContextMenuStripSource = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ToolStripMenuItem33 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem35 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem36 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem37 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem38 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem39 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem40 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem41 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem42 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.OptionsToolStripMenuItem3 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem34 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripMenuItem25 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem31 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem32 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.OptionsToolStripMenuItem3 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ContextMenuStripFolder.SuspendLayout()
         Me.ContextMenuStripFile.SuspendLayout()
         Me.ContextMenuStripProject.SuspendLayout()
@@ -1004,9 +1014,77 @@ Partial Class ProjectExplorer
         'ContextMenuStripSource
         '
         Me.ContextMenuStripSource.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.ContextMenuStripSource.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem25, Me.ToolStripMenuItem31, Me.ToolStripMenuItem32, Me.OptionsToolStripMenuItem3})
+        Me.ContextMenuStripSource.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem33, Me.OptionsToolStripMenuItem3, Me.ToolStripMenuItem34, Me.ToolStripMenuItem25, Me.ToolStripMenuItem31, Me.ToolStripMenuItem32})
         Me.ContextMenuStripSource.Name = "ContextMenuStripSource"
-        Me.ContextMenuStripSource.Size = New System.Drawing.Size(215, 136)
+        Me.ContextMenuStripSource.Size = New System.Drawing.Size(215, 168)
+        '
+        'ToolStripMenuItem33
+        '
+        Me.ToolStripMenuItem33.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem35, Me.ToolStripMenuItem36, Me.ToolStripMenuItem37, Me.ToolStripMenuItem38, Me.ToolStripMenuItem39, Me.ToolStripMenuItem40, Me.ToolStripMenuItem41, Me.ToolStripMenuItem42})
+        Me.ToolStripMenuItem33.Image = CType(resources.GetObject("ToolStripMenuItem33.Image"), System.Drawing.Image)
+        Me.ToolStripMenuItem33.Name = "ToolStripMenuItem33"
+        Me.ToolStripMenuItem33.Size = New System.Drawing.Size(214, 26)
+        Me.ToolStripMenuItem33.Text = "&Compile..."
+        '
+        'ToolStripMenuItem35
+        '
+        Me.ToolStripMenuItem35.Name = "ToolStripMenuItem35"
+        Me.ToolStripMenuItem35.Size = New System.Drawing.Size(236, 26)
+        Me.ToolStripMenuItem35.Text = "C16"
+        '
+        'ToolStripMenuItem36
+        '
+        Me.ToolStripMenuItem36.Name = "ToolStripMenuItem36"
+        Me.ToolStripMenuItem36.Size = New System.Drawing.Size(236, 26)
+        Me.ToolStripMenuItem36.Text = "VIC-20"
+        '
+        'ToolStripMenuItem37
+        '
+        Me.ToolStripMenuItem37.Name = "ToolStripMenuItem37"
+        Me.ToolStripMenuItem37.Size = New System.Drawing.Size(236, 26)
+        Me.ToolStripMenuItem37.Text = "VIC-20 (24 KB)"
+        '
+        'ToolStripMenuItem38
+        '
+        Me.ToolStripMenuItem38.Name = "ToolStripMenuItem38"
+        Me.ToolStripMenuItem38.Size = New System.Drawing.Size(236, 26)
+        Me.ToolStripMenuItem38.Text = "C64"
+        '
+        'ToolStripMenuItem39
+        '
+        Me.ToolStripMenuItem39.Name = "ToolStripMenuItem39"
+        Me.ToolStripMenuItem39.Size = New System.Drawing.Size(236, 26)
+        Me.ToolStripMenuItem39.Text = "C128"
+        '
+        'ToolStripMenuItem40
+        '
+        Me.ToolStripMenuItem40.Name = "ToolStripMenuItem40"
+        Me.ToolStripMenuItem40.Size = New System.Drawing.Size(236, 26)
+        Me.ToolStripMenuItem40.Text = "PLUS/4"
+        '
+        'ToolStripMenuItem41
+        '
+        Me.ToolStripMenuItem41.Name = "ToolStripMenuItem41"
+        Me.ToolStripMenuItem41.Size = New System.Drawing.Size(236, 26)
+        Me.ToolStripMenuItem41.Text = "ATARI (8 bit)"
+        '
+        'ToolStripMenuItem42
+        '
+        Me.ToolStripMenuItem42.Name = "ToolStripMenuItem42"
+        Me.ToolStripMenuItem42.Size = New System.Drawing.Size(236, 26)
+        Me.ToolStripMenuItem42.Text = "ATARI (8 bit) [low res]"
+        '
+        'OptionsToolStripMenuItem3
+        '
+        Me.OptionsToolStripMenuItem3.Image = CType(resources.GetObject("OptionsToolStripMenuItem3.Image"), System.Drawing.Image)
+        Me.OptionsToolStripMenuItem3.Name = "OptionsToolStripMenuItem3"
+        Me.OptionsToolStripMenuItem3.Size = New System.Drawing.Size(214, 26)
+        Me.OptionsToolStripMenuItem3.Text = "Options..."
+        '
+        'ToolStripMenuItem34
+        '
+        Me.ToolStripMenuItem34.Name = "ToolStripMenuItem34"
+        Me.ToolStripMenuItem34.Size = New System.Drawing.Size(211, 6)
         '
         'ToolStripMenuItem25
         '
@@ -1028,13 +1106,6 @@ Partial Class ProjectExplorer
         Me.ToolStripMenuItem32.Name = "ToolStripMenuItem32"
         Me.ToolStripMenuItem32.Size = New System.Drawing.Size(214, 26)
         Me.ToolStripMenuItem32.Text = "Remove"
-        '
-        'OptionsToolStripMenuItem3
-        '
-        Me.OptionsToolStripMenuItem3.Image = CType(resources.GetObject("OptionsToolStripMenuItem3.Image"), System.Drawing.Image)
-        Me.OptionsToolStripMenuItem3.Name = "OptionsToolStripMenuItem3"
-        Me.OptionsToolStripMenuItem3.Size = New System.Drawing.Size(214, 26)
-        Me.OptionsToolStripMenuItem3.Text = "Options..."
         '
         'ProjectExplorer
         '
@@ -1188,4 +1259,14 @@ Partial Class ProjectExplorer
     Friend WithEvents ToolStripMenuItem31 As ToolStripMenuItem
     Friend WithEvents ToolStripMenuItem32 As ToolStripMenuItem
     Friend WithEvents OptionsToolStripMenuItem3 As ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem34 As ToolStripSeparator
+    Friend WithEvents ToolStripMenuItem33 As ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem35 As ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem36 As ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem37 As ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem38 As ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem39 As ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem40 As ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem41 As ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem42 As ToolStripMenuItem
 End Class

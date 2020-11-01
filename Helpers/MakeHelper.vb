@@ -71,7 +71,7 @@ Module MakeHelper
 
         Dim errorString = MakeInternal(_working_directory, actionBuild, _commandLine, _target)
 
-        If ParseMakeErrors(_working_directory, errorString, _options) = 0 Then
+        If ParseMakeErrors(_working_directory, errorString, _options.CC65) = 0 Then
             If (File.Exists(_binary_filename)) Then
                 If _executable Then
                     If MsgBox("Program has been built for " & _target & "." & vbCrLf & "Run it?", vbYesNo, "SUCCESSFUL COMPILATION") = vbYes Then
@@ -85,7 +85,7 @@ Module MakeHelper
             End If
         End If
     End Sub
-    Public Function ParseMakeErrors(_working_directory As String, _output As String, _options As Options) As Integer
+    Public Function ParseMakeErrors(_working_directory As String, _output As String, _options As OptionsCC65) As Integer
 
         ClearErrorOutput()
 
@@ -128,7 +128,7 @@ Module MakeHelper
                         Dim lineNumber = groups.Item(2).Value
                         Dim message = groups.Item(3).Value
 
-                        If (warning = 1 And _options.CC65.IgnoredWarning(message)) Then
+                        If (warning = 1 And _options.IgnoredWarning(message)) Then
                             Continue For
                         End If
 
@@ -210,6 +210,160 @@ Module MakeHelper
         binaryFileName = binaryFileName.Replace("{support}", support)
 
         MakeFileForTargetInternal(Path.GetDirectoryName(GetFullPathForElement(makeFileName)), GetFullPathForElement(binaryFileName), additionalParams, _target, options, True)
+
+    End Sub
+
+    Private Function CompileInternal(_working_directory As String, _source_filename As String, _target_filename As String, _target As String, _options As OptionsCC65) As String
+
+        Dim commandLine As String = ""
+
+        commandLine &= " --target " & _target
+        If _options.AllCDecl Then
+            commandLine &= " --all-cdecl"
+        End If
+        If _options.StaticLocals Then
+            commandLine &= " --static-locals"
+        End If
+        For Each symbol In _options.Symbols
+            commandLine &= " -D" & symbol
+        Next
+        For Each includeDir In _options.IncludeDirs
+            commandLine &= " --include-dir " & includeDir
+        Next
+        If _options.OptimizeCode Then
+            commandLine &= " -O"
+        End If
+        If _options.OptimizeCodeInline Then
+            commandLine &= " -Oi"
+        End If
+        If _options.RegisterVars Then
+            commandLine &= " --register-vars"
+        End If
+        If _options.InlineFunctions Then
+            commandLine &= " --eagerly-inline-funcs"
+        ElseIf _options.InlineStdFunctions Then
+            commandLine &= " --inline-stdfuncs"
+        End If
+        If _options.AddSource Then
+            commandLine &= " --add-source"
+        End If
+        If _options.SuppressWarnings Then
+            commandLine &= " -W"
+        End If
+        If _options.DebugInfo Then
+            commandLine &= " -W"
+        End If
+        If _options.SignedChars Then
+            commandLine &= " --signed-chars"
+        End If
+        If Trim(_target_filename) <> "" Then
+            commandLine &= " -o " & _target_filename
+        End If
+        If Trim(_options.BssName) <> "" Then
+            commandLine &= " --bss-name " & _options.BssName
+        End If
+        If _options.CheckStack Then
+            commandLine &= " --check-stack"
+        End If
+        If Trim(_options.CodeName) <> "" Then
+            commandLine &= " --code-name " & _options.CodeName
+        End If
+        If _options.CodeSizeEnabled Then
+            commandLine &= " --code-size " & _options.CodeSize
+        End If
+        If _options.Cpu65C02 Then
+            commandLine &= " --cpu 65C02"
+        End If
+        If _options.CreateDep Then
+            commandLine &= " --create-dep " & _options.CreateDepFilename
+        End If
+        If _options.CreateFullDep Then
+            commandLine &= " --create-full-dep " & _options.CreateFullDepFilename
+        End If
+        If (_options.CreateDep Or _options.CreateFullDep) And _options.DepTarget Then
+            commandLine &= " --dep-target " & _options.DepTargetFilename
+        End If
+        If Trim(_options.DataName) <> "" Then
+            commandLine &= " --data-name " & _options.DataName
+        End If
+        If _options.ForgetIncPath Then
+            commandLine &= " --forget-inc-paths"
+        End If
+        If _options.RegisterSpaceEnabled Then
+            commandLine &= " --register-space " & _options.RegisterSpace
+        End If
+        If Trim(_options.RodataName) <> "" Then
+            commandLine &= " --rodata-name " & _options.RodataName
+        End If
+        If _options.StandardLanguage Then
+            commandLine &= " --standard " & LCase(_options.StandardLanguage.ToString())
+        End If
+        If _options.WritableStrings Then
+            commandLine &= " --writable-strings"
+        End If
+
+        Dim oProcess As New Process()
+        Dim oStartInfo As New ProcessStartInfo("cc65.exe", commandLine) With {
+            .UseShellExecute = False,
+            .RedirectStandardOutput = True,
+            .RedirectStandardError = True,
+            .WorkingDirectory = _working_directory
+        }
+        oProcess.StartInfo = oStartInfo
+
+        Dim sOutputError As String = ""
+
+        AddHandler oProcess.ErrorDataReceived, New DataReceivedEventHandler(Sub(s, e)
+                                                                                sOutputError &= e.Data & vbCrLf
+                                                                            End Sub)
+        oProcess.Start()
+        oProcess.BeginOutputReadLine()
+        oProcess.BeginErrorReadLine()
+        oProcess.WaitForExit()
+
+        CompileInternal = sOutputError
+
+    End Function
+
+    Public Sub CompileFileForTargetInternal(_working_directory As String, _source_file As String, _target_file As String, _target As String, _options As OptionsCC65)
+
+        ClearAllMarkers()
+
+        ClearErrorOutput()
+
+        Dim errorString = CompileInternal(_working_directory, _source_file, _target_file, _target, _options)
+
+        If ParseMakeErrors(_working_directory, errorString, _options) = 0 Then
+            If (File.Exists(_target_file)) Then
+                MsgBox("Object has been built for " & _target & ".")
+            Else
+                MsgBox("Object  has NOT been built for " & _target & ".", vbOKOnly, "COMPILATION FAILED")
+            End If
+        End If
+    End Sub
+
+    Public Sub CompileObjectForTarget(_file_entry As FileEntry, _folder_entry As FolderEntry, _target As String)
+
+        Dim options As OptionsCC65 = _file_entry.CC65
+
+        If options Is Nothing Then
+            options = GlobalVars.CurrentProject.CurrentOptions.CC65
+            If options Is Nothing Then
+                options = GlobalVars.CurrentOptions.CC65
+            End If
+        End If
+
+        Dim sourceFileName As String = GetFullPathForElement(_file_entry.Filename, _folder_entry)
+
+        Dim binaryFileName As String = options.OutputFile
+
+        If binaryFileName = "" Then
+            binaryFileName = sourceFileName.Replace(".c", ".s")
+        Else
+            binaryFileName = binaryFileName.Replace("{target}", _target)
+        End If
+
+        CompileFileForTargetInternal(Path.GetDirectoryName(GetFullPathForElement(binaryFileName)), sourceFileName, GetFullPathForElement(binaryFileName), _target, options)
 
     End Sub
 

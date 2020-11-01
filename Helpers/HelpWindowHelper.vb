@@ -23,4 +23,10 @@ Module HelpWindowHelper
         ShowPage("https://retroprogramming.iwashere.eu/midres_library:reference")
 
     End Sub
+
+    Public Sub ShowHelpIfRequested(_e As KeyEventArgs, _section As String, _class As String, _identifier As String, Optional _title As String = "Help On line")
+        If _e.KeyCode = Keys.F1 Then
+            ShowHelpFor(_section, _class, _identifier, "Help for " & _title)
+        End If
+    End Sub
 End Module
