@@ -135,6 +135,7 @@ Module MainContainerHelper
     Public Sub UpdateRecentOpenedFiles(_main_container As MainContainer)
 
         If GlobalVars.RecentOpenedFiles.Items.Count > 0 Then
+            _main_container.RecentlyOpenedToolStripMenuItem.Visible = True
             _main_container.RecentlyOpenedToolStripMenuItem.DropDownItems.Clear()
             Dim t As ToolStripMenuItem = New ToolStripMenuItem("Latest files opened:")
             _main_container.RecentlyOpenedToolStripMenuItem.DropDownItems.Add(t)
@@ -174,6 +175,8 @@ Module MainContainerHelper
                 }
                 _main_container.RecentlyOpenedToolStripMenuItem.DropDownItems.Add(t)
             Next i
+        Else
+            _main_container.RecentlyOpenedToolStripMenuItem.Visible = False
         End If
 
 
@@ -596,6 +599,7 @@ Module MainContainerHelper
     Public Sub UpdateRecentOpenedProjects(_main_container As MainContainer)
 
         If GlobalVars.RecentOpenedProjects.Items.Count > 0 Then
+            _main_container.RecentOpenedProjectsToolStripMenuItem.Visible = True
             _main_container.RecentOpenedProjectsToolStripMenuItem.DropDownItems.Clear()
             Dim t As ToolStripMenuItem = New ToolStripMenuItem("Latest projects opened:")
             _main_container.RecentOpenedProjectsToolStripMenuItem.DropDownItems.Add(t)
@@ -634,8 +638,9 @@ Module MainContainerHelper
                 }
                 _main_container.RecentOpenedProjectsToolStripMenuItem.DropDownItems.Add(t)
             Next i
+        Else
+            _main_container.RecentOpenedProjectsToolStripMenuItem.Visible = False
         End If
-
 
     End Sub
 

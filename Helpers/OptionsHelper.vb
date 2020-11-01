@@ -108,7 +108,8 @@ Module OptionsHelper
         End If
 
         _options_window.TextBoxMakeFileName.Text = _options.MakeFilename
-        _options_window.RadioButtonStaticMakefile.Checked = _options.DynamicMakefile
+        _options_window.RadioButtonStaticMakefile.Checked = Not _options.DynamicMakefile
+        _options_window.RadioButtonDynamicMakefile.Checked = _options.DynamicMakefile
         _options_window.TextBoxAdditionalParams.Text = _options.AdditionalParams
         _options_window.TextBoxActionBuild.Text = _options.ActionBuild
         _options_window.TextBoxActionClean.Text = _options.ActionClean
