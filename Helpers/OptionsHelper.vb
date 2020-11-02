@@ -110,14 +110,21 @@ Module OptionsHelper
         End If
 
         _options_window.TextBoxMakeFileName.Text = _options.MakeFilename
-        _options_window.RadioButtonStaticMakefile.Checked = Not _options.DynamicMakefile
-        _options_window.RadioButtonDynamicMakefile.Checked = _options.DynamicMakefile
+        Select Case _options.Kind
+            Case OptionsMake.KindGeneration.STATICAL
+                _options_window.RadioButtonStaticMakefile.Checked = True
+            Case OptionsMake.KindGeneration.DYNAMICAL
+                _options_window.RadioButtonDynamicMakefile.Checked = True
+            Case OptionsMake.KindGeneration.INTERNAL
+                _options_window.RadioButtonInternal.Checked = True
+        End Select
         _options_window.TextBoxAdditionalParams.Text = _options.AdditionalParams
         _options_window.TextBoxActionBuild.Text = _options.ActionBuild
         _options_window.TextBoxActionClean.Text = _options.ActionClean
 
-        _options_window.TextBoxBinaryFileName.Text = _options.BinaryFilename
-        _options_window.RadioButtonComplete.Checked = _options.Complete
+        _options_window.TextBoxExecutableFileName.Text = _options.ExecutableFilename
+        _options_window.CheckBoxDiskImage.Checked = _options.DiskImage
+        _options_window.TextBoxDiskImageFilename.Text = _options.DiskImageFilename
 
         _options_window.CheckBoxPlus4.Checked = _options.Plus4
         _options_window.CheckBoxC16.Checked = _options.C16
@@ -301,12 +308,19 @@ Module OptionsHelper
         End If
 
         _options.MakeFilename = _options_window.TextBoxMakeFileName.Text
-        _options.DynamicMakefile = _options_window.RadioButtonDynamicMakefile.Checked
+        If _options_window.RadioButtonStaticMakefile.Checked Then
+            _options.Kind = OptionsMake.KindGeneration.STATICAL
+        ElseIf _options_window.RadioButtonDynamicMakefile.Checked Then
+            _options.Kind = OptionsMake.KindGeneration.DYNAMICAL
+        ElseIf _options_window.RadioButtonInternal.Checked Then
+            _options.Kind = OptionsMake.KindGeneration.INTERNAL
+        End If
         _options.AdditionalParams = _options_window.TextBoxAdditionalParams.Text
         _options.ActionBuild = _options_window.TextBoxActionBuild.Text
         _options.ActionClean = _options_window.TextBoxActionClean.Text
-        _options.BinaryFilename = _options_window.TextBoxBinaryFileName.Text
-        _options.Complete = _options_window.RadioButtonComplete.Checked
+        _options.DiskImage = _options_window.CheckBoxDiskImage.Checked
+        _options.DiskImageFilename = _options_window.TextBoxDiskImageFilename.Text
+        _options.ExecutableFilename = _options_window.TextBoxExecutableFileName.Text
 
         _options.Plus4 = _options_window.CheckBoxPlus4.Checked
         _options.C16 = _options_window.CheckBoxC16.Checked

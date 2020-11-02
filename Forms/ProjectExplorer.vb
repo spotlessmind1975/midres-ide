@@ -610,4 +610,8 @@ Public Class ProjectExplorer
         ShowOptionsWindowCC65(Me)
 
     End Sub
+
+    Private Sub ToolStripMenuItem43_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem43.Click
+        PasteClipboardAsChildElement(Me)
+    End Sub
 End Class

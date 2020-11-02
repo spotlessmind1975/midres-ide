@@ -52,4 +52,25 @@
     Private Sub ButtonFromProject_Click(sender As Object, e As EventArgs) Handles ButtonFromProject.Click
         UpdateOptionsMake(Me, GlobalVars.CurrentProject.CurrentOptions.Make)
     End Sub
+
+    Private Sub RadioButtonStaticMakefile_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButtonStaticMakefile.CheckedChanged
+        TextBoxActionClean.Enabled = True
+        TextBoxActionBuild.Enabled = True
+        TextBoxAdditionalParams.Enabled = True
+        TextBoxMakeFileName.Enabled = True
+    End Sub
+
+    Private Sub RadioButtonDynamicMakefile_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButtonDynamicMakefile.CheckedChanged
+        TextBoxActionClean.Enabled = False
+        TextBoxActionBuild.Enabled = False
+        TextBoxAdditionalParams.Enabled = False
+        TextBoxMakeFileName.Enabled = True
+    End Sub
+
+    Private Sub RadioButtonInternal_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButtonInternal.CheckedChanged
+        TextBoxActionClean.Enabled = False
+        TextBoxActionBuild.Enabled = False
+        TextBoxAdditionalParams.Enabled = False
+        TextBoxMakeFileName.Enabled = False
+    End Sub
 End Class

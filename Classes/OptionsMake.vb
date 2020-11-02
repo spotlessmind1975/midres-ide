@@ -6,12 +6,19 @@ Public Class OptionsMake
 
     Implements IXmlSerializable
 
+    Public Enum KindGeneration
+        STATICAL = 0
+        DYNAMICAL = 1
+        INTERNAL = 1
+    End Enum
     Private _makeFilename As String = "makefile"
-    Private _dynamicMakefile As Boolean = False
+    Private _kind As KindGeneration
     Private _additionalParams As String = ""
     Private _actionBuild As String = "all"
     Private _actionClean As String = "clean"
-    Private _binaryFileName As String = "exe/midres.{target}.{support}"
+    Private _executableFileName As String = "exe/midres.{target}"
+    Private _diskImage As Boolean = True
+    Private _diskImageFileName As String = "exe/midres.{target}.{support}"
     Private _complete As Boolean = True
 
     Private _plus4 As Boolean
@@ -31,12 +38,12 @@ Public Class OptionsMake
         End Set
     End Property
 
-    Public Property DynamicMakefile As Boolean
+    Public Property Kind As KindGeneration
         Get
-            Return _dynamicMakefile
+            Return _kind
         End Get
-        Set(value As Boolean)
-            _dynamicMakefile = value
+        Set(value As KindGeneration)
+            _kind = value
         End Set
     End Property
 
@@ -68,12 +75,30 @@ Public Class OptionsMake
         End Set
     End Property
 
-    Public Property BinaryFilename As String
+    Public Property ExecutableFilename As String
         Get
-            Return _binaryFileName
+            Return _executableFileName
         End Get
         Set(value As String)
-            _binaryFileName = value
+            _executableFileName = value
+        End Set
+    End Property
+
+    Public Property DiskImage As Boolean
+        Get
+            Return _diskImage
+        End Get
+        Set(value As Boolean)
+            _diskImage = value
+        End Set
+    End Property
+
+    Public Property DiskImageFilename As String
+        Get
+            Return _diskImageFileName
+        End Get
+        Set(value As String)
+            _diskImageFileName = value
         End Set
     End Property
 
@@ -176,7 +201,13 @@ Public Class OptionsMake
                         Case "MakeFileName"
                             _makeFilename = reader.ReadElementContentAsString()
                         Case "DynamicMakefile"
-                            _dynamicMakefile = reader.ReadElementContentAsBoolean()
+                            If (reader.ReadElementContentAsBoolean()) Then
+                                _kind = KindGeneration.DYNAMICAL
+                            Else
+                                _kind = KindGeneration.STATICAL
+                            End If
+                        Case "Kind"
+                            _kind = reader.ReadElementContentAsInt()
                         Case "Plus4"
                             _plus4 = reader.ReadElementContentAsBoolean()
                         Case "C16"
@@ -199,10 +230,10 @@ Public Class OptionsMake
                             _actionBuild = reader.ReadElementContentAsString()
                         Case "ActionClean"
                             _actionClean = reader.ReadElementContentAsString()
-                        Case "BinaryFileName"
-                            _binaryFileName = reader.ReadElementContentAsString()
-                        Case "Complete"
-                            _complete = reader.ReadElementContentAsBoolean()
+                        Case "BinaryFileName", "DiskImageFileName"
+                            _diskImageFileName = reader.ReadElementContentAsString()
+                        Case "Complete", "DiskImage"
+                            _diskImage = reader.ReadElementContentAsBoolean()
                         Case Else
                             reader.ReadContentAsString()
                     End Select
@@ -223,12 +254,8 @@ Public Class OptionsMake
         writer.WriteStartElement("MakeFileName")
         writer.WriteString(_makeFilename)
         writer.WriteEndElement()
-        writer.WriteStartElement("DynamicMakefile")
-        If (_dynamicMakefile) Then
-            writer.WriteString("true")
-        Else
-            writer.WriteString("false")
-        End If
+        writer.WriteStartElement("Kind")
+        writer.WriteString(_kind)
         writer.WriteEndElement()
         writer.WriteStartElement("AdditionalParams")
         writer.WriteString(_additionalParams)
@@ -239,15 +266,18 @@ Public Class OptionsMake
         writer.WriteStartElement("ActionClean")
         writer.WriteString(_actionClean)
         writer.WriteEndElement()
-        writer.WriteStartElement("BinaryFileName")
-        writer.WriteString(_binaryFileName)
+        writer.WriteStartElement("ExecutableImageFileName")
+        writer.WriteString(_diskImageFileName)
         writer.WriteEndElement()
-        writer.WriteStartElement("Complete")
-        If (_complete) Then
+        writer.WriteStartElement("DiskImage")
+        If (_diskImage) Then
             writer.WriteString("true")
         Else
             writer.WriteString("false")
         End If
+        writer.WriteEndElement()
+        writer.WriteStartElement("DiskImageFileName")
+        writer.WriteString(_diskImageFileName)
         writer.WriteEndElement()
 
         writer.WriteStartElement("Plus4")
@@ -321,4 +351,28 @@ Public Class OptionsMake
         Return ShallowClone()
     End Function
 
+    Public Function hasTarget(_target) As Boolean
+
+        Select Case _target
+            Case "plus4"
+                Return _plus4
+            Case "c16"
+                Return _c16
+            Case "vic20"
+                Return _vic20
+            Case "vic2024"
+                Return _vic2024
+            Case "c64"
+                Return _c64
+            Case "c128"
+                Return _c128
+            Case "atari"
+                Return _atari
+            Case "atarilo"
+                Return _atarilo
+        End Select
+
+        Return False
+
+    End Function
 End Class

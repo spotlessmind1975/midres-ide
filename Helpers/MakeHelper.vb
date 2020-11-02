@@ -185,7 +185,14 @@ Module MakeHelper
 
         binaryFileName = binaryFileName.Replace("{target}", _target)
 
-        MakeFileForTargetInternal(Path.GetDirectoryName(GetFullPathForElement(makeFileName)), GetFullPathForElement(binaryFileName), additionalParams, _target, options, False)
+        Select Case options.Make.Kind
+            Case OptionsMake.KindGeneration.STATICAL
+                MakeFileForTargetInternal(Path.GetDirectoryName(GetFullPathForElement(makeFileName)), GetFullPathForElement(binaryFileName), additionalParams, _target, options, False)
+            Case OptionsMake.KindGeneration.DYNAMICAL
+                MsgBox(GenerateMakefile(binaryFileName, _folder_entry, _target))
+            Case OptionsMake.KindGeneration.INTERNAL
+
+        End Select
 
     End Sub
 
@@ -203,6 +210,7 @@ Module MakeHelper
         Dim makeFileName As String = options.Make.MakeFilename
         Dim binaryFileName As String = options.Make.BinaryFilename
         Dim additionalParams As String = options.Make.AdditionalParams
+        Dim executableName As String
 
         Dim support As String = SupportForTarget(_target, options.Make)
 
@@ -214,11 +222,20 @@ Module MakeHelper
         binaryFileName = binaryFileName.Replace("{target}", _target)
         binaryFileName = binaryFileName.Replace("{support}", support)
 
-        MakeFileForTargetInternal(Path.GetDirectoryName(GetFullPathForElement(makeFileName)), GetFullPathForElement(binaryFileName), additionalParams, _target, options, True)
+        Select Case options.Make.Kind
+            Case OptionsMake.KindGeneration.STATICAL
+                MakeFileForTargetInternal(Path.GetDirectoryName(GetFullPathForElement(makeFileName)), GetFullPathForElement(binaryFileName), additionalParams, _target, options, True)
+            Case OptionsMake.KindGeneration.DYNAMICAL
+                MsgBox(GenerateMakefile(binaryFileName, _folder_entry, _target))
+            Case OptionsMake.KindGeneration.INTERNAL
+
+        End Select
+
+
 
     End Sub
 
-    Private Function CompileInternal(_working_directory As String, _source_filename As String, _target_filename As String, _target As String, _options As OptionsCC65) As String
+    Private Function GenerateCompileCommandLine(_working_directory As String, _source_filename As String, _target_filename As String, _target As String, _options As OptionsCC65) As String
 
         Dim commandLine As String = _source_filename
 
@@ -307,7 +324,13 @@ Module MakeHelper
             commandLine &= " --writable-strings"
         End If
 
-        MsgBox(commandLine)
+        Return commandLine
+
+    End Function
+
+    Private Function CompileInternal(_working_directory As String, _source_filename As String, _target_filename As String, _target As String, _options As OptionsCC65) As String
+
+        Dim CommandLine As String = GenerateCompileCommandLine(_working_directory, _source_filename, _target_filename, _target, _options)
 
         Dim oProcess As New Process()
         Dim oStartInfo As New ProcessStartInfo("cc65.exe", commandLine) With {
@@ -380,5 +403,119 @@ Module MakeHelper
         CompileFileForTargetInternal(Path.GetDirectoryName(GetFullPathForElement(binaryFileName)), sourceFileName, GetFullPathForElement(binaryFileName), _target, options)
 
     End Sub
+
+    Public Function GenerateMakefileRecursive(_folder As FolderEntry, _target As String, _objectFiles As Collection, _libraryFiles As Collection) As String
+
+        Dim MakeFileContent As String = ""
+
+        For Each folder In _folder.Folders
+            Select Case folder.Kind
+                Case FolderEntry.KindEnum.TILESET
+
+                Case Else
+                    MakeFileContent &= GenerateMakefileRecursive(folder, _target, _objectFiles, _libraryFiles)
+            End Select
+        Next
+
+        For Each file In _folder.Files
+            If file.Kind = FileEntry.KindEnum.GENERATED Then
+                If Not (file.generated) Is Nothing Then
+                    If file.generated.hasTarget(_target) Then
+                        For Each folder In file.generated.Dependencies
+                            MakeFileContent &= GenerateMakefile(file.filename, folder, _target)
+                        Next
+                        Select Case LCase(Path.GetExtension(file.filename))
+                            Case ".lib"
+                                _libraryFiles.Add(file.filename)
+                        End Select
+                    End If
+                Else
+                    Select Case LCase(Path.GetExtension(file.filename))
+                        Case ".lib"
+                            _libraryFiles.Add(file.filename)
+                    End Select
+                End If
+
+            Else
+                Select Case LCase(Path.GetExtension(file.filename))
+                    Case ".c"
+                        Dim objectFileName As String = Nothing
+                        Dim options As OptionsCC65 = file.cc65
+                        If options Is Nothing Then
+                            options = GlobalVars.CurrentProject.CurrentOptions.CC65
+                            If options Is Nothing Then
+                                options = GlobalVars.CurrentOptions.CC65
+                            End If
+                        End If
+
+                        If (options Is Nothing) Then
+                            objectFileName = file.Filename.Replace(".c", ".o")
+                        Else
+                            If options.hasTarget(_target) Then
+
+                                objectFileName = options.OutputFile
+
+                                If objectFileName = "" Then
+                                    objectFileName = file.Filename.Replace(".c", ".o")
+                                Else
+                                    objectFileName = objectFileName.Replace("{target}", _target)
+                                    objectFileName = objectFileName.Replace("{source}", file.Filename.Replace(".c", ".o"))
+                                End If
+                            End If
+                        End If
+
+                        If Not (objectFileName Is Nothing) Then
+                            MakeFileContent &= objectFileName & ":" & vbTab & file.filename & vbCrLf
+                            MakeFileContent &= vbTab & "cc65 " & GenerateCompileCommandLine("", file.filename, objectFileName, _target, options) & vbCrLf
+                            _objectFiles.Add(objectFileName)
+                        End If
+                    Case ".h"
+                    Case ".cfg"
+                End Select
+            End If
+        Next
+
+        Return MakeFileContent
+    End Function
+
+    Public Function GenerateMakefile(_output_file As String, _folder As FolderEntry, _target As String) As String
+
+        Dim objectFiles As Collection = New Collection()
+        Dim libraryFiles As Collection = New Collection()
+
+        Dim MakeFileContent As String = GenerateMakefileRecursive(_folder, _target, objectFiles, libraryFiles)
+
+        MakeFileContent &= _output_file & ":" & vbTab
+        For Each obj In objectFiles
+            MakeFileContent &= obj & " "
+        Next
+        For Each xlib In libraryFiles
+            MakeFileContent &= xlib & " "
+        Next
+        MakeFileContent &= vbCrLf
+
+        If _folder.Kind = FolderEntry.KindEnum.LIBRARY Then
+            MakeFileContent &= vbTab & "ar65.exe r " & _output_file & " "
+            For Each obj In objectFiles
+                MakeFileContent &= obj & " "
+            Next
+            For Each xlib In libraryFiles
+                MakeFileContent &= xlib & " "
+            Next
+            MakeFileContent &= vbCrLf
+        Else
+            Dim ldFlags As String = ""
+            MakeFileContent &= vbTab & "cl65.exe -t " & _target & " " & ldFlags & " -o " & _output_file & " "
+            For Each obj In objectFiles
+                MakeFileContent &= obj & " "
+            Next
+            For Each xlib In libraryFiles
+                MakeFileContent &= xlib & " "
+            Next
+            MakeFileContent &= vbCrLf
+        End If
+
+        Return MakeFileContent
+    End Function
 
 End Module

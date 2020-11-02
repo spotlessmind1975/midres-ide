@@ -25,13 +25,10 @@ Partial Class OptionsMakeWindow
         Me.ButtonFromGlobal = New System.Windows.Forms.Button()
         Me.ButtonRestore = New System.Windows.Forms.Button()
         Me.ButtonApply = New System.Windows.Forms.Button()
-        Me.TabPageOutput = New System.Windows.Forms.TabPage()
+        Me.TabPageExecutable = New System.Windows.Forms.TabPage()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Label9 = New System.Windows.Forms.Label()
-        Me.GroupBoxBinaryFileFormat = New System.Windows.Forms.GroupBox()
-        Me.RadioButtonComplete = New System.Windows.Forms.RadioButton()
-        Me.RadioButtonExecutable = New System.Windows.Forms.RadioButton()
-        Me.TextBoxBinaryFileName = New System.Windows.Forms.TextBox()
+        Me.TextBoxExecutableFileName = New System.Windows.Forms.TextBox()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.TabPageMake = New System.Windows.Forms.TabPage()
         Me.Panel1 = New System.Windows.Forms.Panel()
@@ -47,7 +44,7 @@ Partial Class OptionsMakeWindow
         Me.TextBoxMakeFileName = New System.Windows.Forms.TextBox()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.TabControlOptions = New System.Windows.Forms.TabControl()
-        Me.TabPageCC65 = New System.Windows.Forms.TabPage()
+        Me.TabPageTargets = New System.Windows.Forms.TabPage()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.CheckBoxAtariLo = New System.Windows.Forms.CheckBox()
         Me.CheckBoxAtari = New System.Windows.Forms.CheckBox()
@@ -58,15 +55,22 @@ Partial Class OptionsMakeWindow
         Me.CheckBoxC16 = New System.Windows.Forms.CheckBox()
         Me.CheckBoxPlus4 = New System.Windows.Forms.CheckBox()
         Me.ButtonFromProject = New System.Windows.Forms.Button()
-        Me.TabPageOutput.SuspendLayout()
+        Me.RadioButtonInternal = New System.Windows.Forms.RadioButton()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.TabPageStorage = New System.Windows.Forms.TabPage()
+        Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.CheckBoxDiskImage = New System.Windows.Forms.CheckBox()
+        Me.TextBoxDiskImageFilename = New System.Windows.Forms.TextBox()
+        Me.TabPageExecutable.SuspendLayout()
         Me.Panel2.SuspendLayout()
-        Me.GroupBoxBinaryFileFormat.SuspendLayout()
         Me.TabPageMake.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
         Me.TabControlOptions.SuspendLayout()
-        Me.TabPageCC65.SuspendLayout()
+        Me.TabPageTargets.SuspendLayout()
         Me.Panel3.SuspendLayout()
+        Me.TabPageStorage.SuspendLayout()
         Me.SuspendLayout()
         '
         'ButtonFromGlobal
@@ -99,22 +103,23 @@ Partial Class OptionsMakeWindow
         Me.ButtonApply.Text = "Apply && Close"
         Me.ButtonApply.UseVisualStyleBackColor = True
         '
-        'TabPageOutput
+        'TabPageExecutable
         '
-        Me.TabPageOutput.Controls.Add(Me.Panel2)
-        Me.TabPageOutput.Location = New System.Drawing.Point(4, 29)
-        Me.TabPageOutput.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.TabPageOutput.Name = "TabPageOutput"
-        Me.TabPageOutput.Size = New System.Drawing.Size(699, 188)
-        Me.TabPageOutput.TabIndex = 3
-        Me.TabPageOutput.Text = "Output"
-        Me.TabPageOutput.UseVisualStyleBackColor = True
+        Me.TabPageExecutable.Controls.Add(Me.Panel2)
+        Me.TabPageExecutable.Location = New System.Drawing.Point(4, 29)
+        Me.TabPageExecutable.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.TabPageExecutable.Name = "TabPageExecutable"
+        Me.TabPageExecutable.Size = New System.Drawing.Size(699, 188)
+        Me.TabPageExecutable.TabIndex = 3
+        Me.TabPageExecutable.Text = "Executable"
+        Me.TabPageExecutable.UseVisualStyleBackColor = True
         '
         'Panel2
         '
+        Me.Panel2.Controls.Add(Me.CheckBoxDiskImage)
+        Me.Panel2.Controls.Add(Me.TextBoxDiskImageFilename)
         Me.Panel2.Controls.Add(Me.Label9)
-        Me.Panel2.Controls.Add(Me.GroupBoxBinaryFileFormat)
-        Me.Panel2.Controls.Add(Me.TextBoxBinaryFileName)
+        Me.Panel2.Controls.Add(Me.TextBoxExecutableFileName)
         Me.Panel2.Controls.Add(Me.Label11)
         Me.Panel2.Location = New System.Drawing.Point(3, 3)
         Me.Panel2.Name = "Panel2"
@@ -124,67 +129,30 @@ Partial Class OptionsMakeWindow
         'Label9
         '
         Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.8!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.Location = New System.Drawing.Point(15, 81)
+        Me.Label9.Location = New System.Drawing.Point(106, 78)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(320, 77)
+        Me.Label9.Size = New System.Drawing.Size(457, 77)
         Me.Label9.TabIndex = 7
         Me.Label9.Text = "It is possible to create ""dynamic"" names by using some variables, such as {target" &
     "} to indicate the target selected with the contextual menu or {support} for file" &
     " format."
         '
-        'GroupBoxBinaryFileFormat
+        'TextBoxExecutableFileName
         '
-        Me.GroupBoxBinaryFileFormat.Controls.Add(Me.RadioButtonComplete)
-        Me.GroupBoxBinaryFileFormat.Controls.Add(Me.RadioButtonExecutable)
-        Me.GroupBoxBinaryFileFormat.Location = New System.Drawing.Point(341, 25)
-        Me.GroupBoxBinaryFileFormat.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.GroupBoxBinaryFileFormat.Name = "GroupBoxBinaryFileFormat"
-        Me.GroupBoxBinaryFileFormat.Padding = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.GroupBoxBinaryFileFormat.Size = New System.Drawing.Size(343, 133)
-        Me.GroupBoxBinaryFileFormat.TabIndex = 6
-        Me.GroupBoxBinaryFileFormat.TabStop = False
-        Me.GroupBoxBinaryFileFormat.Text = "Binary format"
-        '
-        'RadioButtonComplete
-        '
-        Me.RadioButtonComplete.AutoSize = True
-        Me.RadioButtonComplete.Location = New System.Drawing.Point(8, 75)
-        Me.RadioButtonComplete.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.RadioButtonComplete.Name = "RadioButtonComplete"
-        Me.RadioButtonComplete.Size = New System.Drawing.Size(171, 24)
-        Me.RadioButtonComplete.TabIndex = 1
-        Me.RadioButtonComplete.TabStop = True
-        Me.RadioButtonComplete.Text = "Complete (with data)"
-        Me.RadioButtonComplete.UseVisualStyleBackColor = True
-        '
-        'RadioButtonExecutable
-        '
-        Me.RadioButtonExecutable.AutoSize = True
-        Me.RadioButtonExecutable.Location = New System.Drawing.Point(8, 33)
-        Me.RadioButtonExecutable.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.RadioButtonExecutable.Name = "RadioButtonExecutable"
-        Me.RadioButtonExecutable.Size = New System.Drawing.Size(134, 24)
-        Me.RadioButtonExecutable.TabIndex = 0
-        Me.RadioButtonExecutable.TabStop = True
-        Me.RadioButtonExecutable.Text = "Executable only"
-        Me.RadioButtonExecutable.UseVisualStyleBackColor = True
-        '
-        'TextBoxBinaryFileName
-        '
-        Me.TextBoxBinaryFileName.Location = New System.Drawing.Point(18, 34)
-        Me.TextBoxBinaryFileName.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.TextBoxBinaryFileName.Name = "TextBoxBinaryFileName"
-        Me.TextBoxBinaryFileName.Size = New System.Drawing.Size(317, 27)
-        Me.TextBoxBinaryFileName.TabIndex = 5
+        Me.TextBoxExecutableFileName.Location = New System.Drawing.Point(18, 34)
+        Me.TextBoxExecutableFileName.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.TextBoxExecutableFileName.Name = "TextBoxExecutableFileName"
+        Me.TextBoxExecutableFileName.Size = New System.Drawing.Size(317, 27)
+        Me.TextBoxExecutableFileName.TabIndex = 5
         '
         'Label11
         '
         Me.Label11.AutoSize = True
         Me.Label11.Location = New System.Drawing.Point(14, 10)
         Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(112, 20)
+        Me.Label11.Size = New System.Drawing.Size(179, 25)
         Me.Label11.TabIndex = 4
-        Me.Label11.Text = "Binary filename"
+        Me.Label11.Text = "Executable filename"
         '
         'TabPageMake
         '
@@ -266,21 +234,24 @@ Partial Class OptionsMakeWindow
         '
         'GroupBox5
         '
+        Me.GroupBox5.Controls.Add(Me.Label2)
+        Me.GroupBox5.Controls.Add(Me.Label1)
+        Me.GroupBox5.Controls.Add(Me.RadioButtonInternal)
         Me.GroupBox5.Controls.Add(Me.RadioButtonDynamicMakefile)
         Me.GroupBox5.Controls.Add(Me.RadioButtonStaticMakefile)
-        Me.GroupBox5.Location = New System.Drawing.Point(343, 41)
+        Me.GroupBox5.Location = New System.Drawing.Point(276, 7)
         Me.GroupBox5.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.GroupBox5.Name = "GroupBox5"
         Me.GroupBox5.Padding = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.GroupBox5.Size = New System.Drawing.Size(334, 91)
+        Me.GroupBox5.Size = New System.Drawing.Size(401, 167)
         Me.GroupBox5.TabIndex = 21
         Me.GroupBox5.TabStop = False
-        Me.GroupBox5.Text = "Kind of makefile"
+        Me.GroupBox5.Text = "Kind of generation"
         '
         'RadioButtonDynamicMakefile
         '
         Me.RadioButtonDynamicMakefile.AutoSize = True
-        Me.RadioButtonDynamicMakefile.Location = New System.Drawing.Point(6, 60)
+        Me.RadioButtonDynamicMakefile.Location = New System.Drawing.Point(6, 80)
         Me.RadioButtonDynamicMakefile.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.RadioButtonDynamicMakefile.Name = "RadioButtonDynamicMakefile"
         Me.RadioButtonDynamicMakefile.Size = New System.Drawing.Size(175, 24)
@@ -321,8 +292,9 @@ Partial Class OptionsMakeWindow
         'TabControlOptions
         '
         Me.TabControlOptions.Controls.Add(Me.TabPageMake)
-        Me.TabControlOptions.Controls.Add(Me.TabPageOutput)
-        Me.TabControlOptions.Controls.Add(Me.TabPageCC65)
+        Me.TabControlOptions.Controls.Add(Me.TabPageExecutable)
+        Me.TabControlOptions.Controls.Add(Me.TabPageStorage)
+        Me.TabControlOptions.Controls.Add(Me.TabPageTargets)
         Me.TabControlOptions.Location = New System.Drawing.Point(7, 7)
         Me.TabControlOptions.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.TabControlOptions.Name = "TabControlOptions"
@@ -330,17 +302,17 @@ Partial Class OptionsMakeWindow
         Me.TabControlOptions.Size = New System.Drawing.Size(707, 221)
         Me.TabControlOptions.TabIndex = 5
         '
-        'TabPageCC65
+        'TabPageTargets
         '
-        Me.TabPageCC65.Controls.Add(Me.Panel3)
-        Me.TabPageCC65.Location = New System.Drawing.Point(4, 29)
-        Me.TabPageCC65.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.TabPageCC65.Name = "TabPageCC65"
-        Me.TabPageCC65.Padding = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.TabPageCC65.Size = New System.Drawing.Size(699, 188)
-        Me.TabPageCC65.TabIndex = 1
-        Me.TabPageCC65.Text = "Targets"
-        Me.TabPageCC65.UseVisualStyleBackColor = True
+        Me.TabPageTargets.Controls.Add(Me.Panel3)
+        Me.TabPageTargets.Location = New System.Drawing.Point(4, 29)
+        Me.TabPageTargets.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.TabPageTargets.Name = "TabPageTargets"
+        Me.TabPageTargets.Padding = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.TabPageTargets.Size = New System.Drawing.Size(699, 188)
+        Me.TabPageTargets.TabIndex = 1
+        Me.TabPageTargets.Text = "Targets"
+        Me.TabPageTargets.UseVisualStyleBackColor = True
         '
         'Panel3
         '
@@ -454,6 +426,71 @@ Partial Class OptionsMakeWindow
         Me.ButtonFromProject.Text = "From Project"
         Me.ButtonFromProject.UseVisualStyleBackColor = True
         '
+        'RadioButtonInternal
+        '
+        Me.RadioButtonInternal.AutoSize = True
+        Me.RadioButtonInternal.Location = New System.Drawing.Point(6, 135)
+        Me.RadioButtonInternal.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.RadioButtonInternal.Name = "RadioButtonInternal"
+        Me.RadioButtonInternal.Size = New System.Drawing.Size(285, 24)
+        Me.RadioButtonInternal.TabIndex = 2
+        Me.RadioButtonInternal.TabStop = True
+        Me.RadioButtonInternal.Text = "Use internal procedure (w/out ""make"")"
+        Me.RadioButtonInternal.UseVisualStyleBackColor = True
+        '
+        'Label1
+        '
+        Me.Label1.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Location = New System.Drawing.Point(32, 56)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(363, 20)
+        Me.Label1.TabIndex = 3
+        Me.Label1.Text = "Look for an existing makefile and call ""make""."
+        '
+        'Label2
+        '
+        Me.Label2.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.Location = New System.Drawing.Point(32, 108)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(351, 20)
+        Me.Label2.TabIndex = 4
+        Me.Label2.Text = "Generate a new brand makefile and call ""make""."
+        '
+        'TabPageStorage
+        '
+        Me.TabPageStorage.Controls.Add(Me.Panel4)
+        Me.TabPageStorage.Location = New System.Drawing.Point(4, 29)
+        Me.TabPageStorage.Name = "TabPageStorage"
+        Me.TabPageStorage.Size = New System.Drawing.Size(699, 188)
+        Me.TabPageStorage.TabIndex = 5
+        Me.TabPageStorage.Text = "Storage"
+        Me.TabPageStorage.UseVisualStyleBackColor = True
+        '
+        'Panel4
+        '
+        Me.Panel4.Location = New System.Drawing.Point(3, 8)
+        Me.Panel4.Name = "Panel4"
+        Me.Panel4.Size = New System.Drawing.Size(690, 177)
+        Me.Panel4.TabIndex = 0
+        '
+        'CheckBoxDiskImage
+        '
+        Me.CheckBoxDiskImage.AutoSize = True
+        Me.CheckBoxDiskImage.Location = New System.Drawing.Point(355, 3)
+        Me.CheckBoxDiskImage.Name = "CheckBoxDiskImage"
+        Me.CheckBoxDiskImage.Size = New System.Drawing.Size(230, 24)
+        Me.CheckBoxDiskImage.TabIndex = 13
+        Me.CheckBoxDiskImage.Text = "Put all files on this disk image:"
+        Me.CheckBoxDiskImage.UseVisualStyleBackColor = True
+        '
+        'TextBoxDiskImageFilename
+        '
+        Me.TextBoxDiskImageFilename.Location = New System.Drawing.Point(355, 34)
+        Me.TextBoxDiskImageFilename.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.TextBoxDiskImageFilename.Name = "TextBoxDiskImageFilename"
+        Me.TextBoxDiskImageFilename.Size = New System.Drawing.Size(317, 27)
+        Me.TextBoxDiskImageFilename.TabIndex = 12
+        '
         'OptionsMakeWindow
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 20.0!)
@@ -468,36 +505,32 @@ Partial Class OptionsMakeWindow
         Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.Name = "OptionsMakeWindow"
         Me.Text = "OptionsMakeWindow"
-        Me.TabPageOutput.ResumeLayout(False)
+        Me.TabPageExecutable.ResumeLayout(False)
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
-        Me.GroupBoxBinaryFileFormat.ResumeLayout(False)
-        Me.GroupBoxBinaryFileFormat.PerformLayout()
         Me.TabPageMake.ResumeLayout(False)
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
         Me.TabControlOptions.ResumeLayout(False)
-        Me.TabPageCC65.ResumeLayout(False)
+        Me.TabPageTargets.ResumeLayout(False)
         Me.Panel3.ResumeLayout(False)
         Me.Panel3.PerformLayout()
+        Me.TabPageStorage.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
     Friend WithEvents ButtonFromGlobal As Button
     Friend WithEvents ButtonRestore As Button
     Friend WithEvents ButtonApply As Button
-    Friend WithEvents TabPageOutput As TabPage
+    Friend WithEvents TabPageExecutable As TabPage
     Friend WithEvents TabPageMake As TabPage
     Friend WithEvents TabControlOptions As TabControl
-    Friend WithEvents TabPageCC65 As TabPage
+    Friend WithEvents TabPageTargets As TabPage
     Friend WithEvents Panel2 As Panel
     Friend WithEvents Label9 As Label
-    Friend WithEvents GroupBoxBinaryFileFormat As GroupBox
-    Friend WithEvents RadioButtonComplete As RadioButton
-    Friend WithEvents RadioButtonExecutable As RadioButton
-    Friend WithEvents TextBoxBinaryFileName As TextBox
+    Friend WithEvents TextBoxExecutableFileName As TextBox
     Friend WithEvents Label11 As Label
     Friend WithEvents Panel1 As Panel
     Friend WithEvents TextBoxActionClean As TextBox
@@ -521,4 +554,11 @@ Partial Class OptionsMakeWindow
     Friend WithEvents CheckBoxC16 As CheckBox
     Friend WithEvents CheckBoxPlus4 As CheckBox
     Friend WithEvents ButtonFromProject As Button
+    Friend WithEvents Label2 As Label
+    Friend WithEvents Label1 As Label
+    Friend WithEvents RadioButtonInternal As RadioButton
+    Friend WithEvents TabPageStorage As TabPage
+    Friend WithEvents CheckBoxDiskImage As CheckBox
+    Friend WithEvents TextBoxDiskImageFilename As TextBox
+    Friend WithEvents Panel4 As Panel
 End Class

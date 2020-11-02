@@ -310,7 +310,8 @@ Module ProjectExplorerHelper
                         Case ".jpg", ".gif", ".png"
                             Shell("gimp-2.10.exe " & filename)
                         Case Else
-                            MsgBox("Unable to open file " & filename & ": format unknown!")
+                            Dim se As SourceEditor = OpenFileEx(filename, MainContainer)
+                            se.FormalLexer = ScintillaNET.Lexer.Container
                     End Select
                 End If
             End If
@@ -649,13 +650,26 @@ Module ProjectExplorerHelper
         Dim tp As TreeNode = _project_explorer.TreeViewProject.SelectedNode
 
         If Not (tp Is Nothing) Then
-            If TypeOf tp.Tag Is FolderEntry Then
+            If TypeOf tp.Tag Is Project Then
                 Dim sourceObject = Clipboard.GetText()
                 If Not (sourceObject Is Nothing) Then
                     Try
                         Dim folderCloned As FolderEntry = FolderEntry.FromXML(sourceObject)
                         tp.Tag.folders.add(folderCloned, folderCloned.GetHashCode())
                         tp.Nodes.Add(PopulateTreeViewRicorsive(folderCloned))
+                        GlobalVars.CurrentProject.Resolve()
+                    Catch ex As Exception
+                        MsgBox(ex.Message)
+                    End Try
+                End If
+            ElseIf TypeOf tp.Tag Is FolderEntry Then
+                Dim sourceObject = Clipboard.GetText()
+                If Not (sourceObject Is Nothing) Then
+                    Try
+                        Dim folderCloned As FolderEntry = FolderEntry.FromXML(sourceObject)
+                        tp.Tag.folders.add(folderCloned, folderCloned.GetHashCode())
+                        tp.Nodes.Add(PopulateTreeViewRicorsive(folderCloned))
+                        GlobalVars.CurrentProject.Resolve()
                     Catch ex As Exception
                         MsgBox(ex.Message)
                     End Try
@@ -676,6 +690,7 @@ Module ProjectExplorerHelper
                         Dim folderCloned As FolderEntry = FolderEntry.FromXML(sourceObject)
                         tpp.Tag.folders.add(folderCloned, folderCloned.GetHashCode())
                         tpp.Nodes.Add(PopulateTreeViewRicorsive(folderCloned))
+                        GlobalVars.CurrentProject.Resolve()
                     Catch ex As Exception
                         MsgBox(ex.Message)
                     End Try

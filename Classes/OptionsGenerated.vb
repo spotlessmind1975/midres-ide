@@ -230,4 +230,29 @@ Public Class OptionsGenerated
             End If
         Next
     End Sub
+
+    Public Function hasTarget(_target) As Boolean
+
+        Select Case _target
+            Case "plus4"
+                Return _plus4
+            Case "c16"
+                Return _c16
+            Case "vic20"
+                Return _vic20
+            Case "vic2024"
+                Return _vic2024
+            Case "c64"
+                Return _c64
+            Case "c128"
+                Return _c128
+            Case "atari"
+                Return _atari
+            Case "atarilo"
+                Return _atarilo
+        End Select
+
+        Return False
+
+    End Function
 End Class
