@@ -51,7 +51,14 @@
 
     Public Sub ExecuteEmulatorForTarget(_folder_entry As FolderEntry, _target As String)
 
-        Dim binaryFileName As String = _folder_entry.CurrentOptions.Make.BinaryFilename
+        Dim binaryFileName As String
+
+        If _folder_entry.CurrentOptions.Make.DiskImage Then
+            binaryFileName = _folder_entry.CurrentOptions.Make.DiskImageFilename
+        Else
+            binaryFileName = _folder_entry.CurrentOptions.Make.ExecutableFilename
+        End If
+
         Dim support As String = SupportForTarget(_target, _folder_entry.CurrentOptions.Make)
 
         If binaryFileName = "" Then

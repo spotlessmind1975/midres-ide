@@ -406,6 +406,31 @@ Module ProjectExplorerHelper
         End If
     End Sub
 
+    Public Sub ShowOptionsWindowOther(_project_explorer As ProjectExplorer)
+        Dim tp As TreeNode = _project_explorer.TreeViewProject.SelectedNode
+
+        If Not (tp Is Nothing) Then
+            If TypeOf tp.Tag Is Project Then
+                If tp.Tag.CurrentOptions Is Nothing Then
+                    tp.Tag.CurrentOptions = ChooseBestOptions().DeepClone()
+                End If
+                ShowOptionsOtherWindow(tp.Tag.CurrentOptions.Other, "File " & tp.Tag.name & " options")
+            ElseIf TypeOf tp.Tag Is FolderEntry Then
+                If (tp.Tag.Kind = FolderEntry.KindEnum.EXECUTABLE Or tp.Tag.Kind = FolderEntry.KindEnum.LIBRARY) Then
+                    If tp.Tag.CurrentOptions Is Nothing Then
+                        tp.Tag.CurrentOptions = ChooseBestOptions().DeepClone()
+                    End If
+                    ShowOptionsOtherWindow(tp.Tag.CurrentOptions.Other, "File " & tp.Tag.name & " options")
+                End If
+            ElseIf TypeOf tp.Tag Is FileEntry Then
+                If tp.Tag.other Is Nothing Then
+                    tp.Tag.other = ChooseBestOptions().Other.DeepClone()
+                End If
+                ShowOptionsOtherWindow(tp.Tag.other, "Compile " & tp.Tag.name & " options")
+            End If
+        End If
+    End Sub
+
     Public Sub ShowOptionsWindowMake(_project_explorer As ProjectExplorer)
         Dim tp As TreeNode = _project_explorer.TreeViewProject.SelectedNode
         Dim windowtitle As String = ""

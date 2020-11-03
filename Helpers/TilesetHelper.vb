@@ -3,29 +3,36 @@ Imports System.Text.RegularExpressions
 
 Module TilesetHelper
 
-    Private Function Image2Tile(_working_directory As String, _folder_entry As FolderEntry, _output_filename As String, Optional _bank_number As Integer = 0, Optional _header_file As String = Nothing, Optional _threshold_luminance As Integer = 16, Optional _multicolor As Boolean = False, Optional _reverse As Boolean = False) As String
+    Public Function GenerateImage2TileCommandLine(_working_directory As String, _folder_entry As FolderEntry, _output_filename As String, Optional _bank_number As Integer = 0, Optional _header_file As String = Nothing, Optional _threshold_luminance As Integer = 16, Optional _multicolor As Boolean = False, Optional _reverse As Boolean = False) As String
 
-        Dim commandLine As String = ""
+        Dim CommandLine As String = ""
 
         For Each file In _folder_entry.Files
-            commandLine = commandLine & " -i " & GetFullPathForElement(file.filename, _folder_entry)
+            CommandLine &= " -i " & GetFullPathForElement(file.filename, _folder_entry)
         Next
-        commandLine = commandLine & " -o " & GetFullPathForElement(_output_filename)
+        CommandLine = CommandLine & " -o " & GetFullPathForElement(_output_filename)
         If _bank_number > 0 Then
-            commandLine = commandLine & " -b " & _bank_number
+            CommandLine &= " -b " & _bank_number
         End If
         If Not (_header_file Is Nothing) Then
-            commandLine = commandLine & " -g " & GetFullPathForElement(_header_file)
+            CommandLine &= " -g " & GetFullPathForElement(_header_file)
         End If
         If _threshold_luminance > 0 Then
-            commandLine = commandLine & " -l " & _threshold_luminance
+            CommandLine &= " -l " & _threshold_luminance
         End If
         If _multicolor Then
-            commandLine = commandLine & " -m "
+            CommandLine &= " -m "
         End If
         If _reverse Then
-            commandLine = commandLine & " -r "
+            CommandLine &= " -r "
         End If
+
+        Return CommandLine
+
+    End Function
+    Private Function Image2Tile(_working_directory As String, _folder_entry As FolderEntry, _output_filename As String, Optional _bank_number As Integer = 0, Optional _header_file As String = Nothing, Optional _threshold_luminance As Integer = 16, Optional _multicolor As Boolean = False, Optional _reverse As Boolean = False) As String
+
+        Dim commandLine As String = GenerateImage2TileCommandLine(_working_directory, _folder_entry, _output_filename, _bank_number, _header_file, _threshold_luminance, _multicolor, _reverse)
 
         Dim oProcess As New Process()
         Dim oStartInfo As New ProcessStartInfo("img2tile64.exe", commandLine) With {

@@ -16,6 +16,8 @@ Public Class Options
 
     Private _tileset As OptionsTileset = New OptionsTileset
 
+    Private _other As OptionsOther = New OptionsOther
+
     Public Property Make As OptionsMake
         Get
             Return _make
@@ -61,6 +63,14 @@ Public Class Options
         End Set
     End Property
 
+    Public Property Other As OptionsOther
+        Get
+            Return _other
+        End Get
+        Set(value As OptionsOther)
+            _other = value
+        End Set
+    End Property
 
     Public Sub ReadXml(reader As XmlReader) Implements IXmlSerializable.ReadXml
 
@@ -109,6 +119,10 @@ Public Class Options
                                 Dim pe As OptionsTileset = New OptionsTileset
                                 pe.ReadXml(reader)
                                 _tileset = pe
+                            Case "OptionsOther"
+                                Dim pe As OptionsOther = New OptionsOther
+                                pe.ReadXml(reader)
+                                _other = pe
                             Case Else
                                 reader.ReadContentAsString()
                         End Select
@@ -141,6 +155,9 @@ Public Class Options
         writer.WriteEndElement()
         writer.WriteStartElement("OptionsTileset")
         DirectCast(_tileset, OptionsTileset).WriteXml(writer)
+        writer.WriteEndElement()
+        writer.WriteStartElement("OptionsOther")
+        DirectCast(_other, OptionsOther).WriteXml(writer)
         writer.WriteEndElement()
     End Sub
 

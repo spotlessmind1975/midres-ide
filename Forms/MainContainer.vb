@@ -8,6 +8,7 @@ Public Class MainContainer
     Private _optionsCC64Window As OptionsCC65Window
     Private _optionsEmulatorsWindow As OptionsEmulatorsWindow
     Private _optionsTilesetWindow As OptionsTilesetWindow
+    Private _optionsOtherWindow As OptionsOtherWindow
 
     Private Sub NewToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NewToolStripMenuItem.Click
 
@@ -232,5 +233,20 @@ Public Class MainContainer
 
     Private Sub TilesetToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TilesetToolStripMenuItem.Click
         ShowOptionsTilesetWindow(GlobalVars.CurrentProject.CurrentOptions.Tileset, "Project's tileset options")
+    End Sub
+
+    Private Sub FileOptionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FileOptionsToolStripMenuItem.Click
+        If Not (_optionsOtherWindow Is Nothing) Then
+            If _optionsOtherWindow.IsDisposed Then
+                _optionsOtherWindow = Nothing
+            End If
+        End If
+
+        If _optionsOtherWindow Is Nothing Then
+            _optionsOtherWindow = ShowOptionsOtherWindow(Nothing, "Global file options")
+        Else
+            _optionsOtherWindow.Show()
+        End If
+
     End Sub
 End Class

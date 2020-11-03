@@ -154,6 +154,7 @@
     <Compile Include="Classes\OptionsGenerated.vb" />
     <Compile Include="Classes\OptionsIDE.vb" />
     <Compile Include="Classes\OptionsMake.vb" />
+    <Compile Include="Classes\OptionsOther.vb" />
     <Compile Include="Classes\OptionsTileset.vb" />
     <Compile Include="Classes\Project.vb" />
     <Compile Include="Classes\RecentFileEntry.vb" />
@@ -199,6 +200,12 @@
       <DependentUpon>OptionsMakeWindow.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\OptionsMakeWindow.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\OptionsOtherWindow.Designer.vb">
+      <DependentUpon>OptionsOtherWindow.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\OptionsOtherWindow.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\OptionsTilesetWindow.Designer.vb">
@@ -296,6 +303,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\OptionsMakeWindow.resx">
       <DependentUpon>OptionsMakeWindow.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\OptionsOtherWindow.resx">
+      <DependentUpon>OptionsOtherWindow.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\OptionsTilesetWindow.resx">
       <DependentUpon>OptionsTilesetWindow.vb</DependentUpon>

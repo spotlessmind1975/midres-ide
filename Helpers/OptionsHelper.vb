@@ -92,6 +92,32 @@ Module OptionsHelper
 
     End Sub
 
+    Public Sub UpdateOptionsOther(_options_window As OptionsOtherWindow, Optional _options As OptionsOther = Nothing)
+
+        If GlobalVars.CurrentProject Is Nothing Then
+            _options_window.ButtonFromProject.Visible = False
+        Else
+            _options_window.ButtonFromProject.Visible = True
+        End If
+
+        If (_options Is Nothing) Then
+            _options = GlobalVars.CurrentOptions.Other
+            _options_window.ButtonRestore.Visible = True
+        Else
+            _options_window.ButtonRestore.Visible = False
+        End If
+
+        _options_window.CheckBoxPlus4.Checked = _options.Plus4
+        _options_window.CheckBoxC16.Checked = _options.C16
+        _options_window.CheckBoxVic20.Checked = _options.Vic20
+        _options_window.CheckBoxVic2024.Checked = _options.Vic2024
+        _options_window.CheckBoxC64.Checked = _options.C64
+        _options_window.CheckBoxC128.Checked = _options.C128
+        _options_window.CheckBoxAtari.Checked = _options.Atari
+        _options_window.CheckBoxAtariLo.Checked = _options.Atarilo
+
+    End Sub
+
     Public Sub UpdateOptionsMake(_options_window As OptionsMakeWindow, Optional _options As OptionsMake = Nothing)
 
         If GlobalVars.CurrentProject Is Nothing Then
@@ -332,6 +358,24 @@ Module OptionsHelper
         _options.Atarilo = _options_window.CheckBoxAtariLo.Checked
 
     End Sub
+
+    Public Sub ApplyOptionsOther(_options_window As OptionsOtherWindow, Optional _options As OptionsOther = Nothing)
+
+        If (_options Is Nothing) Then
+            _options = GlobalVars.CurrentOptions.Other
+        End If
+
+        _options.Plus4 = _options_window.CheckBoxPlus4.Checked
+        _options.C16 = _options_window.CheckBoxC16.Checked
+        _options.Vic20 = _options_window.CheckBoxVic20.Checked
+        _options.Vic2024 = _options_window.CheckBoxVic2024.Checked
+        _options.C64 = _options_window.CheckBoxC64.Checked
+        _options.C128 = _options_window.CheckBoxC128.Checked
+        _options.Atari = _options_window.CheckBoxAtari.Checked
+        _options.Atarilo = _options_window.CheckBoxAtariLo.Checked
+
+    End Sub
+
     Public Sub ApplyOptionsCC65(_options_window As OptionsCC65Window, Optional _options As OptionsCC65 = Nothing)
 
         If (_options Is Nothing) Then
@@ -485,6 +529,20 @@ Module OptionsHelper
         Dim ow As OptionsCC65Window
 
         ow = New OptionsCC65Window With {
+            .MdiParent = MainContainer,
+            .CurrentOptions = _options
+        }
+        ow.Text = _title
+        ow.Show()
+
+        Return ow
+
+    End Function
+
+    Public Function ShowOptionsOtherWindow(_options As OptionsOther, _title As String, Optional _kind As FolderEntry.KindEnum = Nothing) As OptionsOtherWindow
+        Dim ow As OptionsOtherWindow
+
+        ow = New OptionsOtherWindow With {
             .MdiParent = MainContainer,
             .CurrentOptions = _options
         }

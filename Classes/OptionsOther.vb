@@ -2,24 +2,9 @@
 Imports System.Xml.Schema
 Imports System.Xml.Serialization
 
-Public Class OptionsMake
+Public Class OptionsOther
 
     Implements IXmlSerializable
-
-    Public Enum KindGeneration
-        STATICAL = 0
-        DYNAMICAL = 1
-        INTERNAL = 1
-    End Enum
-    Private _makeFilename As String = "makefile"
-    Private _kind As KindGeneration
-    Private _additionalParams As String = ""
-    Private _actionBuild As String = "all"
-    Private _actionClean As String = "clean"
-    Private _executableFileName As String = "exe/midres.{target}"
-    Private _diskImage As Boolean = True
-    Private _diskImageFileName As String = "exe/midres.{target}.{support}"
-    Private _complete As Boolean = True
 
     Private _plus4 As Boolean
     Private _c16 As Boolean
@@ -29,87 +14,6 @@ Public Class OptionsMake
     Private _c128 As Boolean
     Private _atari As Boolean
     Private _atarilo As Boolean
-    Public Property MakeFilename As String
-        Get
-            Return _makeFilename
-        End Get
-        Set(value As String)
-            _makeFilename = value
-        End Set
-    End Property
-
-    Public Property Kind As KindGeneration
-        Get
-            Return _kind
-        End Get
-        Set(value As KindGeneration)
-            _kind = value
-        End Set
-    End Property
-
-    Public Property AdditionalParams As String
-        Get
-            Return _additionalParams
-        End Get
-        Set(value As String)
-            _additionalParams = value
-        End Set
-    End Property
-
-
-    Public Property ActionBuild As String
-        Get
-            Return _actionBuild
-        End Get
-        Set(value As String)
-            _actionBuild = value
-        End Set
-    End Property
-
-    Public Property ActionClean As String
-        Get
-            Return _actionClean
-        End Get
-        Set(value As String)
-            _actionClean = value
-        End Set
-    End Property
-
-    Public Property ExecutableFilename As String
-        Get
-            Return _executableFileName
-        End Get
-        Set(value As String)
-            _executableFileName = value
-        End Set
-    End Property
-
-    Public Property DiskImage As Boolean
-        Get
-            Return _diskImage
-        End Get
-        Set(value As Boolean)
-            _diskImage = value
-        End Set
-    End Property
-
-    Public Property DiskImageFilename As String
-        Get
-            Return _diskImageFileName
-        End Get
-        Set(value As String)
-            _diskImageFileName = value
-        End Set
-    End Property
-
-    Public Property Complete As Boolean
-        Get
-            Return _complete
-        End Get
-        Set(value As Boolean)
-            _complete = value
-        End Set
-    End Property
 
     Public Property Plus4 As Boolean
         Get
@@ -183,14 +87,11 @@ Public Class OptionsMake
         End Set
     End Property
 
-
     Public Sub ReadXml(reader As XmlReader) Implements IXmlSerializable.ReadXml
 
         If Not reader.IsEmptyElement Then
-
             reader.ReadStartElement()
             reader.MoveToContent()
-
             While reader.NodeType <> System.Xml.XmlNodeType.EndElement And reader.NodeType <> System.Xml.XmlNodeType.None
                 While reader.NodeType = System.Xml.XmlNodeType.Whitespace
                     reader.Read()
@@ -198,16 +99,6 @@ Public Class OptionsMake
 
                 If reader.NodeType <> System.Xml.XmlNodeType.EndElement And reader.NodeType <> System.Xml.XmlNodeType.None Then
                     Select Case reader.Name
-                        Case "MakeFileName"
-                            _makeFilename = reader.ReadElementContentAsString()
-                        Case "DynamicMakefile"
-                            If (reader.ReadElementContentAsBoolean()) Then
-                                _kind = KindGeneration.DYNAMICAL
-                            Else
-                                _kind = KindGeneration.STATICAL
-                            End If
-                        Case "Kind"
-                            _kind = reader.ReadElementContentAsInt()
                         Case "Plus4"
                             _plus4 = reader.ReadElementContentAsBoolean()
                         Case "C16"
@@ -224,18 +115,6 @@ Public Class OptionsMake
                             _atari = reader.ReadElementContentAsBoolean()
                         Case "AtariLo"
                             _atarilo = reader.ReadElementContentAsBoolean()
-                        Case "AdditionalParams"
-                            _additionalParams = reader.ReadElementContentAsString()
-                        Case "ActionBuild"
-                            _actionBuild = reader.ReadElementContentAsString()
-                        Case "ActionClean"
-                            _actionClean = reader.ReadElementContentAsString()
-                        Case "BinaryFileName", "DiskImageFileName"
-                            _diskImageFileName = reader.ReadElementContentAsString()
-                        Case "ExecutableFileName", "ExecutableImageFileName"
-                            _executableFileName = reader.ReadElementContentAsString()
-                        Case "Complete", "DiskImage"
-                            _diskImage = reader.ReadElementContentAsBoolean()
                         Case Else
                             reader.ReadContentAsString()
                     End Select
@@ -249,38 +128,9 @@ Public Class OptionsMake
             reader.Read()
         End If
 
-
     End Sub
 
     Public Sub WriteXml(writer As XmlWriter) Implements IXmlSerializable.WriteXml
-        writer.WriteStartElement("MakeFileName")
-        writer.WriteString(_makeFilename)
-        writer.WriteEndElement()
-        writer.WriteStartElement("Kind")
-        writer.WriteString(_kind)
-        writer.WriteEndElement()
-        writer.WriteStartElement("AdditionalParams")
-        writer.WriteString(_additionalParams)
-        writer.WriteEndElement()
-        writer.WriteStartElement("ActionBuild")
-        writer.WriteString(_actionBuild)
-        writer.WriteEndElement()
-        writer.WriteStartElement("ActionClean")
-        writer.WriteString(_actionClean)
-        writer.WriteEndElement()
-        writer.WriteStartElement("ExecutableFileName")
-        writer.WriteString(_diskImageFileName)
-        writer.WriteEndElement()
-        writer.WriteStartElement("DiskImage")
-        If (_diskImage) Then
-            writer.WriteString("true")
-        Else
-            writer.WriteString("false")
-        End If
-        writer.WriteEndElement()
-        writer.WriteStartElement("DiskImageFileName")
-        writer.WriteString(_diskImageFileName)
-        writer.WriteEndElement()
 
         writer.WriteStartElement("Plus4")
         If (_plus4) Then
@@ -345,11 +195,11 @@ Public Class OptionsMake
         Throw New NotImplementedException()
     End Function
 
-    Public Function ShallowClone() As OptionsMake
-        Return DirectCast(Me.MemberwiseClone(), OptionsMake)
+    Public Function ShallowClone() As OptionsOther
+        Return DirectCast(Me.MemberwiseClone(), OptionsOther)
     End Function
 
-    Public Function DeepClone() As OptionsMake
+    Public Function DeepClone() As OptionsOther
         Return ShallowClone()
     End Function
 

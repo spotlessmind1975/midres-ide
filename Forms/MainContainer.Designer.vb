@@ -69,6 +69,7 @@ Partial Class MainContainer
         Me.TilesetOptionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MainStatusStrip = New System.Windows.Forms.StatusStrip()
         Me.MainStatusStripLabel = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.FileOptionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.MainStatusStrip.SuspendLayout()
         Me.SuspendLayout()
@@ -135,28 +136,28 @@ Partial Class MainContainer
         '
         Me.MakeToolStripMenuItem1.Image = CType(resources.GetObject("MakeToolStripMenuItem1.Image"), System.Drawing.Image)
         Me.MakeToolStripMenuItem1.Name = "MakeToolStripMenuItem1"
-        Me.MakeToolStripMenuItem1.Size = New System.Drawing.Size(224, 26)
+        Me.MakeToolStripMenuItem1.Size = New System.Drawing.Size(161, 26)
         Me.MakeToolStripMenuItem1.Text = "&Make.."
         '
         'CompileToolStripMenuItem
         '
         Me.CompileToolStripMenuItem.Image = CType(resources.GetObject("CompileToolStripMenuItem.Image"), System.Drawing.Image)
         Me.CompileToolStripMenuItem.Name = "CompileToolStripMenuItem"
-        Me.CompileToolStripMenuItem.Size = New System.Drawing.Size(224, 26)
+        Me.CompileToolStripMenuItem.Size = New System.Drawing.Size(161, 26)
         Me.CompileToolStripMenuItem.Text = "&Compile..."
         '
         'EmulatorToolStripMenuItem
         '
         Me.EmulatorToolStripMenuItem.Image = CType(resources.GetObject("EmulatorToolStripMenuItem.Image"), System.Drawing.Image)
         Me.EmulatorToolStripMenuItem.Name = "EmulatorToolStripMenuItem"
-        Me.EmulatorToolStripMenuItem.Size = New System.Drawing.Size(224, 26)
+        Me.EmulatorToolStripMenuItem.Size = New System.Drawing.Size(161, 26)
         Me.EmulatorToolStripMenuItem.Text = "&Emulator..."
         '
         'TilesetToolStripMenuItem
         '
         Me.TilesetToolStripMenuItem.Image = CType(resources.GetObject("TilesetToolStripMenuItem.Image"), System.Drawing.Image)
         Me.TilesetToolStripMenuItem.Name = "TilesetToolStripMenuItem"
-        Me.TilesetToolStripMenuItem.Size = New System.Drawing.Size(224, 26)
+        Me.TilesetToolStripMenuItem.Size = New System.Drawing.Size(161, 26)
         Me.TilesetToolStripMenuItem.Text = "&Tileset..."
         '
         'ExitToolStripMenuItem
@@ -374,7 +375,7 @@ Partial Class MainContainer
         '
         'GlobalsToolStripMenuItem
         '
-        Me.GlobalsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MakeOptionsToolStripMenuItem, Me.CompileOptionsToolStripMenuItem, Me.EmulatorOptionsToolStripMenuItem, Me.TilesetOptionsToolStripMenuItem})
+        Me.GlobalsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MakeOptionsToolStripMenuItem, Me.CompileOptionsToolStripMenuItem, Me.EmulatorOptionsToolStripMenuItem, Me.TilesetOptionsToolStripMenuItem, Me.FileOptionsToolStripMenuItem})
         Me.GlobalsToolStripMenuItem.Name = "GlobalsToolStripMenuItem"
         Me.GlobalsToolStripMenuItem.Size = New System.Drawing.Size(73, 24)
         Me.GlobalsToolStripMenuItem.Text = "&Globals"
@@ -422,6 +423,13 @@ Partial Class MainContainer
         Me.MainStatusStripLabel.Name = "MainStatusStripLabel"
         Me.MainStatusStripLabel.Size = New System.Drawing.Size(28, 20)
         Me.MainStatusStripLabel.Text = "1:1"
+        '
+        'FileOptionsToolStripMenuItem
+        '
+        Me.FileOptionsToolStripMenuItem.Image = CType(resources.GetObject("FileOptionsToolStripMenuItem.Image"), System.Drawing.Image)
+        Me.FileOptionsToolStripMenuItem.Name = "FileOptionsToolStripMenuItem"
+        Me.FileOptionsToolStripMenuItem.Size = New System.Drawing.Size(224, 26)
+        Me.FileOptionsToolStripMenuItem.Text = "File options..."
         '
         'MainContainer
         '
@@ -493,4 +501,5 @@ Partial Class MainContainer
     Friend WithEvents CompileToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents EmulatorToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents TilesetToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents FileOptionsToolStripMenuItem As ToolStripMenuItem
 End Class

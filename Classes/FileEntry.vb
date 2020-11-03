@@ -19,6 +19,7 @@ Public Class FileEntry
 
     Private _generated As OptionsGenerated
     Private _cc65 As OptionsCC65
+    Private _other As OptionsOther
 
 
     Public Sub New(Optional filename As String = "", Optional name As String = "", Optional description As String = "")
@@ -78,6 +79,15 @@ Public Class FileEntry
         End Set
     End Property
 
+    Public Property Other As OptionsOther
+        Get
+            Return _other
+        End Get
+        Set(value As OptionsOther)
+            _other = value
+        End Set
+    End Property
+
     Public Property Kind As KindEnum
         Get
             Return _kind
@@ -113,6 +123,14 @@ Public Class FileEntry
                         Dim pe As OptionsGenerated = New OptionsGenerated
                         pe.ReadXml(reader)
                         _generated = pe
+                    Case "CC65"
+                        Dim pe As OptionsCC65 = New OptionsCC65
+                        pe.ReadXml(reader)
+                        _cc65 = pe
+                    Case "Other"
+                        Dim pe As OptionsOther = New OptionsOther
+                        pe.ReadXml(reader)
+                        _other = pe
                     Case Else
                         reader.ReadElementContentAsString()
                 End Select
@@ -144,6 +162,16 @@ Public Class FileEntry
         If Not (_generated Is Nothing) Then
             writer.WriteStartElement("Generated")
             DirectCast(_generated, OptionsGenerated).WriteXml(writer)
+            writer.WriteEndElement()
+        End If
+        If Not (_cc65 Is Nothing) Then
+            writer.WriteStartElement("CC65")
+            DirectCast(_cc65, OptionsCC65).WriteXml(writer)
+            writer.WriteEndElement()
+        End If
+        If Not (_other Is Nothing) Then
+            writer.WriteStartElement("Other")
+            DirectCast(_other, OptionsOther).WriteXml(writer)
             writer.WriteEndElement()
         End If
     End Sub
