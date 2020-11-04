@@ -269,7 +269,7 @@ Public Class OptionsMake
         writer.WriteString(_actionClean)
         writer.WriteEndElement()
         writer.WriteStartElement("ExecutableFileName")
-        writer.WriteString(_diskImageFileName)
+        writer.WriteString(_executableFileName)
         writer.WriteEndElement()
         writer.WriteStartElement("DiskImage")
         If (_diskImage) Then

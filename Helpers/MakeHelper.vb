@@ -191,8 +191,10 @@ Module MakeHelper
                 MakeFileForTargetInternal(Path.GetDirectoryName(GetFullPathForElement(makeFileName)), GetFullPathForElement(executableFileName), additionalParams, _target, options, False)
             Case OptionsMake.KindGeneration.DYNAMICAL
                 Dim OtherFiles As Collection = New Collection
-                Dim MakeFileContent As String = GenerateMakefile(executableFileName, _folder_entry, _target, otherFiles)
+                Dim MakeFileContent As String = GenerateMakefile(executableFileName, _folder_entry, _target, OtherFiles)
                 MakeFileContent &= "all:" & vbTab & executableFileName & vbCrLf
+                MakeFileContent &= "clean:" & vbCrLf
+                MakeFileContent &= vbTab & "del " & executableFileName & vbCrLf
                 My.Computer.FileSystem.WriteAllText(GetFullPathForElement(makeFileName), MakeFileContent, False, System.Text.Encoding.ASCII)
                 MakeFileForTargetInternal(Path.GetDirectoryName(GetFullPathForElement(makeFileName)), GetFullPathForElement(executableFileName), additionalParams, _target, options, False)
             Case OptionsMake.KindGeneration.INTERNAL
@@ -248,9 +250,15 @@ Module MakeHelper
                             MakeFileContent &= vbTab & "cc1541.exe -f " & Path.GetFileNameWithoutExtension(oth) & " -w " & oth & " " & DiskImageFileName & vbCrLf
                         End If
                     Next
+                    MakeFileContent &= "clean:" & vbCrLf
+                    MakeFileContent &= vbTab & "del " & executableFileName & vbCrLf
+                    MakeFileContent &= vbTab & "del " & DiskImageFileName & vbCrLf
                 Else
                     MakeFileContent &= "all:" & vbTab & executableFileName
+                    MakeFileContent &= "clean:" & vbCrLf
+                    MakeFileContent &= vbTab & "del " & executableFileName & vbCrLf
                 End If
+
                 My.Computer.FileSystem.WriteAllText(GetFullPathForElement(makeFileName), MakeFileContent, False, System.Text.Encoding.ASCII)
                 MakeFileForTargetInternal(Path.GetDirectoryName(GetFullPathForElement(makeFileName)), GetFullPathForElement(executableFileName), additionalParams, _target, options, True)
             Case OptionsMake.KindGeneration.INTERNAL
