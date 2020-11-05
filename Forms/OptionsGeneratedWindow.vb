@@ -1,5 +1,17 @@
 ﻿Public Class OptionsGeneratedWindow
 
+    Private _targetTreeNode As TreeNode
+
+    Public Property TargetTreeNode As TreeNode
+        Get
+            Return _targetTreeNode
+        End Get
+        Set(value As TreeNode)
+            _targetTreeNode = value
+        End Set
+    End Property
+
+
     Private _currentOptions As OptionsGenerated
     Private _folders As Collection
 
@@ -38,9 +50,13 @@
         ResizeMe()
     End Sub
 
-    Private Sub ButtonApply_Click(sender As Object, e As EventArgs) Handles ButtonApply.Click
+    Private Sub ButtonApply_Click(sender As Object, e As EventArgs)
 
         ApplyOptionsGenerated(Me, CurrentOptions)
+
+        If Not (_targetTreeNode Is Nothing) Then
+            refreshImageForNode(_targetTreeNode)
+        End If
 
         Me.Close()
 
@@ -48,5 +64,9 @@
 
     Private Sub CheckedListBoxDependency_SelectedIndexChanged(sender As Object, e As EventArgs)
 
+    End Sub
+
+    Private Sub ButtonRemove_Click(sender As Object, e As EventArgs) Handles ButtonRemove.Click
+        removeOptionsGeneratedFromNode(_targetTreeNode)
     End Sub
 End Class

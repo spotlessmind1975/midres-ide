@@ -22,13 +22,11 @@ Partial Class OptionsTilesetWindow
     'Non modificarla mediante l'editor del codice.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.ButtonFromGlobal = New System.Windows.Forms.Button()
-        Me.ButtonFromProject = New System.Windows.Forms.Button()
-        Me.ButtonRestore = New System.Windows.Forms.Button()
-        Me.ButtonApply = New System.Windows.Forms.Button()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(OptionsTilesetWindow))
         Me.TabControlOptions = New System.Windows.Forms.TabControl()
         Me.TabPageTileset = New System.Windows.Forms.TabPage()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.LabelThresholdLuminance = New System.Windows.Forms.Label()
         Me.CheckBoxTilesetReverse = New System.Windows.Forms.CheckBox()
         Me.CheckBoxTilesetMulticolor = New System.Windows.Forms.CheckBox()
         Me.Label14 = New System.Windows.Forms.Label()
@@ -39,52 +37,16 @@ Partial Class OptionsTilesetWindow
         Me.Label10 = New System.Windows.Forms.Label()
         Me.TextBoxTilesetBinaryFilename = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.LabelThresholdLuminance = New System.Windows.Forms.Label()
+        Me.ButtonRemove = New System.Windows.Forms.Button()
+        Me.ButtonFromGlobal = New System.Windows.Forms.Button()
+        Me.ButtonRestore = New System.Windows.Forms.Button()
+        Me.ButtonApply = New System.Windows.Forms.Button()
+        Me.ButtonFromProject = New System.Windows.Forms.Button()
         Me.TabControlOptions.SuspendLayout()
         Me.TabPageTileset.SuspendLayout()
         Me.Panel1.SuspendLayout()
         CType(Me.TrackBarTilesetThresholdLuminance, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
-        '
-        'ButtonFromGlobal
-        '
-        Me.ButtonFromGlobal.Location = New System.Drawing.Point(313, 233)
-        Me.ButtonFromGlobal.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ButtonFromGlobal.Name = "ButtonFromGlobal"
-        Me.ButtonFromGlobal.Size = New System.Drawing.Size(125, 44)
-        Me.ButtonFromGlobal.TabIndex = 9
-        Me.ButtonFromGlobal.Text = "From Global"
-        Me.ButtonFromGlobal.UseVisualStyleBackColor = True
-        '
-        'ButtonFromProject
-        '
-        Me.ButtonFromProject.Location = New System.Drawing.Point(448, 233)
-        Me.ButtonFromProject.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ButtonFromProject.Name = "ButtonFromProject"
-        Me.ButtonFromProject.Size = New System.Drawing.Size(125, 44)
-        Me.ButtonFromProject.TabIndex = 8
-        Me.ButtonFromProject.Text = "From Project"
-        Me.ButtonFromProject.UseVisualStyleBackColor = True
-        '
-        'ButtonRestore
-        '
-        Me.ButtonRestore.Location = New System.Drawing.Point(3, 233)
-        Me.ButtonRestore.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ButtonRestore.Name = "ButtonRestore"
-        Me.ButtonRestore.Size = New System.Drawing.Size(125, 44)
-        Me.ButtonRestore.TabIndex = 7
-        Me.ButtonRestore.Text = "Restore"
-        Me.ButtonRestore.UseVisualStyleBackColor = True
-        '
-        'ButtonApply
-        '
-        Me.ButtonApply.Location = New System.Drawing.Point(583, 233)
-        Me.ButtonApply.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ButtonApply.Name = "ButtonApply"
-        Me.ButtonApply.Size = New System.Drawing.Size(125, 44)
-        Me.ButtonApply.TabIndex = 6
-        Me.ButtonApply.Text = "Apply && Close"
-        Me.ButtonApply.UseVisualStyleBackColor = True
         '
         'TabControlOptions
         '
@@ -123,6 +85,17 @@ Partial Class OptionsTilesetWindow
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(693, 182)
         Me.Panel1.TabIndex = 0
+        '
+        'LabelThresholdLuminance
+        '
+        Me.LabelThresholdLuminance.BackColor = System.Drawing.SystemColors.Control
+        Me.LabelThresholdLuminance.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelThresholdLuminance.Location = New System.Drawing.Point(636, 72)
+        Me.LabelThresholdLuminance.Name = "LabelThresholdLuminance"
+        Me.LabelThresholdLuminance.Size = New System.Drawing.Size(36, 29)
+        Me.LabelThresholdLuminance.TabIndex = 25
+        Me.LabelThresholdLuminance.Text = "6"
+        Me.LabelThresholdLuminance.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'CheckBoxTilesetReverse
         '
@@ -213,26 +186,81 @@ Partial Class OptionsTilesetWindow
         Me.Label5.TabIndex = 14
         Me.Label5.Text = "Binary filename"
         '
-        'LabelThresholdLuminance
+        'ButtonRemove
         '
-        Me.LabelThresholdLuminance.BackColor = System.Drawing.SystemColors.Control
-        Me.LabelThresholdLuminance.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelThresholdLuminance.Location = New System.Drawing.Point(636, 72)
-        Me.LabelThresholdLuminance.Name = "LabelThresholdLuminance"
-        Me.LabelThresholdLuminance.Size = New System.Drawing.Size(36, 29)
-        Me.LabelThresholdLuminance.TabIndex = 25
-        Me.LabelThresholdLuminance.Text = "6"
-        Me.LabelThresholdLuminance.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.ButtonRemove.Image = CType(resources.GetObject("ButtonRemove.Image"), System.Drawing.Image)
+        Me.ButtonRemove.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.ButtonRemove.Location = New System.Drawing.Point(6, 235)
+        Me.ButtonRemove.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ButtonRemove.Name = "ButtonRemove"
+        Me.ButtonRemove.Size = New System.Drawing.Size(85, 42)
+        Me.ButtonRemove.TabIndex = 16
+        Me.ButtonRemove.Text = "remove"
+        Me.ButtonRemove.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.ButtonRemove.UseVisualStyleBackColor = True
+        '
+        'ButtonFromGlobal
+        '
+        Me.ButtonFromGlobal.Image = CType(resources.GetObject("ButtonFromGlobal.Image"), System.Drawing.Image)
+        Me.ButtonFromGlobal.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.ButtonFromGlobal.Location = New System.Drawing.Point(279, 232)
+        Me.ButtonFromGlobal.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ButtonFromGlobal.Name = "ButtonFromGlobal"
+        Me.ButtonFromGlobal.Size = New System.Drawing.Size(79, 44)
+        Me.ButtonFromGlobal.TabIndex = 15
+        Me.ButtonFromGlobal.Text = "global"
+        Me.ButtonFromGlobal.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.ButtonFromGlobal.UseVisualStyleBackColor = True
+        '
+        'ButtonRestore
+        '
+        Me.ButtonRestore.Image = CType(resources.GetObject("ButtonRestore.Image"), System.Drawing.Image)
+        Me.ButtonRestore.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.ButtonRestore.Location = New System.Drawing.Point(99, 234)
+        Me.ButtonRestore.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ButtonRestore.Name = "ButtonRestore"
+        Me.ButtonRestore.Size = New System.Drawing.Size(85, 42)
+        Me.ButtonRestore.TabIndex = 13
+        Me.ButtonRestore.Text = "restore"
+        Me.ButtonRestore.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.ButtonRestore.UseVisualStyleBackColor = True
+        '
+        'ButtonApply
+        '
+        Me.ButtonApply.Image = CType(resources.GetObject("ButtonApply.Image"), System.Drawing.Image)
+        Me.ButtonApply.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.ButtonApply.Location = New System.Drawing.Point(635, 233)
+        Me.ButtonApply.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ButtonApply.Name = "ButtonApply"
+        Me.ButtonApply.Size = New System.Drawing.Size(69, 44)
+        Me.ButtonApply.TabIndex = 12
+        Me.ButtonApply.Text = "apply"
+        Me.ButtonApply.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.ButtonApply.UseVisualStyleBackColor = True
+        '
+        'ButtonFromProject
+        '
+        Me.ButtonFromProject.Image = CType(resources.GetObject("ButtonFromProject.Image"), System.Drawing.Image)
+        Me.ButtonFromProject.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.ButtonFromProject.Location = New System.Drawing.Point(366, 233)
+        Me.ButtonFromProject.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ButtonFromProject.Name = "ButtonFromProject"
+        Me.ButtonFromProject.Size = New System.Drawing.Size(79, 44)
+        Me.ButtonFromProject.TabIndex = 14
+        Me.ButtonFromProject.Text = "project"
+        Me.ButtonFromProject.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.ButtonFromProject.UseVisualStyleBackColor = True
         '
         'OptionsTilesetWindow
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(716, 282)
+        Me.Controls.Add(Me.ButtonRemove)
         Me.Controls.Add(Me.ButtonFromGlobal)
-        Me.Controls.Add(Me.ButtonFromProject)
         Me.Controls.Add(Me.ButtonRestore)
         Me.Controls.Add(Me.ButtonApply)
+        Me.Controls.Add(Me.ButtonFromProject)
         Me.Controls.Add(Me.TabControlOptions)
         Me.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
@@ -246,11 +274,6 @@ Partial Class OptionsTilesetWindow
         Me.ResumeLayout(False)
 
     End Sub
-
-    Friend WithEvents ButtonFromGlobal As Button
-    Friend WithEvents ButtonFromProject As Button
-    Friend WithEvents ButtonRestore As Button
-    Friend WithEvents ButtonApply As Button
     Friend WithEvents TabControlOptions As TabControl
     Friend WithEvents TabPageTileset As TabPage
     Friend WithEvents Panel1 As Panel
@@ -265,4 +288,9 @@ Partial Class OptionsTilesetWindow
     Friend WithEvents TextBoxTilesetBinaryFilename As TextBox
     Friend WithEvents Label5 As Label
     Friend WithEvents LabelThresholdLuminance As Label
+    Friend WithEvents ButtonRemove As Button
+    Friend WithEvents ButtonFromGlobal As Button
+    Friend WithEvents ButtonRestore As Button
+    Friend WithEvents ButtonApply As Button
+    Friend WithEvents ButtonFromProject As Button
 End Class

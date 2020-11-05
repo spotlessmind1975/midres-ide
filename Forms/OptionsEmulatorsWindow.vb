@@ -1,5 +1,16 @@
 ﻿Public Class OptionsEmulatorsWindow
 
+    Private _targetTreeNode As TreeNode
+
+    Public Property TargetTreeNode As TreeNode
+        Get
+            Return _targetTreeNode
+        End Get
+        Set(value As TreeNode)
+            _targetTreeNode = value
+        End Set
+    End Property
+
     Private _currentOptions As OptionsEmulators
     Public Property CurrentOptions As OptionsEmulators
         Get
@@ -27,7 +38,7 @@
         ResizeMe()
     End Sub
 
-    Private Sub ButtonRestore_Click(sender As Object, e As EventArgs) Handles ButtonRestore.Click
+    Private Sub ButtonRestore_Click(sender As Object, e As EventArgs)
 
         If (CurrentOptions Is Nothing) Then
             LoadOptions()
@@ -37,7 +48,7 @@
 
     End Sub
 
-    Private Sub ButtonApply_Click(sender As Object, e As EventArgs) Handles ButtonApply.Click
+    Private Sub ButtonApply_Click(sender As Object, e As EventArgs)
 
         ApplyOptionsEmulators(Me, CurrentOptions)
 
@@ -45,16 +56,27 @@
             SaveOptions()
         End If
 
+        If Not (_targetTreeNode Is Nothing) Then
+            refreshImageForNode(_targetTreeNode)
+        End If
+
         Me.Close()
 
     End Sub
 
-    Private Sub ButtonFromGlobal_Click(sender As Object, e As EventArgs) Handles ButtonFromGlobal.Click
+    Private Sub ButtonFromGlobal_Click(sender As Object, e As EventArgs)
         UpdateOptionsEmulators(Me, GlobalVars.CurrentOptions.Emulators)
     End Sub
 
-    Private Sub ButtonFromProject_Click(sender As Object, e As EventArgs) Handles ButtonFromProject.Click
+    Private Sub ButtonFromProject_Click(sender As Object, e As EventArgs)
         UpdateOptionsEmulators(Me, GlobalVars.CurrentProject.CurrentOptions.Emulators)
     End Sub
 
+    Private Sub ButtonRemove_Click(sender As Object, e As EventArgs) Handles ButtonRemove.Click
+        removeOptionsEmulatorsFromNode(_targetTreeNode)
+    End Sub
+
+    Private Sub ButtonFromParent_Click(sender As Object, e As EventArgs) Handles ButtonFromParent.Click
+        UpdateOptionsEmulatorsFromParent(Me, _targetTreeNode)
+    End Sub
 End Class

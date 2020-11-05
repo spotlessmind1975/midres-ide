@@ -95,7 +95,7 @@ Public Class MainContainer
             fn = GlobalVars.CurrentOptions.Make.MakeFilename
         End If
 
-        fn = GetFullPathForElement(fn, GlobalVars.CurrentFolder)
+        fn = GetFullPathForElement(fn)
 
         If Not File.Exists(fn) Then
             MsgBox("The file " & fn & " is missing.", vbOKOnly, "CANNOT OPEN MAKEFILE")
@@ -224,7 +224,6 @@ Public Class MainContainer
 
     Private Sub CompileToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CompileToolStripMenuItem.Click
         ShowOptionsCC65Window(GlobalVars.CurrentProject.CurrentOptions.CC65, "Project's compile options")
-
     End Sub
 
     Private Sub EmulatorToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EmulatorToolStripMenuItem.Click

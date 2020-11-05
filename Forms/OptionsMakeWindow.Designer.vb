@@ -22,11 +22,11 @@ Partial Class OptionsMakeWindow
     'Non modificarla mediante l'editor del codice.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.ButtonFromGlobal = New System.Windows.Forms.Button()
-        Me.ButtonRestore = New System.Windows.Forms.Button()
-        Me.ButtonApply = New System.Windows.Forms.Button()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(OptionsMakeWindow))
         Me.TabPageExecutable = New System.Windows.Forms.TabPage()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.CheckBoxDiskImage = New System.Windows.Forms.CheckBox()
+        Me.TextBoxDiskImageFilename = New System.Windows.Forms.TextBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.TextBoxExecutableFileName = New System.Windows.Forms.TextBox()
         Me.Label11 = New System.Windows.Forms.Label()
@@ -39,11 +39,16 @@ Partial Class OptionsMakeWindow
         Me.TextBoxAdditionalParams = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.RadioButtonInternal = New System.Windows.Forms.RadioButton()
         Me.RadioButtonDynamicMakefile = New System.Windows.Forms.RadioButton()
         Me.RadioButtonStaticMakefile = New System.Windows.Forms.RadioButton()
         Me.TextBoxMakeFileName = New System.Windows.Forms.TextBox()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.TabControlOptions = New System.Windows.Forms.TabControl()
+        Me.TabPageStorage = New System.Windows.Forms.TabPage()
+        Me.Panel4 = New System.Windows.Forms.Panel()
         Me.TabPageTargets = New System.Windows.Forms.TabPage()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.CheckBoxAtariLo = New System.Windows.Forms.CheckBox()
@@ -54,54 +59,22 @@ Partial Class OptionsMakeWindow
         Me.CheckBoxVic20 = New System.Windows.Forms.CheckBox()
         Me.CheckBoxC16 = New System.Windows.Forms.CheckBox()
         Me.CheckBoxPlus4 = New System.Windows.Forms.CheckBox()
+        Me.ButtonFromParent = New System.Windows.Forms.Button()
+        Me.ButtonRemove = New System.Windows.Forms.Button()
+        Me.ButtonFromGlobal = New System.Windows.Forms.Button()
+        Me.ButtonRestore = New System.Windows.Forms.Button()
+        Me.ButtonApply = New System.Windows.Forms.Button()
         Me.ButtonFromProject = New System.Windows.Forms.Button()
-        Me.RadioButtonInternal = New System.Windows.Forms.RadioButton()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.TabPageStorage = New System.Windows.Forms.TabPage()
-        Me.Panel4 = New System.Windows.Forms.Panel()
-        Me.CheckBoxDiskImage = New System.Windows.Forms.CheckBox()
-        Me.TextBoxDiskImageFilename = New System.Windows.Forms.TextBox()
         Me.TabPageExecutable.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.TabPageMake.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
         Me.TabControlOptions.SuspendLayout()
+        Me.TabPageStorage.SuspendLayout()
         Me.TabPageTargets.SuspendLayout()
         Me.Panel3.SuspendLayout()
-        Me.TabPageStorage.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'ButtonFromGlobal
-        '
-        Me.ButtonFromGlobal.Location = New System.Drawing.Point(314, 235)
-        Me.ButtonFromGlobal.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ButtonFromGlobal.Name = "ButtonFromGlobal"
-        Me.ButtonFromGlobal.Size = New System.Drawing.Size(125, 44)
-        Me.ButtonFromGlobal.TabIndex = 9
-        Me.ButtonFromGlobal.Text = "From Global"
-        Me.ButtonFromGlobal.UseVisualStyleBackColor = True
-        '
-        'ButtonRestore
-        '
-        Me.ButtonRestore.Location = New System.Drawing.Point(4, 235)
-        Me.ButtonRestore.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ButtonRestore.Name = "ButtonRestore"
-        Me.ButtonRestore.Size = New System.Drawing.Size(125, 44)
-        Me.ButtonRestore.TabIndex = 7
-        Me.ButtonRestore.Text = "Restore"
-        Me.ButtonRestore.UseVisualStyleBackColor = True
-        '
-        'ButtonApply
-        '
-        Me.ButtonApply.Location = New System.Drawing.Point(584, 235)
-        Me.ButtonApply.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ButtonApply.Name = "ButtonApply"
-        Me.ButtonApply.Size = New System.Drawing.Size(125, 44)
-        Me.ButtonApply.TabIndex = 6
-        Me.ButtonApply.Text = "Apply && Close"
-        Me.ButtonApply.UseVisualStyleBackColor = True
         '
         'TabPageExecutable
         '
@@ -125,6 +98,24 @@ Partial Class OptionsMakeWindow
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(693, 182)
         Me.Panel2.TabIndex = 0
+        '
+        'CheckBoxDiskImage
+        '
+        Me.CheckBoxDiskImage.AutoSize = True
+        Me.CheckBoxDiskImage.Location = New System.Drawing.Point(355, 3)
+        Me.CheckBoxDiskImage.Name = "CheckBoxDiskImage"
+        Me.CheckBoxDiskImage.Size = New System.Drawing.Size(230, 24)
+        Me.CheckBoxDiskImage.TabIndex = 13
+        Me.CheckBoxDiskImage.Text = "Put all files on this disk image:"
+        Me.CheckBoxDiskImage.UseVisualStyleBackColor = True
+        '
+        'TextBoxDiskImageFilename
+        '
+        Me.TextBoxDiskImageFilename.Location = New System.Drawing.Point(355, 34)
+        Me.TextBoxDiskImageFilename.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.TextBoxDiskImageFilename.Name = "TextBoxDiskImageFilename"
+        Me.TextBoxDiskImageFilename.Size = New System.Drawing.Size(317, 27)
+        Me.TextBoxDiskImageFilename.TabIndex = 12
         '
         'Label9
         '
@@ -150,7 +141,7 @@ Partial Class OptionsMakeWindow
         Me.Label11.AutoSize = True
         Me.Label11.Location = New System.Drawing.Point(14, 10)
         Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(179, 25)
+        Me.Label11.Size = New System.Drawing.Size(143, 20)
         Me.Label11.TabIndex = 4
         Me.Label11.Text = "Executable filename"
         '
@@ -248,6 +239,36 @@ Partial Class OptionsMakeWindow
         Me.GroupBox5.TabStop = False
         Me.GroupBox5.Text = "Kind of generation"
         '
+        'Label2
+        '
+        Me.Label2.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.Location = New System.Drawing.Point(32, 108)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(351, 20)
+        Me.Label2.TabIndex = 4
+        Me.Label2.Text = "Generate a new brand makefile and call ""make""."
+        '
+        'Label1
+        '
+        Me.Label1.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Location = New System.Drawing.Point(32, 56)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(363, 20)
+        Me.Label1.TabIndex = 3
+        Me.Label1.Text = "Look for an existing makefile and call ""make""."
+        '
+        'RadioButtonInternal
+        '
+        Me.RadioButtonInternal.AutoSize = True
+        Me.RadioButtonInternal.Location = New System.Drawing.Point(6, 135)
+        Me.RadioButtonInternal.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.RadioButtonInternal.Name = "RadioButtonInternal"
+        Me.RadioButtonInternal.Size = New System.Drawing.Size(285, 24)
+        Me.RadioButtonInternal.TabIndex = 2
+        Me.RadioButtonInternal.TabStop = True
+        Me.RadioButtonInternal.Text = "Use internal procedure (w/out ""make"")"
+        Me.RadioButtonInternal.UseVisualStyleBackColor = True
+        '
         'RadioButtonDynamicMakefile
         '
         Me.RadioButtonDynamicMakefile.AutoSize = True
@@ -301,6 +322,23 @@ Partial Class OptionsMakeWindow
         Me.TabControlOptions.SelectedIndex = 0
         Me.TabControlOptions.Size = New System.Drawing.Size(707, 221)
         Me.TabControlOptions.TabIndex = 5
+        '
+        'TabPageStorage
+        '
+        Me.TabPageStorage.Controls.Add(Me.Panel4)
+        Me.TabPageStorage.Location = New System.Drawing.Point(4, 29)
+        Me.TabPageStorage.Name = "TabPageStorage"
+        Me.TabPageStorage.Size = New System.Drawing.Size(699, 188)
+        Me.TabPageStorage.TabIndex = 5
+        Me.TabPageStorage.Text = "Storage"
+        Me.TabPageStorage.UseVisualStyleBackColor = True
+        '
+        'Panel4
+        '
+        Me.Panel4.Location = New System.Drawing.Point(3, 8)
+        Me.Panel4.Name = "Panel4"
+        Me.Panel4.Size = New System.Drawing.Size(690, 177)
+        Me.Panel4.TabIndex = 0
         '
         'TabPageTargets
         '
@@ -417,89 +455,95 @@ Partial Class OptionsMakeWindow
         Me.CheckBoxPlus4.Text = "Commodore PLUS/4"
         Me.CheckBoxPlus4.UseVisualStyleBackColor = True
         '
+        'ButtonFromParent
+        '
+        Me.ButtonFromParent.Image = CType(resources.GetObject("ButtonFromParent.Image"), System.Drawing.Image)
+        Me.ButtonFromParent.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.ButtonFromParent.Location = New System.Drawing.Point(454, 230)
+        Me.ButtonFromParent.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ButtonFromParent.Name = "ButtonFromParent"
+        Me.ButtonFromParent.Size = New System.Drawing.Size(79, 44)
+        Me.ButtonFromParent.TabIndex = 17
+        Me.ButtonFromParent.Text = "parent"
+        Me.ButtonFromParent.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.ButtonFromParent.UseVisualStyleBackColor = True
+        '
+        'ButtonRemove
+        '
+        Me.ButtonRemove.Image = CType(resources.GetObject("ButtonRemove.Image"), System.Drawing.Image)
+        Me.ButtonRemove.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.ButtonRemove.Location = New System.Drawing.Point(7, 232)
+        Me.ButtonRemove.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ButtonRemove.Name = "ButtonRemove"
+        Me.ButtonRemove.Size = New System.Drawing.Size(85, 42)
+        Me.ButtonRemove.TabIndex = 16
+        Me.ButtonRemove.Text = "remove"
+        Me.ButtonRemove.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.ButtonRemove.UseVisualStyleBackColor = True
+        '
+        'ButtonFromGlobal
+        '
+        Me.ButtonFromGlobal.Image = CType(resources.GetObject("ButtonFromGlobal.Image"), System.Drawing.Image)
+        Me.ButtonFromGlobal.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.ButtonFromGlobal.Location = New System.Drawing.Point(280, 229)
+        Me.ButtonFromGlobal.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ButtonFromGlobal.Name = "ButtonFromGlobal"
+        Me.ButtonFromGlobal.Size = New System.Drawing.Size(79, 44)
+        Me.ButtonFromGlobal.TabIndex = 15
+        Me.ButtonFromGlobal.Text = "global"
+        Me.ButtonFromGlobal.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.ButtonFromGlobal.UseVisualStyleBackColor = True
+        '
+        'ButtonRestore
+        '
+        Me.ButtonRestore.Image = CType(resources.GetObject("ButtonRestore.Image"), System.Drawing.Image)
+        Me.ButtonRestore.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.ButtonRestore.Location = New System.Drawing.Point(100, 231)
+        Me.ButtonRestore.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ButtonRestore.Name = "ButtonRestore"
+        Me.ButtonRestore.Size = New System.Drawing.Size(85, 42)
+        Me.ButtonRestore.TabIndex = 13
+        Me.ButtonRestore.Text = "restore"
+        Me.ButtonRestore.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.ButtonRestore.UseVisualStyleBackColor = True
+        '
+        'ButtonApply
+        '
+        Me.ButtonApply.Image = CType(resources.GetObject("ButtonApply.Image"), System.Drawing.Image)
+        Me.ButtonApply.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.ButtonApply.Location = New System.Drawing.Point(636, 230)
+        Me.ButtonApply.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ButtonApply.Name = "ButtonApply"
+        Me.ButtonApply.Size = New System.Drawing.Size(69, 44)
+        Me.ButtonApply.TabIndex = 12
+        Me.ButtonApply.Text = "apply"
+        Me.ButtonApply.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.ButtonApply.UseVisualStyleBackColor = True
+        '
         'ButtonFromProject
         '
-        Me.ButtonFromProject.Location = New System.Drawing.Point(446, 234)
+        Me.ButtonFromProject.Image = CType(resources.GetObject("ButtonFromProject.Image"), System.Drawing.Image)
+        Me.ButtonFromProject.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.ButtonFromProject.Location = New System.Drawing.Point(367, 230)
+        Me.ButtonFromProject.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ButtonFromProject.Name = "ButtonFromProject"
-        Me.ButtonFromProject.Size = New System.Drawing.Size(131, 45)
-        Me.ButtonFromProject.TabIndex = 10
-        Me.ButtonFromProject.Text = "From Project"
+        Me.ButtonFromProject.Size = New System.Drawing.Size(79, 44)
+        Me.ButtonFromProject.TabIndex = 14
+        Me.ButtonFromProject.Text = "project"
+        Me.ButtonFromProject.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.ButtonFromProject.UseVisualStyleBackColor = True
-        '
-        'RadioButtonInternal
-        '
-        Me.RadioButtonInternal.AutoSize = True
-        Me.RadioButtonInternal.Location = New System.Drawing.Point(6, 135)
-        Me.RadioButtonInternal.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.RadioButtonInternal.Name = "RadioButtonInternal"
-        Me.RadioButtonInternal.Size = New System.Drawing.Size(285, 24)
-        Me.RadioButtonInternal.TabIndex = 2
-        Me.RadioButtonInternal.TabStop = True
-        Me.RadioButtonInternal.Text = "Use internal procedure (w/out ""make"")"
-        Me.RadioButtonInternal.UseVisualStyleBackColor = True
-        '
-        'Label1
-        '
-        Me.Label1.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(32, 56)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(363, 20)
-        Me.Label1.TabIndex = 3
-        Me.Label1.Text = "Look for an existing makefile and call ""make""."
-        '
-        'Label2
-        '
-        Me.Label2.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(32, 108)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(351, 20)
-        Me.Label2.TabIndex = 4
-        Me.Label2.Text = "Generate a new brand makefile and call ""make""."
-        '
-        'TabPageStorage
-        '
-        Me.TabPageStorage.Controls.Add(Me.Panel4)
-        Me.TabPageStorage.Location = New System.Drawing.Point(4, 29)
-        Me.TabPageStorage.Name = "TabPageStorage"
-        Me.TabPageStorage.Size = New System.Drawing.Size(699, 188)
-        Me.TabPageStorage.TabIndex = 5
-        Me.TabPageStorage.Text = "Storage"
-        Me.TabPageStorage.UseVisualStyleBackColor = True
-        '
-        'Panel4
-        '
-        Me.Panel4.Location = New System.Drawing.Point(3, 8)
-        Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(690, 177)
-        Me.Panel4.TabIndex = 0
-        '
-        'CheckBoxDiskImage
-        '
-        Me.CheckBoxDiskImage.AutoSize = True
-        Me.CheckBoxDiskImage.Location = New System.Drawing.Point(355, 3)
-        Me.CheckBoxDiskImage.Name = "CheckBoxDiskImage"
-        Me.CheckBoxDiskImage.Size = New System.Drawing.Size(230, 24)
-        Me.CheckBoxDiskImage.TabIndex = 13
-        Me.CheckBoxDiskImage.Text = "Put all files on this disk image:"
-        Me.CheckBoxDiskImage.UseVisualStyleBackColor = True
-        '
-        'TextBoxDiskImageFilename
-        '
-        Me.TextBoxDiskImageFilename.Location = New System.Drawing.Point(355, 34)
-        Me.TextBoxDiskImageFilename.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.TextBoxDiskImageFilename.Name = "TextBoxDiskImageFilename"
-        Me.TextBoxDiskImageFilename.Size = New System.Drawing.Size(317, 27)
-        Me.TextBoxDiskImageFilename.TabIndex = 12
         '
         'OptionsMakeWindow
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(715, 282)
-        Me.Controls.Add(Me.ButtonFromProject)
+        Me.Controls.Add(Me.ButtonFromParent)
+        Me.Controls.Add(Me.ButtonRemove)
         Me.Controls.Add(Me.ButtonFromGlobal)
         Me.Controls.Add(Me.ButtonRestore)
         Me.Controls.Add(Me.ButtonApply)
+        Me.Controls.Add(Me.ButtonFromProject)
         Me.Controls.Add(Me.TabControlOptions)
         Me.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
@@ -514,16 +558,13 @@ Partial Class OptionsMakeWindow
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
         Me.TabControlOptions.ResumeLayout(False)
+        Me.TabPageStorage.ResumeLayout(False)
         Me.TabPageTargets.ResumeLayout(False)
         Me.Panel3.ResumeLayout(False)
         Me.Panel3.PerformLayout()
-        Me.TabPageStorage.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
-    Friend WithEvents ButtonFromGlobal As Button
-    Friend WithEvents ButtonRestore As Button
-    Friend WithEvents ButtonApply As Button
     Friend WithEvents TabPageExecutable As TabPage
     Friend WithEvents TabPageMake As TabPage
     Friend WithEvents TabControlOptions As TabControl
@@ -553,7 +594,6 @@ Partial Class OptionsMakeWindow
     Friend WithEvents CheckBoxVic20 As CheckBox
     Friend WithEvents CheckBoxC16 As CheckBox
     Friend WithEvents CheckBoxPlus4 As CheckBox
-    Friend WithEvents ButtonFromProject As Button
     Friend WithEvents Label2 As Label
     Friend WithEvents Label1 As Label
     Friend WithEvents RadioButtonInternal As RadioButton
@@ -561,4 +601,10 @@ Partial Class OptionsMakeWindow
     Friend WithEvents CheckBoxDiskImage As CheckBox
     Friend WithEvents TextBoxDiskImageFilename As TextBox
     Friend WithEvents Panel4 As Panel
+    Friend WithEvents ButtonFromParent As Button
+    Friend WithEvents ButtonRemove As Button
+    Friend WithEvents ButtonFromGlobal As Button
+    Friend WithEvents ButtonRestore As Button
+    Friend WithEvents ButtonApply As Button
+    Friend WithEvents ButtonFromProject As Button
 End Class

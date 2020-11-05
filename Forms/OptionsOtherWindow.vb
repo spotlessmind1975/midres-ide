@@ -1,5 +1,17 @@
 ﻿Public Class OptionsOtherWindow
 
+    Private _targetTreeNode As TreeNode
+
+    Public Property TargetTreeNode As TreeNode
+        Get
+            Return _targetTreeNode
+        End Get
+        Set(value As TreeNode)
+            _targetTreeNode = value
+        End Set
+    End Property
+
+
     Private _currentOptions As OptionsOther
     Public Property CurrentOptions As OptionsOther
         Get
@@ -24,13 +36,13 @@
         ResizeMe()
     End Sub
 
-    Private Sub ButtonRestore_Click(sender As Object, e As EventArgs) Handles ButtonRestore.Click
+    Private Sub ButtonRestore_Click(sender As Object, e As EventArgs)
 
         UpdateOptionsOther(Me, CurrentOptions)
 
     End Sub
 
-    Private Sub ButtonApply_Click(sender As Object, e As EventArgs) Handles ButtonApply.Click
+    Private Sub ButtonApply_Click(sender As Object, e As EventArgs)
 
         ApplyOptionsOther(Me, CurrentOptions)
 
@@ -38,17 +50,27 @@
             SaveOptions()
         End If
 
+        If Not (_targetTreeNode Is Nothing) Then
+            refreshImageForNode(_targetTreeNode)
+        End If
+
         Me.Close()
 
     End Sub
 
-    Private Sub ButtonFromGlobal_Click(sender As Object, e As EventArgs) Handles ButtonFromGlobal.Click
+    Private Sub ButtonFromGlobal_Click(sender As Object, e As EventArgs)
         UpdateOptionsOther(Me, GlobalVars.CurrentOptions.Other)
     End Sub
 
-    Private Sub ButtonFromProject_Click(sender As Object, e As EventArgs) Handles ButtonFromProject.Click
+    Private Sub ButtonFromProject_Click(sender As Object, e As EventArgs)
         UpdateOptionsOther(Me, GlobalVars.CurrentProject.CurrentOptions.Other)
     End Sub
 
+    Private Sub ButtonRemove_Click(sender As Object, e As EventArgs) Handles ButtonRemove.Click
+        removeOptionsOtherFromNode(_targetTreeNode)
+    End Sub
 
+    Private Sub ButtonFromParent_Click(sender As Object, e As EventArgs) Handles ButtonFromParent.Click
+        UpdateOptionsOtherFromParent(Me, _targetTreeNode)
+    End Sub
 End Class

@@ -22,12 +22,12 @@ Partial Class OptionsGeneratedWindow
     'Non modificarla mediante l'editor del codice.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(OptionsGeneratedWindow))
         Me.TabPageDetails = New System.Windows.Forms.TabPage()
-        Me.ButtonApply = New System.Windows.Forms.Button()
-        Me.TabControlOptions = New System.Windows.Forms.TabControl()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.CheckedListBoxDependency = New System.Windows.Forms.CheckedListBox()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.TabControlOptions = New System.Windows.Forms.TabControl()
         Me.TabPageTargets = New System.Windows.Forms.TabPage()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.CheckBoxAtariLo = New System.Windows.Forms.CheckBox()
@@ -38,9 +38,14 @@ Partial Class OptionsGeneratedWindow
         Me.CheckBoxVic20 = New System.Windows.Forms.CheckBox()
         Me.CheckBoxC16 = New System.Windows.Forms.CheckBox()
         Me.CheckBoxPlus4 = New System.Windows.Forms.CheckBox()
+        Me.ButtonRemove = New System.Windows.Forms.Button()
+        Me.ButtonFromGlobal = New System.Windows.Forms.Button()
+        Me.ButtonRestore = New System.Windows.Forms.Button()
+        Me.ButtonApply = New System.Windows.Forms.Button()
+        Me.ButtonFromProject = New System.Windows.Forms.Button()
         Me.TabPageDetails.SuspendLayout()
-        Me.TabControlOptions.SuspendLayout()
         Me.Panel1.SuspendLayout()
+        Me.TabControlOptions.SuspendLayout()
         Me.TabPageTargets.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
@@ -54,27 +59,6 @@ Partial Class OptionsGeneratedWindow
         Me.TabPageDetails.TabIndex = 5
         Me.TabPageDetails.Text = "Details"
         Me.TabPageDetails.UseVisualStyleBackColor = True
-        '
-        'ButtonApply
-        '
-        Me.ButtonApply.Location = New System.Drawing.Point(589, 239)
-        Me.ButtonApply.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ButtonApply.Name = "ButtonApply"
-        Me.ButtonApply.Size = New System.Drawing.Size(125, 44)
-        Me.ButtonApply.TabIndex = 11
-        Me.ButtonApply.Text = "Apply && Close"
-        Me.ButtonApply.UseVisualStyleBackColor = True
-        '
-        'TabControlOptions
-        '
-        Me.TabControlOptions.Controls.Add(Me.TabPageDetails)
-        Me.TabControlOptions.Controls.Add(Me.TabPageTargets)
-        Me.TabControlOptions.Location = New System.Drawing.Point(12, 11)
-        Me.TabControlOptions.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.TabControlOptions.Name = "TabControlOptions"
-        Me.TabControlOptions.SelectedIndex = 0
-        Me.TabControlOptions.Size = New System.Drawing.Size(707, 221)
-        Me.TabControlOptions.TabIndex = 10
         '
         'Panel1
         '
@@ -101,6 +85,17 @@ Partial Class OptionsGeneratedWindow
         Me.Label1.Size = New System.Drawing.Size(193, 20)
         Me.Label1.TabIndex = 3
         Me.Label1.Text = "Set dependency for this file:"
+        '
+        'TabControlOptions
+        '
+        Me.TabControlOptions.Controls.Add(Me.TabPageDetails)
+        Me.TabControlOptions.Controls.Add(Me.TabPageTargets)
+        Me.TabControlOptions.Location = New System.Drawing.Point(12, 11)
+        Me.TabControlOptions.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.TabControlOptions.Name = "TabControlOptions"
+        Me.TabControlOptions.SelectedIndex = 0
+        Me.TabControlOptions.Size = New System.Drawing.Size(707, 221)
+        Me.TabControlOptions.TabIndex = 10
         '
         'TabPageTargets
         '
@@ -215,12 +210,81 @@ Partial Class OptionsGeneratedWindow
         Me.CheckBoxPlus4.Text = "Commodore PLUS/4"
         Me.CheckBoxPlus4.UseVisualStyleBackColor = True
         '
+        'ButtonRemove
+        '
+        Me.ButtonRemove.Image = CType(resources.GetObject("ButtonRemove.Image"), System.Drawing.Image)
+        Me.ButtonRemove.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.ButtonRemove.Location = New System.Drawing.Point(14, 241)
+        Me.ButtonRemove.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ButtonRemove.Name = "ButtonRemove"
+        Me.ButtonRemove.Size = New System.Drawing.Size(85, 42)
+        Me.ButtonRemove.TabIndex = 16
+        Me.ButtonRemove.Text = "remove"
+        Me.ButtonRemove.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.ButtonRemove.UseVisualStyleBackColor = True
+        '
+        'ButtonFromGlobal
+        '
+        Me.ButtonFromGlobal.Image = CType(resources.GetObject("ButtonFromGlobal.Image"), System.Drawing.Image)
+        Me.ButtonFromGlobal.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.ButtonFromGlobal.Location = New System.Drawing.Point(287, 238)
+        Me.ButtonFromGlobal.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ButtonFromGlobal.Name = "ButtonFromGlobal"
+        Me.ButtonFromGlobal.Size = New System.Drawing.Size(79, 44)
+        Me.ButtonFromGlobal.TabIndex = 15
+        Me.ButtonFromGlobal.Text = "global"
+        Me.ButtonFromGlobal.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.ButtonFromGlobal.UseVisualStyleBackColor = True
+        '
+        'ButtonRestore
+        '
+        Me.ButtonRestore.Image = CType(resources.GetObject("ButtonRestore.Image"), System.Drawing.Image)
+        Me.ButtonRestore.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.ButtonRestore.Location = New System.Drawing.Point(107, 240)
+        Me.ButtonRestore.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ButtonRestore.Name = "ButtonRestore"
+        Me.ButtonRestore.Size = New System.Drawing.Size(85, 42)
+        Me.ButtonRestore.TabIndex = 13
+        Me.ButtonRestore.Text = "restore"
+        Me.ButtonRestore.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.ButtonRestore.UseVisualStyleBackColor = True
+        '
+        'ButtonApply
+        '
+        Me.ButtonApply.Image = CType(resources.GetObject("ButtonApply.Image"), System.Drawing.Image)
+        Me.ButtonApply.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.ButtonApply.Location = New System.Drawing.Point(643, 239)
+        Me.ButtonApply.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ButtonApply.Name = "ButtonApply"
+        Me.ButtonApply.Size = New System.Drawing.Size(69, 44)
+        Me.ButtonApply.TabIndex = 12
+        Me.ButtonApply.Text = "apply"
+        Me.ButtonApply.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.ButtonApply.UseVisualStyleBackColor = True
+        '
+        'ButtonFromProject
+        '
+        Me.ButtonFromProject.Image = CType(resources.GetObject("ButtonFromProject.Image"), System.Drawing.Image)
+        Me.ButtonFromProject.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.ButtonFromProject.Location = New System.Drawing.Point(374, 239)
+        Me.ButtonFromProject.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ButtonFromProject.Name = "ButtonFromProject"
+        Me.ButtonFromProject.Size = New System.Drawing.Size(79, 44)
+        Me.ButtonFromProject.TabIndex = 14
+        Me.ButtonFromProject.Text = "project"
+        Me.ButtonFromProject.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.ButtonFromProject.UseVisualStyleBackColor = True
+        '
         'OptionsGeneratedWindow
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(721, 292)
+        Me.Controls.Add(Me.ButtonRemove)
+        Me.Controls.Add(Me.ButtonFromGlobal)
+        Me.Controls.Add(Me.ButtonRestore)
         Me.Controls.Add(Me.ButtonApply)
+        Me.Controls.Add(Me.ButtonFromProject)
         Me.Controls.Add(Me.TabControlOptions)
         Me.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
@@ -228,9 +292,9 @@ Partial Class OptionsGeneratedWindow
         Me.Name = "OptionsGeneratedWindow"
         Me.Text = "OptionsGeneratedWindow"
         Me.TabPageDetails.ResumeLayout(False)
-        Me.TabControlOptions.ResumeLayout(False)
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
+        Me.TabControlOptions.ResumeLayout(False)
         Me.TabPageTargets.ResumeLayout(False)
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
@@ -239,7 +303,6 @@ Partial Class OptionsGeneratedWindow
     End Sub
 
     Friend WithEvents TabPageDetails As TabPage
-    Friend WithEvents ButtonApply As Button
     Friend WithEvents TabControlOptions As TabControl
     Friend WithEvents Panel1 As Panel
     Friend WithEvents CheckedListBoxDependency As CheckedListBox
@@ -254,4 +317,9 @@ Partial Class OptionsGeneratedWindow
     Friend WithEvents CheckBoxVic20 As CheckBox
     Friend WithEvents CheckBoxC16 As CheckBox
     Friend WithEvents CheckBoxPlus4 As CheckBox
+    Friend WithEvents ButtonRemove As Button
+    Friend WithEvents ButtonFromGlobal As Button
+    Friend WithEvents ButtonRestore As Button
+    Friend WithEvents ButtonApply As Button
+    Friend WithEvents ButtonFromProject As Button
 End Class

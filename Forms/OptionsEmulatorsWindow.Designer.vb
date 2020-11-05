@@ -22,22 +22,9 @@ Partial Class OptionsEmulatorsWindow
     'Non modificarla mediante l'editor del codice.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.ButtonFromGlobal = New System.Windows.Forms.Button()
-        Me.ButtonRestore = New System.Windows.Forms.Button()
-        Me.ButtonApply = New System.Windows.Forms.Button()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(OptionsEmulatorsWindow))
         Me.TabControlOptions = New System.Windows.Forms.TabControl()
         Me.TabPageEmulators = New System.Windows.Forms.TabPage()
-        Me.TabPagePlatforms = New System.Windows.Forms.TabPage()
-        Me.ButtonFromProject = New System.Windows.Forms.Button()
-        Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.CheckBoxAtariLo = New System.Windows.Forms.CheckBox()
-        Me.CheckBoxAtari = New System.Windows.Forms.CheckBox()
-        Me.CheckBoxC128 = New System.Windows.Forms.CheckBox()
-        Me.CheckBoxC64 = New System.Windows.Forms.CheckBox()
-        Me.CheckBoxVic2024 = New System.Windows.Forms.CheckBox()
-        Me.CheckBoxVic20 = New System.Windows.Forms.CheckBox()
-        Me.CheckBoxC16 = New System.Windows.Forms.CheckBox()
-        Me.CheckBoxPlus4 = New System.Windows.Forms.CheckBox()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.TextBoxYAPEPath = New System.Windows.Forms.TextBox()
         Me.CheckBoxYAPE = New System.Windows.Forms.CheckBox()
@@ -47,42 +34,28 @@ Partial Class OptionsEmulatorsWindow
         Me.CheckBoxALTIRRA = New System.Windows.Forms.CheckBox()
         Me.CheckBoxVICE = New System.Windows.Forms.CheckBox()
         Me.TextBoxVICEPath = New System.Windows.Forms.TextBox()
+        Me.TabPagePlatforms = New System.Windows.Forms.TabPage()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.CheckBoxAtariLo = New System.Windows.Forms.CheckBox()
+        Me.CheckBoxAtari = New System.Windows.Forms.CheckBox()
+        Me.CheckBoxC128 = New System.Windows.Forms.CheckBox()
+        Me.CheckBoxC64 = New System.Windows.Forms.CheckBox()
+        Me.CheckBoxVic2024 = New System.Windows.Forms.CheckBox()
+        Me.CheckBoxVic20 = New System.Windows.Forms.CheckBox()
+        Me.CheckBoxC16 = New System.Windows.Forms.CheckBox()
+        Me.CheckBoxPlus4 = New System.Windows.Forms.CheckBox()
+        Me.ButtonFromParent = New System.Windows.Forms.Button()
+        Me.ButtonRemove = New System.Windows.Forms.Button()
+        Me.ButtonFromGlobal = New System.Windows.Forms.Button()
+        Me.ButtonRestore = New System.Windows.Forms.Button()
+        Me.ButtonApply = New System.Windows.Forms.Button()
+        Me.ButtonFromProject = New System.Windows.Forms.Button()
         Me.TabControlOptions.SuspendLayout()
         Me.TabPageEmulators.SuspendLayout()
+        Me.Panel2.SuspendLayout()
         Me.TabPagePlatforms.SuspendLayout()
         Me.Panel1.SuspendLayout()
-        Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'ButtonFromGlobal
-        '
-        Me.ButtonFromGlobal.Location = New System.Drawing.Point(313, 234)
-        Me.ButtonFromGlobal.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ButtonFromGlobal.Name = "ButtonFromGlobal"
-        Me.ButtonFromGlobal.Size = New System.Drawing.Size(125, 44)
-        Me.ButtonFromGlobal.TabIndex = 9
-        Me.ButtonFromGlobal.Text = "From Global"
-        Me.ButtonFromGlobal.UseVisualStyleBackColor = True
-        '
-        'ButtonRestore
-        '
-        Me.ButtonRestore.Location = New System.Drawing.Point(3, 234)
-        Me.ButtonRestore.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ButtonRestore.Name = "ButtonRestore"
-        Me.ButtonRestore.Size = New System.Drawing.Size(125, 44)
-        Me.ButtonRestore.TabIndex = 7
-        Me.ButtonRestore.Text = "Restore"
-        Me.ButtonRestore.UseVisualStyleBackColor = True
-        '
-        'ButtonApply
-        '
-        Me.ButtonApply.Location = New System.Drawing.Point(583, 234)
-        Me.ButtonApply.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ButtonApply.Name = "ButtonApply"
-        Me.ButtonApply.Size = New System.Drawing.Size(125, 44)
-        Me.ButtonApply.TabIndex = 6
-        Me.ButtonApply.Text = "Apply && Close"
-        Me.ButtonApply.UseVisualStyleBackColor = True
         '
         'TabControlOptions
         '
@@ -107,6 +80,105 @@ Partial Class OptionsEmulatorsWindow
         Me.TabPageEmulators.Text = "Emulators"
         Me.TabPageEmulators.UseVisualStyleBackColor = True
         '
+        'Panel2
+        '
+        Me.Panel2.Controls.Add(Me.TextBoxYAPEPath)
+        Me.Panel2.Controls.Add(Me.CheckBoxYAPE)
+        Me.Panel2.Controls.Add(Me.TextBoxATARI800Path)
+        Me.Panel2.Controls.Add(Me.CheckBoxATARI800)
+        Me.Panel2.Controls.Add(Me.TextBoxALTIRRAPath)
+        Me.Panel2.Controls.Add(Me.CheckBoxALTIRRA)
+        Me.Panel2.Controls.Add(Me.CheckBoxVICE)
+        Me.Panel2.Controls.Add(Me.TextBoxVICEPath)
+        Me.Panel2.Location = New System.Drawing.Point(6, 5)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(690, 183)
+        Me.Panel2.TabIndex = 0
+        '
+        'TextBoxYAPEPath
+        '
+        Me.TextBoxYAPEPath.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.TextBoxYAPEPath.Location = New System.Drawing.Point(389, 53)
+        Me.TextBoxYAPEPath.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.TextBoxYAPEPath.Name = "TextBoxYAPEPath"
+        Me.TextBoxYAPEPath.Size = New System.Drawing.Size(280, 27)
+        Me.TextBoxYAPEPath.TabIndex = 48
+        '
+        'CheckBoxYAPE
+        '
+        Me.CheckBoxYAPE.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.CheckBoxYAPE.AutoSize = True
+        Me.CheckBoxYAPE.Location = New System.Drawing.Point(366, 29)
+        Me.CheckBoxYAPE.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.CheckBoxYAPE.Name = "CheckBoxYAPE"
+        Me.CheckBoxYAPE.Size = New System.Drawing.Size(168, 24)
+        Me.CheckBoxYAPE.TabIndex = 47
+        Me.CheckBoxYAPE.Text = "Enable YAPE support"
+        Me.CheckBoxYAPE.UseVisualStyleBackColor = True
+        '
+        'TextBoxATARI800Path
+        '
+        Me.TextBoxATARI800Path.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.TextBoxATARI800Path.Location = New System.Drawing.Point(389, 112)
+        Me.TextBoxATARI800Path.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.TextBoxATARI800Path.Name = "TextBoxATARI800Path"
+        Me.TextBoxATARI800Path.Size = New System.Drawing.Size(279, 27)
+        Me.TextBoxATARI800Path.TabIndex = 46
+        '
+        'CheckBoxATARI800
+        '
+        Me.CheckBoxATARI800.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.CheckBoxATARI800.AutoSize = True
+        Me.CheckBoxATARI800.Location = New System.Drawing.Point(366, 90)
+        Me.CheckBoxATARI800.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.CheckBoxATARI800.Name = "CheckBoxATARI800"
+        Me.CheckBoxATARI800.Size = New System.Drawing.Size(202, 24)
+        Me.CheckBoxATARI800.TabIndex = 45
+        Me.CheckBoxATARI800.Text = "Enable ATARI 800 support"
+        Me.CheckBoxATARI800.UseVisualStyleBackColor = True
+        '
+        'TextBoxALTIRRAPath
+        '
+        Me.TextBoxALTIRRAPath.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.TextBoxALTIRRAPath.Location = New System.Drawing.Point(41, 112)
+        Me.TextBoxALTIRRAPath.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.TextBoxALTIRRAPath.Name = "TextBoxALTIRRAPath"
+        Me.TextBoxALTIRRAPath.Size = New System.Drawing.Size(280, 27)
+        Me.TextBoxALTIRRAPath.TabIndex = 44
+        '
+        'CheckBoxALTIRRA
+        '
+        Me.CheckBoxALTIRRA.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.CheckBoxALTIRRA.AutoSize = True
+        Me.CheckBoxALTIRRA.Location = New System.Drawing.Point(18, 90)
+        Me.CheckBoxALTIRRA.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.CheckBoxALTIRRA.Name = "CheckBoxALTIRRA"
+        Me.CheckBoxALTIRRA.Size = New System.Drawing.Size(191, 24)
+        Me.CheckBoxALTIRRA.TabIndex = 43
+        Me.CheckBoxALTIRRA.Text = "Enable ALTIRRA support"
+        Me.CheckBoxALTIRRA.UseVisualStyleBackColor = True
+        '
+        'CheckBoxVICE
+        '
+        Me.CheckBoxVICE.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.CheckBoxVICE.AutoSize = True
+        Me.CheckBoxVICE.Location = New System.Drawing.Point(18, 29)
+        Me.CheckBoxVICE.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.CheckBoxVICE.Name = "CheckBoxVICE"
+        Me.CheckBoxVICE.Size = New System.Drawing.Size(165, 24)
+        Me.CheckBoxVICE.TabIndex = 41
+        Me.CheckBoxVICE.Text = "Enable VICE support"
+        Me.CheckBoxVICE.UseVisualStyleBackColor = True
+        '
+        'TextBoxVICEPath
+        '
+        Me.TextBoxVICEPath.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.TextBoxVICEPath.Location = New System.Drawing.Point(41, 53)
+        Me.TextBoxVICEPath.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.TextBoxVICEPath.Name = "TextBoxVICEPath"
+        Me.TextBoxVICEPath.Size = New System.Drawing.Size(280, 27)
+        Me.TextBoxVICEPath.TabIndex = 42
+        '
         'TabPagePlatforms
         '
         Me.TabPagePlatforms.Controls.Add(Me.Panel1)
@@ -118,16 +190,6 @@ Partial Class OptionsEmulatorsWindow
         Me.TabPagePlatforms.TabIndex = 1
         Me.TabPagePlatforms.Text = "Platforms"
         Me.TabPagePlatforms.UseVisualStyleBackColor = True
-        '
-        'ButtonFromProject
-        '
-        Me.ButtonFromProject.Location = New System.Drawing.Point(448, 234)
-        Me.ButtonFromProject.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ButtonFromProject.Name = "ButtonFromProject"
-        Me.ButtonFromProject.Size = New System.Drawing.Size(125, 44)
-        Me.ButtonFromProject.TabIndex = 8
-        Me.ButtonFromProject.Text = "From Project"
-        Me.ButtonFromProject.UseVisualStyleBackColor = True
         '
         'Panel1
         '
@@ -232,136 +294,113 @@ Partial Class OptionsEmulatorsWindow
         Me.CheckBoxPlus4.Text = "Commodore PLUS/4"
         Me.CheckBoxPlus4.UseVisualStyleBackColor = True
         '
-        'Panel2
+        'ButtonFromParent
         '
-        Me.Panel2.Controls.Add(Me.TextBoxYAPEPath)
-        Me.Panel2.Controls.Add(Me.CheckBoxYAPE)
-        Me.Panel2.Controls.Add(Me.TextBoxATARI800Path)
-        Me.Panel2.Controls.Add(Me.CheckBoxATARI800)
-        Me.Panel2.Controls.Add(Me.TextBoxALTIRRAPath)
-        Me.Panel2.Controls.Add(Me.CheckBoxALTIRRA)
-        Me.Panel2.Controls.Add(Me.CheckBoxVICE)
-        Me.Panel2.Controls.Add(Me.TextBoxVICEPath)
-        Me.Panel2.Location = New System.Drawing.Point(6, 5)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(690, 183)
-        Me.Panel2.TabIndex = 0
+        Me.ButtonFromParent.Image = CType(resources.GetObject("ButtonFromParent.Image"), System.Drawing.Image)
+        Me.ButtonFromParent.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.ButtonFromParent.Location = New System.Drawing.Point(456, 233)
+        Me.ButtonFromParent.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ButtonFromParent.Name = "ButtonFromParent"
+        Me.ButtonFromParent.Size = New System.Drawing.Size(79, 44)
+        Me.ButtonFromParent.TabIndex = 17
+        Me.ButtonFromParent.Text = "parent"
+        Me.ButtonFromParent.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.ButtonFromParent.UseVisualStyleBackColor = True
         '
-        'TextBoxYAPEPath
+        'ButtonRemove
         '
-        Me.TextBoxYAPEPath.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.TextBoxYAPEPath.Location = New System.Drawing.Point(389, 53)
-        Me.TextBoxYAPEPath.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.TextBoxYAPEPath.Name = "TextBoxYAPEPath"
-        Me.TextBoxYAPEPath.Size = New System.Drawing.Size(280, 27)
-        Me.TextBoxYAPEPath.TabIndex = 48
+        Me.ButtonRemove.Image = CType(resources.GetObject("ButtonRemove.Image"), System.Drawing.Image)
+        Me.ButtonRemove.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.ButtonRemove.Location = New System.Drawing.Point(9, 235)
+        Me.ButtonRemove.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ButtonRemove.Name = "ButtonRemove"
+        Me.ButtonRemove.Size = New System.Drawing.Size(85, 42)
+        Me.ButtonRemove.TabIndex = 16
+        Me.ButtonRemove.Text = "remove"
+        Me.ButtonRemove.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.ButtonRemove.UseVisualStyleBackColor = True
         '
-        'CheckBoxYAPE
+        'ButtonFromGlobal
         '
-        Me.CheckBoxYAPE.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.CheckBoxYAPE.AutoSize = True
-        Me.CheckBoxYAPE.Location = New System.Drawing.Point(366, 29)
-        Me.CheckBoxYAPE.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.CheckBoxYAPE.Name = "CheckBoxYAPE"
-        Me.CheckBoxYAPE.Size = New System.Drawing.Size(168, 24)
-        Me.CheckBoxYAPE.TabIndex = 47
-        Me.CheckBoxYAPE.Text = "Enable YAPE support"
-        Me.CheckBoxYAPE.UseVisualStyleBackColor = True
+        Me.ButtonFromGlobal.Image = CType(resources.GetObject("ButtonFromGlobal.Image"), System.Drawing.Image)
+        Me.ButtonFromGlobal.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.ButtonFromGlobal.Location = New System.Drawing.Point(282, 232)
+        Me.ButtonFromGlobal.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ButtonFromGlobal.Name = "ButtonFromGlobal"
+        Me.ButtonFromGlobal.Size = New System.Drawing.Size(79, 44)
+        Me.ButtonFromGlobal.TabIndex = 15
+        Me.ButtonFromGlobal.Text = "global"
+        Me.ButtonFromGlobal.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.ButtonFromGlobal.UseVisualStyleBackColor = True
         '
-        'TextBoxATARI800Path
+        'ButtonRestore
         '
-        Me.TextBoxATARI800Path.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.TextBoxATARI800Path.Location = New System.Drawing.Point(389, 112)
-        Me.TextBoxATARI800Path.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.TextBoxATARI800Path.Name = "TextBoxATARI800Path"
-        Me.TextBoxATARI800Path.Size = New System.Drawing.Size(279, 27)
-        Me.TextBoxATARI800Path.TabIndex = 46
+        Me.ButtonRestore.Image = CType(resources.GetObject("ButtonRestore.Image"), System.Drawing.Image)
+        Me.ButtonRestore.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.ButtonRestore.Location = New System.Drawing.Point(102, 234)
+        Me.ButtonRestore.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ButtonRestore.Name = "ButtonRestore"
+        Me.ButtonRestore.Size = New System.Drawing.Size(85, 42)
+        Me.ButtonRestore.TabIndex = 13
+        Me.ButtonRestore.Text = "restore"
+        Me.ButtonRestore.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.ButtonRestore.UseVisualStyleBackColor = True
         '
-        'CheckBoxATARI800
+        'ButtonApply
         '
-        Me.CheckBoxATARI800.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.CheckBoxATARI800.AutoSize = True
-        Me.CheckBoxATARI800.Location = New System.Drawing.Point(366, 90)
-        Me.CheckBoxATARI800.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.CheckBoxATARI800.Name = "CheckBoxATARI800"
-        Me.CheckBoxATARI800.Size = New System.Drawing.Size(202, 24)
-        Me.CheckBoxATARI800.TabIndex = 45
-        Me.CheckBoxATARI800.Text = "Enable ATARI 800 support"
-        Me.CheckBoxATARI800.UseVisualStyleBackColor = True
+        Me.ButtonApply.Image = CType(resources.GetObject("ButtonApply.Image"), System.Drawing.Image)
+        Me.ButtonApply.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.ButtonApply.Location = New System.Drawing.Point(638, 233)
+        Me.ButtonApply.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ButtonApply.Name = "ButtonApply"
+        Me.ButtonApply.Size = New System.Drawing.Size(69, 44)
+        Me.ButtonApply.TabIndex = 12
+        Me.ButtonApply.Text = "apply"
+        Me.ButtonApply.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.ButtonApply.UseVisualStyleBackColor = True
         '
-        'TextBoxALTIRRAPath
+        'ButtonFromProject
         '
-        Me.TextBoxALTIRRAPath.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.TextBoxALTIRRAPath.Location = New System.Drawing.Point(41, 112)
-        Me.TextBoxALTIRRAPath.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.TextBoxALTIRRAPath.Name = "TextBoxALTIRRAPath"
-        Me.TextBoxALTIRRAPath.Size = New System.Drawing.Size(280, 27)
-        Me.TextBoxALTIRRAPath.TabIndex = 44
-        '
-        'CheckBoxALTIRRA
-        '
-        Me.CheckBoxALTIRRA.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.CheckBoxALTIRRA.AutoSize = True
-        Me.CheckBoxALTIRRA.Location = New System.Drawing.Point(18, 90)
-        Me.CheckBoxALTIRRA.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.CheckBoxALTIRRA.Name = "CheckBoxALTIRRA"
-        Me.CheckBoxALTIRRA.Size = New System.Drawing.Size(191, 24)
-        Me.CheckBoxALTIRRA.TabIndex = 43
-        Me.CheckBoxALTIRRA.Text = "Enable ALTIRRA support"
-        Me.CheckBoxALTIRRA.UseVisualStyleBackColor = True
-        '
-        'CheckBoxVICE
-        '
-        Me.CheckBoxVICE.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.CheckBoxVICE.AutoSize = True
-        Me.CheckBoxVICE.Location = New System.Drawing.Point(18, 29)
-        Me.CheckBoxVICE.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.CheckBoxVICE.Name = "CheckBoxVICE"
-        Me.CheckBoxVICE.Size = New System.Drawing.Size(165, 24)
-        Me.CheckBoxVICE.TabIndex = 41
-        Me.CheckBoxVICE.Text = "Enable VICE support"
-        Me.CheckBoxVICE.UseVisualStyleBackColor = True
-        '
-        'TextBoxVICEPath
-        '
-        Me.TextBoxVICEPath.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.TextBoxVICEPath.Location = New System.Drawing.Point(41, 53)
-        Me.TextBoxVICEPath.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.TextBoxVICEPath.Name = "TextBoxVICEPath"
-        Me.TextBoxVICEPath.Size = New System.Drawing.Size(280, 27)
-        Me.TextBoxVICEPath.TabIndex = 42
+        Me.ButtonFromProject.Image = CType(resources.GetObject("ButtonFromProject.Image"), System.Drawing.Image)
+        Me.ButtonFromProject.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.ButtonFromProject.Location = New System.Drawing.Point(369, 233)
+        Me.ButtonFromProject.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ButtonFromProject.Name = "ButtonFromProject"
+        Me.ButtonFromProject.Size = New System.Drawing.Size(79, 44)
+        Me.ButtonFromProject.TabIndex = 14
+        Me.ButtonFromProject.Text = "project"
+        Me.ButtonFromProject.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.ButtonFromProject.UseVisualStyleBackColor = True
         '
         'OptionsEmulatorsWindow
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(715, 282)
+        Me.Controls.Add(Me.ButtonFromParent)
+        Me.Controls.Add(Me.ButtonRemove)
         Me.Controls.Add(Me.ButtonFromGlobal)
         Me.Controls.Add(Me.ButtonRestore)
         Me.Controls.Add(Me.ButtonApply)
-        Me.Controls.Add(Me.TabControlOptions)
         Me.Controls.Add(Me.ButtonFromProject)
+        Me.Controls.Add(Me.TabControlOptions)
         Me.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.Name = "OptionsEmulatorsWindow"
         Me.Text = "OptionsEmulatorsWindow"
         Me.TabControlOptions.ResumeLayout(False)
         Me.TabPageEmulators.ResumeLayout(False)
+        Me.Panel2.ResumeLayout(False)
+        Me.Panel2.PerformLayout()
         Me.TabPagePlatforms.ResumeLayout(False)
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
-        Me.Panel2.ResumeLayout(False)
-        Me.Panel2.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
-    Friend WithEvents ButtonFromGlobal As Button
-    Friend WithEvents ButtonRestore As Button
-    Friend WithEvents ButtonApply As Button
     Friend WithEvents TabControlOptions As TabControl
     Friend WithEvents TabPageEmulators As TabPage
     Friend WithEvents TabPagePlatforms As TabPage
-    Friend WithEvents ButtonFromProject As Button
     Friend WithEvents Panel1 As Panel
     Friend WithEvents CheckBoxAtariLo As CheckBox
     Friend WithEvents CheckBoxAtari As CheckBox
@@ -380,4 +419,10 @@ Partial Class OptionsEmulatorsWindow
     Friend WithEvents CheckBoxALTIRRA As CheckBox
     Friend WithEvents CheckBoxVICE As CheckBox
     Friend WithEvents TextBoxVICEPath As TextBox
+    Friend WithEvents ButtonFromParent As Button
+    Friend WithEvents ButtonRemove As Button
+    Friend WithEvents ButtonFromGlobal As Button
+    Friend WithEvents ButtonRestore As Button
+    Friend WithEvents ButtonApply As Button
+    Friend WithEvents ButtonFromProject As Button
 End Class

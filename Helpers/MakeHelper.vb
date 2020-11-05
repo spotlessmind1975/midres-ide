@@ -192,7 +192,11 @@ Module MakeHelper
             Case OptionsMake.KindGeneration.DYNAMICAL
                 Dim OtherFiles As Collection = New Collection
                 Dim MakeFileContent As String = GenerateMakefile(executableFileName, _folder_entry, _target, OtherFiles)
-                MakeFileContent &= "all:" & vbTab & executableFileName & vbCrLf
+                MakeFileContent &= "all:" & vbTab & executableFileName & " "
+                For Each oth In OtherFiles
+                    MakeFileContent &= oth & " "
+                Next
+                MakeFileContent &= vbCrLf
                 MakeFileContent &= "clean:" & vbCrLf
                 MakeFileContent &= vbTab & "del " & executableFileName & vbCrLf
                 My.Computer.FileSystem.WriteAllText(GetFullPathForElement(makeFileName), MakeFileContent, False, System.Text.Encoding.ASCII)
@@ -243,7 +247,11 @@ Module MakeHelper
                 Dim OtherFiles As Collection = New Collection
                 Dim MakeFileContent As String = GenerateMakefile(executableFileName, _folder_entry, _target, OtherFiles)
                 If options.Make.DiskImage Then
-                    MakeFileContent &= "all:" & vbTab & executableFileName & vbCrLf
+                    MakeFileContent &= "all:" & vbTab & executableFileName & " "
+                    For Each oth In OtherFiles
+                        MakeFileContent &= oth & " "
+                    Next
+                    MakeFileContent &= vbCrLf
                     MakeFileContent &= vbTab & "cc1541.exe -f " & Path.GetFileNameWithoutExtension(executableFileName) & " -w " & executableFileName & " " & DiskImageFileName & vbCrLf
                     For Each oth In OtherFiles
                         If InStr(oth, ".cfg") = 0 Then
@@ -258,9 +266,14 @@ Module MakeHelper
                     MakeFileContent &= "clean:" & vbCrLf
                     MakeFileContent &= vbTab & "del " & executableFileName & vbCrLf
                 End If
-
+                Dim binaryfileName As String
+                If options.Make.DiskImage Then
+                    binaryfileName = DiskImageFileName
+                Else
+                    binaryfileName = executableFileName
+                End If
                 My.Computer.FileSystem.WriteAllText(GetFullPathForElement(makeFileName), MakeFileContent, False, System.Text.Encoding.ASCII)
-                MakeFileForTargetInternal(Path.GetDirectoryName(GetFullPathForElement(makeFileName)), GetFullPathForElement(executableFileName), additionalParams, _target, options, True)
+                MakeFileForTargetInternal(Path.GetDirectoryName(GetFullPathForElement(makeFileName)), GetFullPathForElement(binaryFileName), additionalParams, _target, options, True)
             Case OptionsMake.KindGeneration.INTERNAL
 
         End Select
@@ -273,7 +286,7 @@ Module MakeHelper
 
         Dim commandLine As String = ""
 
-        commandLine &= " --target " & _target
+        commandLine &= " -t " & _target
         If _options.AllCDecl Then
             commandLine &= " --all-cdecl"
         End If
@@ -466,7 +479,7 @@ Module MakeHelper
                 Next
 
                 MakeFileContent &= BinaryFileName & ":" & vbTab & imgs & vbCrLf
-                MakeFileContent &= vbTab & "img2tile.exe " & GenerateImage2TileCommandLine(Path.GetDirectoryName(GetFullPathForElement(BinaryFileName)), _folder, BinaryFileName, options.Tileset.BankNumber, headerFileName, options.Tileset.ThresholdLuminance, options.Tileset.Multicolor, options.Tileset.Reverse) & vbCrLf
+                MakeFileContent &= vbTab & "img2tile64.exe " & GenerateImage2TileCommandLine(Path.GetDirectoryName(GetFullPathForElement(BinaryFileName)), _folder, BinaryFileName, options.Tileset.BankNumber, headerFileName, options.Tileset.ThresholdLuminance, options.Tileset.Multicolor, options.Tileset.Reverse) & vbCrLf
 
             Case Else
 

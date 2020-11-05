@@ -65,7 +65,7 @@ Public Class Project
     End Sub
 
     Public Sub New()
-        _currentOptions = New Options
+
     End Sub
     Public Sub ReadXml(reader As XmlReader) Implements IXmlSerializable.ReadXml
 

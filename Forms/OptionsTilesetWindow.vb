@@ -1,5 +1,18 @@
 ﻿Public Class OptionsTilesetWindow
 
+    Private _targetTreeNode As TreeNode
+
+    Public Property TargetTreeNode As TreeNode
+        Get
+            Return _targetTreeNode
+        End Get
+        Set(value As TreeNode)
+            _targetTreeNode = value
+        End Set
+    End Property
+
+
+
     Private _currentOptions As OptionsTileset
     Public Property CurrentOptions As OptionsTileset
         Get
@@ -27,7 +40,7 @@
         ResizeMe()
     End Sub
 
-    Private Sub ButtonRestore_Click(sender As Object, e As EventArgs) Handles ButtonRestore.Click
+    Private Sub ButtonRestore_Click(sender As Object, e As EventArgs)
 
         If (CurrentOptions Is Nothing) Then
             LoadOptions()
@@ -37,7 +50,7 @@
 
     End Sub
 
-    Private Sub ButtonApply_Click(sender As Object, e As EventArgs) Handles ButtonApply.Click
+    Private Sub ButtonApply_Click(sender As Object, e As EventArgs)
 
         ApplyOptionsTileset(Me, CurrentOptions)
 
@@ -45,19 +58,27 @@
             SaveOptions()
         End If
 
+        If Not (_targetTreeNode Is Nothing) Then
+            refreshImageForNode(_targetTreeNode)
+        End If
+
         Me.Close()
 
     End Sub
 
-    Private Sub ButtonFromGlobal_Click(sender As Object, e As EventArgs) Handles ButtonFromGlobal.Click
+    Private Sub ButtonFromGlobal_Click(sender As Object, e As EventArgs)
         UpdateOptionsTileset(Me, GlobalVars.CurrentOptions.Tileset)
     End Sub
 
-    Private Sub ButtonFromProject_Click(sender As Object, e As EventArgs) Handles ButtonFromProject.Click
+    Private Sub ButtonFromProject_Click(sender As Object, e As EventArgs)
         UpdateOptionsTileset(Me, GlobalVars.CurrentProject.CurrentOptions.Tileset)
     End Sub
 
     Private Sub TrackBarTilesetThresholdLuminance_Scroll(sender As Object, e As EventArgs) Handles TrackBarTilesetThresholdLuminance.Scroll
         LabelThresholdLuminance.Text = TrackBarTilesetThresholdLuminance.Value
+    End Sub
+
+    Private Sub ButtonRemove_Click(sender As Object, e As EventArgs) Handles ButtonRemove.Click
+        removeOptionsTilesetFromNode(_targetTreeNode)
     End Sub
 End Class

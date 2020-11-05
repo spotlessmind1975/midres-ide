@@ -1,5 +1,16 @@
 ﻿Public Class OptionsCC65Window
 
+    Private _targetTreeNode As TreeNode
+
+    Public Property TargetTreeNode As TreeNode
+        Get
+            Return _targetTreeNode
+        End Get
+        Set(value As TreeNode)
+            _targetTreeNode = value
+        End Set
+    End Property
+
     Private _currentOptions As OptionsCC65
     Public Property CurrentOptions As OptionsCC65
         Get
@@ -39,6 +50,10 @@
 
         If (CurrentOptions Is Nothing) Then
             SaveOptions()
+        End If
+
+        If Not (_targetTreeNode Is Nothing) Then
+            refreshImageForNode(_targetTreeNode)
         End If
 
         Me.Close()
