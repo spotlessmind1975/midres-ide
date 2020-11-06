@@ -1,21 +1,21 @@
-﻿Module ErrorOutputWindowHelper
+﻿Module OutputWindowHelper
 
-    Public Sub ClearErrorOutput()
+    Public Sub ClearOutput()
         GlobalVars.ErrorOutput.Items.Clear()
     End Sub
 
-    Public Sub AddErrorOutput(_filename As String, _line As Integer, _message As String, _kind As Integer, _marker As Integer)
+    Public Sub AddOutput(_filename As String, _line As Integer, _message As String, _kind As Integer, _marker As Integer)
         Dim errorEntry As ErrorOutputEntry = New ErrorOutputEntry(_filename, _line, _message, _kind, _marker)
         GlobalVars.ErrorOutput.Items.Add(errorEntry)
     End Sub
 
-    Public Sub UpdateErrorOutput(_main_container As MainContainer, Optional _folder_entry As FolderEntry = Nothing)
+    Public Sub UpdateOutput(_main_container As MainContainer, Optional _folder_entry As FolderEntry = Nothing)
 
         Dim line As String
 
-        ErrorOutputWindow.MdiParent = _main_container
+        OutputWindow.MdiParent = _main_container
 
-        ErrorOutputWindow.ListBoxOutput.Items.Clear()
+        OutputWindow.ListBoxOutput.Items.Clear()
 
         For Each ee In GlobalVars.ErrorOutput.Items
             If ee.message <> "" Then
@@ -24,20 +24,20 @@
                 Else
                     line = ee.message
                 End If
-                ErrorOutputWindow.ListBoxOutput.Items.Add(line)
+                OutputWindow.ListBoxOutput.Items.Add(line)
             End If
         Next
 
         If (GlobalVars.ErrorOutput.Items.Count > 0) Then
-            ErrorOutputWindow.Show()
-            ErrorOutputWindow.BringToFront()
+            OutputWindow.Show()
+            OutputWindow.BringToFront()
         Else
-            ErrorOutputWindow.Hide()
+            OutputWindow.Hide()
         End If
 
     End Sub
 
-    Public Sub IgnoreMessageNextTime(_error_output_window As ErrorOutputWindow, _options_cc65 As OptionsCC65)
+    Public Sub IgnoreMessageNextTime(_error_output_window As OutputWindow, _options_cc65 As OptionsCC65)
 
         Dim i As Integer = _error_output_window.ListBoxOutput.SelectedIndex
 

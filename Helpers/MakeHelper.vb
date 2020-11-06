@@ -66,7 +66,7 @@ Module MakeHelper
 
         ClearAllMarkers()
 
-        ClearErrorOutput()
+        ClearOutput()
 
         MakeInternal(_working_directory, actionClean, _commandLine, _target)
 
@@ -88,9 +88,9 @@ Module MakeHelper
     End Sub
     Public Function ParseMakeErrors(_working_directory As String, _output As String, _options As OptionsCC65) As Integer
 
-        ClearErrorOutput()
+        ClearOutput()
 
-        UpdateErrorOutput(MainContainer)
+        UpdateOutput(MainContainer)
 
         Dim partCounts As Integer = 0
         Dim parts() = _output.Split(vbCrLf)
@@ -144,12 +144,12 @@ Module MakeHelper
 
                         Dim scintilla = sourceEditor.ScintillaSource
 
-                        AddErrorOutput(fileName, lineNumber, message, warning, FocusOnFilenameAndLine(fileName, lineNumber, MainContainer, warning))
+                        AddOutput(fileName, lineNumber, message, warning, FocusOnFilenameAndLine(fileName, lineNumber, MainContainer, warning))
 
                     Next
 
                 Else
-                    AddErrorOutput("", 0, part, 0, 0)
+                    AddOutput("", 0, part, 0, 0)
                 End If
 
             End If
@@ -157,7 +157,7 @@ Module MakeHelper
         Next
 
         If (partCounts > 0) Then
-            UpdateErrorOutput(MainContainer)
+            UpdateOutput(MainContainer)
         End If
 
         ParseMakeErrors = partCounts
@@ -273,7 +273,7 @@ Module MakeHelper
                     binaryfileName = executableFileName
                 End If
                 My.Computer.FileSystem.WriteAllText(GetFullPathForElement(makeFileName), MakeFileContent, False, System.Text.Encoding.ASCII)
-                MakeFileForTargetInternal(Path.GetDirectoryName(GetFullPathForElement(makeFileName)), GetFullPathForElement(binaryFileName), additionalParams, _target, options, True)
+                MakeFileForTargetInternal(Path.GetDirectoryName(GetFullPathForElement(makeFileName)), GetFullPathForElement(binaryfileName), additionalParams, _target, options, True)
             Case OptionsMake.KindGeneration.INTERNAL
 
         End Select
@@ -382,7 +382,7 @@ Module MakeHelper
         Dim CommandLine As String = GenerateCompileCommandLine(_working_directory, _source_filename, _target_filename, _target, _options)
 
         Dim oProcess As New Process()
-        Dim oStartInfo As New ProcessStartInfo("cc65.exe", commandLine) With {
+        Dim oStartInfo As New ProcessStartInfo("cc65.exe", CommandLine) With {
             .UseShellExecute = False,
             .RedirectStandardOutput = True,
             .RedirectStandardError = True,
@@ -408,7 +408,7 @@ Module MakeHelper
 
         ClearAllMarkers()
 
-        ClearErrorOutput()
+        ClearOutput()
 
         Try
             MkDir(_working_directory)

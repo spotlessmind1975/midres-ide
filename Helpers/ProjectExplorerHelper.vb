@@ -567,7 +567,7 @@ Module ProjectExplorerHelper
 
         If Not (tp Is Nothing) Then
             If TypeOf tp.Tag Is FolderEntry And tp.Tag.Kind = FolderEntry.KindEnum.LIBRARY Then
-                ErrorOutputWindow.CurrentFolder = tp.Tag
+                OutputWindow.CurrentFolder = tp.Tag
                 MakeLibraryFolderForTarget(tp.Tag, _target)
             End If
         End If
@@ -579,7 +579,7 @@ Module ProjectExplorerHelper
 
         If Not (tp Is Nothing) Then
             If TypeOf tp.Tag Is FolderEntry And tp.Tag.Kind = FolderEntry.KindEnum.EXECUTABLE Then
-                ErrorOutputWindow.CurrentFolder = tp.Tag
+                OutputWindow.CurrentFolder = tp.Tag
                 MakeExecutableFolderForTarget(tp.Tag, _target)
             End If
         End If
@@ -592,7 +592,7 @@ Module ProjectExplorerHelper
 
         If Not (tp Is Nothing) And Not (tpp Is Nothing) Then
             If TypeOf tp.Tag Is FileEntry And LCase(Path.GetExtension(tp.Tag.filename)) = ".c" Then
-                ErrorOutputWindow.CurrentFile = tp.Tag
+                OutputWindow.CurrentFile = tp.Tag
                 CompileObjectForTarget(tp.Tag, tpp.Tag, _target)
             End If
         End If
@@ -604,7 +604,7 @@ Module ProjectExplorerHelper
 
         If Not (tp Is Nothing) Then
             If TypeOf tp.Tag Is FolderEntry And tp.Tag.Kind = FolderEntry.KindEnum.EXECUTABLE Then
-                ErrorOutputWindow.CurrentFolder = tp.Tag
+                OutputWindow.CurrentFolder = tp.Tag
                 ExecuteEmulatorFolderForTarget(tp.Tag, _target)
             End If
         End If

@@ -65,7 +65,7 @@ Public Class MainContainer
 
     End Sub
     Private Sub OutputWindowToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OutputWindowToolStripMenuItem.Click
-        UpdateErrorOutput(Me)
+        UpdateOutput(Me)
     End Sub
 
     Private Sub MainContainer_Shown(sender As Object, e As EventArgs) Handles Me.Shown
