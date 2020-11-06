@@ -203,14 +203,19 @@ Module SourceEditorHelper
     End Sub
 
     Public Sub MakeCurrentSource(_source_editor As SourceEditor, _target As String)
-        If GlobalVars.CurrentFolder Is Nothing Then
-            MakeFileForTarget(_source_editor, _target)
-        Else
-            If GlobalVars.CurrentFolder.Kind = FolderEntry.KindEnum.EXECUTABLE Then
-                MakeExecutableFolderForTarget(GlobalVars.CurrentFolder, _target)
-            Else
-                MakeLibraryFolderForTarget(GlobalVars.CurrentFolder, _target)
+        If ProjectExplorer.Visible Then
+            Dim tp As TreeNode = ProjectExplorer.TreeViewProject.SelectedNode
+            If Not (tp Is Nothing) Then
+                If TypeOf tp.Tag Is FolderEntry Then
+                    If (tp.Tag.Kind = FolderEntry.KindEnum.EXECUTABLE) Then
+                        MakeExecutableFolderForTarget(tp.Tag, _target)
+                    ElseIf (tp.Tag.Kind = FolderEntry.KindEnum.LIBRARY) Then
+                        MakeLibraryFolderForTarget(tp.Tag, _target)
+                    End If
+                End If
             End If
+        Else
+            MakeFileForTarget(_source_editor, _target)
         End If
     End Sub
 

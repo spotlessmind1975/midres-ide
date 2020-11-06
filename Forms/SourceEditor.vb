@@ -8,6 +8,7 @@ Public Class SourceEditor
 
     Private _makeCommandLine As String
     Private _executableName As String
+    Private _currentFolder As FolderEntry
     Private _formalLexer As Lexer = Lexer.Cpp
 
     Private _changed As Boolean
@@ -58,14 +59,21 @@ Public Class SourceEditor
         End Set
     End Property
 
+    Public WriteOnly Property CurrentFolder As FolderEntry
+        Set(value As FolderEntry)
+            _currentFolder = value
+        End Set
+    End Property
+
+
     Public WriteOnly Property FormalLexer As String
         Set(value As String)
             _formalLexer = value
             Init()
-            If GlobalVars.CurrentFolder Is Nothing Then
+            If _currentFolder Is Nothing Then
                 UpdateMenuEntriesForSpecificOptions(Me, Nothing)
             Else
-                UpdateMenuEntriesForSpecificOptions(Me, GlobalVars.CurrentFolder.CurrentOptions)
+                UpdateMenuEntriesForSpecificOptions(Me, _currentFolder.CurrentOptions)
             End If
         End Set
     End Property
@@ -151,10 +159,10 @@ Public Class SourceEditor
 
         Init()
 
-        If GlobalVars.CurrentFolder Is Nothing Then
+        If _currentFolder Is Nothing Then
             UpdateMenuEntriesForSpecificOptions(Me, Nothing)
         Else
-            UpdateMenuEntriesForSpecificOptions(Me, GlobalVars.CurrentFolder.CurrentOptions)
+            UpdateMenuEntriesForSpecificOptions(Me, _currentFolder.CurrentOptions)
         End If
 
         ResizeMe()
@@ -265,16 +273,16 @@ Public Class SourceEditor
 
     Private Sub C64ToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles C64ToolStripMenuItem1.Click
 
-        If Not (GlobalVars.CurrentFolder Is Nothing) Then
-            ExecuteEmulatorFolderForTarget(GlobalVars.CurrentFolder, "c64")
+        If Not (_currentFolder Is Nothing) Then
+            ExecuteEmulatorFolderForTarget(_currentFolder, "c64")
         End If
 
     End Sub
 
     Private Sub VIC20ToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles VIC20ToolStripMenuItem1.Click
 
-        If Not (GlobalVars.CurrentFolder Is Nothing) Then
-            ExecuteEmulatorFolderForTarget(GlobalVars.CurrentFolder, "vic20")
+        If Not (_currentFolder Is Nothing) Then
+            ExecuteEmulatorFolderForTarget(_currentFolder, "vic20")
         End If
 
     End Sub
@@ -287,16 +295,16 @@ Public Class SourceEditor
 
     Private Sub C128ToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles C128ToolStripMenuItem1.Click
 
-        If Not (GlobalVars.CurrentFolder Is Nothing) Then
-            ExecuteEmulatorFolderForTarget(GlobalVars.CurrentFolder, "c128")
+        If Not (_currentFolder Is Nothing) Then
+            ExecuteEmulatorFolderForTarget(_currentFolder, "c128")
         End If
 
     End Sub
 
     Private Sub C16ToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles C16ToolStripMenuItem1.Click
 
-        If Not (GlobalVars.CurrentFolder Is Nothing) Then
-            ExecuteEmulatorFolderForTarget(GlobalVars.CurrentFolder, "c16")
+        If Not (_currentFolder Is Nothing) Then
+            ExecuteEmulatorFolderForTarget(_currentFolder, "c16")
         End If
 
     End Sub
@@ -363,8 +371,8 @@ Public Class SourceEditor
 
     Private Sub VIC2024KBToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles VIC2024KBToolStripMenuItem1.Click
 
-        If Not (GlobalVars.CurrentFolder Is Nothing) Then
-            ExecuteEmulatorFolderForTarget(GlobalVars.CurrentFolder, "vic2024")
+        If Not (_currentFolder Is Nothing) Then
+            ExecuteEmulatorFolderForTarget(_currentFolder, "vic2024")
         End If
 
 
@@ -375,10 +383,10 @@ Public Class SourceEditor
     End Sub
 
     Private Sub ScintillaSource_GotFocus(sender As Object, e As EventArgs) Handles ScintillaSource.GotFocus
-        If GlobalVars.CurrentFolder Is Nothing Then
+        If _currentFolder Is Nothing Then
             UpdateMenuEntriesForSpecificOptions(Me, Nothing)
         Else
-            UpdateMenuEntriesForSpecificOptions(Me, GlobalVars.CurrentFolder.CurrentOptions)
+            UpdateMenuEntriesForSpecificOptions(Me, _currentFolder.CurrentOptions)
         End If
     End Sub
 
@@ -388,23 +396,23 @@ Public Class SourceEditor
 
     Private Sub PLUS4ToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles PLUS4ToolStripMenuItem1.Click
 
-        If Not (GlobalVars.CurrentFolder Is Nothing) Then
-            ExecuteEmulatorFolderForTarget(GlobalVars.CurrentFolder, "plus4")
+        If Not (_currentFolder Is Nothing) Then
+            ExecuteEmulatorFolderForTarget(_currentFolder, "plus4")
         End If
 
     End Sub
 
     Private Sub ATARI8BitToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ATARI8BitToolStripMenuItem1.Click
 
-        If Not (GlobalVars.CurrentFolder Is Nothing) Then
-            ExecuteEmulatorFolderForTarget(GlobalVars.CurrentFolder, "atari")
+        If Not (_currentFolder Is Nothing) Then
+            ExecuteEmulatorFolderForTarget(_currentFolder, "atari")
         End If
 
     End Sub
 
     Private Sub ATARI8BitlowResolutionToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ATARI8BitlowResolutionToolStripMenuItem1.Click
-        If Not (GlobalVars.CurrentFolder Is Nothing) Then
-            ExecuteEmulatorFolderForTarget(GlobalVars.CurrentFolder, "atarilo")
+        If Not (_currentFolder Is Nothing) Then
+            ExecuteEmulatorFolderForTarget(_currentFolder, "atarilo")
         End If
 
     End Sub

@@ -240,14 +240,6 @@ Public Class ProjectExplorer
         ExecuteEmulatorFolderNodeForTarget(Me, "c16")
     End Sub
 
-    Private Sub SetAsactiveToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles SetAsactiveToolStripMenuItem1.Click
-        SetFolderAsActive(Me)
-    End Sub
-
-    Private Sub SetAsactiveToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SetAsactiveToolStripMenuItem.Click
-        SetFolderAsActive(Me)
-    End Sub
-
     Private Sub NewFileToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NewFileToolStripMenuItem.Click
         AddNewFile(Me)
     End Sub

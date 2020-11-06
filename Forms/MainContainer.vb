@@ -79,6 +79,15 @@ Public Class MainContainer
 
         FindReplaceDialog.Replace = False
         FindReplaceDialog.EditForm = Nothing
+        FindReplaceDialog.currentFolder = Nothing
+        If ProjectExplorer.Visible Then
+            Dim tp As TreeNode = ProjectExplorer.TreeViewProject.SelectedNode
+            If Not (tp Is Nothing) Then
+                If TypeOf tp.Tag Is FolderEntry Then
+                    FindReplaceDialog.currentFolder = tp.Tag
+                End If
+            End If
+        End If
         FindReplaceDialog.ShowDialog()
 
     End Sub
@@ -87,15 +96,21 @@ Public Class MainContainer
 
         Dim fn As String = ""
 
-        If Not (GlobalVars.CurrentFolder Is Nothing) Then
-            fn = GlobalVars.CurrentFolder.CurrentOptions.Make.MakeFilename
-        ElseIf Not (GlobalVars.CurrentProject Is Nothing) Then
-            fn = GlobalVars.CurrentProject.CurrentOptions.Make.MakeFilename
+        If ProjectExplorer.Visible Then
+            Dim tp As TreeNode = ProjectExplorer.TreeViewProject.SelectedNode
+            If Not (tp Is Nothing) Then
+                If TypeOf tp.Tag Is FolderEntry Then
+                    fn = tp.Tag.CurrentOptions.Make.MakeFile
+                    fn = GetFullPathForElement(fn, tp.Tag)
+                End If
+            Else
+                fn = GlobalVars.CurrentProject.CurrentOptions.Make.MakeFilename
+                fn = GetFullPathForElement(fn)
+            End If
         Else
             fn = GlobalVars.CurrentOptions.Make.MakeFilename
+            fn = GetFullPathForElement(fn)
         End If
-
-        fn = GetFullPathForElement(fn)
 
         If Not File.Exists(fn) Then
             MsgBox("The file " & fn & " is missing.", vbOKOnly, "CANNOT OPEN MAKEFILE")
@@ -103,6 +118,16 @@ Public Class MainContainer
         End If
 
         Dim editor As SourceEditor = OpenFileEx(fn, Me)
+
+        If ProjectExplorer.Visible Then
+            Dim tp As TreeNode = ProjectExplorer.TreeViewProject.SelectedNode
+            If Not (tp Is Nothing) Then
+                If TypeOf tp.Tag Is FolderEntry Then
+                    editor.CurrentFolder = tp.Tag
+                End If
+            End If
+        End If
+
         editor.FormalLexer = Lexer.Container
 
     End Sub

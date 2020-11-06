@@ -8,9 +8,6 @@
 
     Public Shared ErrorOutput As ErrorOutputCollection = New ErrorOutputCollection
 
-    Public Shared CurrentFolder As FolderEntry
-    Public Shared CurrentFolderNode As TreeNode
-
     Public Shared CurrentOptions As Options = New Options
 
     Public Shared SearchResultCollection As Collection = New Collection

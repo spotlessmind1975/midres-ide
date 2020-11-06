@@ -68,17 +68,13 @@ Module OptionsHelper
 
     Public Sub UpdateOptionsEmulators(_options_window As OptionsEmulatorsWindow, Optional _options As OptionsEmulators = Nothing)
 
-        If GlobalVars.CurrentProject Is Nothing Then
-            _options_window.ButtonFromProject.Visible = False
-        Else
-            _options_window.ButtonFromProject.Visible = True
-        End If
-
         If (_options Is Nothing) Then
             _options = GlobalVars.CurrentOptions.Emulators
-            _options_window.ButtonRestore.Visible = True
+            _options_window.ButtonFromProject.Visible = False
+            _options_window.ButtonFromParent.Visible = False
         Else
-            _options_window.ButtonRestore.Visible = False
+            _options_window.ButtonFromProject.Visible = True
+            _options_window.ButtonFromParent.Visible = True
         End If
 
         _options_window.CheckBoxALTIRRA.Checked = _options.AltirraEnabled
@@ -94,17 +90,13 @@ Module OptionsHelper
 
     Public Sub UpdateOptionsOther(_options_window As OptionsOtherWindow, Optional _options As OptionsOther = Nothing)
 
-        If GlobalVars.CurrentProject Is Nothing Then
-            _options_window.ButtonFromProject.Visible = False
-        Else
-            _options_window.ButtonFromProject.Visible = True
-        End If
-
         If (_options Is Nothing) Then
             _options = GlobalVars.CurrentOptions.Other
-            _options_window.ButtonRestore.Visible = True
+            _options_window.ButtonFromProject.Visible = False
+            _options_window.ButtonFromParent.Visible = False
         Else
-            _options_window.ButtonRestore.Visible = False
+            _options_window.ButtonFromProject.Visible = True
+            _options_window.ButtonFromParent.Visible = True
         End If
 
         _options_window.CheckBoxPlus4.Checked = _options.Plus4
@@ -120,19 +112,13 @@ Module OptionsHelper
 
     Public Sub UpdateOptionsMake(_options_window As OptionsMakeWindow, Optional _options As OptionsMake = Nothing)
 
-        If GlobalVars.CurrentProject Is Nothing Then
-            _options_window.ButtonFromProject.Visible = False
-        Else
-            _options_window.ButtonFromProject.Visible = True
-        End If
-
         If (_options Is Nothing) Then
             _options = GlobalVars.CurrentOptions.Make
-            _options_window.ButtonRestore.Visible = True
-            _options_window.ButtonFromGlobal.Visible = False
+            _options_window.ButtonFromProject.Visible = False
+            _options_window.ButtonFromParent.Visible = False
         Else
-            _options_window.ButtonRestore.Visible = False
-            _options_window.ButtonFromGlobal.Visible = True
+            _options_window.ButtonFromProject.Visible = True
+            _options_window.ButtonFromParent.Visible = True
         End If
 
         _options_window.TextBoxMakeFileName.Text = _options.MakeFilename
@@ -165,19 +151,13 @@ Module OptionsHelper
 
     Public Sub UpdateOptionsCC65(_options_window As OptionsCC65Window, Optional _options As OptionsCC65 = Nothing)
 
-        If GlobalVars.CurrentProject Is Nothing Then
-            _options_window.ButtonFromProject.Visible = False
-        Else
-            _options_window.ButtonFromProject.Visible = True
-        End If
-
         If (_options Is Nothing) Then
             _options = GlobalVars.CurrentOptions.CC65
-            _options_window.ButtonRestore.Visible = True
-            _options_window.ButtonFromGlobal.Visible = False
+            _options_window.ButtonFromProject.Visible = False
+            _options_window.ButtonFromParent.Visible = False
         Else
-            _options_window.ButtonRestore.Visible = False
-            _options_window.ButtonFromGlobal.Visible = True
+            _options_window.ButtonFromProject.Visible = True
+            _options_window.ButtonFromParent.Visible = True
         End If
 
         Dim c As Collection = _options.Warnings
@@ -262,17 +242,11 @@ Module OptionsHelper
 
     Public Sub UpdateOptionsTileset(_options_window As OptionsTilesetWindow, Optional _options As OptionsTileset = Nothing)
 
-        If GlobalVars.CurrentProject Is Nothing Then
+        If (_options Is Nothing) Then
+            _options = GlobalVars.CurrentOptions.Tileset
             _options_window.ButtonFromProject.Visible = False
         Else
             _options_window.ButtonFromProject.Visible = True
-        End If
-
-        If (_options Is Nothing) Then
-            _options = GlobalVars.CurrentOptions.Tileset
-            _options_window.ButtonRestore.Visible = True
-        Else
-            _options_window.ButtonRestore.Visible = False
         End If
 
         _options_window.TextBoxTilesetBinaryFilename.Text = _options.BinaryFilename
@@ -580,14 +554,4 @@ Module OptionsHelper
 
     End Function
 
-    Public Function ChooseBestOptions() As Options
-        If Not (GlobalVars.CurrentFolder Is Nothing) Then
-            Return GlobalVars.CurrentFolder.CurrentOptions
-        ElseIf Not (GlobalVars.CurrentProject Is Nothing) Then
-            Return GlobalVars.CurrentProject.CurrentOptions
-        ElseIf Not (GlobalVars.CurrentOptions Is Nothing) Then
-            Return GlobalVars.CurrentOptions
-        End If
-        Return New Options
-    End Function
 End Module

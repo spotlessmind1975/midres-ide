@@ -155,4 +155,12 @@
     Private Sub CheckBoxSuppressWarnings_CheckedChanged_1(sender As Object, e As EventArgs) Handles CheckBoxSuppressWarnings.CheckedChanged
         CheckedListBoxCC65Warnings.Enabled = Not CheckBoxSuppressWarnings.Checked
     End Sub
+
+    Private Sub ButtonRemove_Click(sender As Object, e As EventArgs) Handles ButtonRemove.Click
+        removeOptionsCC65FromNode(_targetTreeNode)
+    End Sub
+
+    Private Sub ButtonFromParent_Click(sender As Object, e As EventArgs) Handles ButtonFromParent.Click
+        UpdateOptionsCC65FromParent(Me, _targetTreeNode)
+    End Sub
 End Class

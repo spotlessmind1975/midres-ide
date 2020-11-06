@@ -5,10 +5,17 @@ Public Class FindReplaceDialog
 
     Private _editForm As SourceEditor
     Private _replace As Boolean
+    Private _currentFolder As FolderEntry
 
     Public WriteOnly Property Replace As Boolean
         Set(value As Boolean)
             _replace = value
+        End Set
+    End Property
+
+    Public WriteOnly Property currentFolder As FolderEntry
+        Set(value As FolderEntry)
+            _currentFolder = value
         End Set
     End Property
 
@@ -64,7 +71,7 @@ Public Class FindReplaceDialog
                 TextBoxReplaceText.Visible = False
                 ButtonReplace.Visible = False
                 ButtonReplaceAll.Visible = False
-                TextBoxPath.Text = GetFullPathForElement("", GlobalVars.CurrentFolder)
+                TextBoxPath.Text = GetFullPathForElement("", _currentFolder)
             Else
                 LabelPath.Visible = False
                 TextBoxPath.Visible = False
