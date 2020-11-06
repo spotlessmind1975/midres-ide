@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class ErrorOutputWindow
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+Partial Class OutputWindow
     Inherits System.Windows.Forms.Form
 
     'Form esegue l'override del metodo Dispose per pulire l'elenco dei componenti.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,17 +20,17 @@ Partial Class ErrorOutputWindow
     'NOTA: la procedura che segue è richiesta da Progettazione Windows Form
     'Può essere modificata in Progettazione Windows Form.  
     'Non modificarla mediante l'editor del codice.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ErrorOutputWindow))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(OutputWindow))
         Me.ListBoxOutput = New System.Windows.Forms.ListBox()
         Me.ContextMenuStripWarnings = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.IgnoreMessagenextTimeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.OnThisFileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.OnThisfolderToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.OnThisProjectToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GloballyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.OnThisFileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ContextMenuStripWarnings.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -60,31 +60,31 @@ Partial Class ErrorOutputWindow
         Me.IgnoreMessagenextTimeToolStripMenuItem.Size = New System.Drawing.Size(259, 24)
         Me.IgnoreMessagenextTimeToolStripMenuItem.Text = "Ignore message (next time)"
         '
+        'OnThisFileToolStripMenuItem
+        '
+        Me.OnThisFileToolStripMenuItem.Name = "OnThisFileToolStripMenuItem"
+        Me.OnThisFileToolStripMenuItem.Size = New System.Drawing.Size(189, 26)
+        Me.OnThisFileToolStripMenuItem.Text = "On this file"
+        '
         'OnThisfolderToolStripMenuItem
         '
         Me.OnThisfolderToolStripMenuItem.Name = "OnThisfolderToolStripMenuItem"
-        Me.OnThisfolderToolStripMenuItem.Size = New System.Drawing.Size(224, 26)
+        Me.OnThisfolderToolStripMenuItem.Size = New System.Drawing.Size(189, 26)
         Me.OnThisfolderToolStripMenuItem.Text = "On this &folder"
         '
         'OnThisProjectToolStripMenuItem
         '
         Me.OnThisProjectToolStripMenuItem.Name = "OnThisProjectToolStripMenuItem"
-        Me.OnThisProjectToolStripMenuItem.Size = New System.Drawing.Size(224, 26)
+        Me.OnThisProjectToolStripMenuItem.Size = New System.Drawing.Size(189, 26)
         Me.OnThisProjectToolStripMenuItem.Text = "On this project"
         '
         'GloballyToolStripMenuItem
         '
         Me.GloballyToolStripMenuItem.Name = "GloballyToolStripMenuItem"
-        Me.GloballyToolStripMenuItem.Size = New System.Drawing.Size(224, 26)
+        Me.GloballyToolStripMenuItem.Size = New System.Drawing.Size(189, 26)
         Me.GloballyToolStripMenuItem.Text = "Globally"
         '
-        'OnThisFileToolStripMenuItem
-        '
-        Me.OnThisFileToolStripMenuItem.Name = "OnThisFileToolStripMenuItem"
-        Me.OnThisFileToolStripMenuItem.Size = New System.Drawing.Size(224, 26)
-        Me.OnThisFileToolStripMenuItem.Text = "On this file"
-        '
-        'ErrorOutputWindow
+        'OutputWindow
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -93,8 +93,8 @@ Partial Class ErrorOutputWindow
         Me.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.Name = "ErrorOutputWindow"
-        Me.Text = "Errors"
+        Me.Name = "OutputWindow"
+        Me.Text = "Output"
         Me.ContextMenuStripWarnings.ResumeLayout(False)
         Me.ResumeLayout(False)
 

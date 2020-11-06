@@ -160,10 +160,10 @@
     <Compile Include="Classes\RecentFileEntry.vb" />
     <Compile Include="Classes\RecentFileCollection.vb" />
     <Compile Include="Classes\SearchResult.vb" />
-    <Compile Include="Forms\ErrorOutputWindow.Designer.vb">
-      <DependentUpon>ErrorOutputWindow.vb</DependentUpon>
+    <Compile Include="Forms\OutputWindow.Designer.vb">
+      <DependentUpon>OutputWindow.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\ErrorOutputWindow.vb">
+    <Compile Include="Forms\OutputWindow.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\FindReplaceDialog.Designer.vb">
@@ -280,8 +280,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Forms\ErrorOutputWindow.resx">
-      <DependentUpon>ErrorOutputWindow.vb</DependentUpon>
+    <EmbeddedResource Include="Forms\OutputWindow.resx">
+      <DependentUpon>OutputWindow.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FindReplaceDialog.resx">
       <DependentUpon>FindReplaceDialog.vb</DependentUpon>

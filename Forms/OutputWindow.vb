@@ -1,5 +1,4 @@
-﻿Public Class ErrorOutputWindow
-
+﻿Public Class OutputWindow
     Private _currentFolder As FolderEntry
     Private _currentFile As FileEntry
 

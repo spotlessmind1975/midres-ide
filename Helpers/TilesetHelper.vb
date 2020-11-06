@@ -59,9 +59,9 @@ Module TilesetHelper
 
     Public Function ParseImg2TileErrors(_working_directory As String, _output As String, _options As Options) As Integer
 
-        ClearErrorOutput()
+        ClearOutput()
 
-        UpdateErrorOutput(MainContainer)
+        UpdateOutput(MainContainer)
 
         Dim partCounts As Integer = 0
         Dim parts() = _output.Split(vbCrLf)
@@ -91,19 +91,19 @@ Module TilesetHelper
 
                         partCounts += 1
 
-                        AddErrorOutput(fileName, 0, message, warning, 0)
+                        AddOutput(fileName, 0, message, warning, 0)
 
                     Next
 
                 Else
-                    AddErrorOutput("", 0, part, 0, 0)
+                    AddOutput("", 0, part, 0, 0)
                 End If
 
             End If
         Next
 
         If (partCounts > 0) Then
-            UpdateErrorOutput(MainContainer)
+            UpdateOutput(MainContainer)
         End If
 
         Return partCounts
@@ -133,7 +133,7 @@ Module TilesetHelper
 
         ClearAllMarkers()
 
-        ClearErrorOutput()
+        ClearOutput()
 
         Dim errorString = Image2Tile(Path.GetDirectoryName(GetFullPathForElement(binaryFileName)), _folder_entry, binaryFileName, options.Tileset.BankNumber, headerFileName, options.Tileset.ThresholdLuminance, options.Tileset.Multicolor, options.Tileset.Reverse)
 
