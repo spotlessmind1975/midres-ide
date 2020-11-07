@@ -5,8 +5,8 @@
     End Sub
 
     Public Sub AddOutput(_filename As String, _line As Integer, _message As String, _kind As Integer, _marker As Integer)
-        Dim errorEntry As OutputEntry = New OutputEntry(OutputEntry.LevelEnum.INFO, _filename, _line, _message, _kind, _marker)
-        GlobalVars.ErrorOutput.Items.Add(errorEntry)
+        Dim entry As OutputEntry = New OutputEntry(OutputEntry.LevelEnum.INFO, _filename, _line, _message, _kind, _marker)
+        GlobalVars.ErrorOutput.Items.Add(entry)
     End Sub
 
     Public Sub AddOutputMessage(_level As OutputEntry.LevelEnum, _message As String)
@@ -24,6 +24,7 @@
         minLevel = OutputWindow.ComboBoxOutputLevel.SelectedIndex
 
         OutputWindow.ListBoxOutput.Items.Clear()
+        OutputWindow.OutputFiltered = New Collection()
 
         For Each ee In GlobalVars.ErrorOutput.Items
             If ee.level >= minLevel Then
@@ -34,6 +35,7 @@
                         line = ee.message
                     End If
                     OutputWindow.ListBoxOutput.Items.Add(line)
+                    OutputWindow.OutputFiltered.Add(ee)
                 End If
             End If
         Next

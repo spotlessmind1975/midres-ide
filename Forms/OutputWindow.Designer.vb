@@ -39,13 +39,14 @@ Partial Class OutputWindow
         'ListBoxOutput
         '
         Me.ListBoxOutput.ContextMenuStrip = Me.ContextMenuStripWarnings
+        Me.ListBoxOutput.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.ListBoxOutput.Font = New System.Drawing.Font("Courier New", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ListBoxOutput.FormattingEnabled = True
         Me.ListBoxOutput.ItemHeight = 17
         Me.ListBoxOutput.Location = New System.Drawing.Point(3, 39)
         Me.ListBoxOutput.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.ListBoxOutput.Name = "ListBoxOutput"
-        Me.ListBoxOutput.Size = New System.Drawing.Size(960, 548)
+        Me.ListBoxOutput.Size = New System.Drawing.Size(803, 514)
         Me.ListBoxOutput.TabIndex = 0
         '
         'ContextMenuStripWarnings

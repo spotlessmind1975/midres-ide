@@ -1,6 +1,7 @@
 ﻿Public Class OutputWindow
     Private _currentFolder As FolderEntry
     Private _currentFile As FileEntry
+    Private _outputFiltered As Collection
 
     Public Property CurrentFolder As FolderEntry
         Get
@@ -20,6 +21,14 @@
         End Set
     End Property
 
+    Public Property OutputFiltered As Collection
+        Get
+            Return _outputFiltered
+        End Get
+        Set(value As Collection)
+            _outputFiltered = value
+        End Set
+    End Property
 
     Private Sub ResizeMe()
         ComboBoxOutputLevel.Width = Me.Width - 16 - ComboBoxOutputLevel.Left
@@ -40,7 +49,7 @@
         UpdateMenu()
 
         If ListBoxOutput.SelectedIndex > -1 Then
-            Dim eoe As OutputEntry = GlobalVars.ErrorOutput.Items(ListBoxOutput.SelectedIndex + 1)
+            Dim eoe As OutputEntry = _outputFiltered.Item(ListBoxOutput.SelectedIndex + 1)
 
             If (eoe.Filename <> "" And eoe.Line > 0) Then
 
@@ -140,5 +149,23 @@
 
     Private Sub ComboBoxOutputLevel_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBoxOutputLevel.SelectedIndexChanged
         UpdateOutput(MainContainer)
+    End Sub
+
+    Private Sub ListBoxOutput_DrawItem(sender As Object, e As DrawItemEventArgs) Handles ListBoxOutput.DrawItem
+        e.DrawBackground()
+        If e.Index >= 0 Then
+            Dim level As OutputEntry.LevelEnum = _outputFiltered.Item(e.Index + 1).level
+            Select Case level
+                Case OutputEntry.LevelEnum.CRIT, OutputEntry.LevelEnum.ERR
+                    e.Graphics.DrawString(ListBoxOutput.Items(e.Index), e.Font, Brushes.Red, e.Bounds.X, e.Bounds.Y)
+                Case OutputEntry.LevelEnum.WARN
+                    e.Graphics.DrawString(ListBoxOutput.Items(e.Index), e.Font, Brushes.Orange, e.Bounds.X, e.Bounds.Y)
+                Case OutputEntry.LevelEnum.DEBUG, OutputEntry.LevelEnum.TRACE
+                    e.Graphics.DrawString(ListBoxOutput.Items(e.Index), e.Font, Brushes.Gray, e.Bounds.X, e.Bounds.Y)
+                Case OutputEntry.LevelEnum.INFO
+                    e.Graphics.DrawString(ListBoxOutput.Items(e.Index), e.Font, Brushes.Black, e.Bounds.X, e.Bounds.Y)
+            End Select
+        End If
+        e.DrawFocusRectangle()
     End Sub
 End Class
