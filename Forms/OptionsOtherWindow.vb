@@ -42,22 +42,6 @@
 
     End Sub
 
-    Private Sub ButtonApply_Click(sender As Object, e As EventArgs)
-
-        ApplyOptionsOther(Me, CurrentOptions)
-
-        If (CurrentOptions Is Nothing) Then
-            SaveOptions()
-        End If
-
-        If Not (_targetTreeNode Is Nothing) Then
-            refreshImageForNode(_targetTreeNode)
-        End If
-
-        Me.Close()
-
-    End Sub
-
     Private Sub ButtonFromGlobal_Click(sender As Object, e As EventArgs)
         UpdateOptionsOther(Me, GlobalVars.CurrentOptions.Other)
     End Sub
@@ -72,5 +56,21 @@
 
     Private Sub ButtonFromParent_Click(sender As Object, e As EventArgs) Handles ButtonFromParent.Click
         UpdateOptionsOtherFromParent(Me, _targetTreeNode)
+    End Sub
+
+    Private Sub ButtonApply_Click_1(sender As Object, e As EventArgs) Handles ButtonApply.Click
+
+        ApplyOptionsOther(Me, CurrentOptions)
+
+        If (CurrentOptions Is Nothing) Then
+            SaveOptions()
+        End If
+
+        If Not (_targetTreeNode Is Nothing) Then
+            refreshImageForNode(_targetTreeNode)
+        End If
+
+        Me.Close()
+
     End Sub
 End Class

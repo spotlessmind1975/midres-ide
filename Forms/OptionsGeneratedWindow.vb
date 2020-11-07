@@ -50,7 +50,15 @@
         ResizeMe()
     End Sub
 
-    Private Sub ButtonApply_Click(sender As Object, e As EventArgs)
+    Private Sub CheckedListBoxDependency_SelectedIndexChanged(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub ButtonRemove_Click(sender As Object, e As EventArgs) Handles ButtonRemove.Click
+        removeOptionsGeneratedFromNode(_targetTreeNode)
+    End Sub
+
+    Private Sub ButtonApply_Click_1(sender As Object, e As EventArgs) Handles ButtonApply.Click
 
         ApplyOptionsGenerated(Me, CurrentOptions)
 
@@ -60,13 +68,6 @@
 
         Me.Close()
 
-    End Sub
 
-    Private Sub CheckedListBoxDependency_SelectedIndexChanged(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Private Sub ButtonRemove_Click(sender As Object, e As EventArgs) Handles ButtonRemove.Click
-        removeOptionsGeneratedFromNode(_targetTreeNode)
     End Sub
 End Class

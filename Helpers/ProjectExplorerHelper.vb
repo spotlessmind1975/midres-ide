@@ -352,9 +352,23 @@ Module ProjectExplorerHelper
                 Dim ow As OptionsTilesetWindow = ShowOptionsTilesetWindow(tp.Tag.CurrentOptions.Tileset, "Tileset " & tp.Tag.name & " options")
                 ow.TargetTreeNode = tp
             ElseIf TypeOf tp.Tag Is FolderEntry And tp.Tag.Kind = FolderEntry.KindEnum.TILESET Then
-                If tp.Tag.CurrentOptions Is Nothing Then
-                    tp.Tag.CurrentOptions = New Options
-                    tp.Tag.CurrentOptions.Tileset = GlobalVars.CurrentProject.CurrentOptions.Tileset
+                Dim tp2 As TreeNode = tp
+                If tp2.Tag.CurrentOptions Is Nothing Then
+                    tp2.Tag.CurrentOptions = New Options
+                End If
+                If tp2.Tag.CurrentOptions.Tileset Is Nothing Then
+                    While Not (tp2.Parent Is Nothing)
+                        tp2 = tp2.Parent
+                        If Not (tp2.Tag.currentOptions Is Nothing) Then
+                            If Not (tp2.Tag.currentOptions.Tileset Is Nothing) Then
+                                tp.Tag.currentOptions.Emulators = tp2.Tag.currentOptions.Emulators.deepClone()
+                                Exit While
+                            End If
+                        End If
+                    End While
+                End If
+                If tp.Tag.CurrentOptions.Tileset Is Nothing Then
+                    tp.Tag.CurrentOptions.Tileset = GlobalVars.CurrentOptions.Tileset
                 End If
                 Dim ow As OptionsTilesetWindow = ShowOptionsTilesetWindow(tp.Tag.CurrentOptions.Tileset, "Tileset " & tp.Tag.name & " options")
                 ow.TargetTreeNode = tp
@@ -391,6 +405,9 @@ Module ProjectExplorerHelper
                             End If
                         End If
                     End While
+                End If
+                If tp.Tag.CurrentOptions.Emulators Is Nothing Then
+                    tp.Tag.CurrentOptions.Emulators = GlobalVars.CurrentOptions.Emulators
                 End If
                 Dim ow As OptionsEmulatorsWindow = ShowOptionsEmulatorsWindow(tp.Tag.CurrentOptions.Emulators, "Emulators " & tp.Tag.name & " options")
                 ow.TargetTreeNode = tp
@@ -429,6 +446,9 @@ Module ProjectExplorerHelper
                             End If
                         End While
                     End If
+                    If tp.Tag.CurrentOptions.CC65 Is Nothing Then
+                        tp.Tag.CurrentOptions.CC65 = GlobalVars.CurrentOptions.CC65
+                    End If
                     Dim ow As OptionsCC65Window = ShowOptionsCC65Window(tp.Tag.CurrentOptions.CC65, "Compile " & tp.Tag.name & " options")
                     ow.TargetTreeNode = tp
                 End If
@@ -445,6 +465,10 @@ Module ProjectExplorerHelper
                         End If
                     End While
                 End If
+                If tp.Tag.CC65 Is Nothing Then
+                    tp.Tag.cc65 = GlobalVars.CurrentOptions.CC65
+                End If
+
                 Dim ow As OptionsCC65Window = ShowOptionsCC65Window(tp.Tag.cc65, "Compile " & tp.Tag.name & " options")
                 ow.TargetTreeNode = tp
             End If
@@ -482,6 +506,9 @@ Module ProjectExplorerHelper
                             End If
                         End While
                     End If
+                    If tp.Tag.CurrentOptions.Other Is Nothing Then
+                        tp.Tag.CurrentOptions.Other = GlobalVars.CurrentOptions.Other
+                    End If
                     Dim ow As OptionsOtherWindow = ShowOptionsOtherWindow(tp.Tag.CurrentOptions.Other, "File " & tp.Tag.name & " options")
                     ow.TargetTreeNode = tp
                 End If
@@ -499,11 +526,11 @@ Module ProjectExplorerHelper
                             End If
                         End While
                     End If
+                    If tp.Tag.Other Is Nothing Then
+                        tp.Tag.Other = GlobalVars.CurrentOptions.Other
+                    End If
                     Dim ow As OptionsOtherWindow = ShowOptionsOtherWindow(tp.Tag.Other, "Compile " & tp.Tag.name & " options")
                     ow.TargetTreeNode = tp
-                    If Not (tp2 Is Nothing) Then
-                        UpdateOptionsOther(ow, tp2.Tag.CurrentOptions.Other)
-                    End If
                 End If
             End If
         End If
@@ -541,7 +568,10 @@ Module ProjectExplorerHelper
                         End If
                     End While
                 End If
-                Dim ow As OptionsMakeWindow = ShowOptionsMakeWindow(tag.CurrentOptions.Make, windowtitle)
+                If tp.Tag.CurrentOptions.Make Is Nothing Then
+                    tp.Tag.CurrentOptions.Make = GlobalVars.CurrentOptions.Make
+                End If
+                Dim ow As OptionsMakeWindow = ShowOptionsMakeWindow(tp.Tag.CurrentOptions.Make, windowtitle)
                 ow.TargetTreeNode = tp
             End If
         End If

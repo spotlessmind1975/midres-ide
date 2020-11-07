@@ -50,22 +50,6 @@
 
     End Sub
 
-    Private Sub ButtonApply_Click(sender As Object, e As EventArgs)
-
-        ApplyOptionsTileset(Me, CurrentOptions)
-
-        If (CurrentOptions Is Nothing) Then
-            SaveOptions()
-        End If
-
-        If Not (_targetTreeNode Is Nothing) Then
-            refreshImageForNode(_targetTreeNode)
-        End If
-
-        Me.Close()
-
-    End Sub
-
     Private Sub ButtonFromGlobal_Click(sender As Object, e As EventArgs)
         UpdateOptionsTileset(Me, GlobalVars.CurrentOptions.Tileset)
     End Sub
@@ -80,5 +64,21 @@
 
     Private Sub ButtonRemove_Click(sender As Object, e As EventArgs) Handles ButtonRemove.Click
         removeOptionsTilesetFromNode(_targetTreeNode)
+    End Sub
+
+    Private Sub ButtonApply_Click_1(sender As Object, e As EventArgs) Handles ButtonApply.Click
+
+        ApplyOptionsTileset(Me, CurrentOptions)
+
+        If (CurrentOptions Is Nothing) Then
+            SaveOptions()
+        End If
+
+        If Not (_targetTreeNode Is Nothing) Then
+            refreshImageForNode(_targetTreeNode)
+        End If
+
+        Me.Close()
+
     End Sub
 End Class
