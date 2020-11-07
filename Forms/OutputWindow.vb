@@ -22,14 +22,16 @@
 
 
     Private Sub ResizeMe()
+        ComboBoxOutputLevel.Width = Me.Width - 16 - ComboBoxOutputLevel.Left
         ListBoxOutput.Left = 0
         ListBoxOutput.Width = Me.Width - 16
-        ListBoxOutput.Top = 0
-        ListBoxOutput.Height = Me.Height - 40
+        ListBoxOutput.Top = ComboBoxOutputLevel.Top + ComboBoxOutputLevel.Height + 8
+        ListBoxOutput.Height = Me.Height - 40 - ListBoxOutput.Top
         UpdateMenu()
     End Sub
 
     Private Sub ErrorOutputWindow_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ComboBoxOutputLevel.SelectedIndex = OutputEntry.LevelEnum.INFO
         ResizeMe()
     End Sub
 
@@ -38,7 +40,7 @@
         UpdateMenu()
 
         If ListBoxOutput.SelectedIndex > -1 Then
-            Dim eoe As ErrorOutputEntry = GlobalVars.ErrorOutput.Items(ListBoxOutput.SelectedIndex + 1)
+            Dim eoe As OutputEntry = GlobalVars.ErrorOutput.Items(ListBoxOutput.SelectedIndex + 1)
 
             If (eoe.Filename <> "" And eoe.Line > 0) Then
 
@@ -63,7 +65,7 @@
 
         If i > -1 Then
 
-            Dim eoe As ErrorOutputEntry = GlobalVars.ErrorOutput.Items(i + 1)
+            Dim eoe As OutputEntry = GlobalVars.ErrorOutput.Items(i + 1)
 
             If eoe.Kind = 1 Then
                 IgnoreMessagenextTimeToolStripMenuItem.Enabled = True
@@ -134,5 +136,9 @@
 
         UpdateMenu()
 
+    End Sub
+
+    Private Sub ComboBoxOutputLevel_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBoxOutputLevel.SelectedIndexChanged
+        UpdateOutput(MainContainer)
     End Sub
 End Class

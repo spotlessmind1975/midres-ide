@@ -36,8 +36,12 @@ Module MakeHelper
 
     Private Function MakeInternal(_working_directory As String, _action As String, _commandLine As String, _target As String) As String
 
+        Dim completeCommandLine = _commandLine & " target=" & _target & " " & _action
+
+        AddOutputMessage(OutputEntry.LevelEnum.DEBUG, "Calling 'make.exe " & completeCommandLine & "'")
+
         Dim oProcess As New Process()
-        Dim oStartInfo As New ProcessStartInfo("make.exe", _commandLine & " target=" & _target & " " & _action) With {
+        Dim oStartInfo As New ProcessStartInfo("make.exe", completeCommandLine) With {
             .UseShellExecute = False,
             .RedirectStandardOutput = True,
             .RedirectStandardError = True,
@@ -46,8 +50,14 @@ Module MakeHelper
         oProcess.StartInfo = oStartInfo
 
         Dim sOutputError As String = ""
+        Dim sOutput As String = ""
+
+        AddHandler oProcess.OutputDataReceived, New DataReceivedEventHandler(Sub(s, e)
+                                                                                 AddOutputMessage(OutputEntry.LevelEnum.DEBUG, " " & e.Data)
+                                                                             End Sub)
 
         AddHandler oProcess.ErrorDataReceived, New DataReceivedEventHandler(Sub(s, e)
+                                                                                AddOutputMessage(OutputEntry.LevelEnum.DEBUG, " " & e.Data)
                                                                                 sOutputError &= e.Data & vbCrLf
                                                                             End Sub)
         oProcess.Start()
@@ -66,8 +76,6 @@ Module MakeHelper
 
         ClearAllMarkers()
 
-        ClearOutput()
-
         MakeInternal(_working_directory, actionClean, _commandLine, _target)
 
         Dim errorString = MakeInternal(_working_directory, actionBuild, _commandLine, _target)
@@ -85,10 +93,11 @@ Module MakeHelper
                 MsgBox("Program has NOT been built for " & _target & ".", vbOKOnly, "COMPILATION FAILED")
             End If
         End If
+
+        UpdateOutput(MainContainer)
+
     End Sub
     Public Function ParseMakeErrors(_working_directory As String, _output As String, _options As OptionsCC65) As Integer
-
-        ClearOutput()
 
         UpdateOutput(MainContainer)
 
@@ -156,9 +165,9 @@ Module MakeHelper
 
         Next
 
-        If (partCounts > 0) Then
-            UpdateOutput(MainContainer)
-        End If
+        ''If (partCounts > 0) Then
+        ''UpdateOutput(MainContainer)
+        ''End If
 
         ParseMakeErrors = partCounts
 

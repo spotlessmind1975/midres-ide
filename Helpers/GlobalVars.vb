@@ -6,7 +6,7 @@
 
     Public Shared RecentOpenedProjects As RecentFileCollection = New RecentFileCollection
 
-    Public Shared ErrorOutput As ErrorOutputCollection = New ErrorOutputCollection
+    Public Shared ErrorOutput As OutputCollection = New OutputCollection
 
     Public Shared CurrentOptions As Options = New Options
 

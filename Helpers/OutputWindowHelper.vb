@@ -5,35 +5,41 @@
     End Sub
 
     Public Sub AddOutput(_filename As String, _line As Integer, _message As String, _kind As Integer, _marker As Integer)
-        Dim errorEntry As ErrorOutputEntry = New ErrorOutputEntry(_filename, _line, _message, _kind, _marker)
+        Dim errorEntry As OutputEntry = New OutputEntry(OutputEntry.LevelEnum.INFO, _filename, _line, _message, _kind, _marker)
         GlobalVars.ErrorOutput.Items.Add(errorEntry)
+    End Sub
+
+    Public Sub AddOutputMessage(_level As OutputEntry.LevelEnum, _message As String)
+        Dim entry As OutputEntry = New OutputEntry(_level, "", 0, _message, 0, 0)
+        GlobalVars.ErrorOutput.Items.Add(entry)
     End Sub
 
     Public Sub UpdateOutput(_main_container As MainContainer, Optional _folder_entry As FolderEntry = Nothing)
 
+        Dim minLevel As OutputEntry.LevelEnum = OutputEntry.LevelEnum.INFO
         Dim line As String
 
         OutputWindow.MdiParent = _main_container
 
+        minLevel = OutputWindow.ComboBoxOutputLevel.SelectedIndex
+
         OutputWindow.ListBoxOutput.Items.Clear()
 
         For Each ee In GlobalVars.ErrorOutput.Items
-            If ee.message <> "" Then
-                If ee.filename <> "" Then
-                    line = ee.message & " (" & ee.filename & ":" & ee.line & ")"
-                Else
-                    line = ee.message
+            If ee.level >= minLevel Then
+                If ee.message <> "" Then
+                    If ee.filename <> "" Then
+                        line = ee.message & " (" & ee.filename & ":" & ee.line & ")"
+                    Else
+                        line = ee.message
+                    End If
+                    OutputWindow.ListBoxOutput.Items.Add(line)
                 End If
-                OutputWindow.ListBoxOutput.Items.Add(line)
             End If
         Next
 
-        If (GlobalVars.ErrorOutput.Items.Count > 0) Then
-            OutputWindow.Show()
-            OutputWindow.BringToFront()
-        Else
-            OutputWindow.Hide()
-        End If
+        OutputWindow.Show()
+        OutputWindow.BringToFront()
 
     End Sub
 
@@ -43,7 +49,7 @@
 
         If i > -1 Then
 
-            Dim e As ErrorOutputEntry = GlobalVars.ErrorOutput.Items(i + 1)
+            Dim e As OutputEntry = GlobalVars.ErrorOutput.Items(i + 1)
 
             If e.Kind = 1 Then
 

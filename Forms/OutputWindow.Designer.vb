@@ -31,6 +31,8 @@ Partial Class OutputWindow
         Me.OnThisfolderToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.OnThisProjectToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GloballyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.ComboBoxOutputLevel = New System.Windows.Forms.ComboBox()
         Me.ContextMenuStripWarnings.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -40,7 +42,7 @@ Partial Class OutputWindow
         Me.ListBoxOutput.Font = New System.Drawing.Font("Courier New", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ListBoxOutput.FormattingEnabled = True
         Me.ListBoxOutput.ItemHeight = 17
-        Me.ListBoxOutput.Location = New System.Drawing.Point(25, 53)
+        Me.ListBoxOutput.Location = New System.Drawing.Point(3, 39)
         Me.ListBoxOutput.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.ListBoxOutput.Name = "ListBoxOutput"
         Me.ListBoxOutput.Size = New System.Drawing.Size(960, 548)
@@ -84,11 +86,32 @@ Partial Class OutputWindow
         Me.GloballyToolStripMenuItem.Size = New System.Drawing.Size(189, 26)
         Me.GloballyToolStripMenuItem.Text = "Globally"
         '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(12, 9)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(163, 20)
+        Me.Label1.TabIndex = 2
+        Me.Label1.Text = "Minimum level to show"
+        '
+        'ComboBoxOutputLevel
+        '
+        Me.ComboBoxOutputLevel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBoxOutputLevel.FormattingEnabled = True
+        Me.ComboBoxOutputLevel.Items.AddRange(New Object() {"TRACE - detailed info on program execution", "DEBUG - less detailed info on program execution", "INFO - main informational messages", "WARNINGS - warnings only", "ERRORS - errors only (not warnings)", "CRITICAL ERRORS - critical errors only (not simply errors)"})
+        Me.ComboBoxOutputLevel.Location = New System.Drawing.Point(182, 4)
+        Me.ComboBoxOutputLevel.Name = "ComboBoxOutputLevel"
+        Me.ComboBoxOutputLevel.Size = New System.Drawing.Size(610, 28)
+        Me.ComboBoxOutputLevel.TabIndex = 1
+        '
         'OutputWindow
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(804, 571)
+        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.ComboBoxOutputLevel)
         Me.Controls.Add(Me.ListBoxOutput)
         Me.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
@@ -97,6 +120,7 @@ Partial Class OutputWindow
         Me.Text = "Output"
         Me.ContextMenuStripWarnings.ResumeLayout(False)
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
@@ -107,4 +131,6 @@ Partial Class OutputWindow
     Friend WithEvents OnThisProjectToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents GloballyToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents OnThisFileToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents Label1 As Label
+    Friend WithEvents ComboBoxOutputLevel As ComboBox
 End Class

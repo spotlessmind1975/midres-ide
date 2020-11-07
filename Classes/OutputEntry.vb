@@ -2,17 +2,28 @@
 Imports System.Xml.Schema
 Imports System.Xml.Serialization
 
-Public Class ErrorOutputEntry
+Public Class OutputEntry
 
     Implements IXmlSerializable
 
+    Public Enum LevelEnum
+        TRACE = 0
+        DEBUG = 1
+        INFO = 2
+        WARN = 3
+        ERR = 4
+        CRIT = 5
+    End Enum
+
+    Private _level As LevelEnum
     Private _filename As String
     Private _line As Integer
     Private _message As String
     Private _kind As Integer
     Private _marker As Integer
 
-    Public Sub New(fileName As String, line As Integer, message As String, kind As Integer, marker As Integer)
+    Public Sub New(level As LevelEnum, fileName As String, line As Integer, message As String, kind As Integer, marker As Integer)
+        _level = level
         _filename = fileName
         _line = line
         _message = message
@@ -23,6 +34,12 @@ Public Class ErrorOutputEntry
     Public Sub New()
 
     End Sub
+
+    Public ReadOnly Property Level As LevelEnum
+        Get
+            Return _level
+        End Get
+    End Property
 
     Public ReadOnly Property Filename As Object
         Get
@@ -68,6 +85,8 @@ Public Class ErrorOutputEntry
 
                 If reader.NodeType <> System.Xml.XmlNodeType.EndElement And reader.NodeType <> System.Xml.XmlNodeType.None Then
                     Select Case reader.Name
+                        Case "Level"
+                            _level = reader.ReadElementContentAsInt()
                         Case "FileName"
                             _filename = reader.ReadElementContentAsString()
                         Case "Line"
@@ -95,6 +114,9 @@ Public Class ErrorOutputEntry
     End Sub
 
     Public Sub WriteXml(writer As XmlWriter) Implements IXmlSerializable.WriteXml
+        writer.WriteStartElement("Level")
+        writer.WriteString(_level)
+        writer.WriteEndElement()
         writer.WriteStartElement("FileName")
         writer.WriteString(_filename)
         writer.WriteEndElement()
@@ -116,8 +138,8 @@ Public Class ErrorOutputEntry
         Return Nothing
     End Function
 
-    Public Function ShallowClone() As ErrorOutputEntry
-        Return DirectCast(Me.MemberwiseClone(), ErrorOutputEntry)
+    Public Function ShallowClone() As OutputEntry
+        Return DirectCast(Me.MemberwiseClone(), OutputEntry)
     End Function
 
 End Class

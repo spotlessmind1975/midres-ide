@@ -580,6 +580,7 @@ Module ProjectExplorerHelper
         If Not (tp Is Nothing) Then
             If TypeOf tp.Tag Is FolderEntry And tp.Tag.Kind = FolderEntry.KindEnum.EXECUTABLE Then
                 OutputWindow.CurrentFolder = tp.Tag
+                AddOutputMessage(OutputEntry.LevelEnum.INFO, "REQUEST: MAKE EXECUTABLE FOR " & tp.Tag.Name)
                 MakeExecutableFolderForTarget(tp.Tag, _target)
             End If
         End If

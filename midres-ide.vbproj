@@ -149,8 +149,8 @@
     <Compile Include="Classes\Options.vb" />
     <Compile Include="Classes\OptionsCC65.vb" />
     <Compile Include="Classes\OptionsEmulators.vb" />
-    <Compile Include="Classes\ErrorOutputCollection.vb" />
-    <Compile Include="Classes\ErrorOutputEntry.vb" />
+    <Compile Include="Classes\OutputCollection.vb" />
+    <Compile Include="Classes\OutputEntry.vb" />
     <Compile Include="Classes\OptionsGenerated.vb" />
     <Compile Include="Classes\OptionsIDE.vb" />
     <Compile Include="Classes\OptionsMake.vb" />
@@ -239,7 +239,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Helpers\EmulatorHelper.vb" />
-    <Compile Include="Helpers\ErrorOutputWindowHelper.vb" />
+    <Compile Include="Helpers\OutputWindowHelper.vb" />
     <Compile Include="Helpers\HelpWindowHelper.vb" />
     <Compile Include="Helpers\Library.vb" />
     <Compile Include="Helpers\MainContainerHelper.vb" />
