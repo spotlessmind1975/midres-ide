@@ -38,7 +38,7 @@ Module MakeHelper
 
         Dim completeCommandLine = _commandLine & " target=" & _target & " " & _action
 
-        AddOutputMessage(OutputEntry.LevelEnum.DEBUG, "Calling 'make.exe " & completeCommandLine & "'")
+        AddOutputMessage(OutputEntry.LevelEnum.TRACE, "Calling 'make.exe " & completeCommandLine & "'")
 
         Dim oProcess As New Process()
         Dim oStartInfo As New ProcessStartInfo("make.exe", completeCommandLine) With {
@@ -53,7 +53,7 @@ Module MakeHelper
         Dim sOutput As String = ""
 
         AddHandler oProcess.OutputDataReceived, New DataReceivedEventHandler(Sub(s, e)
-                                                                                 AddOutputMessage(OutputEntry.LevelEnum.DEBUG, " " & e.Data)
+                                                                                 AddOutputMessage(OutputEntry.LevelEnum.TRACE, " " & e.Data)
                                                                              End Sub)
 
         AddHandler oProcess.ErrorDataReceived, New DataReceivedEventHandler(Sub(s, e)
@@ -194,9 +194,9 @@ Module MakeHelper
         Dim executableFileName As String = options.Make.ExecutableFilename
         Dim additionalParams As String = options.Make.AdditionalParams
 
-        AddOutputMessage(OutputEntry.LevelEnum.DEBUG, " makefile: " & makeFileName)
-        AddOutputMessage(OutputEntry.LevelEnum.DEBUG, " library file: " & executableFileName)
-        AddOutputMessage(OutputEntry.LevelEnum.DEBUG, " additionalParams: " & additionalParams)
+        AddOutputMessage(OutputEntry.LevelEnum.TRACE, " makefile: " & makeFileName)
+        AddOutputMessage(OutputEntry.LevelEnum.TRACE, " library file: " & executableFileName)
+        AddOutputMessage(OutputEntry.LevelEnum.TRACE, " additionalParams: " & additionalParams)
 
         If executableFileName = "" Then
             MsgBox("Cannot make library since the output file name is undefined.", vbOKOnly, "CANNOT MAKE LIBRARY")
@@ -205,7 +205,7 @@ Module MakeHelper
 
         executableFileName = executableFileName.Replace("{target}", _target)
 
-        AddOutputMessage(OutputEntry.LevelEnum.DEBUG, " library file (real): " & executableFileName)
+        AddOutputMessage(OutputEntry.LevelEnum.TRACE, " library file (real): " & executableFileName)
 
         Select Case options.Make.Kind
             Case OptionsMake.KindGeneration.STATICAL
@@ -251,10 +251,10 @@ Module MakeHelper
         Dim DiskImageFileName As String = options.Make.DiskImageFilename
         Dim additionalParams As String = options.Make.AdditionalParams
 
-        AddOutputMessage(OutputEntry.LevelEnum.DEBUG, " makefile: " & makeFileName)
-        AddOutputMessage(OutputEntry.LevelEnum.DEBUG, " executable: " & executableFileName)
-        AddOutputMessage(OutputEntry.LevelEnum.DEBUG, " disk file: " & DiskImageFileName)
-        AddOutputMessage(OutputEntry.LevelEnum.DEBUG, " additionalParams: " & additionalParams)
+        AddOutputMessage(OutputEntry.LevelEnum.TRACE, " makefile: " & makeFileName)
+        AddOutputMessage(OutputEntry.LevelEnum.TRACE, " executable: " & executableFileName)
+        AddOutputMessage(OutputEntry.LevelEnum.TRACE, " disk file: " & DiskImageFileName)
+        AddOutputMessage(OutputEntry.LevelEnum.TRACE, " additionalParams: " & additionalParams)
 
         Dim support As String = SupportForTarget(_target, options.Make)
 
@@ -273,8 +273,8 @@ Module MakeHelper
         DiskImageFileName = DiskImageFileName.Replace("{target}", _target)
         DiskImageFileName = DiskImageFileName.Replace("{support}", support)
 
-        AddOutputMessage(OutputEntry.LevelEnum.DEBUG, " executable (real): " & executableFileName)
-        AddOutputMessage(OutputEntry.LevelEnum.DEBUG, " disk file (real): " & DiskImageFileName)
+        AddOutputMessage(OutputEntry.LevelEnum.TRACE, " executable (real): " & executableFileName)
+        AddOutputMessage(OutputEntry.LevelEnum.TRACE, " disk file (real): " & DiskImageFileName)
 
         Select Case options.Make.Kind
             Case OptionsMake.KindGeneration.STATICAL
