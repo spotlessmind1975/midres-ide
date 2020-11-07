@@ -1,6 +1,6 @@
 ﻿Imports System.IO
 Imports System.Text.RegularExpressions
-
+Imports CefSharp
 
 Module MakeHelper
 
@@ -76,7 +76,11 @@ Module MakeHelper
 
         ClearAllMarkers()
 
+        AddOutputMessage(OutputEntry.LevelEnum.DEBUG, "Cleaning previous artifact")
+
         MakeInternal(_working_directory, actionClean, _commandLine, _target)
+
+        AddOutputMessage(OutputEntry.LevelEnum.DEBUG, "Making current artifact")
 
         Dim errorString = MakeInternal(_working_directory, actionBuild, _commandLine, _target)
 
@@ -184,9 +188,15 @@ Module MakeHelper
             End If
         End If
 
+        AddOutputMessage(OutputEntry.LevelEnum.DEBUG, "Creating library " & _folder_entry.Name)
+
         Dim makeFileName As String = options.Make.MakeFilename
         Dim executableFileName As String = options.Make.ExecutableFilename
         Dim additionalParams As String = options.Make.AdditionalParams
+
+        AddOutputMessage(OutputEntry.LevelEnum.DEBUG, " makefile: " & makeFileName)
+        AddOutputMessage(OutputEntry.LevelEnum.DEBUG, " library file: " & executableFileName)
+        AddOutputMessage(OutputEntry.LevelEnum.DEBUG, " additionalParams: " & additionalParams)
 
         If executableFileName = "" Then
             MsgBox("Cannot make library since the output file name is undefined.", vbOKOnly, "CANNOT MAKE LIBRARY")
@@ -195,10 +205,14 @@ Module MakeHelper
 
         executableFileName = executableFileName.Replace("{target}", _target)
 
+        AddOutputMessage(OutputEntry.LevelEnum.DEBUG, " library file (real): " & executableFileName)
+
         Select Case options.Make.Kind
             Case OptionsMake.KindGeneration.STATICAL
+                AddOutputMessage(OutputEntry.LevelEnum.DEBUG, "Creating library using static makefile")
                 MakeFileForTargetInternal(Path.GetDirectoryName(GetFullPathForElement(makeFileName)), GetFullPathForElement(executableFileName), additionalParams, _target, options, False)
             Case OptionsMake.KindGeneration.DYNAMICAL
+                AddOutputMessage(OutputEntry.LevelEnum.DEBUG, "Creating library using dynamic makefile")
                 Dim OtherFiles As Collection = New Collection
                 Dim MakeFileContent As String = GenerateMakefile(executableFileName, _folder_entry, _target, OtherFiles)
                 MakeFileContent &= "all:" & vbTab & executableFileName & " "
@@ -211,6 +225,9 @@ Module MakeHelper
                 My.Computer.FileSystem.WriteAllText(GetFullPathForElement(makeFileName), MakeFileContent, False, System.Text.Encoding.ASCII)
                 MakeFileForTargetInternal(Path.GetDirectoryName(GetFullPathForElement(makeFileName)), GetFullPathForElement(executableFileName), additionalParams, _target, options, False)
             Case OptionsMake.KindGeneration.INTERNAL
+                AddOutputMessage(OutputEntry.LevelEnum.DEBUG, "Creating library using internal process")
+                AddOutputMessage(OutputEntry.LevelEnum.CRIT, "NOT SUPPORTED YET!")
+                MsgBox("Sorry, but internal makefile is not supported yet.", vbOKOnly, "UNSUPPORTED")
 
         End Select
 
@@ -227,10 +244,17 @@ Module MakeHelper
             End If
         End If
 
+        AddOutputMessage(OutputEntry.LevelEnum.DEBUG, "Creating executable " & _folder_entry.Name)
+
         Dim makeFileName As String = options.Make.MakeFilename
         Dim executableFileName As String = options.Make.ExecutableFilename
         Dim DiskImageFileName As String = options.Make.DiskImageFilename
         Dim additionalParams As String = options.Make.AdditionalParams
+
+        AddOutputMessage(OutputEntry.LevelEnum.DEBUG, " makefile: " & makeFileName)
+        AddOutputMessage(OutputEntry.LevelEnum.DEBUG, " executable: " & executableFileName)
+        AddOutputMessage(OutputEntry.LevelEnum.DEBUG, " disk file: " & DiskImageFileName)
+        AddOutputMessage(OutputEntry.LevelEnum.DEBUG, " additionalParams: " & additionalParams)
 
         Dim support As String = SupportForTarget(_target, options.Make)
 
@@ -249,10 +273,15 @@ Module MakeHelper
         DiskImageFileName = DiskImageFileName.Replace("{target}", _target)
         DiskImageFileName = DiskImageFileName.Replace("{support}", support)
 
+        AddOutputMessage(OutputEntry.LevelEnum.DEBUG, " executable (real): " & executableFileName)
+        AddOutputMessage(OutputEntry.LevelEnum.DEBUG, " disk file (real): " & DiskImageFileName)
+
         Select Case options.Make.Kind
             Case OptionsMake.KindGeneration.STATICAL
+                AddOutputMessage(OutputEntry.LevelEnum.DEBUG, "Creating executable using static makefile")
                 MakeFileForTargetInternal(Path.GetDirectoryName(GetFullPathForElement(makeFileName)), GetFullPathForElement(executableFileName), additionalParams, _target, options, True)
             Case OptionsMake.KindGeneration.DYNAMICAL
+                AddOutputMessage(OutputEntry.LevelEnum.DEBUG, "Creating executable using dynamic makefile")
                 Dim OtherFiles As Collection = New Collection
                 Dim MakeFileContent As String = GenerateMakefile(executableFileName, _folder_entry, _target, OtherFiles)
                 If options.Make.DiskImage Then
@@ -284,6 +313,9 @@ Module MakeHelper
                 My.Computer.FileSystem.WriteAllText(GetFullPathForElement(makeFileName), MakeFileContent, False, System.Text.Encoding.ASCII)
                 MakeFileForTargetInternal(Path.GetDirectoryName(GetFullPathForElement(makeFileName)), GetFullPathForElement(binaryfileName), additionalParams, _target, options, True)
             Case OptionsMake.KindGeneration.INTERNAL
+                AddOutputMessage(OutputEntry.LevelEnum.DEBUG, "Creating executable using internal process")
+                AddOutputMessage(OutputEntry.LevelEnum.CRIT, "NOT SUPPORTED YET!")
+                MsgBox("Sorry, but internal makefile is not supported yet.", vbOKOnly, "UNSUPPORTED")
 
         End Select
 

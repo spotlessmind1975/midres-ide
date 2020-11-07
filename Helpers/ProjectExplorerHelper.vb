@@ -132,7 +132,6 @@ Module ProjectExplorerHelper
                 .SelectedImageIndex = ProjectToImageIndex(GlobalVars.CurrentProject)
             }
 
-            '' t.ContextMenu = ContextMenuStripProjectExplorer.ContextMenu
             treeViewProject.Nodes.Add(t)
 
             For Each folder In p.Folders
@@ -568,7 +567,9 @@ Module ProjectExplorerHelper
         If Not (tp Is Nothing) Then
             If TypeOf tp.Tag Is FolderEntry And tp.Tag.Kind = FolderEntry.KindEnum.LIBRARY Then
                 OutputWindow.CurrentFolder = tp.Tag
+                AddOutputMessage(OutputEntry.LevelEnum.INFO, "MAKING [LIB] " & tp.Tag.Name & " (" & _target & ")")
                 MakeLibraryFolderForTarget(tp.Tag, _target)
+                AddOutputMessage(OutputEntry.LevelEnum.INFO, "DONE")
             End If
         End If
 
@@ -580,8 +581,9 @@ Module ProjectExplorerHelper
         If Not (tp Is Nothing) Then
             If TypeOf tp.Tag Is FolderEntry And tp.Tag.Kind = FolderEntry.KindEnum.EXECUTABLE Then
                 OutputWindow.CurrentFolder = tp.Tag
-                AddOutputMessage(OutputEntry.LevelEnum.INFO, "REQUEST: MAKE EXECUTABLE FOR " & tp.Tag.Name)
+                AddOutputMessage(OutputEntry.LevelEnum.INFO, "MAKING [EXE] " & tp.Tag.Name & " (" & _target & ")")
                 MakeExecutableFolderForTarget(tp.Tag, _target)
+                AddOutputMessage(OutputEntry.LevelEnum.INFO, "DONE")
             End If
         End If
 
@@ -594,7 +596,9 @@ Module ProjectExplorerHelper
         If Not (tp Is Nothing) And Not (tpp Is Nothing) Then
             If TypeOf tp.Tag Is FileEntry And LCase(Path.GetExtension(tp.Tag.filename)) = ".c" Then
                 OutputWindow.CurrentFile = tp.Tag
+                AddOutputMessage(OutputEntry.LevelEnum.INFO, "COMPILING " & tp.Tag.Name & " (" & _target & ")")
                 CompileObjectForTarget(tp.Tag, tpp.Tag, _target)
+                AddOutputMessage(OutputEntry.LevelEnum.INFO, "DONE")
             End If
         End If
 
@@ -606,7 +610,9 @@ Module ProjectExplorerHelper
         If Not (tp Is Nothing) Then
             If TypeOf tp.Tag Is FolderEntry And tp.Tag.Kind = FolderEntry.KindEnum.EXECUTABLE Then
                 OutputWindow.CurrentFolder = tp.Tag
+                AddOutputMessage(OutputEntry.LevelEnum.INFO, "RUNNING " & tp.Tag.Name & " (" & _target & ")")
                 ExecuteEmulatorFolderForTarget(tp.Tag, _target)
+                AddOutputMessage(OutputEntry.LevelEnum.INFO, "DONE")
             End If
         End If
 
