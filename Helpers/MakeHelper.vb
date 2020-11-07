@@ -228,7 +228,6 @@ Module MakeHelper
                 AddOutputMessage(OutputEntry.LevelEnum.DEBUG, "Creating library using internal process")
                 AddOutputMessage(OutputEntry.LevelEnum.CRIT, "NOT SUPPORTED YET!")
                 MsgBox("Sorry, but internal makefile is not supported yet.", vbOKOnly, "UNSUPPORTED")
-
         End Select
 
     End Sub
